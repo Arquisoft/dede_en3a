@@ -1,6 +1,7 @@
 [[section-quality-scenarios]]
 == Quality Requirements
 
+In this section our goal is to develop with more detail what it was said in the point 1.2, going in depth with the quality attributes.
 
 [role="arc42help"]
 ****
@@ -18,6 +19,24 @@ concrete and measurable.
 ****
 
 === Quality Tree
+
+[plantuml, "Quality tree",png]
+----
+left to right direction
+(System) as (S)
+(Privacy) as (Pr)
+(Security) as (Se)
+(Availability) as (A)
+(Usability) as (U)
+(Maintainability) as (M)
+(Resource utilization) as (R)
+S --> Pr
+S --> Se
+S --> A
+S --> U
+S --> M
+S --> R
+----
 
 [role="arc42help"]
 ****
@@ -37,6 +56,38 @@ In any case the tree should include links to the scenarios of the following sect
 ****
 
 === Quality Scenarios
+
+[%header, cols=3]
+|===
+|Quality requirement
+|Quality scenario
+|Priority
+
+|Privacy
+|Our users' data must be extremely protected. The lowest amount of data our application takes, the better. Of course, always taking into account a decentralized delivery.
+|High
+
+|Security
+|We are going to give as much security as we can, saving the data in a safe way. We will try to prevent any kind of attack or leak.
+|High
+
+|Availability
+|It is important to give the data to our users whenever they request, trying to reduce the technical failures to the minimal amount of time.
+|Medium-High
+
+|Usability
+|Whenever the users want to access their information or to save new data, we want the to use our system in an easy way for them.
+|Medium-High
+
+|Maintainability
+|Because our system will be in a constant develop and change, we want to design our implementation oriented to make this updates easier.
+|Medium
+
+|Resource utilization
+|Our objective in this part is to use the available resources in an efficient way, trying to complete other goals optimizing the resources we have.
+|Low-Medium
+
+|===
 
 [role="arc42help"]
 ****
