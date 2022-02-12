@@ -1,11 +1,24 @@
 [[section-introduction-and-goals]]
 == Introduction and Goals
 
-This is the first section of the documentation made during the lab session.
+DeDe is a online shop project for the course of Software Architecture, University of Oviedo.
+We are the developers from team 3A, from the English group:
+
+- Pelayo González García
+- Martín Beltrán Díaz
+- Pablo García Fernández
+- Carlos Garriga Suárez
+- Josué Fernández Argüelles
+- Enzo Barbón Lema
+
+DeDe (Decentralized Delivery) is an online shop developed following the SOLID project approach, allowing the users to store their personal information in decentralized and secure data storages, the so-called PODs.
+The shop itself won't store any personal data from the users, but will ask them to provide a POD with their address, in order to send the purchased goods.
+If you want to know more about the solid project, do not hesitate to visit the https://solidproject.org/[SOLID project site].
 
 [role="arc42help"]
 ****
-Describes the relevant requirements and the driving forces that software architects and development team must consider. These include
+Describes the relevant requirements and the driving forces that software architects and development team must consider.
+These include
 
 * underlying business goals, essential features and functional requirements for the system
 * quality goals for the architecture
@@ -14,33 +27,58 @@ Describes the relevant requirements and the driving forces that software archite
 
 === Requirements Overview
 
+The system will emulate an online shopping system where end-users can select and order products to buy.
+According to the distance between the distribution center and user's address, the shop will calculate the total cost of the purchase and the delivery, and once the user pays, the order will be recorded and the delivery will be simulated.
+
+The app will record each transaction and order, so a user can review orders done.
+
+Needless to say, every time the app needs user's location, the user should provide a POD, as our service does not store any shopper's personal information.
+
+=== Technical Deployment
+
+DeDe will be implemented using TypeScript with React framework, and data will be stored in an instance of MySQL database.
+The web service and deployment will be provided by Azure, since it provides 100$ bonus for students and a set of diagnosis tools to test loads and web performance.
+
 [role="arc42help"]
 ****
 .Contents
-Short description of the functional requirements, driving forces, extract (or abstract)
-of requirements. Link to (hopefully existing) requirements documents
-(with version number and information where to find it).
+Short description of the functional requirements, driving forces, extract (or abstract) of requirements.
+Link to (hopefully existing) requirements documents (with version number and information where to find it).
 
 .Motivation
-From the point of view of the end users a system is created or modified to
-improve support of a business activity and/or improve the quality.
+From the point of view of the end users a system is created or modified to improve support of a business activity and/or improve the quality.
 
 .Form
 Short textual description, probably in tabular use-case format.
 If requirements documents exist this overview should refer to these documents.
 
-Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.
+Keep these excerpts as short as possible.
+Balance readability of this document with potential redundancy w.r.t to requirements documents.
 ****
 
 === Quality Goals
 
+The top three quality goals for the architecture whose fulfillment is of the highest importance to the major stakeholders.
+
+[options="header",cols="1,2"]
+|===
+|Quality|Motivation
+| _Privacy_ | DeDe should look after users privacy, not allowing them to store private data for deliveries (apart from the address), such as phone number, the receiver of the package, time laps when you can pick it up...
+| _Security_ | Data such as account passwords or previous orders should be stored and only be accessible for the proper user. The database should also be protected against SQLInjections, and passwords must be encrypted.
+| _Availability_ | As an online shop, DeDe doesn't have an opening and closing time, so it must be working 24/7.
+|===
+
 [role="arc42help"]
 ****
 .Contents
-The top three (max five) quality goals for the architecture whose fulfillment is of highest importance to the major stakeholders. We really mean quality goals for the architecture. Don't confuse them with project goals. They are not necessarily identical.
+The top three (max five) quality goals for the architecture whose fulfillment is of highest importance to the major stakeholders.
+We really mean quality goals for the architecture.
+Don't confuse them with project goals.
+They are not necessarily identical.
 
 .Motivation
-You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions. Make sure to be very concrete about these qualities, avoid buzzwords.
+You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions.
+Make sure to be very concrete about these qualities, avoid buzzwords.
 If you as an architect do not know how the quality of your work will be judged …
 
 .Form
@@ -72,6 +110,8 @@ Table with role names, person names, and their expectations with respect to the 
 [options="header",cols="1,2,2"]
 |===
 |Role/Name|Contact|Expectations
-| _<Role-1>_ | _<Contact-1>_ | _<Expectation-1>_
-| _<Role-2>_ | _<Contact-2>_ | _<Expectation-2>_
+| Developers | Martin Beltran, Josue Fernandez, Pablo Garcia, Pelayo Gonzalez, Carlos Garriga and Enzo Barbón. | People in charge of developing the app. They expect to improve their software architecture knowledge and their designing and coding skills.
+| Professors & Reviewers | José Emilio Labra Gallo, Pablo González González | They will guide the developers throughout developing process, providing tutorship and help when needed.
+| Users | | People interested in buying products and good from our online shop.
+| Previous year's students | | Previous year's projects may show the developers what an actual documentation and project development looks like, so they can find inspiration in those projects.
 |===
