@@ -34,7 +34,7 @@ The app will record each transaction and order, so a user can review orders done
 
 Needless to say, every time the app needs user's location, the user should provide a POD, as our service does not store any shopper's personal information.
 
-=== Technical Deployment
+==== Technical Deployment
 
 DeDe will be implemented using TypeScript with React framework, and data will be stored in an instance of MySQL database.
 The web service and deployment will be provided by Azure, since it provides 100$ bonus for students and a set of diagnosis tools to test loads and web performance.
