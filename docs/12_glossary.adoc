@@ -26,6 +26,19 @@ Potentially more columns in case you need translations.
 [options="header"]
 |===
 | Term         | Definition
-| <Term-1>     | <definition-1>
-| <Term-2>     | <definition-2>
+| SOLID     | SOLID is a mnemonic acronym for five design principles,
+                its main goal is to make code maintainable, understandable
+                and extendable by means of those principles.
+| TypeScript     | TypeScript is a strongly typed programming language
+                    that builds on JavaScript.
+| React     | React is an open-source JavaScript library designed for building
+                user interfaces.
+| Pod       | A Pod is a representation of the minimum objects that can be implemented
+                in Kubernetes, it is a unique instance of a process running in
+                your cluster.
+| Node.js       | Node.js is a platform built on JavaScript runtime for easily building
+                    fast and scalable network applications.
+| Azure     | Azure is a cloud computing service operated by Microsoft for application
+                management via Microsoft-managed data centers.
+| MySQL     | MySQL is an open-source relational database management system.
 |===
