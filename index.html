@@ -445,8 +445,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section-introduction-and-goals">1. Introduction and Goals</a>
 <ul class="sectlevel2">
 <li><a href="#_requirements_overview">1.1. Requirements Overview</a></li>
-<li><a href="#_quality_goals">1.2. Quality Goals</a></li>
-<li><a href="#_stakeholders">1.3. Stakeholders</a></li>
+<li><a href="#_technical_deployment">1.2. Technical Deployment</a></li>
+<li><a href="#_quality_goals">1.3. Quality Goals</a></li>
+<li><a href="#_stakeholders">1.4. Stakeholders</a></li>
 </ul>
 </li>
 <li><a href="#section-architecture-constraints">2. Architecture Constraints</a></li>
@@ -537,12 +538,41 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <h2 id="section-introduction-and-goals">1. Introduction and Goals</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This is the first section of the documentation made during the lab session.</p>
+<p>DeDe is a online shop project for the course of Software Architecture, University of Oviedo.
+We are the developers from team 3A, from the English group:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Pelayo González García</p>
+</li>
+<li>
+<p>Martín Beltrán Díaz</p>
+</li>
+<li>
+<p>Pablo García Fernández</p>
+</li>
+<li>
+<p>Carlos Garriga Suárez</p>
+</li>
+<li>
+<p>Josué Fernández Argüelles</p>
+</li>
+<li>
+<p>Enzo Barbón Lema</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>DeDe (Decentralized Delivery) is an online shop developed following the SOLID project approach, allowing the users to store their personal information in decentralized and secure data storages, the so-called PODs.
+The shop itself won&#8217;t store any personal data from the users, but will ask them to provide a POD with their address, in order to send the purchased goods.
+If you want to know more about the solid project, do not hesitate to visit the <a href="https://solidproject.org/">SOLID project site</a>.</p>
 </div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
-<p>Describes the relevant requirements and the driving forces that software architects and development team must consider. These include</p>
+<p>Describes the relevant requirements and the driving forces that software architects and development team must consider.
+These include</p>
 </div>
 <div class="ulist">
 <ul>
@@ -561,18 +591,33 @@ For documentation of your own system you use better the <em>plain</em> version.<
 </div>
 <div class="sect2">
 <h3 id="_requirements_overview">1.1. Requirements Overview</h3>
+<div class="paragraph">
+<p>The system will emulate an online shopping system where end-users can select and order products to buy.
+According to the distance between the distribution center and user&#8217;s address, the shop will calculate the total cost of the purchase and the delivery, and once the user pays, the order will be recorded and the delivery will be simulated.</p>
+</div>
+<div class="paragraph">
+<p>The app will record each transaction and order, so a user can review orders done.</p>
+</div>
+<div class="paragraph">
+<p>Needless to say, every time the app needs user&#8217;s location, the user should provide a POD, as our service does not store any shopper&#8217;s personal information.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_technical_deployment">1.2. Technical Deployment</h3>
+<div class="paragraph">
+<p>DeDe will be implemented using TypeScript with React framework, and data will be stored in an instance of MySQL database.
+The web service and deployment will be provided by Azure, since it provides 100$ bonus for students and a set of diagnosis tools to test loads and web performance.</p>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
 <div class="title">Contents</div>
-<p>Short description of the functional requirements, driving forces, extract (or abstract)
-of requirements. Link to (hopefully existing) requirements documents
-(with version number and information where to find it).</p>
+<p>Short description of the functional requirements, driving forces, extract (or abstract) of requirements.
+Link to (hopefully existing) requirements documents (with version number and information where to find it).</p>
 </div>
 <div class="paragraph">
 <div class="title">Motivation</div>
-<p>From the point of view of the end users a system is created or modified to
-improve support of a business activity and/or improve the quality.</p>
+<p>From the point of view of the end users a system is created or modified to improve support of a business activity and/or improve the quality.</p>
 </div>
 <div class="paragraph">
 <div class="title">Form</div>
@@ -580,22 +625,56 @@ improve support of a business activity and/or improve the quality.</p>
 If requirements documents exist this overview should refer to these documents.</p>
 </div>
 <div class="paragraph">
-<p>Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.</p>
+<p>Keep these excerpts as short as possible.
+Balance readability of this document with potential redundancy w.r.t to requirements documents.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_quality_goals">1.2. Quality Goals</h3>
+<h3 id="_quality_goals">1.3. Quality Goals</h3>
+<div class="paragraph">
+<p>The top three quality goals for the architecture whose fulfillment is of the highest importance to the major stakeholders.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Quality</th>
+<th class="tableblock halign-left valign-top">Motivation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Privacy</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DeDe should look after users privacy, not allowing them to store private data for deliveries (apart from the address), such as phone number, the receiver of the package, time laps when you can pick it up&#8230;&#8203;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Security</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data such as account passwords or previous orders should be stored and only be accessible for the proper user. The database should also be protected against SQLInjections, and passwords must be encrypted.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Availability</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">As an online shop, DeDe doesn&#8217;t have an opening and closing time, so it must be working 24/7.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
 <div class="title">Contents</div>
-<p>The top three (max five) quality goals for the architecture whose fulfillment is of highest importance to the major stakeholders. We really mean quality goals for the architecture. Don&#8217;t confuse them with project goals. They are not necessarily identical.</p>
+<p>The top three (max five) quality goals for the architecture whose fulfillment is of highest importance to the major stakeholders.
+We really mean quality goals for the architecture.
+Don&#8217;t confuse them with project goals.
+They are not necessarily identical.</p>
 </div>
 <div class="paragraph">
 <div class="title">Motivation</div>
-<p>You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions. Make sure to be very concrete about these qualities, avoid buzzwords.
+<p>You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions.
+Make sure to be very concrete about these qualities, avoid buzzwords.
 If you as an architect do not know how the quality of your work will be judged …</p>
 </div>
 <div class="paragraph">
@@ -606,7 +685,7 @@ If you as an architect do not know how the quality of your work will be judged �
 </div>
 </div>
 <div class="sect2">
-<h3 id="_stakeholders">1.3. Stakeholders</h3>
+<h3 id="_stakeholders">1.4. Stakeholders</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -659,14 +738,24 @@ These stakeholders determine the extent and the level of detail of your work and
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Role-1&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Contact-1&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Expectation-1&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Martin Beltran, Josue Fernandez, Pablo Garcia, Pelayo Gonzalez, Carlos Garriga and Enzo Barbón.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">People in charge of developing the app. They expect to improve their software architecture knowledge and their designing and coding skills.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Role-2&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Contact-2&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Expectation-2&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Professors &amp; Reviewers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">José Emilio Labra Gallo, Pablo González González</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">They will guide the developers throughout developing process, providing tutorship and help when needed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Users</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">People interested in buying products and good from our online shop.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Previous year&#8217;s students</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Previous year&#8217;s projects may show the developers what an actual documentation and project development looks like, so they can find inspiration in those projects.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1736,12 +1825,40 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;Term-1&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;definition-1&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SOLID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SOLID is a mnemonic acronym for five design principles,
+                its main goal is to make code maintainable, understandable
+                and extendable by means of those principles.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;Term-2&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;definition-2&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TypeScript</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TypeScript is a strongly typed programming language
+                    that builds on JavaScript.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">React</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">React is an open-source JavaScript library designed for building
+                user interfaces.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pod</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A Pod is a representation of the minimum objects that can be implemented
+                in Kubernetes, it is a unique instance of a process running in
+                your cluster.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Node.js</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Node.js is a platform built on JavaScript runtime for easily building
+                    fast and scalable network applications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Azure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Azure is a cloud computing service operated by Microsoft for application
+                management via Microsoft-managed data centers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MySQL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MySQL is an open-source relational database management system.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1770,7 +1887,7 @@ Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-02-12 11:30:15 +0100
+Last updated 2022-02-12 11:30:04 +0100
 </div>
 </div>
 </body>
