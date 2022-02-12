@@ -22,7 +22,7 @@ concrete and measurable.
 
 [plantuml, "Quality tree",png]
 ----
-left to right direction
+top-down direction
 (System) as (S)
 (Privacy) as (Pr)
 (Security) as (Se)
