@@ -24,3 +24,19 @@ Various options:
 * more detailed in form of separate sections per decision
 * ADR (architecture decision record) for every important decision
 ****
+
+[options="header"]
+|===
+| Decision         | Pros    | Cons
+| QA-1 Typescript    | Typescript has optional static typing, you can spot early bugs,
+its predictable and readable.| Typescript cons are that it has not true static typing and
+it adds an extra step because it needs to convert it to Javascript.
+| QA-2 React    | Easy to learn and use, reusable components, performance enhancement. |
+We started from zero so we needed to learn.
+| QA-3 MySQL    | Portability, seamless connectivity, data security.      | Do not support
+very large databases size as efficiently.
+| QA-4 Node.js   | Uses Javascript, you can stream big files.      | Do not provide scalability.
+| QA-5 Webapp   | Better user experience, flexible access, easy setup.      | Reduced speed, Internet reliance.
+| QA-6 Pod   | Data security, all data in one place.      | As the data is decentralized you need to rely on
+a different product and poor documentation.
+|===
