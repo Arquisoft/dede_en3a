@@ -461,42 +461,49 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_technical_context">3.2. Technical Context</a></li>
 </ul>
 </li>
-<li><a href="#section-solution-strategy">4. Solution Strategy</a></li>
-<li><a href="#section-building-block-view">5. Building Block View</a>
+<li><a href="#section-solution-strategy">4. Solution Strategy</a>
 <ul class="sectlevel2">
-<li><a href="#_whitebox_overall_system">5.1. Whitebox Overall System</a></li>
-<li><a href="#_level_2">5.2. Level 2</a></li>
-<li><a href="#_level_3">5.3. Level 3</a></li>
+<li><a href="#_technology_decisions">4.1. Technology Decisions</a></li>
+<li><a href="#_decisions_about_the_top_level_decomposition_of_the_system">4.2. Decisions about the top-level decomposition of the system</a></li>
+<li><a href="#_decisions_on_how_to_achieve_key_quality_goals">4.3. Decisions on how to achieve key quality goals</a></li>
 </ul>
 </li>
-<li><a href="#section-runtime-view">6. Runtime View</a>
+<li><a href="#_organizational_decisions">5. Organizational decisions</a></li>
+<li><a href="#section-building-block-view">6. Building Block View</a>
 <ul class="sectlevel2">
-<li><a href="#_runtime_scenario_1">6.1. &lt;Runtime Scenario 1&gt;</a></li>
-<li><a href="#_runtime_scenario_2">6.2. &lt;Runtime Scenario 2&gt;</a></li>
-<li><a href="#">6.3. &#8230;&#8203;</a></li>
-<li><a href="#_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</a></li>
+<li><a href="#_whitebox_overall_system">6.1. Whitebox Overall System</a></li>
+<li><a href="#_level_2">6.2. Level 2</a></li>
+<li><a href="#_level_3">6.3. Level 3</a></li>
 </ul>
 </li>
-<li><a href="#section-deployment-view">7. Deployment View</a>
+<li><a href="#section-runtime-view">7. Runtime View</a>
 <ul class="sectlevel2">
-<li><a href="#_infrastructure_level_1">7.1. Infrastructure Level 1</a></li>
-<li><a href="#_infrastructure_level_2">7.2. Infrastructure Level 2</a></li>
+<li><a href="#_runtime_scenario_1">7.1. &lt;Runtime Scenario 1&gt;</a></li>
+<li><a href="#_runtime_scenario_2">7.2. &lt;Runtime Scenario 2&gt;</a></li>
+<li><a href="#">7.3. &#8230;&#8203;</a></li>
+<li><a href="#_runtime_scenario_n">7.4. &lt;Runtime Scenario n&gt;</a></li>
 </ul>
 </li>
-<li><a href="#section-concepts">8. Cross-cutting Concepts</a>
+<li><a href="#section-deployment-view">8. Deployment View</a>
 <ul class="sectlevel2">
-<li><a href="#_domain_model">8.1. Domain model</a></li>
+<li><a href="#_infrastructure_level_1">8.1. Infrastructure Level 1</a></li>
+<li><a href="#_infrastructure_level_2">8.2. Infrastructure Level 2</a></li>
 </ul>
 </li>
-<li><a href="#section-design-decisions">9. Design Decisions</a></li>
-<li><a href="#section-quality-scenarios">10. Quality Requirements</a>
+<li><a href="#section-concepts">9. Cross-cutting Concepts</a>
 <ul class="sectlevel2">
-<li><a href="#_quality_tree">10.1. Quality Tree</a></li>
-<li><a href="#_quality_scenarios">10.2. Quality Scenarios</a></li>
+<li><a href="#_domain_model">9.1. Domain model</a></li>
 </ul>
 </li>
-<li><a href="#section-technical-risks">11. Risks and Technical Debts</a></li>
-<li><a href="#section-glossary">12. Glossary</a></li>
+<li><a href="#section-design-decisions">10. Design Decisions</a></li>
+<li><a href="#section-quality-scenarios">11. Quality Requirements</a>
+<ul class="sectlevel2">
+<li><a href="#_quality_tree">11.1. Quality Tree</a></li>
+<li><a href="#_quality_scenarios">11.2. Quality Scenarios</a></li>
+</ul>
+</li>
+<li><a href="#section-technical-risks">12. Risks and Technical Debts</a></li>
+<li><a href="#section-glossary">13. Glossary</a></li>
 </ul>
 </div>
 </div>
@@ -961,7 +968,8 @@ together with a mapping table showing the relationships between channels and inp
 <div class="content">
 <div class="paragraph">
 <div class="title">Contents</div>
-<p>A short summary and explanation of the fundamental decisions and solution strategies, that shape the system&#8217;s architecture. These include</p>
+<p>A short summary and explanation of the fundamental decisions and solution strategies, that shape the system&#8217;s architecture.
+These include</p>
 </div>
 <div class="ulist">
 <ul>
@@ -981,24 +989,82 @@ together with a mapping table showing the relationships between channels and inp
 </div>
 <div class="paragraph">
 <div class="title">Motivation</div>
-<p>These decisions form the cornerstones for your architecture. They are the basis for many other detailed decisions or implementation rules.</p>
+<p>These decisions form the cornerstones for your architecture.
+They are the basis for many other detailed decisions or implementation rules.</p>
 </div>
 <div class="paragraph">
 <div class="title">Form</div>
 <p>Keep the explanation of these key decisions short.</p>
 </div>
 <div class="paragraph">
-<p>Motivate what you have decided and why you decided that way,
-based upon your problem statement, the quality goals and key constraints.
+<p>Motivate what you have decided and why you decided that way, based upon your problem statement, the quality goals and key constraints.
 Refer to details in the following sections.</p>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_technology_decisions">4.1. Technology Decisions</h3>
+<div class="paragraph">
+<p>The technologies we have decided to use for the development of the app are:</p>
+</div>
+<div class="paragraph">
+<p>Bootstrap → In order to avoid as much as possible the development of CSS we chose to use Bootstrap.</p>
+</div>
+<div class="paragraph">
+<p>MySQL → Since we are familiar to relational databases, we plan to use an instance of MySQL database.</p>
+</div>
+<div class="paragraph">
+<p>Azure → To deploy the web app we have decided to use Azure, since with the University account we have 100$ bonus. A member of the team took a course on Azure basics this summer and used it for the subject SEW.</p>
+</div>
+<div class="paragraph">
+<p>Oracle Server → In order to deploy the database, we decided to use a cloud server from Oracle (not an oracle database). As students, Oracle offer free-for-lifetime virtual machine in the cloud.</p>
+</div>
+<div class="paragraph">
+<p>CryptoJS → The crypto-js library provides AES and some hashing such as MD5/SHA in order to encrypt passwords, so we can save them encrypted in the database.</p>
+</div>
+<div class="paragraph">
+<p>Inrupt → Main POD server provider. Widely used.</p>
+</div>
+<div class="paragraph">
+<p>React and TypeScript have not been included in the list since it is compulsory to use them, and are not "a decision" itself.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_decisions_about_the_top_level_decomposition_of_the_system">4.2. Decisions about the top-level decomposition of the system</h3>
+<div class="paragraph">
+<p>MVC → Probably the most common architectural pattern. It is used to decouple the interface, from the data and the domain logic.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_decisions_on_how_to_achieve_key_quality_goals">4.3. Decisions on how to achieve key quality goals</h3>
+<div class="paragraph">
+<p><strong>Privacy</strong> → To achieve privacy, we won&#8217;t store any personal data from our users apart from their past orders.</p>
+</div>
+<div class="paragraph">
+<p><strong>Security</strong> → As users need to log in in the application, we will store their user&#8217;s passwords encrypted. Also, we plan to protect avery form field against SQL Injections by means of prepared statements.</p>
+</div>
+<div class="paragraph">
+<p><strong>Availability</strong> → Using an external reliable web-hosting service we ensure that the web and the database will be available almost 24/7.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_organizational_decisions">5. Organizational decisions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To enable communication within the team members we have created a Discord Server for meetings and a Whatsapp chat
+group in order to schedule those meetings. We have refined tasks in a GitHub project, so we can follow the overall work
+and keep a backlog of the remaining tasks.</p>
+</div>
+<div class="paragraph">
+<p>We also have an Issue system and a wiki, working as a log for decisions and minutes for meetings.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="section-building-block-view">5. Building Block View</h2>
+<h2 id="section-building-block-view">6. Building Block View</h2>
 <div class="sectionbody">
 <div class="sidebarblock arc42help">
 <div class="content">
@@ -1042,7 +1108,7 @@ Thus it contains the white box description of selected building blocks of level 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_whitebox_overall_system">5.1. Whitebox Overall System</h3>
+<h3 id="_whitebox_overall_system">6.1. Whitebox Overall System</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1138,7 +1204,7 @@ Its headline is the name of the black box.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_name_black_box_1">5.1.1. &lt;Name black box 1&gt;</h4>
+<h4 id="_name_black_box_1">6.1.1. &lt;Name black box 1&gt;</h4>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1189,30 +1255,30 @@ according the the following black box template:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_name_black_box_2">5.1.2. &lt;Name black box 2&gt;</h4>
+<h4 id="_name_black_box_2">6.1.2. &lt;Name black box 2&gt;</h4>
 <div class="paragraph">
 <p><em>&lt;black box template&gt;</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_name_black_box_n">5.1.3. &lt;Name black box n&gt;</h4>
+<h4 id="_name_black_box_n">6.1.3. &lt;Name black box n&gt;</h4>
 <div class="paragraph">
 <p><em>&lt;black box template&gt;</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_name_interface_1">5.1.4. &lt;Name interface 1&gt;</h4>
+<h4 id="_name_interface_1">6.1.4. &lt;Name interface 1&gt;</h4>
 <div class="paragraph">
 <p>&#8230;&#8203;</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_name_interface_m">5.1.5. &lt;Name interface m&gt;</h4>
+<h4 id="_name_interface_m">6.1.5. &lt;Name interface m&gt;</h4>
 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_level_2">5.2. Level 2</h3>
+<h3 id="_level_2">6.2. Level 2</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1226,7 +1292,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_1">5.2.1. White Box <em>&lt;building block 1&gt;</em></h4>
+<h4 id="_white_box_building_block_1">6.2.1. White Box <em>&lt;building block 1&gt;</em></h4>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1239,7 +1305,7 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_2">5.2.2. White Box <em>&lt;building block 2&gt;</em></h4>
+<h4 id="_white_box_building_block_2">6.2.2. White Box <em>&lt;building block 2&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;white box template&gt;</em></p>
 </div>
@@ -1248,14 +1314,14 @@ Leave out normal, simple, boring or standardized parts of your system</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_m">5.2.3. White Box <em>&lt;building block m&gt;</em></h4>
+<h4 id="_white_box_building_block_m">6.2.3. White Box <em>&lt;building block m&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;white box template&gt;</em></p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_level_3">5.3. Level 3</h3>
+<h3 id="_level_3">6.3. Level 3</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1268,7 +1334,7 @@ part of arc42 for additional levels.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_x_1">5.3.1. White Box &lt;_building block x.1_&gt;</h4>
+<h4 id="_white_box_building_block_x_1">6.3.1. White Box &lt;_building block x.1_&gt;</h4>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1281,13 +1347,13 @@ part of arc42 for additional levels.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_x_2">5.3.2. White Box &lt;_building block x.2_&gt;</h4>
+<h4 id="_white_box_building_block_x_2">6.3.2. White Box &lt;_building block x.2_&gt;</h4>
 <div class="paragraph">
 <p><em>&lt;white box template&gt;</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_white_box_building_block_y_1">5.3.3. White Box &lt;_building block y.1_&gt;</h4>
+<h4 id="_white_box_building_block_y_1">6.3.3. White Box &lt;_building block y.1_&gt;</h4>
 <div class="paragraph">
 <p><em>&lt;white box template&gt;</em></p>
 </div>
@@ -1297,7 +1363,7 @@ part of arc42 for additional levels.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="section-runtime-view">6. Runtime View</h2>
+<h2 id="section-runtime-view">7. Runtime View</h2>
 <div class="sectionbody">
 <div class="sidebarblock arc42help">
 <div class="content">
@@ -1358,7 +1424,7 @@ You will mainly capture scenarios in your documentation to communicate your arch
 </div>
 </div>
 <div class="sect2">
-<h3 id="_runtime_scenario_1">6.1. &lt;Runtime Scenario 1&gt;</h3>
+<h3 id="_runtime_scenario_1">7.1. &lt;Runtime Scenario 1&gt;</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1380,21 +1446,21 @@ building block instances depicted in this diagram.&gt;</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_runtime_scenario_2">6.2. &lt;Runtime Scenario 2&gt;</h3>
+<h3 id="_runtime_scenario_2">7.2. &lt;Runtime Scenario 2&gt;</h3>
 
 </div>
 <div class="sect2">
-<h3 id="">6.3. &#8230;&#8203;</h3>
+<h3 id="">7.3. &#8230;&#8203;</h3>
 
 </div>
 <div class="sect2">
-<h3 id="_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</h3>
+<h3 id="_runtime_scenario_n">7.4. &lt;Runtime Scenario n&gt;</h3>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="section-deployment-view">7. Deployment View</h2>
+<h2 id="section-deployment-view">8. Deployment View</h2>
 <div class="sectionbody">
 <div class="sidebarblock arc42help">
 <div class="content">
@@ -1447,7 +1513,7 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_infrastructure_level_1">7.1. Infrastructure Level 1</h3>
+<h3 id="_infrastructure_level_1">8.1. Infrastructure Level 1</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1495,7 +1561,7 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_infrastructure_level_2">7.2. Infrastructure Level 2</h3>
+<h3 id="_infrastructure_level_2">8.2. Infrastructure Level 2</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1507,13 +1573,13 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_infrastructure_element_1">7.2.1. <em>&lt;Infrastructure Element 1&gt;</em></h4>
+<h4 id="_infrastructure_element_1">8.2.1. <em>&lt;Infrastructure Element 1&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;diagram + explanation&gt;</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_infrastructure_element_2">7.2.2. <em>&lt;Infrastructure Element 2&gt;</em></h4>
+<h4 id="_infrastructure_element_2">8.2.2. <em>&lt;Infrastructure Element 2&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;diagram + explanation&gt;</em></p>
 </div>
@@ -1522,7 +1588,7 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_infrastructure_element_n">7.2.3. <em>&lt;Infrastructure Element n&gt;</em></h4>
+<h4 id="_infrastructure_element_n">8.2.3. <em>&lt;Infrastructure Element n&gt;</em></h4>
 <div class="paragraph">
 <p><em>&lt;diagram + explanation&gt;</em></p>
 </div>
@@ -1532,7 +1598,7 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="section-concepts">8. Cross-cutting Concepts</h2>
+<h2 id="section-concepts">9. Cross-cutting Concepts</h2>
 <div class="sectionbody">
 <div class="sidebarblock arc42help">
 <div class="content">
@@ -1631,7 +1697,7 @@ on this list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_domain_model">8.1. Domain model</h3>
+<h3 id="_domain_model">9.1. Domain model</h3>
 <div class="paragraph">
 <p><span class="image"><img src="./images/Clase-UML.png" alt="UML Diagram"></span></p>
 </div>
@@ -1644,7 +1710,7 @@ purchased in that order and the date.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="section-design-decisions">9. Design Decisions</h2>
+<h2 id="section-design-decisions">10. Design Decisions</h2>
 <div class="sectionbody">
 <div class="sidebarblock arc42help">
 <div class="content">
@@ -1738,7 +1804,7 @@ a different product and poor documentation.</p></td>
 </div>
 </div>
 <div class="sect1">
-<h2 id="section-quality-scenarios">10. Quality Requirements</h2>
+<h2 id="section-quality-scenarios">11. Quality Requirements</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In this section our goal is to develop with more detail what it was said in the point 1.2, going in depth with the quality attributes.</p>
@@ -1762,7 +1828,7 @@ concrete and measurable.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_quality_tree">10.1. Quality Tree</h3>
+<h3 id="_quality_tree">11.1. Quality Tree</h3>
 <div class="imageblock">
 <div class="content">
 <img src="./images/Quality%20tree.png" alt="Quality tree" width="332" height="387">
@@ -1799,7 +1865,7 @@ concrete and measurable.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_quality_scenarios">10.2. Quality Scenarios</h3>
+<h3 id="_quality_scenarios">11.2. Quality Scenarios</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1889,7 +1955,7 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </div>
 </div>
 <div class="sect1">
-<h2 id="section-technical-risks">11. Risks and Technical Debts</h2>
+<h2 id="section-technical-risks">12. Risks and Technical Debts</h2>
 <div class="sectionbody">
 <div class="sidebarblock">
 <div class="content">
@@ -1941,7 +2007,7 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </div>
 </div>
 <div class="sect1">
-<h2 id="section-glossary">12. Glossary</h2>
+<h2 id="section-glossary">13. Glossary</h2>
 <div class="sectionbody">
 <div class="sidebarblock arc42help">
 <div class="content">
@@ -2049,7 +2115,7 @@ Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-02-10 13:20:13 +0100
+Last updated 2022-02-12 11:30:04 +0100
 </div>
 </div>
 </body>
