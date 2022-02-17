@@ -1,11 +1,11 @@
 [[section-solution-strategy]]
 == Solution Strategy
 
-
 [role="arc42help"]
 ****
 .Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape the system's architecture. These include
+A short summary and explanation of the fundamental decisions and solution strategies, that shape the system's architecture.
+These include
 
 * technology decisions
 * decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
@@ -13,12 +13,52 @@ A short summary and explanation of the fundamental decisions and solution strate
 * relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
 
 .Motivation
-These decisions form the cornerstones for your architecture. They are the basis for many other detailed decisions or implementation rules.
+These decisions form the cornerstones for your architecture.
+They are the basis for many other detailed decisions or implementation rules.
 
 .Form
 Keep the explanation of these key decisions short.
 
-Motivate what you have decided and why you decided that way,
-based upon your problem statement, the quality goals and key constraints.
+Motivate what you have decided and why you decided that way, based upon your problem statement, the quality goals and key constraints.
 Refer to details in the following sections.
 ****
+
+=== Technology Decisions
+
+The technologies we have decided to use for the development of the app are:
+
+Bootstrap → In order to avoid as much as possible the development of CSS we chose to use Bootstrap.
+
+MySQL → Since we are familiar to relational databases, we plan to use an instance of MySQL database.
+
+Azure → To deploy the web app we have decided to use Azure, since with the University account we have 100$ bonus. A member of the team took a course on Azure basics this summer and used it for the subject SEW.
+
+Oracle Server → In order to deploy the database, we decided to use a cloud server from Oracle (not an oracle database). As students, Oracle offer free-for-lifetime virtual machine in the cloud.
+
+CryptoJS → The crypto-js library provides AES and some hashing such as MD5/SHA in order to encrypt passwords, so we can save them encrypted in the database.
+
+Inrupt → Main POD server provider. Widely used.
+
+React and TypeScript have not been included in the list since it is compulsory to use them, and are not "a decision" itself.
+
+=== Decisions about the top-level decomposition of the system
+
+MVC → Probably the most common architectural pattern. It is used to decouple the interface, from the data and the domain logic.
+
+=== Decisions on how to achieve key quality goals
+
+**Privacy** → To achieve privacy, we won't store any personal data from our users apart from their past orders.
+
+**Security** → As users need to log in in the application, we will store their user's passwords encrypted. Also, we plan to protect avery form field against SQL Injections by means of prepared statements.
+
+**Availability** → Using an external reliable web-hosting service we ensure that the web and the database will be available almost 24/7.
+
+== Organizational decisions
+
+To enable communication within the team members we have created a Discord Server for meetings and a Whatsapp chat
+group in order to schedule those meetings. We have refined tasks in a GitHub project, so we can follow the overall work
+and keep a backlog of the remaining tasks.
+
+We also have an Issue system and a wiki, working as a log for decisions and minutes for meetings.
+
+
