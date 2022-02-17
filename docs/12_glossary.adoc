@@ -26,9 +26,8 @@ Potentially more columns in case you need translations.
 [options="header"]
 |===
 | Term         | Definition
-| SOLID     | SOLID is a mnemonic acronym for five design principles,
-                its main goal is to make code maintainable, understandable
-                and extendable by means of those principles.
+| Solid     | Solid is a specification that lets people store their data
+                securely in decentralized data stores called Pods.
 | TypeScript     | TypeScript is a strongly typed programming language
                     that builds on JavaScript.
 | React     | React is an open-source JavaScript library designed for building
