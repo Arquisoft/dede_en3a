@@ -54,14 +54,15 @@ image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscuttin
 
 image:Clase-UML.png["UML Diagram"]
 
+The main point of following this model is to allow the user to have a related lists of orders, containing the products
+purchased in that order and the date.
 
+//=== _<Concept 2>_
 
-=== _<Concept 2>_
+//_<explanation>_
 
-_<explanation>_
+//...
 
-...
+//=== _<Concept n>_
 
-=== _<Concept n>_
-
-_<explanation>_
+//_<explanation>_
