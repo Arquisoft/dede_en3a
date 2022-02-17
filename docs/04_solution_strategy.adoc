@@ -53,7 +53,7 @@ MVC → Probably the most common architectural pattern. It is used to decouple t
 
 **Availability** → Using an external reliable web-hosting service we ensure that the web and the database will be available almost 24/7.
 
-== Organizational decisions
+=== Organizational decisions
 
 To enable communication within the team members we have created a Discord Server for meetings and a Whatsapp chat
 group in order to schedule those meetings. We have refined tasks in a GitHub project, so we can follow the overall work
