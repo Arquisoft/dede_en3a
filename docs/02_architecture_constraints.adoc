@@ -8,17 +8,26 @@ The constraints will be divided into business and technical.
 
 These constraints will limit the team's ability to change the technology environment.
 
-1. TypeScript -> TypeScript is the programming language in which the project has to be implemented.
-2. React -> The application must be implemented using the React Framework.
-3. Github -> The project must be constantly updated in GitHub, showing all the members collaborations.
-4. Arc42 -> The documentation must follow the Arc42 templates.
-5. SOLID -> The project will user SOLID user pods as data retrieval.
+[options="header"]
+|===
+| Constraint        | Explanation
+| TypeScript    | TypeScript is the programming language in which the project has to be implemented.
+| React     | The application must be implemented using the React Framework.
+| Github     |  The project must be constantly updated in GitHub, showing all the members collaborations.
+| Arc42     | The documentation must follow the Arc42 templates.
+| SOLID       | The project will user SOLID user pods as data retrieval.
+|===
 
 
-=== Business Constraints
+=== Organizational Constraints
 
-1. Time -> The project must be done in 11 weeks.
-2. Team -> The teams is composed of 6 members.
+[options="header"]
+|===
+| Constraint        | Explanation
+| Time    | The project must be done in 11 weeks.
+| Team     | The teams is composed of 6 members.
+
+|===
 
 [role="arc42help"]
 ****

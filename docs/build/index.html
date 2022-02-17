@@ -452,7 +452,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section-architecture-constraints">2. Architecture Constraints</a>
 <ul class="sectlevel2">
 <li><a href="#_technical_constraints">2.1. Technical Constraints</a></li>
-<li><a href="#_business_constraints">2.2. Business Constraints</a></li>
+<li><a href="#_organizational_constraints">2.2. Organizational Constraints</a></li>
 </ul>
 </li>
 <li><a href="#section-system-scope-and-context">3. System Scope and Context</a>
@@ -486,8 +486,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section-concepts">8. Cross-cutting Concepts</a>
 <ul class="sectlevel2">
 <li><a href="#_domain_model">8.1. Domain model</a></li>
-<li><a href="#_concept_2">8.2. <em>&lt;Concept 2&gt;</em></a></li>
-<li><a href="#_concept_n">8.3. <em>&lt;Concept n&gt;</em></a></li>
 </ul>
 </li>
 <li><a href="#section-design-decisions">9. Design Decisions</a></li>
@@ -778,38 +776,65 @@ These stakeholders determine the extent and the level of detail of your work and
 <div class="paragraph">
 <p>These constraints will limit the team&#8217;s ability to change the technology environment.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>TypeScript &#8594; TypeScript is the programming language in which the project has to be implemented.</p>
-</li>
-<li>
-<p>React &#8594; The application must be implemented using the React Framework.</p>
-</li>
-<li>
-<p>Github &#8594; The project must be constantly updated in GitHub, showing all the members collaborations.</p>
-</li>
-<li>
-<p>Arc42 &#8594; The documentation must follow the Arc42 templates.</p>
-</li>
-<li>
-<p>SOLID &#8594; The project will user SOLID user pods as data retrieval.</p>
-</li>
-</ol>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Constraint</th>
+<th class="tableblock halign-left valign-top">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TypeScript</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TypeScript is the programming language in which the project has to be implemented.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">React</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application must be implemented using the React Framework.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Github</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The project must be constantly updated in GitHub, showing all the members collaborations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Arc42</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The documentation must follow the Arc42 templates.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SOLID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The project will user SOLID user pods as data retrieval.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
-<h3 id="_business_constraints">2.2. Business Constraints</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Time &#8594; The project must be done in 11 weeks.</p>
-</li>
-<li>
-<p>Team &#8594; The teams is composed of 6 members.</p>
-</li>
-</ol>
-</div>
+<h3 id="_organizational_constraints">2.2. Organizational Constraints</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Constraint</th>
+<th class="tableblock halign-left valign-top">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The project must be done in 11 weeks.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Team</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The teams is composed of 6 members.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1610,20 +1635,9 @@ on this list.</p>
 <div class="paragraph">
 <p><span class="image"><img src="./images/Clase-UML.png" alt="UML Diagram"></span></p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_concept_2">8.2. <em>&lt;Concept 2&gt;</em></h3>
 <div class="paragraph">
-<p><em>&lt;explanation&gt;</em></p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_concept_n">8.3. <em>&lt;Concept n&gt;</em></h3>
-<div class="paragraph">
-<p><em>&lt;explanation&gt;</em></p>
+<p>The main point of following this model is to allow the user to have a related lists of orders, containing the products
+purchased in that order and the date.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1751,7 +1765,7 @@ concrete and measurable.</p>
 <h3 id="_quality_tree">10.1. Quality Tree</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/Quality%20tree.png" alt="Quality tree" width="334" height="387">
+<img src="./images/Quality%20tree.png" alt="Quality tree" width="332" height="387">
 </div>
 </div>
 <div class="sidebarblock arc42help">
@@ -2035,7 +2049,7 @@ Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-02-12 11:07:06 +0100
+Last updated 2022-02-10 13:20:13 +0100
 </div>
 </div>
 </body>
