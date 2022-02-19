@@ -3,6 +3,8 @@
 
 == Building Block View
 
+image:DocumentationSection5.png["Whitebox Overall System"]
+
 [role="arc42help"]
 ****
 .Content
