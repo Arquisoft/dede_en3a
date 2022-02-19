@@ -32,9 +32,8 @@ Potentially more columns in case you need translations.
                     that builds on JavaScript.
 | React     | React is an open-source JavaScript library designed for building
                 user interfaces.
-| Pod       | A Pod is a representation of the minimum objects that can be implemented
-                in Kubernetes, it is a unique instance of a process running in
-                your cluster.
+| Pod       | Pods are where you store your data. Any kind of data can be stored in a Solid Pod. Once stored in a Pod, you control who can access your data.
+                
 | Node.js       | Node.js is a platform built on JavaScript runtime for easily building
                     fast and scalable network applications.
 | Azure     | Azure is a cloud computing service operated by Microsoft for application

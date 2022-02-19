@@ -25,7 +25,7 @@ These constraints will limit the team's ability to change the technology environ
 |===
 | Constraint        | Explanation
 | Time    | The project must be done in 11 weeks.
-| Team     | The teams is composed of 6 members.
+| Team     | The team is composed of 6 members.
 
 |===
 

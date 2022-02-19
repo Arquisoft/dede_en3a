@@ -48,39 +48,29 @@ Describe (usually in a combination of diagrams, tables, and text):
 For multiple environments or alternative deployments please copy that section of arc42 for all relevant environments.
 ****
 
-_**<Overview Diagram>**_
+image:07_deployment_view.png["Deployment view"]
+
+
 
 Motivation::
 
-_<explanation in text form>_
+Software does not run without hardware. This underlying infrastructure can and will influence your system and/or some cross-cutting concepts. Therefore, you need to know the infrastructure.
+This diagram shows how the app components and their respective hardware devices are related to each other. It's goal it's to easily understand the technical infraestructure of the application.
+
 
 Quality and/or Performance Features::
 
-_<explanation in text form>_
+Perfomance is mainly based on the user's available resources (connection speed, device hardware, etc) and the resources of the hosting server device (which depends on the price plan). We cannot control those things.
+To a lesser extent, the perfomance of the application will also depend on the
+node.js and react apps. We will make the required optimizations in order to maximize the performance and quality.
+
 
 Mapping of Building Blocks to Infrastructure::
-_<description of the mapping>_
 
+|===
+| Client Device         | Device of the user (desktop, mobile). Must have internet connection
+| Oracle Server     | The oracle server in which the the MySQL instance will be running
+| Web Server     | Azure server in which our app will be running. 
 
-=== Infrastructure Level 2
-
-[role="arc42help"]
-****
-Here you can include the internal structure of (some) infrastructure elements from level 1.
-
-Please copy the structure from level 1 for each selected element.
-****
-
-==== _<Infrastructure Element 1>_
-
-_<diagram + explanation>_
-
-==== _<Infrastructure Element 2>_
-
-_<diagram + explanation>_
-
-...
-
-==== _<Infrastructure Element n>_
-
-_<diagram + explanation>_
+| POD Provider      | The pod provider we will be using. In our case, Inrupt. Will be in charge of providing the pods for the app users.
+|===
