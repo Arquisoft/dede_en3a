@@ -30,28 +30,15 @@ There are many notations for describing scenarios, e.g.
 
 ****
 
-=== <Runtime Scenario 1>
+=== Login scenario
+
+This is the process where the user logs in into the application and the system verifies it.
+
+image:Login_scenario.png["Login scenario"]
 
 
-* _<insert runtime diagram or textual description of the scenario>_
-* _<insert description of the notable aspects of the interactions between the
-building block instances depicted in this diagram.>_
+=== Purchasing scenario
 
-It is possible to use a sequence diagram:
+Once the user has logged in he/she can purchase products, add them to the order and pay.
 
-[plantuml,"Sequence diagram",png]
-----
-actor Alice
-actor Bob
-database Pod as "Bob's Pod"
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
-Alice  --> Pod: Store route
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
-----
-=== <Runtime Scenario 2>
-
-=== ...
-
-=== <Runtime Scenario n>
+image:Purchasing_scenario.png["Purchasing scenario"]
