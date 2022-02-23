@@ -54,7 +54,7 @@ image:07_deployment_view.png["Deployment view"]
 
 Motivation::
 
-Software does not run without hardware. This underlying infrastructure can and will influence your system and/or some cross-cutting concepts. Therefore, you need to know the infrastructure.
+Software does not run without hardware. This underlying infrastructure can and will influence your system and/or some cross-cutting concepts.
 This diagram shows how the app components and their respective hardware devices are related to each other. It's goal it's to easily understand the technical infraestructure of the application.
 
 

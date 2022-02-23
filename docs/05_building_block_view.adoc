@@ -40,15 +40,32 @@ image:DocumentationSection5.png["Whitebox Overall System"]
 
 Motivation::
 
-_<text explanation>_
-
+The building block view is meant to be as a quick overview of our application by making it's structure easily understandable throught abstraction.
 
 Contained Building Blocks::
-_<Description of contained building block (black boxes)>_
 
-Important Interfaces::
-_<Description of important interfaces>_
+*Scope & Context:*
+|===
+| User         | A client using our application.
+| Dede     | The application itself. 
+| Pod     | The user's pod. It is external to our application. It is used by the application in order to preserve the privacy of our users. Will be provided by an external POD Provider.
+|===
 
+*Level 1:*
+
+|===
+| Frontend         | React application. Will contain the user interface as well as any client-side function the application may need. 
+| Backend     | Node.js project. It will contain the REST API as well as any server-side function the application may need.
+| Web Server     |  Instance of the  MySQL database.
+|===
+*Level 2:*
+
+__These components are highly subject to change, given the early stage of the application development__
+
+|===
+| API Rest         | Node.js REST Api. Will be in charge of data read, write and delete operations. 
+| GUI     | The interface system the user will interact with. 
+|===
 
 [role="arc42help"]
 ****
