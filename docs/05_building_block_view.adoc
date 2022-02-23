@@ -43,7 +43,6 @@ Motivation::
 The building block view is meant to be as a quick overview of our application by making it's structure easily understandable throught abstraction.
 
 Contained Building Blocks::
-
 *Scope & Context:*
 |===
 | User         | A client using our application.
