@@ -3,10 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import MyLoginButton from './components/login-inrupt/my-login-button';
+import GoogleLog from "./components/login-inrupt/googleLog";
+import WithChildren from "./components/login-inrupt/inruptLogButton"
+
+
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+
+    <GoogleLog  />
+      <MyLoginButton/>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -30,11 +30,11 @@ There are many notations for describing scenarios, e.g.
 
 ****
 
-=== Login scenario
+=== MyLoginButton scenario
 
 This is the process where the user logs in into the application and the system verifies it.
 
-image:Login_scenario.png["Login scenario"]
+image:Login_scenario.png["MyLoginButton scenario"]
 
 
 === Purchasing scenario
