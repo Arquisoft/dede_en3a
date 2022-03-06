@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   height: 100% ;
-  background-color: #6b5b95;
+  background-color: blue;
   display:flex;
   justify-content: space-between;
   font-size: 1.7rem;
@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   width: 100%;
   max-width: 1300em;
   height: 100% ;
-  background-color: #6b5b95;
+  background-color: blue;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -30,18 +30,18 @@ export const LogoContainer = styled.div`
   p{
     &:nth-child(2){
       color:white;
-      background-color: #6b5b95;
+      background-color: blue;
       border-radius: 0.2em;
     }
     &:nth-child(3){
-      color: #6b5b95;
-      background-color: orange;
+      color: blue;
+      background-color: white;
       border-radius: 0.2em;
     }
   }
   
   svg{
-    fill: orange;
+    fill: white;
     margin-right: 0.5rem;
   }
     
@@ -56,11 +56,11 @@ export const Menu = styled.ul`
   display:flex;
   justify-content: space-between;
   list-style: none;
-  background-color: #6b5b95;
+  background-color: blue;
   
   @media screen and (max-width: 900px){
     position: absolute;
-    top:3em;
+    top:2em;
     left: ${props => (props.theme.open ? "0" : "-100")}%;
     width:100%;
     heigth:90vh;
@@ -101,7 +101,7 @@ export const MenuItemLink = styled.a`
   align-content: center;
   height: 100%;
   padding: 0.5rem ;
-  color: orange;
+  color: white;
   font-family: sans-serif;
   
   font-weight: 300;
@@ -109,8 +109,8 @@ export const MenuItemLink = styled.a`
   transition: 0.5s all ease;
   
   &:hover{
-    color:#6b5b95;
-    background-color: orange;
+    color: blue;
+    background-color: white;
     transition: 0.5s all ease;
   }
 
