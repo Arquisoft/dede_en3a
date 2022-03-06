@@ -11,6 +11,7 @@ export async function addUser(user: User): Promise<any> {
   });
 }
 
+//test
 export async function getUsers(): Promise<any> {
   return getDocs(userCollection).then((docs) =>
     docs.docs.map((doc) => doc.data() as User)
