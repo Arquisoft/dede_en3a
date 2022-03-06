@@ -1,13 +1,14 @@
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import logo from '../logo.svg';
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import logo from "../logo.svg";
+import "firebase/firestore";
+import "./Welcome.scss";
 
 type WelcomeProps = {
   message: string;
-}
+};
 
 function Welcome(props: WelcomeProps): JSX.Element {
-
   return (
     <Grid container>
       <Grid item xs={10}>
@@ -16,9 +17,7 @@ function Welcome(props: WelcomeProps): JSX.Element {
       <Grid item xs={2}>
         <img src={logo} className="App-logo" alt="logo" />
       </Grid>
-      
     </Grid>
-    
   );
 }
 
