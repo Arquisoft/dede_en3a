@@ -6,7 +6,6 @@ import { SiAiohttp } from "react-icons/si";
 import { FaBars} from 'react-icons/fa'
 import {IconContext} from "react-icons";
 import GoogleLogin from 'react-google-login';
-import {SignUp} from "../login/signup";
 import ReactDOM from "react-dom";
 import App from "../../App";
 
@@ -45,18 +44,6 @@ const Navbar = () => {
                             </MenuItemLink>
                         </MenuItem>
 
-
-                        <MenuItem>
-                            <MenuItemLink>
-                                <a onClick={() => {
-                                    ReactDOM.render(
-                                        <SignUp />,
-                                    document.getElementById('root')
-                                );}}>
-                                SIGN UP
-                                </a>
-                            </MenuItemLink>
-                        </MenuItem>
 
 
                         <MenuItem>

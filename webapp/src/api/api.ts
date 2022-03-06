@@ -1,6 +1,11 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { User } from "./model/user";
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
+
+
 
 const userCollection = collection(db, "user");
 
@@ -17,3 +22,5 @@ export async function getUsers(): Promise<any> {
     docs.docs.map((doc) => doc.data() as User)
   );
 }
+
+
