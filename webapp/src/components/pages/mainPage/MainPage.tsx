@@ -1,8 +1,3 @@
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import ContactPageIcon from "@mui/icons-material/ContactPage";
 import "./MainPage.scss";
 import CardItem from "../../CardItem/CardItem";
 
@@ -10,20 +5,24 @@ type MainPageProps = {};
 
 function MainPage(): JSX.Element {
   const item1 = {
-    name: "Uno",
-    img: "https://irecetasfaciles.com/wp-content/uploads/2019/08/pizza-de-jamon-queso-y-tocino.jpg",
+    name: "Balón",
+    img: "https://i8.amplience.net/t/jpl/jdes_product_list?plu=jd_500507_bl&qlt=92&w=363&h=363&v=1&fmt=auto",
+    price: 120,
   };
   const item2 = {
-    name: "Dos",
-    img: "https://irecetasfaciles.com/wp-content/uploads/2019/08/pizza-de-jamon-queso-y-tocino.jpg",
+    name: "Gorra",
+    img: "https://i8.amplience.net/t/jpl/jdes_product_list?plu=jd_562055_bl&qlt=92&w=363&h=363&v=1&fmt=auto",
+    price: 220,
   };
   const item3 = {
-    name: "Tres",
-    img: "https://irecetasfaciles.com/wp-content/uploads/2019/08/pizza-de-jamon-queso-y-tocino.jpg",
+    name: "Mochila",
+    img: "https://i8.amplience.net/t/jpl/jdes_product_list?plu=jd_571269_bl&qlt=92&w=363&h=363&v=1&fmt=auto",
+    price: 40,
   };
   const item4 = {
-    name: "Cuatro",
-    img: "https://irecetasfaciles.com/wp-content/uploads/2019/08/pizza-de-jamon-queso-y-tocino.jpg",
+    name: "Guantes",
+    img: "https://i8.amplience.net/t/jpl/jdes_product_list?plu=jd_571266_bl&qlt=92&w=363&h=363&v=1&fmt=auto",
+    price: 20,
   };
 
   return (
@@ -34,10 +33,18 @@ function MainPage(): JSX.Element {
           <div className="subtitle">A decentralized ecommerce website.</div>
         </div>
         <div className="product-card-container">
-          <CardItem product={item1}></CardItem>
-          <CardItem product={item2}></CardItem>
-          <CardItem product={item3}></CardItem>
-          <CardItem product={item4}></CardItem>
+          <div className="product1">
+            <CardItem product={item1}></CardItem>
+          </div>
+          <div className="product2">
+            <CardItem product={item2}></CardItem>
+          </div>
+          <div className="product3">
+            <CardItem product={item3}></CardItem>
+          </div>
+          <div className="product4">
+            <CardItem product={item4}></CardItem>
+          </div>
         </div>
       </div>
     </>

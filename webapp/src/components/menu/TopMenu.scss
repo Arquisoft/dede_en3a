@@ -1,4 +1,6 @@
 .menu-container {
+  position: sticky;
+  top: 0px;
   height: 5rem;
   background-color: var(--dark2);
   display: flex;
