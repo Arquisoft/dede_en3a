@@ -8,6 +8,9 @@ import UserList from "./components/UserList";
 import { getUsers } from "./api/api";
 import { User } from "./api/model/user";
 import "./App.scss";
+import "./Styles.scss";
+import MainPage from "./components/pages/mainPage/MainPage";
+import TopMenu from "./components/menu/TopMenu";
 
 function App(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
@@ -22,16 +25,16 @@ function App(): JSX.Element {
 
   return (
     <>
-      <Container maxWidth="sm">
-        <Welcome message="ASW students" />
+      <TopMenu></TopMenu>
+      <MainPage></MainPage>
+      {/* <Welcome message="ASW students" />
         <Box component="div" sx={{ py: 2 }}>
           This is a basic example of a React application using Typescript. You
           can add your email to the list filling the form below.
         </Box>
         <EmailForm OnUserListChange={refreshUserList} />
         <UserList users={users} />
-        <Link href="https://github.com/pglez82/asw2122_0">Source code</Link>
-      </Container>
+        <Link href="https://github.com/pglez82/asw2122_0">Source code</Link> */}
     </>
   );
 }
