@@ -11,8 +11,23 @@ import "./App.scss";
 import "./Styles.scss";
 import MainPage from "./components/pages/mainPage/MainPage";
 import TopMenu from "./components/menu/TopMenu";
+import Cart from "./components/Cart/Cart";
+import {Routes,Route} from 'react-router-dom';
 
 function App(): JSX.Element {
+
+  const products = [
+      {
+        name: "Uno",
+        img: "https://irecetasfaciles.com/wp-content/uploads/2019/08/pizza-de-jamon-queso-y-tocino.jpg",
+
+      },
+      {
+        name: "Dos",
+        img: "https://irecetasfaciles.com/wp-content/uploads/2019/08/pizza-de-jamon-queso-y-tocino.jpg",
+      }
+  ]
+
   const [users, setUsers] = useState<User[]>([]);
 
   const refreshUserList = async () => {
@@ -24,9 +39,28 @@ function App(): JSX.Element {
   }, []);
 
   return (
+
     <>
-      <TopMenu></TopMenu>
-      <MainPage></MainPage>
+        <TopMenu></TopMenu>
+        <Routes>
+            <Route path = "/" element={MainPage}></Route>
+
+            <Route path = "/Cart" element={<Cart products={[
+                {
+                    name: "Uno",
+                    img: "https://irecetasfaciles.com/wp-content/uploads/2019/08/pizza-de-jamon-queso-y-tocino.jpg",
+                    title: "Uno"
+                },
+                {
+                    name: "Dos",
+                    img: "https://irecetasfaciles.com/wp-content/uploads/2019/08/pizza-de-jamon-queso-y-tocino.jpg",
+                    title: "Dos"
+                }
+            ]}></Cart>}>
+            </Route>
+
+
+        </Routes>
       {/* <Welcome message="ASW students" />
         <Box component="div" sx={{ py: 2 }}>
           This is a basic example of a React application using Typescript. You
