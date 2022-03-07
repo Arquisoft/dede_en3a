@@ -5,7 +5,7 @@ import { User } from "../api/model/user";
 
 test("check that the list of users renders propertly", async () => {
   const userList: User[] = [
-    { name: "Pablo", email: "gonzalezgpablo@uniovi.es" },
+    //{ name: "Pablo", email: "gonzalezgpablo@uniovi.es" },
   ];
   const { getByText } = render(<UserList users={userList} />);
   // expect(getByText(userList[0].name)).toBeInTheDocument();

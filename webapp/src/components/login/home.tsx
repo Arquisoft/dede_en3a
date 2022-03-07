@@ -1,6 +1,9 @@
 
-import {Routes,Route} from 'react-router-dom';
+import {useContext} from "react";
 
 export function Home(){
-return <div>home</div>
+
+
+
+    return <div>home</div>
 }
