@@ -9,6 +9,23 @@ import CardItem from "../../CardItem/CardItem";
 type MainPageProps = {};
 
 function MainPage(): JSX.Element {
+  const item1 = {
+    name: "Uno",
+    img: "https://irecetasfaciles.com/wp-content/uploads/2019/08/pizza-de-jamon-queso-y-tocino.jpg",
+  };
+  const item2 = {
+    name: "Dos",
+    img: "https://irecetasfaciles.com/wp-content/uploads/2019/08/pizza-de-jamon-queso-y-tocino.jpg",
+  };
+  const item3 = {
+    name: "Tres",
+    img: "https://irecetasfaciles.com/wp-content/uploads/2019/08/pizza-de-jamon-queso-y-tocino.jpg",
+  };
+  const item4 = {
+    name: "Cuatro",
+    img: "https://irecetasfaciles.com/wp-content/uploads/2019/08/pizza-de-jamon-queso-y-tocino.jpg",
+  };
+
   return (
     <>
       <div className="header-container">
@@ -17,10 +34,10 @@ function MainPage(): JSX.Element {
           <div className="subtitle">A decentralized ecommerce website.</div>
         </div>
         <div className="product-card-container">
-          <CardItem></CardItem>
-          <CardItem></CardItem>
-          <CardItem></CardItem>
-          <CardItem></CardItem>
+          <CardItem product={item1}></CardItem>
+          <CardItem product={item2}></CardItem>
+          <CardItem product={item3}></CardItem>
+          <CardItem product={item4}></CardItem>
         </div>
       </div>
     </>
