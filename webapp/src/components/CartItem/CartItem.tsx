@@ -12,11 +12,13 @@ function Cart(props: CartProps): JSX.Element {
   return (
     <>
       <h2>Your Shopping Cart</h2>
-      {/* <div className="container">
+      <div className="container">
         {props.products.length === 0 ? <p>No items</p> : null}
-        {() => props.products.forEach((p) => <div> {p.name} </div>)}
-      </div> */}
-      {/* <h2>Total: ${calculateTotal(props.products).toFixed(2)}</h2> */}
+        {props.products.map((p) => (
+          <div> {p.title} </div>
+        ))}
+      </div>
+      <h2>Total: ${calculateTotal(props.products).toFixed(2)}</h2>
     </>
   );
 }
