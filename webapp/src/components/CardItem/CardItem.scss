@@ -1,6 +1,7 @@
 .container {
   height: 25rem;
   width: 15rem;
+  color: var(--white);
 }
 
 .product-image:hover {
@@ -35,7 +36,7 @@
 .price {
   transition: 0.5s ease;
   margin-top: 0.5rem;
-  color: var(--dark2);
+  color: var(--white);
   font-size: 1.8rem;
   font-family: "Montserrat-Bold";
 }
@@ -54,7 +55,7 @@
 }
 .product-name {
   font-size: 1.4rem;
-  color: var(--dark2);
+  color: var(--white);
   letter-spacing: var(--letterSpacing);
   height: 3rem;
   margin-top: 0.2rem;
