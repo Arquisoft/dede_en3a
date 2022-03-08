@@ -25,7 +25,7 @@ function App(): JSX.Element {
     price: 120,
   };
   const item2 = {
-    name: "Gorra",
+    name: "Gorrita",
     img: "https://i8.amplience.net/t/jpl/jdes_product_list?plu=jd_562055_bl&qlt=92&w=363&h=363&v=1&fmt=auto",
     price: 220,
   };
