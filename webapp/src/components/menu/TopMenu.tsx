@@ -25,7 +25,6 @@ function TopMenu(): JSX.Element {
             <div className="menu-item">Shop</div>
             <div className="menu-item">About us</div>
             <div className="menu-item">Contact</div>
-            <div onClick={ () => navigate("/cart") } className="menu-item">Cart</div>
           </div>
           <span
             className="material-icons login-icon"

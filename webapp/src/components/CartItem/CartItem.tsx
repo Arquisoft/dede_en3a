@@ -1,7 +1,5 @@
 import "../CardItem/CardItem.scss";
 import { Product } from "../../api/model/product";
-import TopMenu from "../menu/TopMenu";
-import "./CartItem.scss";
 
 type CartProps = {
   products: Product[];
@@ -13,17 +11,14 @@ function Cart(props: CartProps): JSX.Element {
 
   return (
     <>
-        <TopMenu></TopMenu>
-        <div className="cart-container">
-          <h2>Your Shopping Cart</h2>
-
-            {props.products.length === 0 ? <p>No items</p> : null}
-            {props.products.map((p) => (
-              <div> {p.title} </div>
-            ))}
-
-          <h2>Total: ${calculateTotal(props.products).toFixed(2)}</h2>
-        </div>
+      <h2>Your Shopping Cart</h2>
+      <div className="container">
+        {props.products.length === 0 ? <p>No items</p> : null}
+        {props.products.map((p) => (
+          <div> {p.title} </div>
+        ))}
+      </div>
+      <h2>Total: ${calculateTotal(props.products).toFixed(2)}</h2>
     </>
   );
 }
