@@ -9,7 +9,7 @@ import { addUser } from "../api/api";
 type EmailFormProps = {
   OnUserListChange: () => void;
 };
-
+/*
 type NotificationType = {
   severity: AlertColor;
   message: string;
@@ -27,7 +27,7 @@ function EmailForm(props: EmailFormProps): JSX.Element {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let result: boolean = await addUser({ name, email });
+    /!*let result: boolean = await addUser({ name, email });
     if (result) {
       setNotificationStatus(true);
       setNotification({
@@ -41,7 +41,7 @@ function EmailForm(props: EmailFormProps): JSX.Element {
       setNotification({
         severity: "error",
         message: "There's been an error in the register proccess.",
-      });
+      });*!/
     }
   };
 
@@ -85,4 +85,4 @@ function EmailForm(props: EmailFormProps): JSX.Element {
   );
 }
 
-export default EmailForm;
+export default EmailForm;*/

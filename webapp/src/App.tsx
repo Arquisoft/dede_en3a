@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
+
+
 import { getUsers } from "./api/api";
 import { User } from "./api/model/user";
 import "./App.scss";
 import "./Styles.scss";
 import MainPage from "./components/pages/mainPage/MainPage";
-import TopMenu from "./components/menu/TopMenu";
+
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Cart from "./components/CartItem/CartItem";
 import LoginPage from "./components/pages/LoginPage/LoginPage";
-import RegisterPage from "./components/pages/RegisterPage/RegisterPage";
+
+import {Dashboard} from './components/pages/DashboardPage/dashboard'
+import {RegisterPage} from "./components/pages/RegisterPage/RegisterPage";
 
 function App(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
@@ -21,38 +25,17 @@ function App(): JSX.Element {
     refreshUserList();
   }, []);
 
-  const item1 = {
-    name: "Balón",
-    img: "https://i8.amplience.net/t/jpl/jdes_product_list?plu=jd_500507_bl&qlt=92&w=363&h=363&v=1&fmt=auto",
-    price: 120,
-  };
-  const item2 = {
-    name: "Gorrita",
-    img: "https://i8.amplience.net/t/jpl/jdes_product_list?plu=jd_562055_bl&qlt=92&w=363&h=363&v=1&fmt=auto",
-    price: 220,
-  };
-  const item3 = {
-    name: "Mochila",
-    img: "https://i8.amplience.net/t/jpl/jdes_product_list?plu=jd_571269_bl&qlt=92&w=363&h=363&v=1&fmt=auto",
-    price: 40,
-  };
-  const item4 = {
-    name: "Guantes",
-    img: "https://i8.amplience.net/t/jpl/jdes_product_list?plu=jd_571266_bl&qlt=92&w=363&h=363&v=1&fmt=auto",
-    price: 20,
-  };
-
-  const products = [item1, item2, item3];
 
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/home" element={<MainPage />} />
-          <Route path="/cart" element={<Cart products={products} />} />
+          <Route path="/cart" element={<Cart products={[]} />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="*" element={<Navigate to="/home" />} />
+          <Route path={"/dashboard"} element={<Dashboard/>}/>;
         </Routes>
       </BrowserRouter>
       {/* <Welcome message="ASW students" />
