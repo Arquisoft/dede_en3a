@@ -1,0 +1,56 @@
+.menu-container {
+  position: sticky;
+  top: 0px;
+  height: 5rem;
+  background-color: var(--dark2);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  z-index: 100;
+}
+
+.menu {
+  height: 100%;
+  box-shadow: var(--shadow2);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.links {
+  height: 100%;
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.menu-item {
+  cursor: pointer;
+  font-size: 1.2rem;
+  text-align: center;
+  letter-spacing: var(--letterSpacing);
+  transition: 0.35s ease;
+}
+
+.menu-item:hover {
+  color: var(--orange2);
+  transform: translateY(-0.2rem);
+}
+
+.logo {
+  margin-left: 1rem;
+  align-self: center;
+  height: 3rem;
+  animation: logo-spin 25s infinite linear;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
