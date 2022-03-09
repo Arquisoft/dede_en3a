@@ -10,11 +10,9 @@ import MainPage from "./components/pages/mainPage/MainPage";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Cart from "./components/CartItem/CartItem";
 import LoginPage from "./components/pages/LoginPage/LoginPage";
-import RegisterPage from "./components/pages/RegisterPage/RegisterPage";
 
-import {Dashboard} from './components/login/dashboard'
-import {Login} from "./components/login/login";
-import {Register} from "./components/login/register";
+import {Dashboard} from './components/pages/DashboardPage/dashboard'
+import {RegisterPage} from "./components/pages/RegisterPage/RegisterPage";
 
 function App(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
@@ -33,10 +31,11 @@ function App(): JSX.Element {
       <BrowserRouter>
         <Routes>
           <Route path="/home" element={<MainPage />} />
-          <Route path="/cart" element={<Cart products={products} />} />
+          <Route path="/cart" element={<Cart products={[]} />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="*" element={<Navigate to="/home" />} />
+          <Route path={"/dashboard"} element={<Dashboard/>}/>;
         </Routes>
       </BrowserRouter>
       {/* <Welcome message="ASW students" />

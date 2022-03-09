@@ -5,14 +5,11 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./utils/firebase";
 
-import {BrowserRouter} from "react-router-dom";
-
-//No borrar BROWSER RPUTER
 ReactDOM.render(
   <React.StrictMode>
-      <BrowserRouter>
+
           <App />
-      </BrowserRouter>
+
 
   </React.StrictMode>,
   document.getElementById("root")
