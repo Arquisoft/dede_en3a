@@ -1,7 +1,7 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { User } from "./model/user";
-import firebase from 'firebase/app';
+//import firebase from 'firebase/app';
 import 'firebase/auth';
 
 

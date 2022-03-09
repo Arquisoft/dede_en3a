@@ -1,22 +1,23 @@
-import React, {ChangeEvent, useState} from "react";
+import React, { useState} from "react";
 import {useAuth} from "../../context/AuthContext";
 import {useNavigate} from 'react-router-dom'
 import {addUser} from "../../api/api";
-import firebase from "firebase/compat";
 import {Exception} from "sass";
+
 
 export function Register(){
 
     const [user, setUser] = useState({
         email:'',
         password:'',
+        confirmPssw:'',
         name:''
     });
 
    const {signup} = useAuth();
    const navigate = useNavigate();
 
-   const [error,setError] = useState();
+   const [error,setError] = useState('');
 
     const handleChangeEmail = (e:React.ChangeEvent<HTMLInputElement>) => {
         setUser({...user, email: e.currentTarget.value});
@@ -34,10 +35,27 @@ export function Register(){
         console.log(e.currentTarget.name,e.currentTarget.value);
     }
 
+    const handleChangeConfirmPasswd = (e:React.ChangeEvent<HTMLInputElement>) => {
+        setUser({...user, confirmPssw: e.currentTarget.value});
+        console.log(e.currentTarget.name,e.currentTarget.value);
+    }
+
+
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
+
+
+
+
+        setError('')
         console.log(user);
         try{
+
+            if(user.password != user.confirmPssw){
+                throw new Error('Passwords have to be equal');
+            }
+
             await signup(user.email,user.password)
                 .then((userCredential) => {
                     console.log("User: " + userCredential.user, "ProviderId: " + userCredential.providerId);
@@ -52,7 +70,17 @@ export function Register(){
 
             navigate("/");
         }catch(error : any ){
-            setError(error.message);
+            if(error.code === "auth/internal-error"){
+                setError('Invalid email');
+            }else if(error.code === 'auth/email-already-in-use'){
+                setError('Email already registered');
+            }else if(error.code === 'auth/weak-password'){
+                setError('Password should be at least 6 characters');
+            }
+            else{
+                setError(error.message);
+            }
+
         }
 
     }
@@ -70,7 +98,12 @@ export function Register(){
                 <input type={"text"} name="name" placeholder={"your name and surname"}
                        onChange={handleChangeName}/><br/>
                 <label htmlFor={"password"}>Password</label>
-                <input type={"password"} name="password" id={"password"} onChange={handleChangePassword}/><br/>
+                <input type={"password"} name="password" id={"password"}
+                       onChange={handleChangePassword} placeholder={"******"}/><br/>
+
+                <label htmlFor={"confirmPasswd"}>Confirm Password</label>
+                <input type={"password"} name="confirmPasswd" id={"confirmPasswd"}
+                        onChange={handleChangeConfirmPasswd} placeholder={"******"}/><br/>
 
                 <button>Register</button>
             </form>
