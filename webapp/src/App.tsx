@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import Link from "@mui/material/Link";
-import Container from "@mui/material/Container";
-import EmailForm from "./components/EmailForm";
-import Welcome from "./components/Welcome";
-import UserList from "./components/UserList";
+
+
 import { getUsers } from "./api/api";
 import { User } from "./api/model/user";
 import "./App.scss";
-import ShowPodInformation from "./components/ShowPodInformation";
+import "./Styles.scss";
+import MainPage from "./components/pages/mainPage/MainPage";
+
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Cart from "./components/CartItem/CartItem";
+import LoginPage from "./components/pages/LoginPage/LoginPage";
+
+import {Dashboard} from './components/pages/DashboardPage/dashboard'
+import {RegisterPage} from "./components/pages/RegisterPage/RegisterPage";
 
 function App(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
@@ -22,20 +26,26 @@ function App(): JSX.Element {
   }, []);
 
 
-  // @ts-ignore
   return (
     <>
-      <Container maxWidth="sm">
-        <Welcome message="ASW students" />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/home" element={<MainPage />} />
+          <Route path="/cart" element={<Cart products={[]} />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="*" element={<Navigate to="/home" />} />
+          <Route path={"/dashboard"} element={<Dashboard/>}/>;
+        </Routes>
+      </BrowserRouter>
+      {/* <Welcome message="ASW students" />
         <Box component="div" sx={{ py: 2 }}>
           This is a basic example of a React application using Typescript. You
           can add your email to the list filling the form below.
         </Box>
-        <ShowPodInformation webID="https://carlosgarriga12.solidcommunity.net/profile/card#id1646762269182" />
         <EmailForm OnUserListChange={refreshUserList} />
         <UserList users={users} />
-        <Link href="https://github.com/pglez82/asw2122_0">Source code</Link>
-      </Container>
+        <Link href="https://github.com/pglez82/asw2122_0">Source code</Link> */}
     </>
   );
 }
