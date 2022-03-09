@@ -5,7 +5,7 @@ import "./App.scss";
 import "./Styles.scss";
 import MainPage from "./components/pages/mainPage/MainPage";
 import TopMenu from "./components/menu/TopMenu";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Cart from "./components/CartItem/CartItem";
 import LoginPage from "./components/pages/LoginPage/LoginPage";
 import RegisterPage from "./components/pages/RegisterPage/RegisterPage";
@@ -52,6 +52,7 @@ function App(): JSX.Element {
           <Route path="/cart" element={<Cart products={products} />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
       </BrowserRouter>
       {/* <Welcome message="ASW students" />
