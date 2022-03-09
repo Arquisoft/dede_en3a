@@ -17,8 +17,6 @@ async function retrievePODInfo(webID: string): Promise<string> {
     let myDataset = await getSolidDataset(profileDocumentURI); // obtain the dataset from the URI
     let profile = getThing(myDataset, webID); // we obtain the thing we are looking for from the dataset
     let name = getStringNoLocale(profile as Thing, VCARD.street_address) as string;
-    console.log("me cago en los muertos de react");
-    console.log(name);
     // we obtain the property we are looking for and return it
 
 
