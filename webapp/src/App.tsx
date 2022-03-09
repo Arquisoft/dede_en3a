@@ -7,6 +7,8 @@ import MainPage from "./components/pages/mainPage/MainPage";
 import TopMenu from "./components/menu/TopMenu";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Cart from "./components/CartItem/CartItem";
+import LoginPage from "./components/pages/LoginPage/LoginPage";
+import RegisterPage from "./components/pages/RegisterPage/RegisterPage";
 
 function App(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
@@ -44,11 +46,12 @@ function App(): JSX.Element {
 
   return (
     <>
-      <TopMenu></TopMenu>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/home" element={<MainPage />} />
           <Route path="/cart" element={<Cart products={products} />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </BrowserRouter>
       {/* <Welcome message="ASW students" />
