@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
-// import Box from "@mui/material/Box";
-// import Link from "@mui/material/Link";
-// import Container from "@mui/material/Container";
-// //import EmailForm from "./components/EmailForm";
-// import Welcome from "./components/Welcome";
-// import UserList from "./components/UserList";
+
+
 import { getUsers } from "./api/api";
 import { User } from "./api/model/user";
-//import Navbar from './components/navBar/Navbar';
 import "./App.scss";
+import "./Styles.scss";
+import MainPage from "./components/pages/mainPage/MainPage";
 
-import {Routes,Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Cart from "./components/CartItem/CartItem";
+import LoginPage from "./components/pages/LoginPage/LoginPage";
+import RegisterPage from "./components/pages/RegisterPage/RegisterPage";
+
 import {Dashboard} from './components/login/dashboard'
 import {Login} from "./components/login/login";
 import {Register} from "./components/login/register";
-//import {AuthProvider} from "./context/AuthContext";
 
 function App(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
@@ -28,25 +28,27 @@ function App(): JSX.Element {
   }, []);
 
 
-
   return (
-        <div className={"bg-slate-300 h-screen text-black flex"}>
-
-
-                <Routes>
-
-                    <Route path = "/" element={<Dashboard/>}></Route>
-                    <Route path = "/login" element={<Login/>}></Route>
-                    <Route path = "/dashboard" element={<Dashboard/>}></Route>
-                    <Route path = "/register" element={<Register/>}></Route>
-
-                </Routes>
-
-
-        </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/home" element={<MainPage />} />
+          <Route path="/cart" element={<Cart products={products} />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="*" element={<Navigate to="/home" />} />
+        </Routes>
+      </BrowserRouter>
+      {/* <Welcome message="ASW students" />
+        <Box component="div" sx={{ py: 2 }}>
+          This is a basic example of a React application using Typescript. You
+          can add your email to the list filling the form below.
+        </Box>
+        <EmailForm OnUserListChange={refreshUserList} />
+        <UserList users={users} />
+        <Link href="https://github.com/pglez82/asw2122_0">Source code</Link> */}
+    </>
   );
-
-
 }
 
 export default App;
