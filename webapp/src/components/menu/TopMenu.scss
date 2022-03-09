@@ -1,7 +1,7 @@
 .menu-container {
   position: sticky;
   top: 0px;
-  height: 5rem;
+  height: var(--topMenuHeight);
   background-color: var(--dark2);
   display: flex;
   flex-direction: row;
@@ -39,11 +39,40 @@
   transform: translateY(-0.2rem);
 }
 
+.selected {
+  color: var(--orange2);
+  transform: translateY(-0.2rem);
+}
+
 .logo {
   margin-left: 1rem;
   align-self: center;
   height: 3rem;
   animation: logo-spin 25s infinite linear;
+}
+
+.login-icon {
+  cursor: pointer;
+  font-size: 2rem;
+  align-self: center;
+  margin-right: 3.5rem;
+  transition: 0.35s ease;
+}
+
+.login-icon:hover {
+  filter: drop-shadow(var(--dropShadowOrange));
+  font-size: 2rem;
+  align-self: center;
+  margin-right: 3.5rem;
+  color: var(--orange2);
+}
+a,
+a:hover,
+a:focus,
+a:active {
+  align-self: center;
+  text-decoration: none;
+  color: inherit;
 }
 
 @keyframes logo-spin {

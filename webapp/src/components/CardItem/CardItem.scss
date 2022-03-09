@@ -47,7 +47,7 @@
     transition: 0.25s ease;
   }
   span:hover {
-    filter: drop-shadow(0px 0px 0.5rem var(--orange2));
+    filter: drop-shadow(var(--dropShadowOrange));
   }
   color: var(--orange2);
   top: 1rem;

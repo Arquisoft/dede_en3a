@@ -1,11 +1,13 @@
 html,
 :root {
   --white: #fbfbfb;
-  --white1: #ffffff;
+  --white1: #eceaea;
 
   --orange1: rgba(255, 182, 80, 1);
   --orange2: rgba(255, 156, 81, 1);
   --orange3: rgba(239, 104, 72, 1);
+
+  --dropShadowOrange: 0px 0px 0.5rem var(--orange2);
 
   --dark1: #282c34;
   --dark2: #1a1a1a;
@@ -13,10 +15,38 @@ html,
   --shadow2: 0px 0px 20px var(--dark2);
 
   --letterSpacing: 0.05rem;
+
+  --topMenuHeight: 5rem;
 }
 
 html {
   background-color: var(--white);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Montserrat-Regular";
+}
+
+input,
+input:focus,
+input:hover {
+  font-family: "Montserrat-Regular";
+  border: 0;
+  outline: 0;
+  -webkit-appearance: none;
+}
+
+button,
+button:hover,
+button:focus {
+  font-family: "Montserrat-Regular";
+
+  border: 0;
+  outline: 0;
+  background-color: white;
 }
 
 body {
