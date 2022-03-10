@@ -15,6 +15,9 @@ import {Dashboard} from './components/pages/DashboardPage/dashboard'
 import {RegisterPage} from "./components/pages/RegisterPage/RegisterPage";
 
 function App(): JSX.Element {
+
+  //mySession : sessionStorage = sessionStorage;
+
   const [users, setUsers] = useState<User[]>([]);
 
   const refreshUserList = async () => {

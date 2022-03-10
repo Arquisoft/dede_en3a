@@ -6,6 +6,7 @@ type CardItemProps = {
 };
 
 function CardItem(props: CardItemProps): JSX.Element {
+
   return (
     <>
       <div className="container">
@@ -16,7 +17,7 @@ function CardItem(props: CardItemProps): JSX.Element {
             <div className="product-name">{props.product.name}</div>
           </div>
           <div className="col2">
-            <div className="add-to-cart">
+            <div onClick={ () => null /*sessionStorage.setItem(props.product.id as string, props.product)*/ } className="add-to-cart">
               <span className="material-icons">add_shopping_cart</span>
             </div>
           </div>
