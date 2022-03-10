@@ -89,7 +89,9 @@ export function RegisterPage(){
             <div className="register-page-container">
             {error && <p>{error}</p>}
             <form onSubmit={handleSubmit}>
+
                 <div className="register-wrapper">
+                    <h2>Register</h2>
                 <label htmlFor="email">Email</label>
                 <input type={"email"} name="email" placeholder={"youremail@goes.here"}
                        onChange={handleChangeEmail}/><br/>
@@ -109,7 +111,7 @@ export function RegisterPage(){
                         <button type={"submit"}>Register</button>
                     </div>
 
-                    </div >
+                </div >
             </form>
 
             </div>
