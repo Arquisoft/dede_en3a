@@ -1,35 +1,40 @@
-import {CartItem} from "./models/CartItem";
+import { CartItem } from "./models/CartItem";
 import * as actionTypes from "./actionTypes";
-import {Product} from "../api/model/product";
+import { Product } from "../api/model/product";
 
 export function increase(item: Product) {
-    return {
-        type: actionTypes.INCREASE,
-        payload: item,
-    }
+  return {
+    type: actionTypes.INCREASE,
+    props: {
+      product: item,
+    },
+  };
 }
 export function decrease(item: Product) {
-    return {
-        type: actionTypes.DECREASE,
-        payload: item,
-    }
+  return {
+    type: actionTypes.DECREASE,
+    props: {
+      product: item,
+    },
+  };
 }
 export function remove(item: Product) {
-    return {
-        type:  actionTypes.REMOVE,
-        payload: item,
-    }
+  return {
+    type: actionTypes.REMOVE,
+    props: {
+      product: item,
+    },
+  };
 }
 export function clearCart(item: Product) {
-    return {
-        type:  actionTypes.CLEAR_CART,
-        payload: item,
-    }
+  return {
+    type: actionTypes.CLEAR_CART,
+    props: item,
+  };
 }
 export function getTotals(item: Product) {
-    return {
-        type:  actionTypes.GET_TOTALS,
-        payload: item,
-    }
+  return {
+    type: actionTypes.GET_TOTALS,
+    props: item,
+  };
 }
-
