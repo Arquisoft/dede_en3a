@@ -1,15 +1,22 @@
 import reducer from './reducer';
-import { createStore } from 'redux';
+import { createStore, Store } from 'redux';
 import {CartItem} from "./models/CartItem";
 
 const initialStore = {
     cart: [] ,
-    amount: 0,
-    total: 0
 }
 
-export interface Store {
+export type DedeAction = {
+    type: string,
+    props: any
+}
+
+export type DedeStore = {
     cart: CartItem[]
 }
 
-export const store = createStore(reducer, initialStore);
+type DispatchType = (args: DedeAction) => DedeAction;
+
+export const store: Store<DedeStore, DedeAction> & {
+    dispatch: DispatchType
+} = createStore(reducer, initialStore)

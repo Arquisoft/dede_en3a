@@ -1,15 +1,34 @@
-import createAction from 'redux';
 import {CartItem} from "./models/CartItem";
+import * as actionTypes from "./actionTypes";
 
-export const INCREASE = { type: 'INCREASE', payload : 'todo' }
-export const DECREASE = { type: 'INCREASE' }
-export const REMOVE = { type: 'REMOVE' }
-export const CLEAR_CART = { type: 'CLEAR_CART' }
-export const GET_TOTALS = { type: 'GET_TOTALS' }
-
-function increase(item: CartItem) {
+export function increase(item: CartItem) {
     return {
-        type: INCREASE,
+        type: actionTypes.INCREASE,
         payload: item,
     }
 }
+export function decrease(item: CartItem) {
+    return {
+        type: actionTypes.DECREASE,
+        payload: item,
+    }
+}
+export function remove(item: CartItem) {
+    return {
+        type:  actionTypes.REMOVE,
+        payload: item,
+    }
+}
+export function clearCart(item: CartItem) {
+    return {
+        type:  actionTypes.CLEAR_CART,
+        payload: item,
+    }
+}
+export function getTotals(item: CartItem) {
+    return {
+        type:  actionTypes.GET_TOTALS,
+        payload: item,
+    }
+}
+
