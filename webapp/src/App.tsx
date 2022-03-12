@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-
-
 import { getUsers } from "./api/api";
 import { User } from "./api/model/user";
 import "./App.scss";

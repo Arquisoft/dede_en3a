@@ -9,8 +9,6 @@ type CartProps = {
 
 function Cart(props: CartProps): JSX.Element {
 
-    //props.products = sessionStorage.
-
   const calculateTotal = (items: Product[]) =>
     items.reduce((ack: number, item) => ack, 0); //+ item.price
 
