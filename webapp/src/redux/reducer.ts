@@ -28,15 +28,29 @@ const reducer = (state: DedeStore = initialStore, action: DedeAction): DedeStore
         }
     }
     if (action.type === INCREASE) {
-        return {
-            ...state, cart: state.cart.map((item) => {
-                if (item.product.id === action.props.product.id) {
-                    item.amount++;
-                }
-                return item;
-            })
+        const newCartItems = state.cart;
+
+        let exists = false;
+
+        newCartItems.forEach( (item) => {
+            if (item.product.id === action.props.product.id) {
+                exists = true;
+                item.amount++;
+            }
+        });
+
+        if(!exists)
+        {
+            newCartItems.push( { product: action.props.product, amount: 1 } );
         }
+
+        return {
+            ...state, cart: newCartItems
+        }
+
     }
+
+
     if (action.type === CLEAR_CART) {
         return { ...state, cart: [] };
     }
