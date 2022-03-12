@@ -13,10 +13,30 @@ import LoginPage from "./components/pages/LoginPage/LoginPage";
 
 import {Dashboard} from './components/pages/DashboardPage/dashboard'
 import {RegisterPage} from "./components/pages/RegisterPage/RegisterPage";
+import {createStore} from "redux";
 
 function App(): JSX.Element {
 
-  //mySession : sessionStorage = sessionStorage;
+  //Session
+  function counter(state = 0, action: { type: any; }) {
+    switch (action.type) {
+      case 'INCREMENT':
+        return state + 1;
+      case 'DECREMENT':
+        return state - 1;
+      default:
+        return state;
+    }
+  }
+
+  let store = createStore(counter);
+
+  store.subscribe(() => {
+    console.log(store.getState())
+  });
+
+  store.dispatch({ type: 'INCREMENT' });
+  store.dispatch({ type: 'DECREMENT' });
 
   const [users, setUsers] = useState<User[]>([]);
 
