@@ -1,41 +1,33 @@
 
-import React from "react";
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged} from 'firebase/auth';
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
 import {auth} from '../utils/firebase'
 import {createContext,useContext} from "react";
-import {UserCredential} from 'firebase/auth';
-import {useEffect,useState} from 'react';
-//import firebase from "firebase/compat";
-import {User} from 'firebase/auth';
-import {jsx} from "@emotion/react";
+import {UserCredential,User} from 'firebase/auth';
+import {logInUser, signUpUser} from "../api/api";
 
 
-var currentUser : any = null
 
-function setUser(user:User|null){
-    currentUser = user;
-}
+
 
 export function getCurrentUser() : User|null{
-    return currentUser;
+    return auth.currentUser;
 }
 
 
 
 const signup = async (email:string,password:string) =>{
-    const userCredentials : UserCredential = await createUserWithEmailAndPassword(auth,email,password);
+    const userCredentials : UserCredential = await signUpUser(auth, email, password);
 
 
-    setUser(userCredentials.user);
+
     console.log(getCurrentUser());
     return userCredentials;
 }
 
 const login =async (email:string,password:string) =>{
-    const userCredentials : UserCredential = await signInWithEmailAndPassword(auth,email,password);
+    const userCredentials : UserCredential = await logInUser(auth,email,password);
 
 
-    setUser(userCredentials.user);
     console.log(getCurrentUser());
     return userCredentials;
 }
