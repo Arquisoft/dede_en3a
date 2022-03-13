@@ -15,6 +15,7 @@ import {Dashboard} from './components/pages/DashboardPage/dashboard'
 import {RegisterPage} from "./components/pages/RegisterPage/RegisterPage";
 import ShopPage from "./components/pages/shopPage/ShopPage";
 import ContactPage from "./components/pages/ContactPage/ContactPage";
+import OrdersPage from "./components/pages/OrdersPage/OrdersPage";
 
 function App(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
@@ -38,6 +39,7 @@ function App(): JSX.Element {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/orders" element={<OrdersPage />} />
           <Route path="*" element={<Navigate to="/home" />} />
           <Route path={"/dashboard"} element={<Dashboard/>}/>;
         </Routes>
