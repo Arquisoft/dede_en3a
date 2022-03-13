@@ -12,6 +12,9 @@ import LoginPage from "./components/pages/LoginPage/LoginPage";
 import {Dashboard} from './components/pages/DashboardPage/dashboard'
 import {RegisterPage} from "./components/pages/RegisterPage/RegisterPage";
 import {createStore} from "redux";
+import {DedeStore} from "./redux/store";
+import {shallowEqual, useSelector} from "react-redux";
+import {CartItem} from "./redux/models/CartItem";
 
 function App(): JSX.Element {
 
@@ -46,13 +49,17 @@ function App(): JSX.Element {
     refreshUserList();
   }, []);
 
+  const products: CartItem[] = useSelector(
+      (state: DedeStore) => state.cart,
+      shallowEqual
+  )
 
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/home" element={<MainPage />} />
-          <Route path="/cart" element={<Cart products={[]} />} />
+          <Route path="/cart" element={<Cart products={products} />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="*" element={<Navigate to="/home" />} />
