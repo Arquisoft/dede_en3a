@@ -32,17 +32,5 @@
   font-size: 1.35rem;
   letter-spacing: 0.05rem;
   color: var(--white1);
-  animation: tracking-in-expand 1.35s cubic-bezier(0.33, 1, 0.68, 1) 0.7s
-  forwards;
-}
-
-.text {
-  text-align: center;
-  margin-top: 6rem;
-  opacity: 0;
-
-  font-size: 1.75rem;
-  letter-spacing: 0.05rem;
-  color: var(--white1);
-  animation: appear 1s ease 1.5s forwards;
+  animation: appear 1s ease 0.4s forwards;
 }

@@ -2,8 +2,6 @@ import "./TopMenu.scss";
 import logo from "./../../logo.svg";
 import { useNavigate } from "react-router-dom";
 
-type TopMenuProps = {};
-
 function TopMenu(): JSX.Element {
   const navigate = useNavigate();
 
@@ -22,9 +20,11 @@ function TopMenu(): JSX.Element {
             <div className={homeClass} onClick={() => navigate("/home")}>
               Home
             </div>
-            <div className="menu-item">Shop</div>
-            <div className="menu-item">About us</div>
-            <div className="menu-item">Contact</div>
+            <div onClick={ () => navigate("/shop") } className="menu-item">Shop</div>
+            <a href={"https://arquisoft.github.io/dede_en3a/"}>
+              <div className="menu-item">About us</div>
+            </a>
+            <div onClick={ () => navigate("/contact") }className="menu-item">Contact</div>
             <div onClick={ () => navigate("/cart") } className="menu-item">Cart</div>
           </div>
           <span
