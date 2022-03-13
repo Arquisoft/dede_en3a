@@ -36,7 +36,5 @@ Potentially more columns in case you need translations.
                 
 | Node.js       | Node.js is a platform built on JavaScript runtime for easily building
                     fast and scalable network applications.
-| Azure     | Azure is a cloud computing service operated by Microsoft for application
-                management via Microsoft-managed data centers.
-| MySQL     | MySQL is an open-source relational database management system.
+| Firebase      | Platform to develop web applications and also to deploy them. Backend can be done inside.
 |===

@@ -114,4 +114,6 @@ Table with role names, person names, and their expectations with respect to the 
 | Professors & Reviewers | José Emilio Labra Gallo, Pablo González González | They will guide the developers throughout developing process, providing tutorship and help when needed.
 | Users | | People interested in buying products and good from our online shop.
 | Previous year's students | | Previous year's projects may show the developers what an actual documentation and project development looks like, so they can find inspiration in those projects.
+| Inrupt | People that are inolved in Inrupt will have access to our project that is public in Github
+| Empathy | By establishing empathy with your stakeholders, you show them that you're willing to learn and grow alongside them.
 |===
