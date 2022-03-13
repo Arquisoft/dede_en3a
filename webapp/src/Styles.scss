@@ -20,7 +20,7 @@ html,
 }
 
 html {
-  background-color: var(--white);
+  background-color: var(--dark1);
 }
 
 h1,
@@ -28,6 +28,19 @@ h2,
 h3,
 h4 {
   font-family: "Montserrat-Regular";
+}
+
+span {
+  .material-icons {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: 0.25s ease;
+
+    color: var(--orange2);
+  }
+  .material-icons:hover {
+    filter: drop-shadow(var(--dropShadowOrange));
+  }
 }
 
 input,

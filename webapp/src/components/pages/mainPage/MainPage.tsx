@@ -6,9 +6,9 @@ import React, { useEffect, useState } from "react";
 import { User } from "../../../api/model/user";
 import TopMenu from "../../menu/TopMenu";
 import { useNavigate } from "react-router-dom";
-import { Dispatch } from "redux"
-import {useDispatch} from "react-redux";
-import {increase} from "../../../redux/actions";
+import { Dispatch } from "redux";
+import { useDispatch } from "react-redux";
+import { increase } from "../../../redux/actions";
 
 type MainPageProps = {};
 
@@ -25,23 +25,20 @@ function MainPage(): JSX.Element {
 
   let productList: JSX.Element[] = [];
 
-
-
   const dispatch: Dispatch<any> = useDispatch();
 
-  const saveArticle = React.useCallback(
-      (product: Product) => dispatch(increase(product)),
-      [dispatch]
-  )
+  const saveProduct = React.useCallback(
+    (product: Product) => dispatch(increase(product)),
+    [dispatch]
+  );
 
   products.forEach((product) => {
     productList.push(
-        <div className="product">
-          <CardItem product={product} saveProductToCart={ saveArticle }></CardItem>
-        </div>
+      <div className="product">
+        <CardItem product={product} saveProductToCart={saveProduct}></CardItem>
+      </div>
     );
   });
-
 
   return (
     <>

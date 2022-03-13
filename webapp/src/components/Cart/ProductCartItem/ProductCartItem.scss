@@ -1,0 +1,66 @@
+.product-cart-container {
+  margin-top: 3rem;
+  height: 15rem;
+  width: 45rem;
+  color: var(--white);
+  display: flex;
+  flex-direction: row;
+}
+
+.product-image:hover {
+  transform: scale(1.05);
+  .price {
+    margin-top: 1rem;
+  }
+}
+
+.product-image {
+  cursor: pointer;
+  transition: 0.5s ease;
+  border-radius: 0.5rem;
+  width: 15rem;
+  height: 100%;
+}
+
+.product-cart-description-container {
+  margin-left: 3rem;
+  flex-direction: row;
+  width: 25rem;
+}
+.price {
+  transition: 0.5s ease;
+  margin-top: 0.5rem;
+  color: var(--white);
+  font-size: 1.8rem;
+  font-family: "Montserrat-Bold";
+}
+.add-to-cart {
+  span {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: 0.25s ease;
+  }
+  span:hover {
+    filter: drop-shadow(var(--dropShadowOrange));
+  }
+  color: var(--orange2);
+  top: 1rem;
+  right: 1rem;
+}
+.product-name {
+  font-size: 1.4rem;
+  color: var(--white);
+  letter-spacing: var(--letterSpacing);
+  margin-top: 0.2rem;
+}
+.row2 {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  span {
+    color: var(--orange2);
+    cursor: pointer;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}

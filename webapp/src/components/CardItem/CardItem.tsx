@@ -1,20 +1,19 @@
+import { useState } from "react";
 import { Product } from "../../api/model/product";
 import "./CardItem.scss";
 
 type CardItemProps = {
   product: Product;
-  saveProductToCart: (product: Product | any) => void
+  saveProductToCart: (product: Product | any) => void;
 };
 
-
-
-export const CardItem: React.FC<CardItemProps> = ({ saveProductToCart, product }) => {
-
+export const CardItem: React.FC<CardItemProps> = ({
+  saveProductToCart,
+  product,
+}) => {
   const addToCart = () => {
     saveProductToCart(product);
-  }
-
-
+  };
 
   return (
     <>
@@ -26,7 +25,7 @@ export const CardItem: React.FC<CardItemProps> = ({ saveProductToCart, product }
             <div className="product-name">{product.name}</div>
           </div>
           <div className="col2">
-            <div onClick={ addToCart } className="add-to-cart">
+            <div onClick={addToCart} className="add-to-cart">
               <span className="material-icons">add_shopping_cart</span>
             </div>
           </div>
@@ -34,8 +33,6 @@ export const CardItem: React.FC<CardItemProps> = ({ saveProductToCart, product }
       </div>
     </>
   );
-}
-
-
+};
 
 export default CardItem;

@@ -41,12 +41,11 @@
   letter-spacing: 0.05rem;
   color: var(--white1);
   animation: tracking-in-expand 1.35s cubic-bezier(0.33, 1, 0.68, 1) 0.7s
-  forwards;
+    forwards;
 }
 
-.product-card-container {
+.card-item-card-container {
   margin-top: 6rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
-
