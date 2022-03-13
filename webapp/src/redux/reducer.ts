@@ -26,7 +26,6 @@ const reducer = (
     };
   }
   if (action.type === INCREASE) {
-    console.log("estado store", state);
     const newCartItems = state.cart;
 
     let exists = false;
@@ -41,6 +40,11 @@ const reducer = (
     if (!exists) {
       newCartItems.push({ product: action.props.product, amount: 1 });
     }
+
+    console.log("estado store", {
+      ...state,
+      cart: newCartItems,
+    });
 
     return {
       ...state,

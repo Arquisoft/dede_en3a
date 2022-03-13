@@ -6,21 +6,20 @@ import "./Styles.scss";
 import MainPage from "./components/pages/mainPage/MainPage";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Cart from "./components/CartItem/CartItem";
+import Cart from "./components/Cart/Cart";
 import LoginPage from "./components/pages/LoginPage/LoginPage";
 
-import {Dashboard} from './components/pages/DashboardPage/dashboard'
-import {RegisterPage} from "./components/pages/RegisterPage/RegisterPage";
-import {createStore} from "redux";
+import { Dashboard } from "./components/pages/DashboardPage/dashboard";
+import { RegisterPage } from "./components/pages/RegisterPage/RegisterPage";
+import { createStore } from "redux";
 
 function App(): JSX.Element {
-
   //Session
-  function counter(state = 0, action: { type: any; }) {
+  function counter(state = 0, action: { type: any }) {
     switch (action.type) {
-      case 'INCREMENT':
+      case "INCREMENT":
         return state + 1;
-      case 'DECREMENT':
+      case "DECREMENT":
         return state - 1;
       default:
         return state;
@@ -30,11 +29,11 @@ function App(): JSX.Element {
   let store = createStore(counter);
 
   store.subscribe(() => {
-    console.log(store.getState())
+    console.log(store.getState());
   });
 
-  store.dispatch({ type: 'INCREMENT' });
-  store.dispatch({ type: 'DECREMENT' });
+  store.dispatch({ type: "INCREMENT" });
+  store.dispatch({ type: "DECREMENT" });
 
   const [users, setUsers] = useState<User[]>([]);
 
@@ -46,7 +45,6 @@ function App(): JSX.Element {
     refreshUserList();
   }, []);
 
-
   return (
     <>
       <BrowserRouter>
@@ -56,7 +54,7 @@ function App(): JSX.Element {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="*" element={<Navigate to="/home" />} />
-          <Route path={"/dashboard"} element={<Dashboard/>}/>;
+          <Route path={"/dashboard"} element={<Dashboard />} />;
         </Routes>
       </BrowserRouter>
       {/* <Welcome message="ASW students" />
