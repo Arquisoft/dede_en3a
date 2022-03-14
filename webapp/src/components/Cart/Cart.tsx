@@ -22,7 +22,10 @@ function Cart(props: CartProps): JSX.Element {
   );
 
   products.forEach((cartItem) => {
-    itemList.push(<ProductCartItem product={cartItem}></ProductCartItem>);
+    if( cartItem.amount > 0 ){
+      itemList.push(<ProductCartItem product={cartItem}></ProductCartItem>);
+    }
+
   });
 
   return (

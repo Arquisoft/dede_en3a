@@ -30,12 +30,16 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
   const increaseButtonAction = () => {
     saveProduct(product.product);
     setProductState(product.amount + 1);
+
   };
 
   const decreaseButtonAction = () => {
     decreaseProduct(product.product);
     setProductState(product.amount - 1);
   };
+
+  //const [, updateState] = React.useState<{}>();
+  //const forceUpdate = React.useCallback(() => updateState({}), []);
 
   return (
     <>
@@ -50,7 +54,7 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
             <span className="material-icons" onClick={decreaseButtonAction}>
               remove
             </span>
-            <div className="product-cart-amount">{productAmount}</div>
+            <div className="product-cart-amount">{product.amount}</div>
             <span className="material-icons" onClick={increaseButtonAction}>
               add
             </span>
