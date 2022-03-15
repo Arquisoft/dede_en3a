@@ -13,3 +13,40 @@
   flex-direction: column;
   align-self: center;
 }
+
+.title {
+  margin-top: 7rem;
+  opacity: 0;
+  text-align: center;
+  font-size: 7rem;
+  color: var(--orange2);
+  filter: drop-shadow(0px 0px 5rem var(--white));
+}
+
+.orders-name{
+  font-family: "Montserrat-Bold";
+  margin-left: 2rem;
+  margin-top: 1rem;
+}
+
+.order-card-item-container {
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+}
+.order-card-container > * {
+  margin: 1rem;
+}
+
+.order-wrapper {
+  box-shadow: 0px 0px 3rem rgba(255, 255, 255, 0.192);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark3);
+}
+
+.order{
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}

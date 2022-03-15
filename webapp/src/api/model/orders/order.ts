@@ -1,3 +1,9 @@
+import {OrderInd} from "./orderInd";
+
 export interface Order{
-    userEmail?: string;
+    address: string;
+    created: number;
+    items : OrderInd[];
+    totalAmount : number;
+    userEmail : string;
 }
