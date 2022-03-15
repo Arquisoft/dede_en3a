@@ -50,7 +50,7 @@ image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscuttin
 ****
 
 
-=== Domain model
+=== Domain model - Simple Class Diagram
 
 image:Clase-UML.png["UML Diagram"]
 
