@@ -487,7 +487,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#section-concepts">8. Cross-cutting Concepts</a>
 <ul class="sectlevel2">
-<li><a href="#_domain_model">8.1. Domain model</a></li>
+<li><a href="#_domain_model_simple_class_diagram">8.1. Domain model - Simple Class Diagram</a></li>
 </ul>
 </li>
 <li><a href="#section-design-decisions">9. Design Decisions</a></li>
@@ -608,8 +608,8 @@ According to the distance between the distribution center and user&#8217;s addre
 <div class="sect3">
 <h4 id="_technical_deployment">1.1.1. Technical Deployment</h4>
 <div class="paragraph">
-<p>DeDe will be implemented using TypeScript with React framework, and data will be stored in an instance of MySQL database.
-The web service and deployment will be provided by Azure, since it provides 100$ bonus for students and a set of diagnosis tools to test loads and web performance.</p>
+<p>DeDe will be implemented using TypeScript with React framework, and data will be stored in a Firebase database.
+The web service and deployment will also be provided by Firebase, since it provides 300$ bonus for students and a set of diagnosis tools to test loads and web performance.</p>
 </div>
 <div class="sidebarblock arc42help">
 <div class="content">
@@ -761,6 +761,11 @@ These stakeholders determine the extent and the level of detail of your work and
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Previous year&#8217;s projects may show the developers what an actual documentation and project development looks like, so they can find inspiration in those projects.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inrupt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">People that are inolved in Inrupt will have access to our project that is public in Github</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Empathy</p></td>
+</tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
@@ -809,6 +814,10 @@ These stakeholders determine the extent and the level of detail of your work and
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SOLID</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The project will user SOLID user pods as data retrieval.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Continuous integration system</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application will be deployed using a continuous integration system.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1005,19 +1014,13 @@ Refer to details in the following sections.</p>
 <p>Bootstrap → In order to avoid as much as possible the development of CSS we chose to use Bootstrap.</p>
 </div>
 <div class="paragraph">
-<p>MySQL → Since we are familiar to relational databases, we plan to use an instance of MySQL database.</p>
-</div>
-<div class="paragraph">
-<p>Azure → To deploy the web app we have decided to use Azure, since with the University account we have 100$ bonus. A member of the team took a course on Azure basics this summer and used it for the subject SEW.</p>
-</div>
-<div class="paragraph">
-<p>Oracle Server → In order to deploy the database, we decided to use a cloud server from Oracle (not an oracle database). As students, Oracle offer free-for-lifetime virtual machine in the cloud.</p>
-</div>
-<div class="paragraph">
 <p>CryptoJS → The crypto-js library provides AES and some hashing such as MD5/SHA in order to encrypt passwords, so we can save them encrypted in the database.</p>
 </div>
 <div class="paragraph">
-<p>Inrupt → Main POD server provider. Widely used.</p>
+<p>Solid Community → Main POD server provider. Widely used.</p>
+</div>
+<div class="paragraph">
+<p>Firebase → Is a tool for the deployment and development of the application and also it provides a part for the backend and a database.</p>
 </div>
 <div class="paragraph">
 <p>React and TypeScript have not been included in the list since it is compulsory to use them, and are not "a decision" itself.</p>
@@ -1084,9 +1087,6 @@ abstraction.</p>
 (see figure below) and their descriptions.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="./images/05_building_blocks-EN.png" alt="Hierarchy of building blocks"></span></p>
-</div>
-<div class="paragraph">
 <p><strong>Level 1</strong> is the white box description of the overall system together with black
 box descriptions of all contained building blocks.</p>
 </div>
@@ -1151,11 +1151,7 @@ Thus it contains the white box description of selected building blocks of level 
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Backend</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Node.js project. It will contain the REST API as well as any server-side function the application may need.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Web Server</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Instance of the  MySQL database.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The backend functionality will be provided by the firebase functions.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1172,12 +1168,14 @@ Thus it contains the white box description of selected building blocks of level 
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">API Rest</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Node.js REST Api. Will be in charge of data read, write and delete operations.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GUI</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The interface system the user will interact with.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Functions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provided by firebase. Serverless backend code that works via http requests.
+They allow JavaScript, TypeScript, Python and Go. They provide automatic vertical and horizontal escalation
+depending on the number of requests, ensuring availability and efficiency.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1416,16 +1414,16 @@ node.js and react apps. We will make the required optimizations in order to maxi
 <td class="tableblock halign-left valign-top"><p class="tableblock">Device of the user (desktop, mobile). Must have internet connection</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Oracle Server</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The oracle server in which the the MySQL instance will be running</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Firebase provides a database linked to the app.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Web Server</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Azure server in which our app will be running.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Firebase in which our app will be running.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">POD Provider</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The pod provider we will be using. In our case, Inrupt. Will be in charge of providing the pods for the app users.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The pod provider we will be using. In our case, Solid Community. Will be in charge of providing the pods for the app users.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1533,7 +1531,7 @@ on this list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_domain_model">8.1. Domain model</h3>
+<h3 id="_domain_model_simple_class_diagram">8.1. Domain model - Simple Class Diagram</h3>
 <div class="paragraph">
 <p><span class="image"><img src="./images/Clase-UML.png" alt="UML Diagram"></span></p>
 </div>
@@ -1601,38 +1599,30 @@ here in this central section or whether you better document it locally
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">QA-1 Typescript</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Typescript has optional static typing, you can spot early bugs,
-its predictable and readable.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Typescript cons are that it has not true static typing and
-it adds an extra step because it needs to convert it to Javascript.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QA-1 Webstorm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Easy IDE to use very similar to IntellIJ</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">QA-2 React</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Easy to learn and use, reusable components, performance enhancement.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">We started from zero so we needed to learn.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">QA-3 MySQL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Portability, seamless connectivity, data security.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Do not support
-very large databases size as efficiently.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">QA-4 Node.js</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QA-2 Node.js</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Uses Javascript, you can stream big files.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Do not provide scalability.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">QA-5 Webapp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QA-3 Webapp</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Better user experience, flexible access, easy setup.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Reduced speed, Internet reliance.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">QA-6 Pod</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QA-4 Pod. Solid Community</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Data security, all data in one place.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">As the data is decentralized you need to rely on
 a different product and poor documentation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QA-5 Firebase</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It supports the development and the deployment for the app. Also some backend</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not very familiarized</p></td>
 </tr>
 </tbody>
 </table>
@@ -1914,13 +1904,8 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
                     fast and scalable network applications.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Azure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Azure is a cloud computing service operated by Microsoft for application
-                management via Microsoft-managed data centers.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MySQL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MySQL is an open-source relational database management system.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Firebase</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Platform to develop web applications and also to deploy them. Backend can be done inside.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1949,7 +1934,7 @@ Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-02-19 11:13:47 +0100
+Last updated 2022-02-10 13:20:13 +0100
 </div>
 </div>
 </body>
