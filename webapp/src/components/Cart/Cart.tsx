@@ -8,24 +8,22 @@ import { DedeStore } from "../../redux/store";
 type CartProps = {};
 
 function Cart(props: CartProps): JSX.Element {
-  const calculateTotal = (items: CartItem[]) =>
-    items.reduce(
+  const calculateTotal = (items: CartItem[]) => {
+    console.log("recalculate");
+    return items.reduce(
       (ack: number, item) => ack + item.product.price! * item.amount,
       0
     ); //+ item.price
+  };
 
   let itemList: JSX.Element[] = [];
 
-  const products: CartItem[] = useSelector(
-    (state: DedeStore) => state.cart,
-    shallowEqual
-  );
+  const products: CartItem[] = useSelector((state: DedeStore) => state.cart);
 
   products.forEach((cartItem) => {
-    if( cartItem.amount > 0 ){
+    if (cartItem.amount > 0) {
       itemList.push(<ProductCartItem product={cartItem}></ProductCartItem>);
     }
-
   });
 
   return (
