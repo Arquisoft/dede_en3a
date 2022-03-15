@@ -1087,9 +1087,6 @@ abstraction.</p>
 (see figure below) and their descriptions.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="./images/05_building_blocks-EN.png" alt="Hierarchy of building blocks"></span></p>
-</div>
-<div class="paragraph">
 <p><strong>Level 1</strong> is the white box description of the overall system together with black
 box descriptions of all contained building blocks.</p>
 </div>
@@ -1154,11 +1151,7 @@ Thus it contains the white box description of selected building blocks of level 
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Backend</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Node.js project. It will contain the REST API as well as any server-side function the application may need.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Web Server</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Instance of the  MySQL database.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The backend functionality will be provided by the firebase functions.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1175,12 +1168,14 @@ Thus it contains the white box description of selected building blocks of level 
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">API Rest</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Node.js REST Api. Will be in charge of data read, write and delete operations.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GUI</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The interface system the user will interact with.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Functions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provided by firebase. Serverless backend code that works via http requests.
+They allow JavaScript, TypeScript, Python and Go. They provide automatic vertical and horizontal escalation
+depending on the number of requests, ensuring availability and efficiency.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1939,7 +1934,7 @@ Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-02-12 11:30:15 +0100
+Last updated 2022-02-10 13:20:13 +0100
 </div>
 </div>
 </body>
