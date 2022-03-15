@@ -16,6 +16,7 @@ These constraints will limit the team's ability to change the technology environ
 | Github     |  The project must be constantly updated in GitHub, showing all the members collaborations.
 | Arc42     | The documentation must follow the Arc42 templates.
 | SOLID       | The project will user SOLID user pods as data retrieval.
+| Continuous integration system      | The application will be deployed using a continuous integration system.
 |===
 
 
