@@ -1,8 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-
-import firebase from 'firebase/app';
 import {getAuth} from 'firebase/auth';
+import {getFunctions} from "firebase/functions";
 
 // const firebaseConfig = {
 //   apiKey: process.env.REACT_APP_apiKey,
@@ -22,12 +21,14 @@ const firebaseConfig = {
   storageBucket: "dede-en3a.appspot.com",
   messagingSenderId: "344724226999",
   appId: "1:344724226999:web:1aef51b515c7983e08de32",
-  measurementId: "G-Q99W98RL24",
+  measurementId: "G-Q99W98RL24"
 };
 
 console.log(firebaseConfig);
 
 const app = initializeApp(firebaseConfig);
 
-export const db = getFirestore(app);
 export const auth = getAuth(app);
+export const functions = getFunctions(app);
+
+export const db = getFirestore(app);
