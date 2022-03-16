@@ -36,8 +36,8 @@ Needless to say, every time the app needs user's location, the user should provi
 
 ==== Technical Deployment
 
-DeDe will be implemented using TypeScript with React framework, and data will be stored in an instance of MySQL database.
-The web service and deployment will be provided by Azure, since it provides 100$ bonus for students and a set of diagnosis tools to test loads and web performance.
+DeDe will be implemented using TypeScript with React framework, and data will be stored in a Firebase database.
+The web service and deployment will also be provided by Firebase, since it provides 300$ bonus for students and a set of diagnosis tools to test loads and web performance.
 
 [role="arc42help"]
 ****
@@ -114,4 +114,6 @@ Table with role names, person names, and their expectations with respect to the 
 | Professors & Reviewers | José Emilio Labra Gallo, Pablo González González | They will guide the developers throughout developing process, providing tutorship and help when needed.
 | Users | | People interested in buying products and good from our online shop.
 | Previous year's students | | Previous year's projects may show the developers what an actual documentation and project development looks like, so they can find inspiration in those projects.
+| Inrupt | People that are inolved in Inrupt will have access to our project that is public in Github
+| Empathy | By establishing empathy with your stakeholders, you show them that you're willing to learn and grow alongside them.
 |===

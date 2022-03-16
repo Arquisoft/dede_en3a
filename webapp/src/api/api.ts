@@ -5,10 +5,23 @@ import { Product } from "./model/product";
 import {OrderInd} from "./model/orders/orderInd";
 import {Order} from "./model/orders/order";
 import {query, where} from "firebase/firestore";
+import {auth} from '../utils/firebase';
+import firebase from "firebase/compat";
+import {Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential} from 'firebase/auth';
 
 const userCollection = collection(db, "user");
 const productCollection = collection(db, "products")
 const orderCollection = collection(db, "orders")
+
+
+export async function signUpUser(auth:Auth, email:string,password:string) : Promise<UserCredential>{
+    return await createUserWithEmailAndPassword(auth,email,password);
+}
+
+
+export async function logInUser(auth:Auth, email:string,password:string) : Promise<UserCredential>{
+    return await signInWithEmailAndPassword(auth,email,password);
+}
 
 export async function addUser(user: User): Promise<any> {
   return addDoc(userCollection, {

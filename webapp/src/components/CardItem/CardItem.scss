@@ -41,15 +41,6 @@
   font-family: "Montserrat-Bold";
 }
 .add-to-cart {
-  span {
-    font-size: 2rem;
-    cursor: pointer;
-    transition: 0.25s ease;
-  }
-  span:hover {
-    filter: drop-shadow(var(--dropShadowOrange));
-  }
-  color: var(--orange2);
   top: 1rem;
   right: 1rem;
 }
