@@ -1,4 +1,3 @@
-
 "use strict";
 
 import {CallableContext} from "firebase-functions/lib/common/providers/https";
