@@ -5,15 +5,15 @@ import ProductCartItem from "./ProductCartItem/ProductCartItem";
 import { shallowEqual, useSelector } from "react-redux";
 import { DedeStore } from "../../redux/store";
 import React from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import productCartItem from "./ProductCartItem/ProductCartItem";
-import {useAuth} from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 type CartProps = {};
 
 function Cart(props: CartProps): JSX.Element {
-
   const navigate = useNavigate();
+  const currentUser = useAuth().getCurrentUser();
 
   const calculateTotal = (items: CartItem[]) => {
     console.log("recalculate");
@@ -33,21 +33,20 @@ function Cart(props: CartProps): JSX.Element {
     }
   });
 
-  const currentUser = useAuth().getCurrentUser();
-
   const checkUserRegistered = () => {
-    if( currentUser === null ){
+    if (!currentUser?.uid) {
       //<span className="popuptext" id="myPopup">You need to Login</span>;
       //new Promise(f => setTimeout(f, 10000));
+      console.log("false");
       navigate("/login");
     } else {
-      buy()
+      buy();
     }
+  };
+
+  function buy() {
+    console.log("buy");
   }
-
-
-
-  function buy () {}
 
   return (
     <>
@@ -70,7 +69,13 @@ function Cart(props: CartProps): JSX.Element {
             {itemList}
           </div>
           <div className="buttons">
-            <button type={ "submit" } className="buy" onClick={ checkUserRegistered } >Buy</button>
+            <button
+              type={"submit"}
+              className="buy"
+              onClick={checkUserRegistered}
+            >
+              Buy
+            </button>
           </div>
         </div>
       </div>
