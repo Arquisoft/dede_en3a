@@ -24,8 +24,6 @@ function LoginPage(): JSX.Element {
         setUser({...user, email: e.currentTarget.value});
 
     }
-
-
     const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({...user, password: e.currentTarget.value});
 
@@ -63,7 +61,6 @@ function LoginPage(): JSX.Element {
                 {error && <p>{error}</p>}
                 <form onSubmit={handleSubmit}>
                 <div className="login-wrapper">
-
                         <h2>Login</h2>
                         <h3>Email</h3>
                         <input type="text" onChange={handleChangeEmail}></input>
@@ -71,15 +68,13 @@ function LoginPage(): JSX.Element {
                         <input type="password" onChange={handleChangePassword}></input>
                         <div className="register"></div>
                         <div className="buttons">
-                            <button type={ "submit"}className="login">Login</button>
+                            <button type={ "submit"} className="login">Login</button>
                         </div>
 
                     <div className="register-text">
-
                         Need an account?{" "}
                         <b onClick={() => navigate("/register")}>Register</b> here
                     </div>
-
                 </div>
                 </form>
             </div>

@@ -15,6 +15,7 @@ import { createStore } from "redux";
 import { DedeStore } from "./redux/store";
 import { shallowEqual, useSelector } from "react-redux";
 import { CartItem } from "./redux/models/CartItem";
+import POD from "./components/Cart/POD/POD";
 
 function App(): JSX.Element {
   //Session
@@ -56,10 +57,12 @@ function App(): JSX.Element {
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="*" element={<Navigate to="/home" />} />
+          <Route path="*"         element={<Navigate to="/home" />} />
           <Route path={"/dashboard"} element={<Dashboard />} />;
+          <Route path={"/pod"} element={<POD />} />
         </Routes>
       </BrowserRouter>
+
       {/* <Welcome message="ASW students" />
         <Box component="div" sx={{ py: 2 }}>
           This is a basic example of a React application using Typescript. You
