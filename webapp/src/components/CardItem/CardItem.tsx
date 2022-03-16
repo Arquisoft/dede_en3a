@@ -1,22 +1,31 @@
+import { useState } from "react";
 import { Product } from "../../api/model/product";
 import "./CardItem.scss";
 
 type CardItemProps = {
   product: Product;
+  saveProductToCart: (product: Product | any) => void;
 };
 
-function CardItem(props: CardItemProps): JSX.Element {
+export const CardItem: React.FC<CardItemProps> = ({
+  saveProductToCart,
+  product,
+}) => {
+  const addToCart = () => {
+    saveProductToCart(product);
+  };
+
   return (
     <>
       <div className="container">
-        <img className="product-image" src={props.product.img}></img>
+        <img className="product-image" src={product.img}></img>
         <div className="description-container">
           <div className="col1">
-            <div className="price">{props.product.price + " €"}</div>
-            <div className="product-name">{props.product.name}</div>
+            <div className="price">{product.price + " €"}</div>
+            <div className="product-name">{product.name}</div>
           </div>
           <div className="col2">
-            <div className="add-to-cart">
+            <div onClick={addToCart} className="add-to-cart">
               <span className="material-icons">add_shopping_cart</span>
             </div>
           </div>
@@ -24,6 +33,6 @@ function CardItem(props: CardItemProps): JSX.Element {
       </div>
     </>
   );
-}
+};
 
 export default CardItem;
