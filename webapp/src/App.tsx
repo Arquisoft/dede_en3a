@@ -8,18 +8,11 @@ import MainPage from "./components/pages/mainPage/MainPage";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
 import LoginPage from "./components/pages/LoginPage/LoginPage";
-
-import {Dashboard} from './components/pages/DashboardPage/dashboard'
-import {RegisterPage} from "./components/pages/RegisterPage/RegisterPage";
 import ShopPage from "./components/pages/shopPage/ShopPage";
 import ContactPage from "./components/pages/ContactPage/ContactPage";
 import OrdersPage from "./components/pages/OrdersPage/OrdersPage";
 import { Dashboard } from "./components/pages/DashboardPage/dashboard";
 import { RegisterPage } from "./components/pages/RegisterPage/RegisterPage";
-import { createStore } from "redux";
-import { DedeStore } from "./redux/store";
-import { shallowEqual, useSelector } from "react-redux";
-import { CartItem } from "./redux/models/CartItem";
 import POD from "./components/Cart/POD/POD";
 
 function App(): JSX.Element {

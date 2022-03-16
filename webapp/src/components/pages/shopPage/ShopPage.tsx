@@ -1,9 +1,12 @@
 import TopMenu from "../../menu/TopMenu";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Product} from "../../../api/model/product";
 import {getProducts} from "../../../api/api";
 import CardItem from "../../CardItem/CardItem";
 import "./ShopPage.scss";
+import {Dispatch} from "redux";
+import {useDispatch} from "react-redux";
+import {increase} from "../../../redux/actions";
 
 
 function ShopPage():JSX.Element{
@@ -19,10 +22,17 @@ function ShopPage():JSX.Element{
 
     let productList: JSX.Element[] = [];
 
+    const dispatch: Dispatch<any> = useDispatch();
+
+    const saveProduct = React.useCallback(
+        (product: Product) => dispatch(increase(product)),
+        [dispatch]
+    );
+
     products.forEach((product) => {
         productList.push(
             <div className="product">
-                <CardItem product={product}></CardItem>
+                <CardItem product={product} saveProductToCart={saveProduct}></CardItem>
             </div>
         );
     });

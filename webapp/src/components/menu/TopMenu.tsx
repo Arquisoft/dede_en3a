@@ -40,10 +40,6 @@ function TopMenu(): JSX.Element {
             </a>
             <div onClick={ () => navigate("/contact") }className="menu-item">Contact</div>
             <div onClick={ () => navigate("/orders") }className="menu-item">Orders</div>
-            <div onClick={ () => navigate("/cart") } className="menu-item">Cart</div>
-            <div className={styles.menuitem}>Shop</div>
-            <div className={styles.menuitem}>About us</div>
-            <div className={styles.menuitem}>Contact</div>
             <div className={styles.cartcontainer} onAnimationEnd={endWobble}>
               <span
                 className={"material-icons " + styles.loginicon}
