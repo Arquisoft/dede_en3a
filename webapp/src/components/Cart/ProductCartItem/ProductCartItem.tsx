@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 import { Product } from "../../../api/model/product";
@@ -30,7 +30,6 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
   const increaseButtonAction = () => {
     saveProduct(product.product);
     setProductState(product.amount + 1);
-
   };
 
   const decreaseButtonAction = () => {

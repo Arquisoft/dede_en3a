@@ -13,23 +13,24 @@ const reducer = (
   if (action.type === DECREASE) {
     return {
       ...state,
-      cart: state.cart.map((item) => {
-        if (item.product.id === action.props.product.id) {
-          if (item.amount === 0) {
-            return item;
-          } else {
-            item.amount--;
+      cart: state.cart
+        .map((item) => {
+          if (item.product.id === action.props.product.id) {
+            if (item.amount === 0) {
+              return item;
+            } else {
+              item.amount--;
+            }
           }
-        }
-        return item;
-      }),
+          return item;
+        })
+        .filter((item) => item.amount !== 0),
     };
   }
   if (action.type === INCREASE) {
     const newCartItems = state.cart;
 
     let exists = false;
-
     newCartItems.forEach((item) => {
       if (item.product.id === action.props.product.id) {
         exists = true;
@@ -43,12 +44,12 @@ const reducer = (
 
     console.log("estado store", {
       ...state,
-      cart: newCartItems,
+      cart: state.cart,
     });
 
     return {
       ...state,
-      cart: newCartItems,
+      cart: newCartItems.filter((x) => false).concat(newCartItems),
     };
   }
 
