@@ -1,46 +1,46 @@
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { createContext, useContext } from "react";
+import { UserCredential, User } from "firebase/auth";
+import { logInUser, signUpUser } from "../api/api";
 
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
-import {auth} from '../utils/firebase'
-import {createContext,useContext} from "react";
-import {UserCredential,User} from 'firebase/auth';
-import {logInUser, signUpUser} from "../api/api";
-
-
-
-
-
-export function getCurrentUser() : User|null{
-    return auth.currentUser;
+export function getCurrentUser(): User | null {
+  return auth.currentUser;
 }
 
+const signup = async (email: string, password: string) => {
+  const userCredentials: UserCredential = await signUpUser(
+    auth,
+    email,
+    password
+  );
 
+  console.log(getCurrentUser());
+  return userCredentials;
+};
 
-const signup = async (email:string,password:string) =>{
-    const userCredentials : UserCredential = await signUpUser(auth, email, password);
+const login = async (email: string, password: string) => {
+  const userCredentials: UserCredential = await logInUser(
+    auth,
+    email,
+    password
+  );
 
+  console.log(getCurrentUser());
+  return userCredentials;
+};
 
+export const authContext = createContext({ signup, login, getCurrentUser });
 
-    console.log(getCurrentUser());
-    return userCredentials;
-}
+export const useAuth = () => {
+  const context = useContext(authContext);
+  if (!context) throw new Error("No auth provider");
 
-const login =async (email:string,password:string) =>{
-    const userCredentials : UserCredential = await logInUser(auth,email,password);
-
-
-    console.log(getCurrentUser());
-    return userCredentials;
-}
-
-
-export const authContext = createContext({signup,login, getCurrentUser});
-
-export const useAuth=()=>{
-    const context = useContext(authContext);
-    if(!context) throw new Error('No auth provider');
-
-    return context;
-}
+  return context;
+};
 
 /*
 export function AuthProvider(children : React.ReactChildren) {
@@ -66,6 +66,3 @@ export function AuthProvider(children : React.ReactChildren) {
         <authContext.Provider value={{signup,login,currentUser}}> {{children}} </authContext.Provider>
     );
 }*/
-
-
-

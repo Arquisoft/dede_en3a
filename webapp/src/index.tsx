@@ -6,12 +6,14 @@ import reportWebVitals from "./reportWebVitals";
 import "./utils/firebase";
 import { getFunctions, httpsCallable } from "firebase/functions";
 
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+
 ReactDOM.render(
   <React.StrictMode>
-
-          <App />
-
-
+    <Provider store={ store }>
+        <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

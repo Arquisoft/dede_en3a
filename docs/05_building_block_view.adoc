@@ -24,8 +24,6 @@ This allows you to communicate with your stakeholder on an abstract level withou
 The building block view is a hierarchical collection of black boxes and white boxes
 (see figure below) and their descriptions.
 
-image:05_building_blocks-EN.png["Hierarchy of building blocks"]
-
 *Level 1* is the white box description of the overall system together with black
 box descriptions of all contained building blocks.
 
@@ -54,16 +52,17 @@ Contained Building Blocks::
 
 |===
 | Frontend         | React application. Will contain the user interface as well as any client-side function the application may need. 
-| Backend     | Node.js project. It will contain the REST API as well as any server-side function the application may need.
-| Web Server     |  Instance of the  MySQL database.
+| Backend     | The backend functionality will be provided by the firebase functions.
 |===
 *Level 2:*
 
 __These components are highly subject to change, given the early stage of the application development__
 
 |===
-| API Rest         | Node.js REST Api. Will be in charge of data read, write and delete operations. 
-| GUI     | The interface system the user will interact with. 
+| GUI     | The interface system the user will interact with.
+| Functions     | Provided by firebase. Serverless backend code that works via http requests.
+They allow JavaScript, TypeScript, Python and Go. They provide automatic vertical and horizontal escalation
+depending on the number of requests, ensuring availability and efficiency.
 |===
 
 [role="arc42help"]

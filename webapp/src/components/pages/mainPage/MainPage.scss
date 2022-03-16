@@ -33,43 +33,16 @@
   letter-spacing: 0.05rem;
   color: var(--white1);
   animation: tracking-in-expand 1.35s cubic-bezier(0.33, 1, 0.68, 1) 0.7s
-    forwards;
+  forwards;
 }
 
-.product-card-container {
+.text {
+  text-align: center;
   margin-top: 6rem;
-  display: flex;
-  flex-direction: row;
-}
-.product-card-container > * {
-  margin: 1rem;
-}
-
-.product:nth-child(0) {
-  opacity: 0;
-  animation: appear 1s ease 1.1s forwards;
-}
-.product:nth-child(1) {
   opacity: 0;
 
-  animation: appear 1s ease 1.3s forwards;
-}
-.product:nth-child(2) {
-  opacity: 0;
-
+  font-size: 1.75rem;
+  letter-spacing: 0.05rem;
+  color: var(--white1);
   animation: appear 1s ease 1.5s forwards;
-}
-.product:nth-child(3) {
-  opacity: 0;
-
-  animation: appear 1s ease 1.7s forwards;
-}
-.product:nth-child(4) {
-  opacity: 0;
-
-  animation: appear 1s ease 1.9s forwards;
-}
-
-.product-name {
-  color: var(--dark2);
 }

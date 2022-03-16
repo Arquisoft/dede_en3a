@@ -1,34 +1,57 @@
-import "./TopMenu.scss";
+import styles from "./TopMenu.module.scss";
 import logo from "./../../logo.svg";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { DedeStore } from "../../redux/store";
+import { Component, useEffect, useState } from "react";
+import { CartItem } from "../../redux/models/CartItem";
 
 type TopMenuProps = {};
-
 function TopMenu(): JSX.Element {
+  const [wobble, setWobble] = useState(String);
   const navigate = useNavigate();
 
   const url = window.location.href.split("/");
 
   const path = url[1];
 
-  let homeClass = "menu-item";
-  if (path === "home") homeClass = "menu-item selected";
+  const cart = useSelector((state: DedeStore) => state.cart);
+
+  const endWobble = () => {
+    console.log("endWobble");
+
+    setWobble("");
+  };
+
+  let homeClass = styles.menuitem;
+  if (path === "home") homeClass = styles.menuitem + " " + styles.selected;
   return (
     <>
-      <div className="menu-container">
-        <div className="menu">
-          <img src={logo} className="logo" alt="logo" />
-          <div className="links">
+      <div className={styles.menucontainer}>
+        <div className={styles.menu}>
+          <img src={logo} className={styles.logo} alt="logo" />
+          <div className={styles.links}>
             <div className={homeClass} onClick={() => navigate("/home")}>
               Home
             </div>
-            <div className="menu-item">Shop</div>
-            <div className="menu-item">About us</div>
-            <div className="menu-item">Contact</div>
-            <div onClick={ () => navigate("/cart") } className="menu-item">Cart</div>
+            <div onClick={ () => navigate("/shop") } className="menu-item">Shop</div>
+            <a href={"https://arquisoft.github.io/dede_en3a/"}>
+              <div className="menu-item">About us</div>
+            </a>
+            <div onClick={ () => navigate("/contact") }className="menu-item">Contact</div>
+            <div onClick={ () => navigate("/orders") }className="menu-item">Orders</div>
+            <div className={styles.cartcontainer} onAnimationEnd={endWobble}>
+              <span
+                className={"material-icons " + styles.loginicon}
+                onClick={() => navigate("/cart")}
+              >
+                shopping_cart
+              </span>
+              <div className={styles.cartcounter}>{cart.length}</div>
+            </div>
           </div>
           <span
-            className="material-icons login-icon"
+            className={"material-icons " + styles.loginicon}
             onClick={() => navigate("/login")}
           >
             account_circle
