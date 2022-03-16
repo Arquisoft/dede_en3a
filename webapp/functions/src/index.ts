@@ -4,11 +4,9 @@
 import {CallableContext} from "firebase-functions/lib/common/providers/https";
 
 const functions = require('firebase-functions');
-const addDoc = require( "@firebase/firestore");
 const admin = require('firebase-admin');
 admin.initializeApp();
 
-const db = admin.firestore();
 
 
 // // Start writing Firebase Functions
@@ -19,7 +17,7 @@ const db = admin.firestore();
 export const sendOrder = functions
     .region('us-central1')
     .https
-    .onCall((data : {
+    .onCall(async (data : {
         items:
             {product: {
                     id: string,
@@ -54,16 +52,20 @@ export const sendOrder = functions
                 });
 
 
-                total += item.amount * item.product.price;
+                total = total + (item.amount * item.product.price);
                 functions.logger.info("Total: " + total);
             }
         });
 
-        const orders = db.collection('orders')
 
+        functions.logger.info(await admin.firestore().listCollections());
+        const orders = await  admin.firestore().collection('orders');
 
+        //const orders = collection(db, "orders");
 
-        addDoc( orders, {
+        functions.logger.info("Tipo doc:" + orders.type);
+        functions.logger.info("Antes del add");
+        await orders.add( {
             created: Date.now(),
             userEmail:data.user,
             items:items,
@@ -72,6 +74,7 @@ export const sendOrder = functions
 
         })
             .then(()=>{
+                functions.logger.info("Doc saved ");
                 return {
                     message: "Congrats, your order has been saved...",
                     status:200
@@ -79,6 +82,7 @@ export const sendOrder = functions
 
             })
             .catch((err : Error)=>{
+                functions.logger.info("Doc NOT saved ");
 
                 return new Error("Sorry, unable to register your order, please try again later");
 
