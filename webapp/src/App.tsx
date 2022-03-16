@@ -13,6 +13,7 @@ import LoginPage from "./components/pages/LoginPage/LoginPage";
 
 import {Dashboard} from './components/pages/DashboardPage/dashboard'
 import {RegisterPage} from "./components/pages/RegisterPage/RegisterPage";
+import {getFunctions, httpsCallable} from "firebase/functions";
 
 function App(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
@@ -25,6 +26,40 @@ function App(): JSX.Element {
     refreshUserList();
   }, []);
 
+
+
+  const functions = getFunctions();
+  const sendOrder = httpsCallable(functions, 'sendOrder');
+    sendOrder({
+    items:[
+      {product: {
+          id: "1",
+          img: "non",
+          price: 0.6,
+          title: "FFP2 mask"
+        },
+        amount: 3},
+
+      {product: {
+          id: "2",
+          img: "non",
+          price: 0.15,
+          title: "Quirurgical mask"
+        },
+        amount: 3}
+    ],
+    user:"pablo@garciafernandez.eu",
+    address:"Cassa de Pablo"
+  })
+      .then((result ) => {
+        const data = result.data;
+        // @ts-ignore
+        console.log(data.message);
+      }).catch((error)=>{
+
+    console.log(error.message);
+
+  });
 
   return (
     <>
