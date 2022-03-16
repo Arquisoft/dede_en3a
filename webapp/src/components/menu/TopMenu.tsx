@@ -34,9 +34,12 @@ function TopMenu(): JSX.Element {
             <div className={homeClass} onClick={() => navigate("/home")}>
               Home
             </div>
-            <div className={styles.menuitem}>Shop</div>
-            <div className={styles.menuitem}>About us</div>
-            <div className={styles.menuitem}>Contact</div>
+            <div onClick={ () => navigate("/shop") } className="menu-item">Shop</div>
+            <a href={"https://arquisoft.github.io/dede_en3a/"}>
+              <div className="menu-item">About us</div>
+            </a>
+            <div onClick={ () => navigate("/contact") }className="menu-item">Contact</div>
+            <div onClick={ () => navigate("/orders") }className="menu-item">Orders</div>
             <div className={styles.cartcontainer} onAnimationEnd={endWobble}>
               <span
                 className={"material-icons " + styles.loginicon}

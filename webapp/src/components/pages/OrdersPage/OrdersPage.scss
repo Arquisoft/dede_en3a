@@ -21,28 +21,32 @@
   font-size: 7rem;
   color: var(--orange2);
   filter: drop-shadow(0px 0px 5rem var(--white));
-  animation: tracking-in-expand 1.35s cubic-bezier(0.33, 1, 0.68, 1) 0s forwards;
 }
 
-.subtitle {
-  text-align: center;
+.orders-name{
+  font-family: "Montserrat-Bold";
+  margin-left: 2rem;
   margin-top: 1rem;
-  opacity: 0;
-
-  font-size: 1.35rem;
-  letter-spacing: 0.05rem;
-  color: var(--white1);
-  animation: tracking-in-expand 1.35s cubic-bezier(0.33, 1, 0.68, 1) 0.7s
-  forwards;
 }
 
-.text {
-  text-align: center;
+.order-card-item-container {
   margin-top: 6rem;
-  opacity: 0;
+  display: flex;
+  flex-direction: column;
+}
+.order-card-container > * {
+  margin: 1rem;
+}
 
-  font-size: 1.75rem;
-  letter-spacing: 0.05rem;
-  color: var(--white1);
-  animation: appear 1s ease 1.5s forwards;
+.order-wrapper {
+  box-shadow: 0px 0px 3rem rgba(255, 255, 255, 0.192);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark3);
+}
+
+.order{
+  margin-left: 2rem;
+  margin-bottom: 1rem;
 }

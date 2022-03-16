@@ -8,13 +8,11 @@ import MainPage from "./components/pages/mainPage/MainPage";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
 import LoginPage from "./components/pages/LoginPage/LoginPage";
-
+import ShopPage from "./components/pages/shopPage/ShopPage";
+import ContactPage from "./components/pages/ContactPage/ContactPage";
+import OrdersPage from "./components/pages/OrdersPage/OrdersPage";
 import { Dashboard } from "./components/pages/DashboardPage/dashboard";
 import { RegisterPage } from "./components/pages/RegisterPage/RegisterPage";
-import { createStore } from "redux";
-import { DedeStore } from "./redux/store";
-import { shallowEqual, useSelector } from "react-redux";
-import { CartItem } from "./redux/models/CartItem";
 import POD from "./components/Cart/POD/POD";
 
 function App(): JSX.Element {
@@ -36,8 +34,12 @@ function App(): JSX.Element {
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="*" element={<Navigate to="/home" />} />
+          <Route path={"/dashboard"} element={<Dashboard/>}/>;
           <Route path="*"         element={<Navigate to="/home" />} />
-          <Route path={"/dashboard"} element={<Dashboard />} />;
           <Route path={"/pod"} element={<POD />} />
         </Routes>
       </BrowserRouter>
