@@ -69,8 +69,8 @@ Mapping of Building Blocks to Infrastructure::
 
 |===
 | Client Device         | Device of the user (desktop, mobile). Must have internet connection
-| Oracle Server     | The oracle server in which the the MySQL instance will be running
-| Web Server     | Azure server in which our app will be running. 
+| DB     | Firebase provides a database linked to the app.
+| Web Server     | Firebase in which our app will be running.
 
-| POD Provider      | The pod provider we will be using. In our case, Inrupt. Will be in charge of providing the pods for the app users.
+| POD Provider      | The pod provider we will be using. In our case, Solid Community. Will be in charge of providing the pods for the app users.
 |===
