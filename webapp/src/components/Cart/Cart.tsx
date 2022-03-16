@@ -13,7 +13,6 @@ type CartProps = {};
 
 function Cart(props: CartProps): JSX.Element {
   const navigate = useNavigate();
-  const currentUser = useAuth().getCurrentUser();
 
   const calculateTotal = (items: CartItem[]) => {
     console.log("recalculate");
@@ -33,20 +32,18 @@ function Cart(props: CartProps): JSX.Element {
     }
   });
 
-  const checkUserRegistered = () => {
-    if (!currentUser?.uid) {
-      //<span className="popuptext" id="myPopup">You need to Login</span>;
-      //new Promise(f => setTimeout(f, 10000));
-      console.log("false");
-      navigate("/login");
-    } else {
-      buy();
-    }
+  const currentUser = useAuth().getCurrentUser();
+
+  const userRegistered = () => {
+    return currentUser !== null;
   };
 
-  function buy() {
-    console.log("buy");
-  }
+  const buy = () => {
+    if (userRegistered()) {
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <>
@@ -69,11 +66,7 @@ function Cart(props: CartProps): JSX.Element {
             {itemList}
           </div>
           <div className="buttons">
-            <button
-              type={"submit"}
-              className="buy"
-              onClick={checkUserRegistered}
-            >
+            <button type={"submit"} className="buy" onClick={buy}>
               Buy
             </button>
           </div>
