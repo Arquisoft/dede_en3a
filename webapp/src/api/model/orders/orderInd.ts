@@ -3,5 +3,5 @@ export interface OrderInd{
     amount: number;
     price: number;
     img: string;
-    tittle: string;
+    title: string;
 }
