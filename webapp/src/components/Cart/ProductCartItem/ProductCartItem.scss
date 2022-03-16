@@ -7,14 +7,7 @@
   flex-direction: row;
 }
 
-.product-image:hover {
-  transform: scale(1.05);
-  .price {
-    margin-top: 1rem;
-  }
-}
-
-.product-image {
+.product-cart-product-image {
   cursor: pointer;
   transition: 0.5s ease;
   border-radius: 0.5rem;

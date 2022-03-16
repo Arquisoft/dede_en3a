@@ -43,7 +43,10 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
   return (
     <>
       <div className="product-cart-container">
-        <img className="product-image" src={product.product.img}></img>
+        <img
+          className="product-cart-product-image"
+          src={product.product.img}
+        ></img>
         <div className="product-cart-description-container">
           <div className="row1">
             <div className="price">{product.product.price + " €"}</div>
