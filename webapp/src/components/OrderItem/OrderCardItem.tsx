@@ -15,6 +15,7 @@ function OrderCardItem(ord : OrderCardItem): JSX.Element{
                     <div className="row1">
                         <div className="price">{ord.orderItem.price + " €"}</div>
                         <div className="product-name">{ord.orderItem.title}</div>
+                        <div className="product-ammount">x {ord.orderItem.amount}</div>
                     </div>
                 </div>
             </div>

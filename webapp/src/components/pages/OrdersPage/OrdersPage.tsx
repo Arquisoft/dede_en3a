@@ -37,7 +37,7 @@ function OrdersPage(): JSX.Element{
                 <div className="order-wrapper">
                     <div className="orders-name">Date: {moment(dateOrder).format('YYYY-MM-DD HH:MM:SS')}</div>
                     <div className="orders-name">Address: {order.address}</div>
-                    <div className="orders-name">Total ammount: {order.totalAmount}</div>
+                    <div className="orders-name">Total ammount: {order.totalAmount} €</div>
                     <div>{group}</div>
                 </div>
             );
