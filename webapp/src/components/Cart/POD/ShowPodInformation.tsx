@@ -7,7 +7,11 @@ import Box from "@mui/material/Box";
 
 import {VCARD} from "@inrupt/vocab-common-rdf";
 import React, {useEffect} from "react";
+import {Button} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
+import { DedeStore } from "../../../redux/store";
 type PODProps = {
     webID: string;
 };
@@ -52,6 +56,7 @@ async function retrievePODCity(webID: string): Promise<string> {
 
 
 function ShowPodInformation(props: PODProps): JSX.Element {
+    const cart = useSelector((state: DedeStore) => state.cart);
     const [address, setAddress] = React.useState("");
     const [postalCode, setPostalCode]= React.useState("");
     const [city, setCity] = React.useState("");
@@ -65,6 +70,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
         getPODPostalCode();
         getPODCity();
     })
+    const navigate = useNavigate();
 
     return (
         <Grid container>
@@ -72,6 +78,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
                 <Box component="h3">Address: {address}</Box>
                 <Box component="h3">Postal Code: {postalCode}</Box>
                 <Box component="h3">Locality: {city}</Box>
+
             </Grid>
         </Grid>
     );

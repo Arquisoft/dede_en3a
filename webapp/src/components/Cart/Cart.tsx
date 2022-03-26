@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import productCartItem from "./ProductCartItem/ProductCartItem";
 import { useAuth } from "../../context/AuthContext";
 import {getFunctions, httpsCallable} from "firebase/functions";
-
+import POD from "./POD/POD";
 type CartProps = {};
 
 function Cart(props: CartProps): JSX.Element {
@@ -99,9 +99,10 @@ function Cart(props: CartProps): JSX.Element {
             )} */}
             {itemList}
           </div>
+            <POD/>
           <div className="buttons">
             <button type={"submit"} className="buy" onClick={buy}>
-              Buy
+              Checkout
             </button>
           </div>
         </div>

@@ -11,6 +11,10 @@ admin.initializeApp();
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 //
+/*
+const calculateDelivery = (address : String, postalcode : String , zipcode : String) =>{
+
+};*/
 
 
 export const sendOrder = functions
