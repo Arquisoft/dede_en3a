@@ -46,3 +46,12 @@ test ( 'Navbar Order test', async () => {
     expect(getByText("Orders")).toBeInTheDocument();
 
 } );
+
+test ( 'Navbar Cart test', async () => {
+
+    const {getByText} = render( <TopMenu></TopMenu> );
+    const cartButton = getByText("Car");
+    fireEvent.click(cartButton);
+    expect(getByText("Shopping Cart")).toBeInTheDocument();
+
+} );

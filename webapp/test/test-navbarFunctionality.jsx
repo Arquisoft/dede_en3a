@@ -89,3 +89,13 @@ test('Navbar Order test', function () { return __awaiter(void 0, void 0, void 0,
         return [2 /*return*/];
     });
 }); });
+test('Navbar Cart test', function () { return __awaiter(void 0, void 0, void 0, function () {
+    var getByText, cartButton;
+    return __generator(this, function (_a) {
+        getByText = (0, react_1.render)(<TopMenu_1.default></TopMenu_1.default>).getByText;
+        cartButton = getByText("Car");
+        react_1.fireEvent.click(cartButton);
+        expect(getByText("Shopping Cart")).toBeInTheDocument();
+        return [2 /*return*/];
+    });
+}); });
