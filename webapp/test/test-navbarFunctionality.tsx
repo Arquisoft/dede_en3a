@@ -23,8 +23,8 @@ test ( 'Navbar shop test', async () => {
 test ( 'Navbar about us test', async () => {
 
     const {getByText} = render( <TopMenu></TopMenu> );
-    const homeButton = getByText("About us");
-    fireEvent.click(homeButton);
+    const aboutUsButton = getByText("About us");
+    fireEvent.click(aboutUsButton);
     expect(getByText("DeDe_en3a")).toBeInTheDocument();
 
 } );
@@ -32,8 +32,17 @@ test ( 'Navbar about us test', async () => {
 test ( 'Navbar Contact test', async () => {
 
     const {getByText} = render( <TopMenu></TopMenu> );
-    const homeButton = getByText("Contact");
-    fireEvent.click(homeButton);
+    const contactButton = getByText("Contact");
+    fireEvent.click(contactButton);
     expect(getByText("Contact")).toBeInTheDocument();
+
+} );
+
+test ( 'Navbar Order test', async () => {
+
+    const {getByText} = render( <TopMenu></TopMenu> );
+    const ordersButton = getByText("Orders");
+    fireEvent.click(ordersButton);
+    expect(getByText("Orders")).toBeInTheDocument();
 
 } );

@@ -60,22 +60,32 @@ test('Navbar shop test', function () { return __awaiter(void 0, void 0, void 0, 
     });
 }); });
 test('Navbar about us test', function () { return __awaiter(void 0, void 0, void 0, function () {
-    var getByText, homeButton;
+    var getByText, aboutUsButton;
     return __generator(this, function (_a) {
         getByText = (0, react_1.render)(<TopMenu_1.default></TopMenu_1.default>).getByText;
-        homeButton = getByText("About us");
-        react_1.fireEvent.click(homeButton);
+        aboutUsButton = getByText("About us");
+        react_1.fireEvent.click(aboutUsButton);
         expect(getByText("DeDe_en3a")).toBeInTheDocument();
         return [2 /*return*/];
     });
 }); });
 test('Navbar Contact test', function () { return __awaiter(void 0, void 0, void 0, function () {
-    var getByText, homeButton;
+    var getByText, contactButton;
     return __generator(this, function (_a) {
         getByText = (0, react_1.render)(<TopMenu_1.default></TopMenu_1.default>).getByText;
-        homeButton = getByText("Contact");
-        react_1.fireEvent.click(homeButton);
+        contactButton = getByText("Contact");
+        react_1.fireEvent.click(contactButton);
         expect(getByText("Contact")).toBeInTheDocument();
+        return [2 /*return*/];
+    });
+}); });
+test('Navbar Order test', function () { return __awaiter(void 0, void 0, void 0, function () {
+    var getByText, ordersButton;
+    return __generator(this, function (_a) {
+        getByText = (0, react_1.render)(<TopMenu_1.default></TopMenu_1.default>).getByText;
+        ordersButton = getByText("Orders");
+        react_1.fireEvent.click(ordersButton);
+        expect(getByText("Orders")).toBeInTheDocument();
         return [2 /*return*/];
     });
 }); });
