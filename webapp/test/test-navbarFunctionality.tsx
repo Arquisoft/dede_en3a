@@ -19,3 +19,12 @@ test ( 'Navbar shop test', async () => {
     expect(getByText("Shop")).toBeInTheDocument();
 
 } );
+
+test ( 'Navbar about us test', async () => {
+
+    const {getByText} = render( <TopMenu></TopMenu> );
+    const homeButton = getByText("About us");
+    fireEvent.click(homeButton);
+    expect(getByText("DeDe_en3a")).toBeInTheDocument();
+
+} );
