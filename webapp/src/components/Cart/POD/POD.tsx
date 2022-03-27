@@ -7,7 +7,8 @@ function pod(webID: string) {
     if(webID.length == 0) {
         return(<div>
 
-                <h3>Please enter a valid SOLIDCommunity POD</h3>
+
+            <h3>Please enter a valid SOLIDCommunity POD</h3>
             <h3>Address:</h3>
             <h3>Postal Code:</h3>
             <h3>Locality:</h3>

@@ -21,6 +21,8 @@
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.19.0",
     "moment": "^2.29.1",
+    "nominatim-client": "^3.2.1",
+    "nominatim-geocoder": "^0.1.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
