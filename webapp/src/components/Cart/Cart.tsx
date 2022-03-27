@@ -8,8 +8,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import productCartItem from "./ProductCartItem/ProductCartItem";
 import { useAuth } from "../../context/AuthContext";
-import {getFunctions, httpsCallable} from "firebase/functions";
-
+import POD from "./POD/POD";
 type CartProps = {};
 
 function Cart(props: CartProps): JSX.Element {
@@ -30,28 +29,10 @@ function Cart(props: CartProps): JSX.Element {
   let itemList: JSX.Element[] = [];
 
   const products: CartItem[] = useSelector((state: DedeStore) => state.cart);
-  const currentUser = useAuth().getCurrentUser();
 
 
-    const  add = async () => {
 
 
-        const sendOrder = httpsCallable(getFunctions(), 'sendOrder');
-
-        return await sendOrder({
-            items:products,
-            user:currentUser?.email,
-            address:"Casa de " + currentUser?.email
-        })
-            .then(( ) => {
-                console.log("Your order has been processed.");
-            }).catch(()=>{
-
-                console.log("Sorry, we are suffering technical problems, try again...");
-
-            });
-
-    }
 
 
   products.forEach((cartItem) => {
@@ -62,22 +43,6 @@ function Cart(props: CartProps): JSX.Element {
 
 
 
-  const userRegistered = () => {
-    return currentUser !== null;
-  };
-
-
-  const buy = () => {
-    if (userRegistered()) {
-
-       add().then(()=>{
-
-       });
-
-    } else {
-      navigate("/login");
-    }
-  };
 
   return (
     <>
@@ -99,11 +64,8 @@ function Cart(props: CartProps): JSX.Element {
             )} */}
             {itemList}
           </div>
-          <div className="buttons">
-            <button type={"submit"} className="buy" onClick={buy}>
-              Buy
-            </button>
-          </div>
+            <POD/>
+
         </div>
       </div>
     </>

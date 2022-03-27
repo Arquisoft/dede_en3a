@@ -16,7 +16,9 @@
     "@firebase/firestore": "^3.4.5",
     "firebase": "^9.6.8",
     "firebase-admin": "^10.0.2",
-    "firebase-functions": "^3.18.1"
+    "firebase-functions": "^3.18.1",
+    "nominatim-client": "^3.2.1",
+    "nominatim-geocoder": "^0.1.4"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0",
