@@ -28,3 +28,12 @@ test ( 'Navbar about us test', async () => {
     expect(getByText("DeDe_en3a")).toBeInTheDocument();
 
 } );
+
+test ( 'Navbar Contact test', async () => {
+
+    const {getByText} = render( <TopMenu></TopMenu> );
+    const homeButton = getByText("Contact");
+    fireEvent.click(homeButton);
+    expect(getByText("Contact")).toBeInTheDocument();
+
+} );
