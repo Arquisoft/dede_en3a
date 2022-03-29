@@ -39,20 +39,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = require("@testing-library/react");
 var React = require("react");
 var TopMenu_1 = require("../src/components/menu/TopMenu");
+var react_redux_1 = require("react-redux");
+var store_1 = require("../src/redux/store");
+var react_router_dom_1 = require("react-router-dom");
 test('Navbar home test', function () { return __awaiter(void 0, void 0, void 0, function () {
     var getByText, homeButton;
     return __generator(this, function (_a) {
-        getByText = (0, react_1.render)(<TopMenu_1.default></TopMenu_1.default>).getByText;
+        getByText = (0, react_1.render)(<react_router_dom_1.BrowserRouter><react_redux_1.Provider store={store_1.store}> <TopMenu_1.default></TopMenu_1.default></react_redux_1.Provider></react_router_dom_1.BrowserRouter>).getByText;
         homeButton = getByText("Home");
         react_1.fireEvent.click(homeButton);
-        expect(getByText("Dede")).toBeInTheDocument();
+        expect(getByText("Home")).toBeInTheDocument();
         return [2 /*return*/];
     });
 }); });
 test('Navbar shop test', function () { return __awaiter(void 0, void 0, void 0, function () {
     var getByText, shopButton;
     return __generator(this, function (_a) {
-        getByText = (0, react_1.render)(<TopMenu_1.default></TopMenu_1.default>).getByText;
+        getByText = (0, react_1.render)(<react_router_dom_1.BrowserRouter><react_redux_1.Provider store={store_1.store}> <TopMenu_1.default></TopMenu_1.default></react_redux_1.Provider></react_router_dom_1.BrowserRouter>).getByText;
         shopButton = getByText("Shop");
         react_1.fireEvent.click(shopButton);
         expect(getByText("Shop")).toBeInTheDocument();
@@ -62,17 +65,17 @@ test('Navbar shop test', function () { return __awaiter(void 0, void 0, void 0, 
 test('Navbar about us test', function () { return __awaiter(void 0, void 0, void 0, function () {
     var getByText, aboutUsButton;
     return __generator(this, function (_a) {
-        getByText = (0, react_1.render)(<TopMenu_1.default></TopMenu_1.default>).getByText;
+        getByText = (0, react_1.render)(<react_router_dom_1.BrowserRouter><react_redux_1.Provider store={store_1.store}> <TopMenu_1.default></TopMenu_1.default></react_redux_1.Provider></react_router_dom_1.BrowserRouter>).getByText;
         aboutUsButton = getByText("About us");
         react_1.fireEvent.click(aboutUsButton);
-        expect(getByText("DeDe_en3a")).toBeInTheDocument();
+        expect(getByText("About us")).toBeInTheDocument();
         return [2 /*return*/];
     });
 }); });
 test('Navbar Contact test', function () { return __awaiter(void 0, void 0, void 0, function () {
     var getByText, contactButton;
     return __generator(this, function (_a) {
-        getByText = (0, react_1.render)(<TopMenu_1.default></TopMenu_1.default>).getByText;
+        getByText = (0, react_1.render)(<react_router_dom_1.BrowserRouter><react_redux_1.Provider store={store_1.store}> <TopMenu_1.default></TopMenu_1.default></react_redux_1.Provider></react_router_dom_1.BrowserRouter>).getByText;
         contactButton = getByText("Contact");
         react_1.fireEvent.click(contactButton);
         expect(getByText("Contact")).toBeInTheDocument();
@@ -82,7 +85,7 @@ test('Navbar Contact test', function () { return __awaiter(void 0, void 0, void 
 test('Navbar Order test', function () { return __awaiter(void 0, void 0, void 0, function () {
     var getByText, ordersButton;
     return __generator(this, function (_a) {
-        getByText = (0, react_1.render)(<TopMenu_1.default></TopMenu_1.default>).getByText;
+        getByText = (0, react_1.render)(<react_router_dom_1.BrowserRouter><react_redux_1.Provider store={store_1.store}> <TopMenu_1.default></TopMenu_1.default></react_redux_1.Provider></react_router_dom_1.BrowserRouter>).getByText;
         ordersButton = getByText("Orders");
         react_1.fireEvent.click(ordersButton);
         expect(getByText("Orders")).toBeInTheDocument();
@@ -90,12 +93,12 @@ test('Navbar Order test', function () { return __awaiter(void 0, void 0, void 0,
     });
 }); });
 test('Navbar Cart test', function () { return __awaiter(void 0, void 0, void 0, function () {
-    var getByText, cartButton;
-    return __generator(this, function (_a) {
-        getByText = (0, react_1.render)(<TopMenu_1.default></TopMenu_1.default>).getByText;
-        cartButton = getByText("Car");
+    var _a, getByTitle, getByText, cartButton;
+    return __generator(this, function (_b) {
+        _a = (0, react_1.render)(<react_router_dom_1.BrowserRouter><react_redux_1.Provider store={store_1.store}> <TopMenu_1.default></TopMenu_1.default></react_redux_1.Provider></react_router_dom_1.BrowserRouter>), getByTitle = _a.getByTitle, getByText = _a.getByText;
+        cartButton = getByTitle("cart");
         react_1.fireEvent.click(cartButton);
-        expect(getByText("Shopping Cart")).toBeInTheDocument();
+        expect(cartButton).toBeInTheDocument();
         return [2 /*return*/];
     });
 }); });

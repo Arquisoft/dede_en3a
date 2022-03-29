@@ -33,7 +33,7 @@ function TopMenu() {
             <div className={TopMenu_module_scss_1.default.menuitem} onClick={function () { return navigate("/contact"); }}>Contact</div>
             <div className={TopMenu_module_scss_1.default.menuitem} onClick={function () { return navigate("/orders"); }}>Orders</div>
             <div className={TopMenu_module_scss_1.default.cartcontainer} onAnimationEnd={endWobble}>
-              <span className={"material-icons " + TopMenu_module_scss_1.default.loginicon} onClick={function () { return navigate("/cart"); }}>
+              <span title={"cart"} className={"material-icons " + TopMenu_module_scss_1.default.loginicon} onClick={function () { return navigate("/cart"); }}>
                 shopping_cart
               </span>
               <div className={TopMenu_module_scss_1.default.cartcounter}>{cart.length}</div>
