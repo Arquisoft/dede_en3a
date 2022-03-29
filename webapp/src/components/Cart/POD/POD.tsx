@@ -6,9 +6,13 @@ import "./POD.scss"
 function pod(webID: string) {
     if(webID.length == 0) {
         return(<div>
+
+
+            <h3>Please enter a valid SOLIDCommunity POD</h3>
             <h3>Address:</h3>
             <h3>Postal Code:</h3>
             <h3>Locality:</h3>
+
         </div>
         );
     }
@@ -24,7 +28,7 @@ function POD(): JSX.Element {
         <div>
             <form name={"pod-form"}>
                 <h2>Introuduce your webID in order to get information</h2>
-                <input className="pod-input-field" id= "input-form" type={"text"}></input>
+                <input className="pod-input-field" id= "input-form" type={"text"}></input><br/><br/>
                 <button type = "button" className = "pod-button"onClick={() => {
                     setWebID((document.getElementById("input-form") as HTMLInputElement).value)
                 }
