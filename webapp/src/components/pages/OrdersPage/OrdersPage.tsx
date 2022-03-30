@@ -16,15 +16,16 @@ function OrdersPage(): JSX.Element{
         setOrders(await getOrder(getCurrentUser()?.email));
     };
 
+    refreshOrderList();
     useEffect(() => {
         refreshOrderList();
     }, []);
 
     let orderList: JSX.Element[] = [];
 
-    if(orders !== null || orders !== undefined){
+    if(orders != null || orders != undefined){
         orders.forEach((order) => {
-            if(order.items.length !== 0){
+            if(order.items.length != 0){
                 let group: JSX.Element[] = [];
                 order.items.forEach((indOrd) => {
                     group.push(
