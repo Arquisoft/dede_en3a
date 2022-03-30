@@ -2,7 +2,6 @@
 
 .headercontainer {
   width: 100%;
-  height: 115vh;
   background-color: var(--dark1);
   display: flex;
   flex-direction: column;
@@ -42,24 +41,27 @@
 
 .productcardcontainer {
   margin-top: 6rem;
+
+  width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
+  justify-content: center;
 }
 .productcardcontainer > * {
   margin: 1rem;
 }
 
 .product:nth-child(0) {
-  opacity: 1;
+  opacity: 0;
   animation: appear 1s ease 1.1s forwards;
 }
 .product:nth-child(1) {
-  opacity: 1;
+  opacity: 0;
 
   animation: appear 1s ease 1.3s forwards;
 }
 .product:nth-child(2) {
-  opacity: 1;
+  opacity: 0;
 
   animation: appear 1s ease 1.5s forwards;
 }

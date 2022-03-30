@@ -50,9 +50,18 @@ function TopMenu(): JSX.Element {
             <div className={styles.menuitem} onClick={() => navigate("/shop")}>
               Shop
             </div>
-            <a href={"https://arquisoft.github.io/dede_en3a/"}>
-              <div className={styles.menuitem}>About us</div>
-            </a>
+            <div>
+              {/* <a href={"https://arquisoft.github.io/dede_en3a/"}> */}
+              <div
+                className={styles.menuitem}
+                onClick={() => {
+                  navigate("/about");
+                  expandMenu();
+                }}
+              >
+                About us
+              </div>
+            </div>
             <div
               className={styles.menuitem}
               onClick={() => navigate("/contact")}
@@ -129,16 +138,16 @@ function TopMenu(): JSX.Element {
             Shop
           </div>
           <div>
-            <a href={"https://arquisoft.github.io/dede_en3a/"}>
-              <div
-                className={styles.menuitem}
-                onClick={() => {
-                  expandMenu();
-                }}
-              >
-                About us
-              </div>
-            </a>
+            {/* <a href={"https://arquisoft.github.io/dede_en3a/"}> */}
+            <div
+              className={styles.menuitem}
+              onClick={() => {
+                navigate("/about");
+                expandMenu();
+              }}
+            >
+              About us
+            </div>
           </div>
           <div
             className={styles.menuitem}

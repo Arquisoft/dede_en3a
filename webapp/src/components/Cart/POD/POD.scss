@@ -1,13 +1,37 @@
+.podcontainer {
+  background-color: var(--dark2);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow2);
+
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .pod-input-field {
-    font-size: 2rem;
-    width: 70rem;
-    background-color: white;
-    color: #1a1a1a;
+  margin-top: 0.5rem;
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  width: 90%;
+  margin-left: 5%;
+  background-color: white;
+  color: #1a1a1a;
 }
 
 .pod-button {
-    font-size: 2rem;
-    color: #1a1a1a;
-    background-color:white;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #1a1a1a;
+  background-color: white;
 }
-

@@ -1,5 +1,5 @@
 import TopMenu from "../../menu/TopMenu";
-import "./OrdersPage.scss";
+import styles from "./OrdersPage.module.scss";
 import { useEffect, useState } from "react";
 import { getOrder } from "../../../api/api";
 import { Order } from "../../../api/model/orders/order";
@@ -26,19 +26,19 @@ function OrdersPage(): JSX.Element {
       let group: JSX.Element[] = [];
       order.items.forEach((indOrd) => {
         group.push(
-          <div className="order">
+          <div className={styles.order}>
             <OrderCardItem orderItem={indOrd}></OrderCardItem>
           </div>
         );
       });
       let dateOrder = new Date(order.created);
       orderList.push(
-        <div className="order-wrapper">
-          <div className="orders-name">
+        <div className={styles.orderwrapper}>
+          <div className={styles.ordersname}>
             Date: {moment(dateOrder).format("YYYY-MM-DD HH:MM:SS")}
           </div>
-          <div className="orders-name">Address: {order.address}</div>
-          <div className="orders-name">
+          <div className={styles.ordersname}>Address: {order.address}</div>
+          <div className={styles.ordersname}>
             Total ammount: {order.totalAmount} €
           </div>
           <div>{group}</div>
@@ -50,10 +50,10 @@ function OrdersPage(): JSX.Element {
   return (
     <>
       <TopMenu></TopMenu>
-      <div className="header-container">
-        <div className="header">
-          <div className="title">Orders</div>
-          <div className="order-card-item-container">{orderList}</div>
+      <div className={styles.headercontainer}>
+        <div className={styles.header}>
+          <div className={styles.title}>Orders</div>
+          <div className={styles.ordercarditemcontainer}>{orderList}</div>
         </div>
       </div>
     </>

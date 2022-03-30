@@ -1,0 +1,134 @@
+@import "./../../Styles.scss";
+@import "./../../variables.scss";
+
+.cartcontainer {
+  background-color: var(--dark1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5rem;
+}
+
+.headercontainer {
+  width: 100%;
+  background-color: var(--dark1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  max-width: 70rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-top: 3rem;
+  opacity: 04rem;
+  text-align: center;
+  font-size: 6rem;
+  color: var(--orange2);
+  filter: drop-shadow(0px 0px 5rem var(--white));
+  animation: tracking-in-expand 1.35s cubic-bezier(0.33, 1, 0.68, 1) 0s forwards;
+}
+
+.subtitle {
+  text-align: center;
+  margin-top: 1rem;
+  opacity: 0;
+
+  font-size: 1.35rem;
+  letter-spacing: 0.05rem;
+  color: var(--white1);
+  animation: tracking-in-expand 1.35s cubic-bezier(0.33, 1, 0.68, 1) 0.7s
+    forwards;
+}
+
+.carditemcardcontainer {
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.buttons {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    cursor: pointer;
+    font-family: "Montserrat-Bold";
+    background-color: var(--orange2);
+    margin-top: 5rem;
+    font-size: 1.3rem;
+    padding: 1rem;
+    padding-left: 1.7rem;
+    padding-right: 1.7rem;
+
+    border-radius: 0.5rem;
+    transition: 0.35s;
+  }
+  button:hover {
+    filter: drop-shadow(0px 0px 7px var(--orange2));
+  }
+}
+
+.podcontainer {
+  margin-right: 2rem;
+  top: 4.5rem;
+  right: 4.5rem;
+  margin-left: auto;
+  position: sticky;
+}
+
+.cartcontent {
+  //Trampisima que flipas pero bueno
+  transform: translateY(-35rem);
+  align-self: flex-start;
+  margin-left: 15%;
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-md-max) {
+  .cartcontent {
+    //Trampisima que flipas pero bueno
+    align-self: center;
+    transform: translateY(0);
+  }
+
+  .podcontainer {
+    right: 0;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 0px) and (max-width: $screen-xs-max) {
+  .title {
+    font-size: 4.5rem;
+  }
+  .cartcontent {
+    //Trampisima que flipas pero bueno
+    align-self: center;
+    transform: translateY(0);
+    margin-left: 5%;
+    margin-left: 5%;
+  }
+
+  .podcontainer {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    right: 0;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}

@@ -1,0 +1,5 @@
+@import "./../../../Styles.scss";
+.iframecontainer {
+  height: calc(100vh - var(--topMenuHeight));
+  width: 100%;
+}

@@ -1,4 +1,6 @@
-.header-container {
+@import "./../../../Styles.scss";
+
+.headercontainer {
   width: 100%;
   height: 115vh;
   background-color: var(--dark1);
@@ -8,7 +10,7 @@
 }
 
 .header {
-  width: 70rem;
+  max-width: 70rem;
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -21,24 +23,25 @@
   font-size: 7rem;
   color: var(--orange2);
   filter: drop-shadow(0px 0px 5rem var(--white));
+  animation: tracking-in-expand 1.35s cubic-bezier(0.33, 1, 0.68, 1) 0s forwards;
 }
 
-.orders-name{
+.ordersname {
   font-family: "Montserrat-Bold";
   margin-left: 2rem;
   margin-top: 1rem;
 }
 
-.order-card-item-container {
+.ordercarditemcontainer {
   margin-top: 6rem;
   display: flex;
   flex-direction: column;
 }
-.order-card-container > * {
+.ordercardcontainer > * {
   margin: 1rem;
 }
 
-.order-wrapper {
+.orderwrapper {
   box-shadow: 0px 0px 3rem rgba(255, 255, 255, 0.192);
   border-radius: 1rem;
   display: flex;
@@ -46,7 +49,7 @@
   background-color: var(--dark3);
 }
 
-.order{
+.order {
   margin-left: 2rem;
   margin-bottom: 1rem;
 }
