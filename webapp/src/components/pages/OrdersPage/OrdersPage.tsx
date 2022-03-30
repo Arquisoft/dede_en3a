@@ -22,26 +22,27 @@ function OrdersPage(): JSX.Element{
 
     let orderList: JSX.Element[] = [];
 
-    if(orders != null || orders != undefined){
+    if(orders !== null || orders !== undefined){
         orders.forEach((order) => {
-            let group: JSX.Element[] = [];
-            order.items.forEach((indOrd) => {
-                group.push(
-                    <div className="order">
-                        <OrderCardItem orderItem={indOrd}></OrderCardItem>
+            if(order.items.length !== 0){
+                let group: JSX.Element[] = [];
+                order.items.forEach((indOrd) => {
+                    group.push(
+                        <div className="order">
+                            <OrderCardItem orderItem={indOrd}></OrderCardItem>
+                        </div>
+                    )
+                });
+                let dateOrder = new Date(order.created);
+                orderList.push(
+                    <div className="order-wrapper">
+                        <div className="orders-name">Date: {moment(dateOrder).format('YYYY-MM-DD HH:MM:SS')}</div>
+                        <div className="orders-name">Address: {order.address}</div>
+                        <div className="orders-name">Total ammount: {order.totalAmount} €</div>
+                        <div>{group}</div>
                     </div>
-                )
-            });
-            let dateOrder = new Date(order.created);
-            orderList.push(
-                <div className="order-wrapper">
-                    <div className="orders-name">Date: {moment(dateOrder).format('YYYY-MM-DD HH:MM:SS')}</div>
-                    <div className="orders-name">Address: {order.address}</div>
-                    <div className="orders-name">Total ammount: {order.totalAmount} €</div>
-                    <div>{group}</div>
-                </div>
-            );
-
+                );
+            }
         });
     }
 
