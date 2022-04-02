@@ -1,8 +1,8 @@
 import {fireEvent, render} from "@testing-library/react";
 import * as React from "react";
-import TopMenu from "../src/components/menu/TopMenu";
+import TopMenu from "./components/menu/TopMenu";
 import {Provider} from "react-redux";
-import {store} from "../src/redux/store";
+import {store} from "./redux/store";
 import {BrowserRouter} from "react-router-dom";
 
 test ( 'Navbar home test', async () => {
