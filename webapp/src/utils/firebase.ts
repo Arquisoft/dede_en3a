@@ -13,17 +13,6 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_appId,
 };
 
-//
-// //TODO: Should be in enverioment variables for security
-// const firebaseConfig = {
-//   apiKey: "AIzaSyAsJIeaL0YAdv0QJG7CuXuR26grYco5-p0",
-//   authDomain: "dede-en3a.firebaseapp.com",
-//   projectId: "dede-en3a",
-//   storageBucket: "dede-en3a.appspot.com",
-//   messagingSenderId: "344724226999",
-//   appId: "1:344724226999:web:1aef51b515c7983e08de32",
-//   measurementId: "G-Q99W98RL24"
-// };
 
 console.log(firebaseConfig);
 
