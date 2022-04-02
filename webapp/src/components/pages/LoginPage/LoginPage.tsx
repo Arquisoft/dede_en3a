@@ -66,9 +66,9 @@ function LoginPage(): JSX.Element {
 
             <div className="register-text">
               Need an account?{" "}
-              <b onClick={() => navigate("/register")}>Register</b> here
+              <b title={"register"} onClick={() => navigate("/register")}>Register</b> here
               <br></br>
-              <b onClick={() => auth.signOut()}>Log out</b>
+              <b title={"logout"} onClick={() => auth.signOut()}>Log out</b>
             </div>
           </div>
         </form>
