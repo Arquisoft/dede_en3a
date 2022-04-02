@@ -29,11 +29,11 @@ The technologies we have decided to use for the development of the app are:
 
 Bootstrap → In order to avoid as much as possible the development of CSS we chose to use Bootstrap.
 
-CryptoJS → The crypto-js library provides AES and some hashing such as MD5/SHA in order to encrypt passwords, so we can save them encrypted in the database.
-
 Solid Community → Main POD server provider. Widely used.
 
-Firebase → Is a tool for the deployment and development of the application and also it provides a part for the backend and a database.
+Firebase → Serverless service for the deployment and development of the application, providing the web and DB hosting,
+a prepared backend for the DB and a way of deploying isolated custom functions. It also provides authentication storage,
+so user's email and password (hashed) are safe and secure.
 
 React and TypeScript have not been included in the list since it is compulsory to use them, and are not "a decision" itself.
 

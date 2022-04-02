@@ -1014,13 +1014,12 @@ Refer to details in the following sections.</p>
 <p>Bootstrap → In order to avoid as much as possible the development of CSS we chose to use Bootstrap.</p>
 </div>
 <div class="paragraph">
-<p>CryptoJS → The crypto-js library provides AES and some hashing such as MD5/SHA in order to encrypt passwords, so we can save them encrypted in the database.</p>
-</div>
-<div class="paragraph">
 <p>Solid Community → Main POD server provider. Widely used.</p>
 </div>
 <div class="paragraph">
-<p>Firebase → Is a tool for the deployment and development of the application and also it provides a part for the backend and a database.</p>
+<p>Firebase → Serverless service for the deployment and development of the application, providing the web and DB hosting,
+a prepared backend for the DB and a way of deploying isolated custom functions. It also provides authentication storage,
+so user&#8217;s email and password (hashed) are safe and secure.</p>
 </div>
 <div class="paragraph">
 <p>React and TypeScript have not been included in the list since it is compulsory to use them, and are not "a decision" itself.</p>
@@ -1396,8 +1395,8 @@ This diagram shows how the app components and their respective hardware devices 
 </dd>
 <dt class="hdlist1">Quality and/or Performance Features</dt>
 <dd>
-<p>Perfomance is mainly based on the user&#8217;s available resources (connection speed, device hardware, etc) and the resources of the hosting server device (which depends on the price plan). We cannot control those things.
-To a lesser extent, the perfomance of the application will also depend on the
+<p>Performance is mainly based on the user&#8217;s available resources(connection speed, device hardware, etc.) and the resources of the hosting server device (which depends on the price plan). We cannot control those things.
+To a lesser extent, the performance of the application will also depend on the
 node.js and react apps. We will make the required optimizations in order to maximize the performance and quality.</p>
 </dd>
 <dt class="hdlist1">Mapping of Building Blocks to Infrastructure</dt>
@@ -1418,8 +1417,16 @@ node.js and react apps. We will make the required optimizations in order to maxi
 <td class="tableblock halign-left valign-top"><p class="tableblock">Firebase provides a database linked to the app.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB Api</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Corresponding api to perform queries to Firebase Database</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Web Server</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Firebase in which our app will be running.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Geocoder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Api to calculate coordinates and distances given a street, city, region&#8230;&#8203;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">POD Provider</p></td>
@@ -1551,7 +1558,7 @@ purchased in that order and the date.</p>
 <div class="paragraph">
 <div class="title">Contents</div>
 <p>Important, expensive, large scale or risky architecture decisions including rationals.
-With "decisions" we mean selecting one alternative based on given criteria.</p>
+With "decisions", we mean selecting one alternative based on given criteria.</p>
 </div>
 <div class="paragraph">
 <p>Please use your judgement to decide whether an architectural decision should be documented
@@ -1604,25 +1611,30 @@ here in this central section or whether you better document it locally
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">QA-2 Node.js</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Uses Javascript, you can stream big files.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Do not provide scalability.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">QA-3 Webapp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QA-2 Webapp</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Better user experience, flexible access, easy setup.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Reduced speed, Internet reliance.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">QA-4 Pod. Solid Community</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QA-3 Pod. Solid Community</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Data security, all data in one place.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">As the data is decentralized you need to rely on
 a different product and poor documentation.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">QA-5 Firebase</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">It supports the development and the deployment for the app. Also some backend</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Not very familiarized</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QA-4 Firebase Hosting</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It supports the deployment for the app. High availability.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not very familiarized.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QA-5 Firebase Database</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It stores the document-based database. High availability. Provides a clear web interface to administrate it. A protected and secure backend for accessing the storage is already provided.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not very familiarized with document-based database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QA-6 Firebase Functions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Serverless approach to provide the backend of our app. Has its own stored logs. High availability.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Very difficult to debug.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1905,7 +1917,7 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Firebase</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Platform to develop web applications and also to deploy them. Backend can be done inside.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Platform to develop web applications and also to deploy them. Backend functions can be served from firebase.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1934,7 +1946,7 @@ Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-02-10 13:20:13 +0100
+Last updated 2022-02-12 11:30:04 +0100
 </div>
 </div>
 </body>
