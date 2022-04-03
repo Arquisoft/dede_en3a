@@ -114,6 +114,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
 
 
+
     useEffect(() => {
         getPODAddress();
         getPODPostalCode();
@@ -235,9 +236,13 @@ function ShowPodInformation(props: PODProps): JSX.Element {
                     <Box component="h3" id={"cityComponent"}>Locality: {city}</Box>
                     <Box component="h3" id={"countryComponent"}>Country: {country}</Box>
                     <Box component="h3" id={"regionComponent"}>Region: {region}</Box>
+
+                    <Box component={"h3"}> </Box>
                 </div>
-                <button  className="info-button"  onClick={calcShipping}> Calculate shipping </button>
-                <div className="buttons">
+                <div className="buttonsPOD-internal">
+                    <button  onClick={calcShipping}> Calculate shipping </button>
+                </div>
+                <div className="buttonsPOD-internal">
                     <button type={"submit"} className="buy" onClick={buy}>
                         Checkout
                     </button>
