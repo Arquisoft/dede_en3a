@@ -229,11 +229,13 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     return (
         <Grid container>
             <Grid>
-                <Box component="h3" id={"addressComponent"}>Address: {address}</Box>
-                <Box component="h3" id={"postalcodeComponent"}>Postal Code: {postalCode}</Box>
-                <Box component="h3" id={"cityComponent"}>Locality: {city}</Box>
-                <Box component="h3" id={"countryComponent"}>Country: {country}</Box>
-                <Box component="h3" id={"regionComponent"}>Region: {region}</Box>
+                <div className={"info-container"}>
+                    <Box component="h3" id={"addressComponent"}>Address: {address}</Box>
+                    <Box component="h3" id={"postalcodeComponent"}>Postal Code: {postalCode}</Box>
+                    <Box component="h3" id={"cityComponent"}>Locality: {city}</Box>
+                    <Box component="h3" id={"countryComponent"}>Country: {country}</Box>
+                    <Box component="h3" id={"regionComponent"}>Region: {region}</Box>
+                </div>
                 <button  className="info-button"  onClick={calcShipping}> Calculate shipping </button>
                 <div className="buttons">
                     <button type={"submit"} className="buy" onClick={buy}>
