@@ -42,10 +42,10 @@ function ShopPage():JSX.Element{
             <TopMenu></TopMenu>
             <div className="header-container">
                 <div className="header">
-                    <div className="title">Shop</div>
+                    <div title={"ShopTitle"} className="title">Shop</div>
                     <div className="subtitle">Life is hard enough already. Let us make it a little easier.</div>
                 </div>
-                <div className="product-card-container">{productList}</div>
+                <div title={"products"} className="product-card-container">{productList}</div>
             </div>
         </>
     );
