@@ -1,9 +1,9 @@
 import {fireEvent, render} from "@testing-library/react";
 import * as React from "react";
-import Login from "./components/pages/LoginPage/LoginPage";
+import Login from "../components/pages/LoginPage/LoginPage";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
-import {store} from "./redux/store";
+import {store} from "../redux/store";
 
 test("the login button is rendered", async () => {
 

@@ -1,9 +1,9 @@
 import {render} from "@testing-library/react";
-import ProductCartItem from "./components/Cart/ProductCartItem/ProductCartItem";
-import {CartItem} from "./redux/models/CartItem";
-import {Product} from "./api/model/product";
+import ProductCartItem from "../components/Cart/ProductCartItem/ProductCartItem";
+import {CartItem} from "../redux/models/CartItem";
+import {Product} from "../api/model/product";
 import {Provider} from "react-redux";
-import {store} from "./redux/store";
+import {store} from "../redux/store";
 
 test ( 'the cartItem is rendered', async () => {
 
