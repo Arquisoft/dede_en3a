@@ -39,8 +39,8 @@ function Cart(props: CartProps): JSX.Element {
       <div className={styles.cartcontainer}>
         <div className={styles.headercontainer}>
           <div className={styles.header}>
-            <div className={styles.title}>Shopping Cart</div>
-            <div className={styles.subtitle}></div>
+            <div title={"shoppingCartTitle"}  className={styles.title}>Shopping Cart</div>
+            <div title={"total"} className={styles.subtitle}></div>
             Total: ${calculateTotal(products).toFixed(2)}
           </div>
         </div>

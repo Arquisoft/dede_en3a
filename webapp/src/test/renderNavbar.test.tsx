@@ -7,28 +7,25 @@ import {BrowserRouter} from "react-router-dom";
 
 test ( 'Navbar home test', async () => {
 
-    const {getByText} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
-    const homeButton = getByText("Home");
-    fireEvent.click(homeButton);
-    expect(getByText("Home")).toBeInTheDocument();
+    const {getByTitle} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
+    const homeButton = getByTitle("home");
+    expect(homeButton).toBeInTheDocument();
 
 } );
 
 test ( 'Navbar shop test', async () => {
 
-    const {getByText} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
-    const shopButton = getByText("Shop");
-    fireEvent.click(shopButton);
-    expect(getByText("Shop")).toBeInTheDocument();
+    const {getByTitle} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
+    const shopButton = getByTitle("shop");
+    expect(shopButton).toBeInTheDocument();
 
 } );
 
 test ( 'Navbar about us test', async () => {
 
-    const {getByText} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
-    const aboutUsButton = getByText("About us");
-    fireEvent.click(aboutUsButton);
-    expect(getByText("About us")).toBeInTheDocument();
+    const {getByTitle} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
+    const aboutUsButton = getByTitle("about");
+    expect(aboutUsButton).toBeInTheDocument();
 
 } );
 

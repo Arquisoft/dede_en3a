@@ -42,12 +42,12 @@ function ShopPage(): JSX.Element {
       <TopMenu></TopMenu>
       <div className={styles.headercontainer}>
         <div className={styles.header}>
-          <div className={styles.title}>Shop</div>
+          <div title={"ShopTitle"} className={styles.title}>Shop</div>
           <div className={styles.subtitle}>
             Life is hard enough already. Let us make it a little easier.
           </div>
         </div>
-        <div className={styles.productcardcontainer}> {productList}</div>
+        <div title={"products"} className={styles.productcardcontainer}> {productList}</div>
       </div>
     </>
   );
