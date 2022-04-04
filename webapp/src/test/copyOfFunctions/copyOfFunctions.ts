@@ -1,17 +1,7 @@
 import {addDoc, collection, getDocs, getFirestore} from "firebase/firestore";
 import {initializeApp} from "firebase/app";
 import * as geo  from "nominatim-client"
-const firebaseConfig = {
-    apiKey: "AIzaSyAsJIeaL0YAdv0QJG7CuXuR26grYco5-p0",
-    authDomain: "dede-en3a.firebaseapp.com",
-    projectId: "dede-en3a",
-    storageBucket: "dede-en3a.appspot.com",
-    messagingSenderId: "344724226999",
-    appId: "1:344724226999:web:1aef51b515c7983e08de32",
-    measurementId: "G-Q99W98RL24",
-};
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+import {db} from "../../utils/firebase";
 const orderCollection = collection(db, "orders")
 
 
