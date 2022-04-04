@@ -49,7 +49,7 @@
 }
 
 .carditemcardcontainer {
-  margin-top: 6rem;
+  margin-top: 5.5rem;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -89,15 +89,14 @@
 }
 
 .cartcontent {
-  //Trampisima que flipas pero bueno
-  transform: translateY(-35rem);
+  //Un poco trampa pero funciona
+  transform: translateY(-27rem);
   align-self: flex-start;
   margin-left: 15%;
 }
 
 @media (min-width: $screen-sm-min) and (max-width: $screen-md-max) {
   .cartcontent {
-    //Trampisima que flipas pero bueno
     align-self: center;
     transform: translateY(0);
   }
@@ -115,7 +114,6 @@
     font-size: 4.5rem;
   }
   .cartcontent {
-    //Trampisima que flipas pero bueno
     align-self: center;
     transform: translateY(0);
     margin-left: 5%;
