@@ -89,6 +89,7 @@ function TopMenu(): JSX.Element {
             </div>
           </div>
           <span
+              title={"login"}
             className={"material-icons " + styles.loginicon}
             onClick={() => navigate("/login")}
           >

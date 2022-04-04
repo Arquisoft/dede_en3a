@@ -8,7 +8,7 @@ import ContactPage from "../components/pages/ContactPage/ContactPage";
 test("the contact title is rendered", async () => {
 
     const {getByTitle} = render( <BrowserRouter><Provider store={store}> <ContactPage></ContactPage> </Provider></BrowserRouter> );
-    const titleContact = getByTitle("contact");
+    const titleContact = getByTitle("contactTitle");
     expect(titleContact).toBeInTheDocument();
 
 });

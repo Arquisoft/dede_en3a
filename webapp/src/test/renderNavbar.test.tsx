@@ -32,27 +32,32 @@ test ( 'Navbar about us test', async () => {
 
 test ( 'Navbar Contact test', async () => {
 
-    const {getByText} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
-    const contactButton = getByText("Contact");
-    fireEvent.click(contactButton);
-    expect(getByText("Contact")).toBeInTheDocument();
+    const {getByTitle} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
+    const contactButton = getByTitle("contact");
+    expect(contactButton).toBeInTheDocument();
 
 } );
 
 test ( 'Navbar Order test', async () => {
 
-    const {getByText} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
-    const ordersButton = getByText("Orders");
-    fireEvent.click(ordersButton);
-    expect(getByText("Orders")).toBeInTheDocument();
+    const {getByTitle} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
+    const ordersButton = getByTitle("orders");
+    expect(ordersButton).toBeInTheDocument();
 
 } );
 
 test ( 'Navbar Cart test', async () => {
 
-    const {getByTitle, getByText} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
+    const {getByTitle} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
     const cartButton = getByTitle("cart");
-    fireEvent.click(cartButton);
     expect(cartButton).toBeInTheDocument();
+
+} );
+
+test ( 'Navbar Login test', async () => {
+
+    const {getByTitle} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
+    const loginButton = getByTitle("login");
+    expect(loginButton).toBeInTheDocument();
 
 } );
