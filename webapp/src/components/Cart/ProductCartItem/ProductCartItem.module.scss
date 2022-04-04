@@ -1,24 +1,26 @@
-.product-cart-container {
+@import "./../../../variables.scss";
+@import "./../../../Styles.scss";
+
+.productcartcontainer {
   margin-top: 3rem;
-  height: 15rem;
-  width: 45rem;
+  height: 13rem;
+  width: 100%;
   color: var(--white);
   display: flex;
   flex-direction: row;
 }
 
-.product-cart-product-image {
+.productcartproductimage {
   cursor: pointer;
   transition: 0.5s ease;
   border-radius: 0.5rem;
-  width: 15rem;
+  width: 55%;
   height: 100%;
 }
 
-.product-cart-description-container {
+.productcartdescriptioncontainer {
   margin-left: 3rem;
   flex-direction: row;
-  width: 25rem;
 }
 .price {
   transition: 0.5s ease;
@@ -27,7 +29,7 @@
   font-size: 1.8rem;
   font-family: "Montserrat-Bold";
 }
-.add-to-cart {
+.addtocart {
   span {
     font-size: 2rem;
     cursor: pointer;
@@ -55,5 +57,10 @@
     cursor: pointer;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+  }
+}
+@media (min-width: 0px) and (max-width: $screen-xs-max) {
+  .product-cart-container {
+    height: 10rem;
   }
 }

@@ -1,5 +1,5 @@
 import TopMenu from "../menu/TopMenu";
-import "./Cart.scss";
+import styles from "./Cart.module.scss";
 import { CartItem } from "../../redux/models/CartItem";
 import ProductCartItem from "./ProductCartItem/ProductCartItem";
 import { shallowEqual, useSelector } from "react-redux";
@@ -14,10 +14,6 @@ type CartProps = {};
 function Cart(props: CartProps): JSX.Element {
   const navigate = useNavigate();
 
-
-
-
-
   const calculateTotal = (items: CartItem[]) => {
     console.log("recalculate");
     return items.reduce(
@@ -30,33 +26,29 @@ function Cart(props: CartProps): JSX.Element {
 
   const products: CartItem[] = useSelector((state: DedeStore) => state.cart);
 
-
-
-
-
-
   products.forEach((cartItem) => {
     if (cartItem.amount > 0) {
       itemList.push(<ProductCartItem product={cartItem}></ProductCartItem>);
     }
   });
 
-
-
-
   return (
     <>
       <TopMenu></TopMenu>
 
-      <div className="cart-container">
-        <div className="header-container">
-          <div className="header">
-            <div className="title">Shopping Cart</div>
-            <div className="subtitle">
-              Total: ${calculateTotal(products).toFixed(2)}
-            </div>
+      <div className={styles.cartcontainer}>
+        <div className={styles.headercontainer}>
+          <div className={styles.header}>
+            <div className={styles.title}>Shopping Cart</div>
+            <div className={styles.subtitle}></div>
+            Total: ${calculateTotal(products).toFixed(2)}
           </div>
-          <div className="card-item-card-container">
+        </div>
+        <div className={styles.podcontainer}>
+          <POD />
+        </div>
+        <div className={styles.cartcontent}>
+          <div className={styles.carditemcardcontainer}>
             {/* {props.products.length === 0 ? (
               <p>Your cart is empty.</p>
             ) : (
@@ -64,8 +56,6 @@ function Cart(props: CartProps): JSX.Element {
             )} */}
             {itemList}
           </div>
-            <POD/>
-
         </div>
       </div>
     </>

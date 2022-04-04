@@ -114,6 +114,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
 
 
+
     useEffect(() => {
         getPODAddress();
         getPODPostalCode();
@@ -182,6 +183,11 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
     const  add = async () => {
 
+        if(cart.length == 0){
+            alert("Oh, you are doing an empty order, that is not allowed :(");
+            return;
+        }
+
 
         const sendOrder = httpsCallable(getFunctions(), 'sendOrder');
 
@@ -212,7 +218,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
             add().then(()=>{
 
-                alert("PURCHASE COMPLETED");
+
 
             }).catch((error : Error)=>{
 
@@ -229,13 +235,19 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     return (
         <Grid container>
             <Grid>
-                <Box component="h3" id={"addressComponent"}>Address: {address}</Box>
-                <Box component="h3" id={"postalcodeComponent"}>Postal Code: {postalCode}</Box>
-                <Box component="h3" id={"cityComponent"}>Locality: {city}</Box>
-                <Box component="h3" id={"countryComponent"}>Country: {country}</Box>
-                <Box component="h3" id={"regionComponent"}>Region: {region}</Box>
-                <button  className="info-button"  onClick={calcShipping}> Calculate shipping </button>
-                <div className="buttons">
+                <div className={"info-container"}>
+                    <Box component="h3" id={"addressComponent"}>Address: {address}</Box>
+                    <Box component="h3" id={"postalcodeComponent"}>Postal Code: {postalCode}</Box>
+                    <Box component="h3" id={"cityComponent"}>Locality: {city}</Box>
+                    <Box component="h3" id={"countryComponent"}>Country: {country}</Box>
+                    <Box component="h3" id={"regionComponent"}>Region: {region}</Box>
+
+                    <Box component={"h3"}> </Box>
+                </div>
+                <div className="buttonsPOD-internal">
+                    <button  onClick={calcShipping}> Calculate shipping </button>
+                </div>
+                <div className="buttonsPOD-internal">
                     <button type={"submit"} className="buy" onClick={buy}>
                         Checkout
                     </button>

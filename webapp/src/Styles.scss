@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 html,
 :root {
   --white: #fbfbfb;
@@ -22,6 +24,13 @@ html,
 
 html {
   background-color: var(--dark1);
+  font-size: 16px;
+}
+
+@media (min-width: 0px) and (max-width: $screen-sm-max) {
+  html {
+    font-size: 14px;
+  }
 }
 
 h1,
@@ -56,11 +65,9 @@ input:hover {
 button,
 button:hover,
 button:focus {
-  font-family: "Montserrat-Regular";
-
   border: 0;
   outline: 0;
-  background-color: white;
+  // background-color: white;
 }
 
 body {

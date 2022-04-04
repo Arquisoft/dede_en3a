@@ -48,26 +48,7 @@ async function calculateCoordinates(address : string, postcode : string , mycity
     let query : string =  mycity + ',' + region + ',' + country + ',' + postcode;
     console.log(query)
     return geocoder.search( { q: query  })
-    /*
-        .then((response : any) => {
 
-
-            functions.logger.info("NOMINATIM ENUENTRA")
-            functions.logger.info(response)
-            return response;
-           console.log(response)
-
-            console.log("AAAAA")
-            console.log( distanceInKmBetweenEarthCoordinates(response[0].lat,response[0].lon,43.3603,-5.84476));
-
-        })
-        .catch((error : any) => {
-            functions.logger.error("ERROR DENTRO DE NOMINATIM")
-           return []
-        })
-
-    functions.logger.error("retorno vacio")
-    return []*/
 
 }
 
