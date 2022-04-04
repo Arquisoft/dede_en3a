@@ -21,7 +21,7 @@ form {
 .pod-input-field {
   font-size: 2rem;
   width: 90%;
-
+  padding: 0.3rem;
   background-color: white;
   color: var(--dark2);
   border-radius: 0.5rem;
@@ -45,7 +45,6 @@ form {
   flex-direction: column;
   background-color: var(--dark3);
   margin-top: 2rem;
-  margin-button: 2rem;
 }
 
 .buttonsPOD {
