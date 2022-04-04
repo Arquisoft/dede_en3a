@@ -33,6 +33,7 @@ function ShopPage(): JSX.Element {
       <div className={styles.product}>
         <CardItem product={product} saveProductToCart={saveProduct}></CardItem>
       </div>
+
     );
   });
 

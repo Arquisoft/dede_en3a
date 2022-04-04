@@ -76,6 +76,7 @@ function TopMenu(): JSX.Element {
             </div>
             <div className={styles.cartcontainer} onAnimationEnd={endWobble}>
               <span
+                title={"cart"}
                 className={"material-icons " + styles.loginicon}
                 onClick={() => navigate("/cart")}
               >

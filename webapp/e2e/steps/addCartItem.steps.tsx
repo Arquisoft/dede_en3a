@@ -1,10 +1,10 @@
 import {fireEvent, render} from "@testing-library/react";
 import {useDispatch, useSelector} from "react-redux";
-import {DedeStore} from "../src/redux/store";
-import CardItem from "../src/components/CardItem/CardItem";
-import {Product} from "../src/api/model/product";
+import {DedeStore} from "../../src/redux/store";
+import CardItem from "../../src/components/CardItem/CardItem";
+import {Product} from "../../src/api/model/product";
 import {Dispatch} from "redux";
-import {increase} from "../src/redux/actions";
+import {increase} from "../../src/redux/actions";
 import * as React from "react";
 
 const cart = useSelector((state: DedeStore) => state.cart);

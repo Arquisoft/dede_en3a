@@ -3,6 +3,7 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getFunctions } from "firebase/functions";
 
+
 // const firebaseConfig = {
 //   apiKey: process.env.REACT_APP_apiKey,
 //   authDomain: process.env.REACT_APP_authDomain,
@@ -12,6 +13,7 @@ import { getFunctions } from "firebase/functions";
 //   messagingSenderId: process.env.REACT_APP_messagingSenderId,
 //   appId: process.env.REACT_APP_appId,
 // };
+
 
 //TODO: Should be in enverioment variables for security
 const firebaseConfig = {
