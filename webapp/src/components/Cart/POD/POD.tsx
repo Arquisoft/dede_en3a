@@ -1,9 +1,9 @@
-
-import React, { useState} from "react";
+import React, { useState } from "react";
 import ShowPodInformation from "./ShowPodInformation";
-import "./POD.scss"
+import "./POD.scss";
 
 function pod(webID: string) {
+
     //Puse 43 porque no puede haber un pod link menor que https://.solidcommunity.net/profile/card#me
     if(webID.length > 0 && webID.length < 43){
         return (
@@ -38,6 +38,7 @@ function POD(): JSX.Element {
             }
         </div>
     );
+
 }
 
 export default POD;
