@@ -8,7 +8,7 @@ function ContactPage(): JSX.Element {
       <TopMenu></TopMenu>
       <div className={styles.headercontainer}>
         <div className={styles.header}>
-          <div title={"contact"} className={styles.title}>Contact</div>
+          <div title={"contactTitle"} className={styles.title}>Contact</div>
           <div className={styles.subtitle}>
             <img
               title={"contactImage"}

@@ -44,15 +44,16 @@ function TopMenu(): JSX.Element {
         <div className={styles.menu}>
           <img src={logo} className={styles.logo} alt="logo" />
           <div className={styles.links}>
-            <div className={homeClass} onClick={() => navigate("/home")}>
+            <div title={"home"} className={homeClass} onClick={() => navigate("/home")}>
               Home
             </div>
-            <div className={styles.menuitem} onClick={() => navigate("/shop")}>
+            <div title={"shop"} className={styles.menuitem} onClick={() => navigate("/shop")}>
               Shop
             </div>
             <div>
               {/* <a href={"https://arquisoft.github.io/dede_en3a/"}> */}
               <div
+                  title={"about"}
                 className={styles.menuitem}
                 onClick={() => {
                   navigate("/about");
@@ -63,12 +64,14 @@ function TopMenu(): JSX.Element {
               </div>
             </div>
             <div
+                title={"contact"}
               className={styles.menuitem}
               onClick={() => navigate("/contact")}
             >
               Contact
             </div>
             <div
+                title={"orders"}
               className={styles.menuitem}
               onClick={() => navigate("/orders")}
             >
@@ -86,6 +89,7 @@ function TopMenu(): JSX.Element {
             </div>
           </div>
           <span
+              title={"login"}
             className={"material-icons " + styles.loginicon}
             onClick={() => navigate("/login")}
           >
