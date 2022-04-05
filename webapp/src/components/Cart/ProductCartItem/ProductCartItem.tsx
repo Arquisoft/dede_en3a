@@ -49,7 +49,7 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
         ></img>
         <div className={styles.productcartdescriptioncontainer}>
           <div className={styles.row1}>
-            <div className={styles.price}>{product.product.price + " €"}</div>
+            <div className={styles.price}>{product.product.price + " $"}</div>
             <div className={styles.productname}>{product.product.name}</div>
           </div>
           <div className={styles.row2}>
