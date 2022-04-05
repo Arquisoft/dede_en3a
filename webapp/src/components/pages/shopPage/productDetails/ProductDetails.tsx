@@ -25,7 +25,7 @@ function ProductDetails(): JSX.Element {
     if (products != null || products != undefined) {
         products.forEach((product) => {
             productList.push(
-                <div>
+                <div className={styles.headerContainer}>
                     <div className={styles.wrapperLeft}>
                         <div className={styles.productName}>{product.name}</div>
                         <img className={styles.productImage} src={product.img} ></img>
@@ -46,9 +46,11 @@ function ProductDetails(): JSX.Element {
         <>
             <TopMenu></TopMenu>
             <>{productList}</>
-            <div className={styles.subsubtitle}>ADD COMMENT</div>
-            <input className={styles.inputComment} id= "input-form" type={"text"}></input><br/><br/>
-            <div className={styles.subsubtitle}>COMENTS:</div>
+            <div className={styles.subheader}>
+                <div className={styles.subsubtitle}>ADD COMMENT</div>
+                <input className={styles.inputComment} id= "input-form" type={"text"}></input><br/><br/>
+                <div className={styles.subsubtitle}>COMENTS:</div>
+            </div>
         </>
     );
 }
