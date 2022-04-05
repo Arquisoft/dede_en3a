@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
+      - name: Change diretory to webapp
+        run: cd .\webapp\
       - name: Install Dependencies
         run: npm install
       - name: Build
