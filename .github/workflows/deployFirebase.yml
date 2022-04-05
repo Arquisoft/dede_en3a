@@ -22,8 +22,8 @@ jobs:
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
-          name: path
-          path: webapp
+          name: dist
+          path: dist
   deploy:
     name: Deploy
     needs: build
@@ -37,6 +37,8 @@ jobs:
       - name: Change to webapp
         run: cd webapp
       - name: Deploy to Firebase
+        run: cd webapp
+            ls -l
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
