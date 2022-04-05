@@ -54,21 +54,21 @@ function LoginPage(): JSX.Element {
           <div className="login-wrapper">
             <h2>Login</h2>
             <h3>Email</h3>
-            <input type="text" onChange={handleChangeEmail}></input>
+            <input title={"email"} type="text" onChange={handleChangeEmail}></input>
             <h3>Password</h3>
-            <input type="password" onChange={handleChangePassword}></input>
+            <input title={"password"} type="password" onChange={handleChangePassword}></input>
             <div className="register"></div>
             <div className="buttons">
-              <button type={"submit"} className="login">
+              <button title={"loggin"} type={"submit"} className="login">
                 Login
               </button>
             </div>
 
             <div className="register-text">
               Need an account?{" "}
-              <b onClick={() => navigate("/register")}>Register</b> here
+              <b title={"register"} onClick={() => navigate("/register")}>Register</b> here
               <br></br>
-              <b onClick={() => auth.signOut()}>Log out</b>
+              <b title={"logout"} onClick={() => auth.signOut()}>Log out</b>
             </div>
           </div>
         </form>

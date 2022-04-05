@@ -195,6 +195,11 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
     const  add = async () => {
 
+        if(cart.length == 0){
+            alert("Oh, you are doing an empty order, that is not allowed :(");
+            return;
+        }
+
 
         const sendOrder = httpsCallable(getFunctions(), 'sendOrder');
 
@@ -225,7 +230,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
             add().then(()=>{
 
-                alert("PURCHASE COMPLETED");
+
 
             }).catch((error : Error)=>{
 
