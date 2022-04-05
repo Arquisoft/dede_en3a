@@ -65,3 +65,13 @@ export async function getOrder(email : string | null | undefined): Promise<any> 
     }
     return null;
 }
+
+export async function getProductById(id : string | null | undefined): Promise<any> {
+    if(id != null && id != undefined){
+        const q = query(productCollection, where("id", "==", id));
+        return getDocs(q).then((docs) =>
+            docs.docs.map((doc) => doc.data() as Product)
+        );
+    }
+    return null;
+}
