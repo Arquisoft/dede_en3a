@@ -19,8 +19,7 @@ jobs:
           cd webapp
           npm install
       - name: Build
-        run: |
-          cd webapp
+        run:
           CI=false npm run build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
@@ -28,6 +27,9 @@ jobs:
           name: dist
           path: dist
   deploy:
+    defaults:
+      run:
+        working-directory: webapp
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
