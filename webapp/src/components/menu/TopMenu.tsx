@@ -5,10 +5,13 @@ import { useSelector } from "react-redux";
 import { DedeStore } from "../../redux/store";
 import { Component, useEffect, useState } from "react";
 import { CartItem } from "../../redux/models/CartItem";
+import { getAuth } from "firebase/auth";
 
 type TopMenuProps = {};
 function TopMenu(): JSX.Element {
   const [wobble, setWobble] = useState(String);
+  const [userName, setUserName] = useState(getAuth().currentUser?.email);
+
   const [expandableMenuClass, setExpandableMenuClass] = useState(
     styles.expandablemenu
   );
@@ -17,7 +20,9 @@ function TopMenu(): JSX.Element {
   const url = window.location.href.split("/");
 
   const path = url[1];
-
+  getAuth().onAuthStateChanged((changedAuth) => {
+    setUserName(changedAuth?.email);
+  });
   const cart = useSelector((state: DedeStore) => state.cart);
 
   const expandMenu = () => {
@@ -44,16 +49,24 @@ function TopMenu(): JSX.Element {
         <div className={styles.menu}>
           <img src={logo} className={styles.logo} alt="logo" />
           <div className={styles.links}>
-            <div title={"home"} className={homeClass} onClick={() => navigate("/home")}>
+            <div
+              title={"home"}
+              className={homeClass}
+              onClick={() => navigate("/home")}
+            >
               Home
             </div>
-            <div title={"shop"} className={styles.menuitem} onClick={() => navigate("/shop")}>
+            <div
+              title={"shop"}
+              className={styles.menuitem}
+              onClick={() => navigate("/shop")}
+            >
               Shop
             </div>
             <div>
               {/* <a href={"https://arquisoft.github.io/dede_en3a/"}> */}
               <div
-                  title={"about"}
+                title={"about"}
                 className={styles.menuitem}
                 onClick={() => {
                   navigate("/about");
@@ -64,14 +77,14 @@ function TopMenu(): JSX.Element {
               </div>
             </div>
             <div
-                title={"contact"}
+              title={"contact"}
               className={styles.menuitem}
               onClick={() => navigate("/contact")}
             >
               Contact
             </div>
             <div
-                title={"orders"}
+              title={"orders"}
               className={styles.menuitem}
               onClick={() => navigate("/orders")}
             >
@@ -88,13 +101,16 @@ function TopMenu(): JSX.Element {
               <div className={styles.cartcounter}>{cart.length}</div>
             </div>
           </div>
-          <span
+          <div className={styles.logincontainer}>
+            <span
               title={"login"}
-            className={"material-icons " + styles.loginicon}
-            onClick={() => navigate("/login")}
-          >
-            account_circle
-          </span>
+              className={"material-icons " + styles.loginicon}
+              onClick={() => navigate("/login")}
+            >
+              account_circle
+            </span>
+            <div className={styles.username}>{userName}</div>
+          </div>
         </div>
       </div>
       {/* Mobile menu */}
@@ -117,6 +133,15 @@ function TopMenu(): JSX.Element {
               shopping_cart
             </span>
             <div className={styles.cartcounter}>{cart.length}</div>
+          </div>
+          <div className={styles.logincontainer}>
+            <span
+              title={"login"}
+              className={"material-icons " + styles.loginicon}
+              onClick={() => navigate("/login")}
+            >
+              account_circle
+            </span>
           </div>
         </div>
       </div>

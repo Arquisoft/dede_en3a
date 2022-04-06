@@ -57,16 +57,6 @@
   cursor: pointer;
   font-size: 2rem;
   align-self: center;
-  margin-right: 3.5rem;
-  transition: 0.35s ease;
-}
-
-.loginicon:hover {
-  filter: drop-shadow(var(--dropShadowOrange));
-  font-size: 2rem;
-  align-self: center;
-  margin-right: 3.5rem;
-  color: var(--orange2);
 }
 
 .cartcounter {
@@ -157,7 +147,7 @@ a:active {
   background-color: var(--dark2);
   height: 100vh;
   transition: 0.5s ease;
-  z-index: 1;
+  z-index: 50;
   .links {
     display: none;
     margin-top: var(--topMenuHeight);
@@ -176,4 +166,27 @@ a:active {
   .links {
     display: flex;
   }
+}
+
+.loginLogoMobile {
+  margin-right: 1rem !important;
+}
+
+.logincontainer {
+  transition: 0.35s ease;
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.logincontainer:hover {
+  filter: drop-shadow(var(--dropShadowOrange));
+  color: var(--orange2);
+}
+
+.username {
+  user-select: none;
+  margin-top: 0.25rem;
+  text-align: center;
 }
