@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
 import LoginPage from "./components/pages/LoginPage/LoginPage";
 import ShopPage from "./components/pages/shopPage/ShopPage";
+import ProductDetails from "./components/pages/shopPage/productDetails/ProductDetails";
 import ContactPage from "./components/pages/ContactPage/ContactPage";
 import OrdersPage from "./components/pages/OrdersPage/OrdersPage";
 import { Dashboard } from "./components/pages/DashboardPage/dashboard";
@@ -37,6 +38,7 @@ function App(): JSX.Element {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/shop" element={<ShopPage />} />
+          <Route path={"/product/:id"} element={<ProductDetails/>}></Route>
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="*" element={<Navigate to="/home" />} />
