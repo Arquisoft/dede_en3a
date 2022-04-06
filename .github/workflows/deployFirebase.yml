@@ -39,7 +39,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: take-build-file
-          path: ./webapp/
+          path: /home/runner/work/dede_en3a/dede_en3a/webapp
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
