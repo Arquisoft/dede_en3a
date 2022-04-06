@@ -4,7 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "build",
+    "public": "webapp",
     "ignore": [
       "firebase.json",
       "**/.*",
