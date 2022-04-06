@@ -24,7 +24,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: take-build-file
-          path: ./webapp/dist
+          path: ./webapp/build
   deploy:
     defaults:
       run:
@@ -39,7 +39,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: take-build-file
-          path: ./webapp/dist
+          path: ./webapp/build
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
