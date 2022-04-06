@@ -61,8 +61,7 @@ function ProductDetails(): JSX.Element {
             await updateProduct(product)
                 .then(()=>{
                     refreshProductList();
-                    console.log("IMPLEMENTAR FIREBASE FUNCTION QUE AÑADA EL MENSAJE EN LA DB");
-                    console.log(comment);
+
                 }).catch(()=>{
                     alert("Not able to add comment :(")
                 });
@@ -81,7 +80,7 @@ function ProductDetails(): JSX.Element {
                             <img className={styles.userImage} src={comment.userImage} ></img>
                             <div className={styles.username}>{comment.author}</div>
                         </div>
-                        <Rating name="read-only" value={comment.rating} readOnly size={"small"}/>
+                        <Rating name="read-only" value={comment.rating} precision={0.5} readOnly size={"small"}/>
                         <div className={styles.text}>{comment.message}</div>
                     </div>
                 );
