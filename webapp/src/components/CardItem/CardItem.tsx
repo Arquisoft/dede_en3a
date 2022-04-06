@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Product } from "../../api/model/product";
 import "./CardItem.scss";
+import { Link } from "react-router-dom";
 
 type CardItemProps = {
   product: Product;
@@ -18,10 +19,12 @@ export const CardItem: React.FC<CardItemProps> = ({
   return (
     <>
       <div className="container">
-        <img className="card-product-image" src={product.img}></img>
+        <Link to={"/product/" + product.id}>
+          <img className="card-product-image" src={product.img} ></img>
+        </Link>
         <div className="description-container">
           <div className="col1">
-            <div className="price">{product.price + " €"}</div>
+            <div className="price">{product.price + " $"}</div>
             <div className="product-name">{product.name}</div>
           </div>
           <div className="col2">

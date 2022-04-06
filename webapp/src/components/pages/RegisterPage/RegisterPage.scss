@@ -11,7 +11,12 @@
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  width: 30rem;
+  width: 95%;
+  padding: 1rem;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+
+  max-width: 25rem;
   height: 38rem;
   background-color: var(--white1);
   h2 {
@@ -21,14 +26,15 @@
     letter-spacing: var(--letterSpacing);
     font-size: 2.5rem;
   }
-  h3,label {
+  h3,
+  label {
     color: black;
     margin: 0;
-    margin-left: 4.5rem;
+    margin-left: 0.5rem;
   }
   input {
     align-self: center;
-    width: 20rem;
+    width: 100%;
     font-size: 1.2rem;
     background-color: var(--white);
     padding: 0.5rem;

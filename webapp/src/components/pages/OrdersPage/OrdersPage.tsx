@@ -41,7 +41,7 @@ function OrdersPage(): JSX.Element {
           <div className={styles.ordersname}>
             Total ammount: {order.totalAmount} €
           </div>
-          <div>{group}</div>
+          <div className={styles.carditemscontainer}>{group}</div>
         </div>
       );
     });
@@ -53,12 +53,11 @@ function OrdersPage(): JSX.Element {
       <div className={styles.headercontainer}>
         <div className={styles.header}>
           <div className={styles.title}>Orders</div>
-          <div className={styles.ordercarditemcontainer}>{orderList}</div>
         </div>
       </div>
+      <div className={styles.ordercarditemcontainer}>{orderList}</div>
     </>
   );
-
 }
 
 export default OrdersPage;
