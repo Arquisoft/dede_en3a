@@ -1,8 +1,8 @@
 name: CI for ASW2122
 on:
   pull_request:
-    branches:
-      - develop
+    branches: [develop]
+    types: [closed]
 
 jobs:
   build:
