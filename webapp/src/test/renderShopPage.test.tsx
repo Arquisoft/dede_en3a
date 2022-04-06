@@ -6,7 +6,7 @@ import Login from "../components/pages/LoginPage/LoginPage";
 import * as React from "react";
 import {Shop} from "@mui/icons-material";
 import ShopPage from "../components/pages/shopPage/ShopPage";
-
+import {db} from "../utils/firebase"
 test("the Shop title is rendered", async () => {
 
     const {getByTitle} = render( <BrowserRouter><Provider store={store}> <ShopPage></ShopPage></Provider></BrowserRouter> );

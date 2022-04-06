@@ -4,7 +4,7 @@ import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {store} from "../redux/store";
 import MainPage from "../components/pages/mainPage/MainPage";
-
+import {db} from "../utils/firebase"
 test("the Dede title is rendered", async () => {
 
     const {getByText} = render( <BrowserRouter><Provider store={store}> <MainPage></MainPage></Provider></BrowserRouter> );

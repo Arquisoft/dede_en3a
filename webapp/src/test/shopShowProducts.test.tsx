@@ -6,7 +6,7 @@ import * as React from "react";
 import {store} from "../redux/store";
 import {BrowserRouter} from "react-router-dom";
 import ShopPage from "../components/pages/shopPage/ShopPage";
-
+import {db} from "../utils/firebase"
 test ( 'the cardItem is rendered in the ShopPage', async () => {
 
     const {getByTitle} = render( <BrowserRouter>
