@@ -1,10 +1,13 @@
 import TopMenu from "../../../menu/TopMenu";
 import {useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import {getProductById} from "../../../../api/api";
+import {getProductById, getUsersByEmail} from "../../../../api/api";
 import {Product} from "../../../../api/model/product";
 import styles from "./ProductDetails.module.scss";
 import {Rating} from "@mui/material";
+import {Comments} from "../../../../api/model/comments";
+import {useAuth} from "../../../../context/AuthContext";
+import {User} from "../../../../api/model/user";
 
 
 function ProductDetails(): JSX.Element {
@@ -16,9 +19,45 @@ function ProductDetails(): JSX.Element {
         setProducts(await getProductById(id));
     };
 
+    const [users, setUsers] = useState<User[]>([]);
+    const { getCurrentUser } = useAuth();
+
+    const refreshUserList = async () => {
+        setUsers(await getUsersByEmail(getCurrentUser()?.email));
+    };
+
     useEffect(() => {
+        refreshUserList();
         refreshProductList();
     }, []);
+
+    let valueGet = 2.5;
+
+    function setValue(valueSet : number | null) {
+        if(valueSet != null){
+            valueGet = valueSet;
+        }
+    }
+
+    function callSender(message: string, rating: number){
+        let name : string = "Anonimous";
+
+        if(users != null && users != undefined){
+            users.forEach((user) => {
+               name = user.name;
+            });
+        }
+
+        const comment : Comments = {
+            author: name,
+            message: message,
+            userImage: "http://cdn.onlinewebfonts.com/svg/img_184513.png",
+            rating: rating,
+        };
+
+        console.log("IMPLEMENTAR FIREBASE FUNCTION QUE AÑADA EL MENSAJE EN LA DB");
+        console.log(comment);
+    }
 
     function loadComments() {
         products.forEach((product) => {
@@ -53,7 +92,9 @@ function ProductDetails(): JSX.Element {
                         <div className={styles.subtitle}>Description: </div>
                         <div className={styles.text}>{product.description}</div>
                         <div className={styles.subtitle}>Rating:</div>
-                        <Rating name="half-rating" defaultValue={2.5} precision={0.5} size="large"/>
+                        <Rating name="half-rating" defaultValue={2.5} precision={0.5} size="large"
+                        onChange={(event, newValue) => {
+                            setValue(newValue);}}/>
                     </div>
                 </div>
             );
@@ -66,7 +107,14 @@ function ProductDetails(): JSX.Element {
             <>{productList}</>
             <div className={styles.subheader}>
                 <div className={styles.subsubtitle}>Add a Review:</div>
-                <input className={styles.inputComment} id= "input-form" type={"text"}></input><br/><br/>
+                <div className={styles.commentWrapper}>
+                    <input className={styles.inputComment} id= "input-comment-form" type={"text"}></input>
+                    <div className={styles.buttonsComments}>
+                        <button title={"setMessage"} type = "button" onClick={() => callSender(
+                            (document.getElementById("input-comment-form") as HTMLInputElement).value,
+                            valueGet)}>Send</button>
+                    </div>
+                </div>
                 <div className={styles.subsubtitle}>Reviews:</div>
                 {
                     loadComments()

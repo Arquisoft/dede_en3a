@@ -8,6 +8,8 @@ import {query, where} from "firebase/firestore";
 import {auth} from '../utils/firebase';
 import firebase from "firebase/compat";
 import {Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential} from 'firebase/auth';
+import {Comments} from "./model/comments";
+
 
 const userCollection = collection(db, "user");
 const productCollection = collection(db, "products")
@@ -74,4 +76,13 @@ export async function getProductById(id : string | null | undefined): Promise<an
         );
     }
     return null;
+}
+
+export async function getUsersByEmail(email : string | null | undefined): Promise<any> {
+    if(email != null && email != undefined){
+        const q = query(userCollection, where("email", "==", email));
+        return getDocs(q).then((docs) =>
+            docs.docs.map((doc) => doc.data() as User)
+        );
+    }
 }
