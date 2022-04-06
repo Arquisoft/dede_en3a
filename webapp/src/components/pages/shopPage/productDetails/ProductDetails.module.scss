@@ -5,6 +5,29 @@
   margin-left: 3rem;
 }
 
+.wrapperWholeComment{
+  margin-top: 0.75rem;
+  margin-left: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.username{
+  font-family: "Montserrat-Bold";
+  font-size: 1rem;
+  margin-left: 0.5rem;
+}
+
+.commentWrapper{
+  text-align: center;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-self: center;
+  font-size: 1.35rem;
+  color: var(--white1);
+}
+
 .headerContainer{
   display: flex;
   flex-flow: row wrap;
@@ -27,6 +50,14 @@
   border-radius: 0.5rem;
   width: 20rem;
   height: 100%;
+}
+
+.userImage{
+  cursor: pointer;
+  transition: 0.5s ease;
+  border-radius: 0.5rem;
+  width: 3%;
+  height: 3%;
 }
 
 .productName{
