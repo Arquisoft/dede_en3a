@@ -24,7 +24,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: take-build-file
-          path: ./webapp/build
+          path: ./webapp/public
   deploy:
     defaults:
       run:
@@ -39,9 +39,9 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: take-build-file
-          path: ./webapp/build
+          path: ./webapp/public
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@v2
+        uses: w9jds/firebase-action@v2.0.0
         with:
           args: deploy --only hosting
         env:
