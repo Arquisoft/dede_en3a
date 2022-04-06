@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs, setDoc,doc } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { User } from "./model/user";
 import { Product } from "./model/product";
@@ -37,6 +37,13 @@ export async function getUsers(): Promise<any> {
   return getDocs(userCollection).then((docs) =>
       docs.docs.map((doc) => doc.data() as User)
   );
+
+}
+
+export async function updateProduct(product : Product): Promise<any>{
+    return setDoc(doc(db,"products",product.id) , {
+        ...product
+    });
 
 }
 

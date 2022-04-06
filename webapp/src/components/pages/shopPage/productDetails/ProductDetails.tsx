@@ -1,7 +1,7 @@
 import TopMenu from "../../../menu/TopMenu";
 import {useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import {getProductById, getUsersByEmail} from "../../../../api/api";
+import {getProductById, getUsersByEmail, updateProduct} from "../../../../api/api";
 import {Product} from "../../../../api/model/product";
 import styles from "./ProductDetails.module.scss";
 import {Rating} from "@mui/material";
@@ -55,8 +55,21 @@ function ProductDetails(): JSX.Element {
             rating: rating,
         };
 
-        console.log("IMPLEMENTAR FIREBASE FUNCTION QUE AÑADA EL MENSAJE EN LA DB");
-        console.log(comment);
+
+        products.forEach(async product => {
+            product.comments?.push(comment);
+            await updateProduct(product)
+                .then(()=>{
+                    refreshProductList();
+                    console.log("IMPLEMENTAR FIREBASE FUNCTION QUE AÑADA EL MENSAJE EN LA DB");
+                    console.log(comment);
+                }).catch(()=>{
+                    alert("Not able to add comment :(")
+                });
+
+
+        })
+
     }
 
     function loadComments() {
