@@ -86,7 +86,15 @@ async function retrievePODRegion(webID: string): Promise<string> {
     return region
 }
 
-
+function cost(cost : number) {
+    if(cost != 0){
+        return (
+            <div className={"info-container"}>
+                <Box component="h3" id={"deliveryComponent"}>Delivery cost: {cost} $</Box>
+            </div>
+        );
+    }
+}
 
 
 
@@ -98,6 +106,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     const [city, setCity] = React.useState("");
     const [country, setCountry] = React.useState("");
     const [region, setRegion] = React.useState("");
+    const [delCost, setDelCost] = React.useState(0);
 
     const getPODAddress = async () => setAddress(await retrievePODAddress(props.webID));
     const getPODPostalCode = async () => setPostalCode(await retrievePODPostalCode(props.webID))
@@ -147,7 +156,10 @@ function ShowPodInformation(props: PODProps): JSX.Element {
                 let result  = response.data;
                 console.log(result);
                 // @ts-ignore
-                alert("Your shipping will cost: " + result.cost + "$");
+                //alert("Your shipping will cost: " + result.cost + "$");
+                // @ts-ignore
+                setDelCost(result.cost);
+                console.log(delCost)
                // @ts-ignore
                 return  {message: result.message , cost : result.cost};
             }).catch((error:Error)=>{
@@ -247,6 +259,9 @@ function ShowPodInformation(props: PODProps): JSX.Element {
                 <div className="buttonsPOD-internal">
                     <button  onClick={calcShipping}> Calculate shipping </button>
                 </div>
+                {
+                    cost(delCost)
+                }
                 <div className="buttonsPOD-internal">
                     <button type={"submit"} className="buy" onClick={buy}>
                         Checkout
