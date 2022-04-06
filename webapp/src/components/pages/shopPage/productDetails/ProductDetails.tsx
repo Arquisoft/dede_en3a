@@ -26,11 +26,6 @@ function ProductDetails(): JSX.Element {
         setUsers(await getUsersByEmail(getCurrentUser()?.email));
     };
 
-    useEffect(() => {
-        refreshUserList();
-        refreshProductList();
-    }, []);
-
     let valueGet = 2.5;
 
     function setValue(valueSet : number | null) {
@@ -38,6 +33,13 @@ function ProductDetails(): JSX.Element {
             valueGet = valueSet;
         }
     }
+
+    useEffect(() => {
+        refreshUserList();
+        refreshProductList();
+    }, []);
+
+
 
     function callSender(message: string, rating: number){
         let name : string = "Anonimous";
@@ -61,7 +63,7 @@ function ProductDetails(): JSX.Element {
             await updateProduct(product)
                 .then(()=>{
                     refreshProductList();
-
+                    console.log(comment)
                 }).catch(()=>{
                     alert("Not able to add comment :(")
                 });
