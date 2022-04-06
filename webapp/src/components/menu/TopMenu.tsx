@@ -10,7 +10,7 @@ import { getAuth } from "firebase/auth";
 type TopMenuProps = {};
 function TopMenu(): JSX.Element {
   const [wobble, setWobble] = useState(String);
-  const [userName, setUserName] = useState(getAuth().currentUser?.email);
+  //const [userName, setUserName] = useState(getAuth().currentUser?.email);
 
   const [expandableMenuClass, setExpandableMenuClass] = useState(
     styles.expandablemenu
@@ -20,9 +20,9 @@ function TopMenu(): JSX.Element {
   const url = window.location.href.split("/");
 
   const path = url[1];
-  getAuth().onAuthStateChanged((changedAuth) => {
-    setUserName(changedAuth?.email);
-  });
+  //getAuth().onAuthStateChanged((changedAuth) => {
+    //setUserName(changedAuth?.email);
+  //});
   const cart = useSelector((state: DedeStore) => state.cart);
 
   const expandMenu = () => {
@@ -103,13 +103,13 @@ function TopMenu(): JSX.Element {
           </div>
           <div className={styles.logincontainer}>
             <span
-              title={"login"}
+              title={"login-pc"}
               className={"material-icons " + styles.loginicon}
               onClick={() => navigate("/login")}
             >
               account_circle
             </span>
-            <div className={styles.username}>{userName}</div>
+            {/*<div className={styles.username}>{userName}</div>*/}
           </div>
         </div>
       </div>
@@ -136,7 +136,7 @@ function TopMenu(): JSX.Element {
           </div>
           <div className={styles.logincontainer}>
             <span
-              title={"login"}
+              title={"login-mobile"}
               className={"material-icons " + styles.loginicon}
               onClick={() => navigate("/login")}
             >

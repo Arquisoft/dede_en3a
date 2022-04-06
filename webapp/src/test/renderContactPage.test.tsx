@@ -4,7 +4,7 @@ import {Provider} from "react-redux";
 import {store} from "../redux/store";
 import * as React from "react";
 import ContactPage from "../components/pages/ContactPage/ContactPage";
-
+import {db} from "../utils/firebase"
 test("the contact title is rendered", async () => {
 
     const {getByTitle} = render( <BrowserRouter><Provider store={store}> <ContactPage></ContactPage> </Provider></BrowserRouter> );

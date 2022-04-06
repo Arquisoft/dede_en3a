@@ -4,7 +4,7 @@ import Login from "../components/pages/LoginPage/LoginPage";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {store} from "../redux/store";
-
+import {db} from "../utils/firebase"
 test("the login button is rendered", async () => {
 
     const {getByRole} = render( <BrowserRouter><Provider store={store}> <Login></Login></Provider></BrowserRouter> );
