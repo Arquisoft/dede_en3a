@@ -23,8 +23,8 @@ jobs:
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: build
-          path: build
+          name: webapp/build
+          path: webapp/build
   deploy:
     defaults:
       run:
@@ -38,7 +38,7 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
-          name: build
+          name: webapp/build/
           path: build
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
