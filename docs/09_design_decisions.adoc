@@ -35,4 +35,6 @@ a different product and poor documentation.
 | QA-4 Firebase Hosting| It supports the deployment for the app. High availability.  | Not very familiarized.
 | QA-5 Firebase Database| It stores the document-based database. High availability. Provides a clear web interface to administrate it. A protected and secure backend for accessing the storage is already provided. | Not very familiarized with document-based database.
 | QA-6 Firebase Functions| Serverless approach to provide the backend of our app. Has its own stored logs. High availability.  | Very difficult to debug.
+| QA-7 Redux      | Easy way of keeping the state of the application and using information of different pages | Hard configuration and none of us had any idea of how to use it before.
+| QA-8 Geocoder API | Fast coordinates resolution for addresses. | Very poor documentation for using it in TypeScript.
 |===
