@@ -6,15 +6,24 @@ import { DedeStore } from "../../redux/store";
 import { Component, useEffect, useState } from "react";
 import { CartItem } from "../../redux/models/CartItem";
 import { getAuth } from "firebase/auth";
+import React from "react";
 
 type TopMenuProps = {};
 function TopMenu(): JSX.Element {
-  const [wobble, setWobble] = useState(String);
+
+
+
+  const [wobble, setWobble] = useState('');
+  const [firstRender, setfirstRender] = useState(true);
+
   //const [userName, setUserName] = useState(getAuth().currentUser?.email);
 
   const [expandableMenuClass, setExpandableMenuClass] = useState(
     styles.expandablemenu
   );
+
+
+
   const navigate = useNavigate();
 
   const url = window.location.href.split("/");
@@ -24,7 +33,6 @@ function TopMenu(): JSX.Element {
     //setUserName(changedAuth?.email);
   //});
   const cart = useSelector((state: DedeStore) => state.cart);
-
   const expandMenu = () => {
     console.log(expandableMenuClass);
     setExpandableMenuClass(
@@ -34,11 +42,13 @@ function TopMenu(): JSX.Element {
     );
   };
 
-  const endWobble = () => {
-    console.log("endWobble");
-
-    setWobble("");
-  };
+  useEffect(() => {
+    if (firstRender){
+      setfirstRender(false);
+    }else{
+      setWobble(styles.wobble)
+    }
+  }, [cart]);
 
   let homeClass = styles.menuitem;
   if (path === "home") homeClass = styles.menuitem + " " + styles.selected;
@@ -90,15 +100,18 @@ function TopMenu(): JSX.Element {
             >
               Orders
             </div>
-            <div className={styles.cartcontainer} onAnimationEnd={endWobble}>
+            <div className={styles.cartcontainer } >
               <span
                 title={"cart"}
-                className={"material-icons " + styles.loginicon}
+                className={"material-icons " + styles.loginicon + ' ' + wobble}
                 onClick={() => navigate("/cart")}
+                onAnimationEnd={() => setWobble('')}
               >
                 shopping_cart
-              </span>
-              <div className={styles.cartcounter}>{cart.length}</div>
+              </span >
+              <div className={styles.cartcounter }
+              
+              >{cart.length}</div>
             </div>
           </div>
           <div className={styles.logincontainer}>
@@ -125,16 +138,19 @@ function TopMenu(): JSX.Element {
             menu
           </span>
           <img src={logo} className={styles.logo} alt="logo" />
-          <div className={styles.cartcontainer} onAnimationEnd={endWobble}>
+          <div className={styles.cartcontainer }  >
             <span
-              className={"material-icons " + styles.loginicon}
+              className={"material-icons " + styles.loginicon + ' ' + styles.wobble}
               onClick={() => navigate("/cart")}
+              onAnimationEnd={() => setWobble('')}
             >
               shopping_cart
             </span>
-            <div className={styles.cartcounter}>{cart.length}</div>
+            <div className={styles.cartcounter }
+            
+            >{cart.length}</div>
           </div>
-          <div className={styles.logincontainer}>
+          <div className={styles.logincontainer}  >
             <span
               title={"login-mobile"}
               className={"material-icons " + styles.loginicon}

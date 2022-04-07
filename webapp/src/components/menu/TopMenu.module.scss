@@ -70,9 +70,6 @@
   background-color: transparent;
 }
 
-.wobble {
-  animation: wobble 0.8s both;
-}
 
 a,
 a:hover,
@@ -189,4 +186,9 @@ a:active {
   user-select: none;
   margin-top: 0.25rem;
   text-align: center;
+}
+
+
+.wobble {
+  animation: wobble 0.8s both;
 }

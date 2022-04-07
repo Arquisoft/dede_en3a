@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import productCartItem from "./ProductCartItem/ProductCartItem";
 import { useAuth } from "../../context/AuthContext";
 import POD from "./POD/POD";
+import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
 type CartProps = {};
 
 function Cart(props: CartProps): JSX.Element {
@@ -34,8 +35,8 @@ function Cart(props: CartProps): JSX.Element {
 
   return (
     <>
+      <LoadingOverlay></LoadingOverlay>
       <TopMenu></TopMenu>
-
       <div className={styles.cartcontainer}>
         <div className={styles.headercontainer}>
           <div className={styles.header}>
