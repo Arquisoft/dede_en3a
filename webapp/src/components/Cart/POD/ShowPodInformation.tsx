@@ -86,7 +86,15 @@ async function retrievePODRegion(webID: string): Promise<string> {
     return region
 }
 
-
+function cost(cost : number) {
+    if(cost != 0){
+        return (
+            <div className={"info-container"}>
+                <Box component="h3" id={"deliveryComponent"}>Delivery cost: {cost} $</Box>
+            </div>
+        );
+    }
+}
 
 
 
@@ -98,6 +106,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     const [city, setCity] = React.useState("");
     const [country, setCountry] = React.useState("");
     const [region, setRegion] = React.useState("");
+    const [delCost, setDelCost] = React.useState(0);
 
     const getPODAddress = async () => setAddress(await retrievePODAddress(props.webID));
     const getPODPostalCode = async () => setPostalCode(await retrievePODPostalCode(props.webID))
@@ -110,6 +119,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     const userRegistered = () => {
         return currentUser !== null;
     };
+
 
 
 
@@ -146,7 +156,10 @@ function ShowPodInformation(props: PODProps): JSX.Element {
                 let result  = response.data;
                 console.log(result);
                 // @ts-ignore
-                alert("Your shipping will cost: " + result.cost + "$");
+                //alert("Your shipping will cost: " + result.cost + "$");
+                // @ts-ignore
+                setDelCost(result.cost);
+                console.log(delCost)
                // @ts-ignore
                 return  {message: result.message , cost : result.cost};
             }).catch((error:Error)=>{
@@ -182,6 +195,11 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
     const  add = async () => {
 
+        if(cart.length == 0){
+            alert("Oh, you are doing an empty order, that is not allowed :(");
+            return;
+        }
+
 
         const sendOrder = httpsCallable(getFunctions(), 'sendOrder');
 
@@ -212,7 +230,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
             add().then(()=>{
 
-                alert("PURCHASE COMPLETED");
+
 
             }).catch((error : Error)=>{
 
@@ -229,13 +247,22 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     return (
         <Grid container>
             <Grid>
-                <Box component="h3" id={"addressComponent"}>Address: {address}</Box>
-                <Box component="h3" id={"postalcodeComponent"}>Postal Code: {postalCode}</Box>
-                <Box component="h3" id={"cityComponent"}>Locality: {city}</Box>
-                <Box component="h3" id={"countryComponent"}>Country: {country}</Box>
-                <Box component="h3" id={"regionComponent"}>Region: {region}</Box>
-                <button  className="info-button"  onClick={calcShipping}> Calculate shipping </button>
-                <div className="buttons">
+                <div className={"info-container"}>
+                    <Box component="h3" id={"addressComponent"}>Address: {address}</Box>
+                    <Box component="h3" id={"postalcodeComponent"}>Postal Code: {postalCode}</Box>
+                    <Box component="h3" id={"cityComponent"}>Locality: {city}</Box>
+                    <Box component="h3" id={"countryComponent"}>Country: {country}</Box>
+                    <Box component="h3" id={"regionComponent"}>Region: {region}</Box>
+
+                    <Box component={"h3"}> </Box>
+                </div>
+                <div className="buttonsPOD-internal">
+                    <button  onClick={calcShipping}> Calculate shipping </button>
+                </div>
+                {
+                    cost(delCost)
+                }
+                <div className="buttonsPOD-internal">
                     <button type={"submit"} className="buy" onClick={buy}>
                         Checkout
                     </button>

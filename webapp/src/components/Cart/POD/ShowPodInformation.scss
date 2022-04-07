@@ -4,3 +4,56 @@
   background-color:black;
 }
 
+.buttons {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    cursor: pointer;
+    font-family: "Montserrat-Bold";
+    background-color: var(--orange2);
+    font-size: 1.3rem;
+    padding: 1rem;
+    padding-left: 1.7rem;
+    padding-right: 1.7rem;
+
+    border-radius: 0.5rem;
+    transition: 0.35s;
+  }
+  button:hover {
+    filter: drop-shadow(0px 0px 7px var(--orange2));
+  }
+}
+
+.info-container {
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.buttonsPOD-internal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+
+  button {
+    cursor: pointer;
+    font-family: "Montserrat-Bold";
+    background-color: var(--orange2);
+    font-size: 1.3rem;
+    padding: 1rem;
+    padding-left: 1.7rem;
+    padding-right: 1.7rem;
+
+    border-radius: 0.5rem;
+    transition: 0.35s;
+  }
+  button:hover {
+    filter: drop-shadow(0px 0px 7px var(--orange2));
+  }
+}
