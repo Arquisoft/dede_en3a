@@ -18,6 +18,7 @@ import {getFunctions, httpsCallable} from "firebase/functions";
 
 import "./ShowPodInformation.scss"
 import {useAuth} from "../../../context/AuthContext";
+import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
 
 
 
@@ -32,6 +33,7 @@ type PODProps = {
  * returns an string of your address.
  * @param webID
  */
+
 
 
 
@@ -107,6 +109,8 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     const [country, setCountry] = React.useState("");
     const [region, setRegion] = React.useState("");
     const [delCost, setDelCost] = React.useState(0);
+    const [loadingOverlay, setLoadingOverlay] = React.useState(<div></div>);
+
 
     const getPODAddress = async () => setAddress(await retrievePODAddress(props.webID));
     const getPODPostalCode = async () => setPostalCode(await retrievePODPostalCode(props.webID))
@@ -143,7 +147,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
 
             const calculateDeliveryOnCall = httpsCallable(getFunctions(), 'calculateDeliveryOnCall');
-
+            setLoadingOverlay(<LoadingOverlay></LoadingOverlay>)
             calculateDeliveryOnCall({
                 address: address,
                 postalcode: postalcode,
@@ -151,7 +155,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
                 country: country,
                 region: region
             }).then((response  )=>{
-
+                setLoadingOverlay(<div></div>)
                 console.log(response)
                 let result  = response.data;
                 console.log(result);
@@ -246,6 +250,8 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
     return (
         <Grid container>
+        {loadingOverlay}
+
             <Grid>
                 <div className={"info-container"}>
                     <Box component="h3" id={"addressComponent"}>Address: {address}</Box>

@@ -35,7 +35,6 @@ function Cart(props: CartProps): JSX.Element {
 
   return (
     <>
-      <LoadingOverlay></LoadingOverlay>
       <TopMenu></TopMenu>
       <div className={styles.cartcontainer}>
         <div className={styles.headercontainer}>
