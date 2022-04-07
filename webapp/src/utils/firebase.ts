@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import {getAuth} from 'firebase/auth';
-import {getFunctions} from "firebase/functions";
+import { getAuth } from "firebase/auth";
+import { getFunctions } from "firebase/functions";
+
 
 // const firebaseConfig = {
 //   apiKey: process.env.REACT_APP_apiKey,
@@ -13,6 +14,7 @@ import {getFunctions} from "firebase/functions";
 //   appId: process.env.REACT_APP_appId,
 // };
 
+
 //TODO: Should be in enverioment variables for security
 const firebaseConfig = {
   apiKey: "AIzaSyAsJIeaL0YAdv0QJG7CuXuR26grYco5-p0",
@@ -21,7 +23,7 @@ const firebaseConfig = {
   storageBucket: "dede-en3a.appspot.com",
   messagingSenderId: "344724226999",
   appId: "1:344724226999:web:1aef51b515c7983e08de32",
-  measurementId: "G-Q99W98RL24"
+  measurementId: "G-Q99W98RL24",
 };
 
 console.log(firebaseConfig);

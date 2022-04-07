@@ -4,7 +4,7 @@ import { Dispatch } from "redux";
 import { Product } from "../../../api/model/product";
 import { decrease, increase } from "../../../redux/actions";
 import { CartItem } from "../../../redux/models/CartItem";
-import "./ProductCartItem.scss";
+import styles from "./ProductCartItem.module.scss";
 
 type ProductCartItemProps = {
   product: CartItem;
@@ -42,22 +42,22 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
 
   return (
     <>
-      <div className="product-cart-container">
+      <div className={styles.productcartcontainer}>
         <img
-          className="product-cart-product-image"
+          className={styles.productcartproductimage}
           src={product.product.img}
         ></img>
-        <div className="product-cart-description-container">
-          <div className="row1">
-            <div className="price">{product.product.price + " €"}</div>
-            <div className="product-name">{product.product.name}</div>
+        <div className={styles.productcartdescriptioncontainer}>
+          <div className={styles.row1}>
+            <div className={styles.price}>{product.product.price + " $"}</div>
+            <div className={styles.productname}>{product.product.name}</div>
           </div>
-          <div className="row2">
-            <span className="material-icons" onClick={decreaseButtonAction}>
+          <div className={styles.row2}>
+            <span className={"material-icons"} onClick={decreaseButtonAction}>
               remove
             </span>
-            <div className="product-cart-amount">{product.amount}</div>
-            <span className="material-icons" onClick={increaseButtonAction}>
+            <div className={styles.productcartamount}>{product.amount}</div>
+            <span className={"material-icons"} onClick={increaseButtonAction}>
               add
             </span>
           </div>
