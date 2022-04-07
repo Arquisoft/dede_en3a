@@ -1,5 +1,5 @@
 import TopMenu from "../menu/TopMenu";
-import "./Cart.scss";
+import styles from "./Cart.module.scss";
 import { CartItem } from "../../redux/models/CartItem";
 import ProductCartItem from "./ProductCartItem/ProductCartItem";
 import { shallowEqual, useSelector } from "react-redux";
@@ -8,16 +8,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import productCartItem from "./ProductCartItem/ProductCartItem";
 import { useAuth } from "../../context/AuthContext";
-import {getFunctions, httpsCallable} from "firebase/functions";
-
+import POD from "./POD/POD";
 type CartProps = {};
 
 function Cart(props: CartProps): JSX.Element {
   const navigate = useNavigate();
-
-
-
-
 
   const calculateTotal = (items: CartItem[]) => {
     console.log("recalculate");
@@ -30,29 +25,6 @@ function Cart(props: CartProps): JSX.Element {
   let itemList: JSX.Element[] = [];
 
   const products: CartItem[] = useSelector((state: DedeStore) => state.cart);
-  const currentUser = useAuth().getCurrentUser();
-
-
-    const  add = async () => {
-
-
-        const sendOrder = httpsCallable(getFunctions(), 'sendOrder');
-
-        return await sendOrder({
-            items:products,
-            user:currentUser?.email,
-            address:"Casa de " + currentUser?.email
-        })
-            .then(( ) => {
-                console.log("Your order has been processed.");
-            }).catch(()=>{
-
-                console.log("Sorry, we are suffering technical problems, try again...");
-
-            });
-
-    }
-
 
   products.forEach((cartItem) => {
     if (cartItem.amount > 0) {
@@ -60,49 +32,29 @@ function Cart(props: CartProps): JSX.Element {
     }
   });
 
-
-
-  const userRegistered = () => {
-    return currentUser !== null;
-  };
-
-
-  const buy = () => {
-    if (userRegistered()) {
-
-       add().then(()=>{
-
-       });
-
-    } else {
-      navigate("/login");
-    }
-  };
-
   return (
     <>
       <TopMenu></TopMenu>
 
-      <div className="cart-container">
-        <div className="header-container">
-          <div className="header">
-            <div className="title">Shopping Cart</div>
-            <div className="subtitle">
-              Total: ${calculateTotal(products).toFixed(2)}
-            </div>
+      <div className={styles.cartcontainer}>
+        <div className={styles.headercontainer}>
+          <div className={styles.header}>
+            <div title={"shoppingCartTitle"}  className={styles.title}>Shopping Cart</div>
+            <div title={"total"} className={styles.subtitle}></div>
+            Total: ${calculateTotal(products).toFixed(2)}
           </div>
-          <div className="card-item-card-container">
+        </div>
+        <div className={styles.podcontainer}>
+          <POD />
+        </div>
+        <div className={styles.cartcontent}>
+          <div className={styles.carditemcardcontainer}>
             {/* {props.products.length === 0 ? (
               <p>Your cart is empty.</p>
             ) : (
               { itemList }
             )} */}
             {itemList}
-          </div>
-          <div className="buttons">
-            <button type={"submit"} className="buy" onClick={buy}>
-              Buy
-            </button>
           </div>
         </div>
       </div>

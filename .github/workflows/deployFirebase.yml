@@ -1,0 +1,48 @@
+name: CI for ASW2122
+on:
+  pull_request:
+    branches: [develop]
+    types: [closed]
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: webapp
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Install Dependencies
+        run:
+          npm install
+      - name: Build
+        run:
+          CI=false npm run build
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: take-build-file
+          path: ./webapp/build
+  deploy:
+    defaults:
+      run:
+        working-directory: webapp
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: take-build-file
+          path: /home/runner/work/dede_en3a/dede_en3a/webapp
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
