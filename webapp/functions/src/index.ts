@@ -82,8 +82,8 @@ export const calculateDeliveryOnCall = functions
 
             functions.logger.info("distance computed: " + distance);
 
-            //0.5 $ per kilometer
-            let costShi =  distance*0.5;
+            //1$ each 100km
+            let costShi =  (distance/100);
         costShi = parseFloat(costShi.toFixed(2));
             return {
                 message: "Congrats, your shipping has been calculated...",
@@ -133,7 +133,8 @@ export const sendOrder = functions
             functions.logger.error("NO HAY RESPUESTA DE NOMINATIM")
         }
             let distance = distanceInKmBetweenEarthCoordinates(43.3603,-5.84476, result[0].lat,result[0].lon);
-            let costShi =  distance*0.5;
+            //1$ for 100km
+            let costShi =  (distance/100);
             costShi = parseFloat(costShi.toFixed(2));
 
 
