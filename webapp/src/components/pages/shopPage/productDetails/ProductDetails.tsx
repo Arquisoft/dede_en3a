@@ -73,6 +73,9 @@ function ProductDetails(): JSX.Element {
 
     }
 
+
+
+
     function loadComments() {
         products.forEach((product) => {
             product.comments?.forEach((comment) => {
@@ -82,6 +85,7 @@ function ProductDetails(): JSX.Element {
                             <img className={styles.userImage} src={comment.userImage} ></img>
                             <div className={styles.username}>{comment.author}</div>
                         </div>
+
                         <Rating name="read-only" value={comment.rating} precision={0.5} readOnly size={"small"}/>
                         <div className={styles.text}>{comment.message}</div>
                     </div>
@@ -106,9 +110,18 @@ function ProductDetails(): JSX.Element {
                         <div className={styles.subtitle}>Description: </div>
                         <div className={styles.text}>{product.description}</div>
                         <div className={styles.subtitle}>Rating:</div>
-                        <Rating name="half-rating" defaultValue={2.5} precision={0.5} size="large"
-                        onChange={(event, newValue) => {
-                            setValue(newValue);}}/>
+
+                        <div className={styles.buttonsComments}>
+
+                            <Rating className={styles.rating} name="half-rating" defaultValue={2.5} precision={0.5} size="large"
+                                    onChange={(event, newValue) => {
+                                        setValue(newValue);}}/>
+
+                            <div className={styles.buttonsComments}>
+                                <button >ADD TO CART</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             );
