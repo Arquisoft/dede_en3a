@@ -1,13 +1,22 @@
-.login-page-container {
-  height: calc(100vh - var(--topMenuHeight));
-  background-color: var(--dark1);
+.loginpagecontainer {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
 }
 
-.login-wrapper {
+.hide {
+  display: none;
+}
+
+.loginwrapper {
+  z-index: 1001;
   box-shadow: 0px 0px 3rem rgba(255, 255, 255, 0.192);
   border-radius: 1rem;
   width: 95%;
@@ -18,16 +27,8 @@
   margin-left: 2.5%;
   margin-right: 2.5%;
   max-width: 25rem;
-  height: 31.5rem;
-
   background-color: var(--white1);
-  h2 {
-    color: var(--orange2);
-    filter: drop-shadow(0px 0px 3px);
-    text-align: center;
-    letter-spacing: var(--letterSpacing);
-    font-size: 2.5rem;
-  }
+
   h3 {
     color: black;
     margin: 0;
@@ -50,7 +51,33 @@
     box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.103);
   }
 }
+.title {
+  position: absolute;
+  background-color: var(--dark2);
+  box-shadow: 0px 0px 30px 2px rgba(0, 0, 0, 0.445);
+  width: fit-content;
+  align-self: center;
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 
+  transform: translateY(-14.5rem);
+  border-radius: 2rem;
+}
+
+h2 {
+  filter: drop-shadow(0px 0px 5px var(--orange2));
+  text-align: center;
+  color: var(--orange2);
+  letter-spacing: var(--letterSpacing);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+.bottom {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row-reverse;
+}
 .buttons {
   margin-top: 1rem;
   display: flex;
@@ -63,7 +90,7 @@
     font-family: "Montserrat-Bold";
     background-color: var(--orange2);
     font-size: 1.3rem;
-    padding: 1rem;
+    padding: 0.7rem;
     padding-left: 1.7rem;
     padding-right: 1.7rem;
 
@@ -79,10 +106,14 @@ h3:nth-child(4) {
   margin-top: 1.5rem;
 }
 
-.register-text {
+.registertext {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-right: 1rem;
   font-family: "Montserrat-Regular";
   margin-top: 1.5rem;
-  text-align: center;
+  text-align: start;
   color: black;
   b {
     cursor: pointer;

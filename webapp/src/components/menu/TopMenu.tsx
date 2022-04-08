@@ -7,31 +7,43 @@ import { Component, useEffect, useState } from "react";
 import { CartItem } from "../../redux/models/CartItem";
 import { getAuth } from "firebase/auth";
 import React from "react";
+import { SubtitlesOutlined } from "@mui/icons-material";
+import LoginPage from "../pages/LoginPage/LoginPage";
+import { RegisterPage } from "../pages/RegisterPage/RegisterPage";
 
 type TopMenuProps = {};
+
 function TopMenu(): JSX.Element {
-
-
-
-  const [wobble, setWobble] = useState('');
+  const [wobble, setWobble] = useState("");
+  const [transparent, setTransparent] = useState("");
   const [firstRender, setfirstRender] = useState(true);
+  const [loginPage, setLoginPage] = useState(<div></div>);
+  const [registerPage, setRegisterPage] = useState(<div></div>);
 
-  //const [userName, setUserName] = useState(getAuth().currentUser?.email);
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  }, []); //Will only be called once upon initialization
+
+  function handleScroll(event: any) {
+    if (window.scrollY !== 0) {
+      setTransparent(styles.colored);
+    } else {
+      setTransparent("");
+    }
+  }
+  const [userName, setUserName] = useState(getAuth().currentUser?.email);
 
   const [expandableMenuClass, setExpandableMenuClass] = useState(
     styles.expandablemenu
   );
-
-
-
   const navigate = useNavigate();
 
   const url = window.location.href.split("/");
 
   const path = url[1];
-  //getAuth().onAuthStateChanged((changedAuth) => {
-    //setUserName(changedAuth?.email);
-  //});
+  getAuth().onAuthStateChanged((changedAuth) => {
+    setUserName(changedAuth?.email);
+  });
   const cart = useSelector((state: DedeStore) => state.cart);
   const expandMenu = () => {
     console.log(expandableMenuClass);
@@ -43,19 +55,34 @@ function TopMenu(): JSX.Element {
   };
 
   useEffect(() => {
-    if (firstRender){
+    if (firstRender) {
       setfirstRender(false);
-    }else{
-      setWobble(styles.wobble)
+    } else {
+      setWobble(styles.wobble);
     }
   }, [cart]);
+
+  const loginPageProps = {
+    onExit: () => setLoginPage(<div></div>),
+    onRegisterClick: () => {
+      setLoginPage(<div></div>);
+      setRegisterPage(
+        <RegisterPage
+          onExit={() => setRegisterPage(<div></div>)}
+        ></RegisterPage>
+      );
+    },
+  };
 
   let homeClass = styles.menuitem;
   if (path === "home") homeClass = styles.menuitem + " " + styles.selected;
   return (
     <>
+      {/* Modal pages */}
+      {loginPage}
+      {registerPage}
       {/* Normal menu */}
-      <div className={styles.menucontainer}>
+      <div className={styles.menucontainer + " " + transparent}>
         <div className={styles.menu}>
           <img src={logo} className={styles.logo} alt="logo" />
           <div className={styles.links}>
@@ -100,29 +127,29 @@ function TopMenu(): JSX.Element {
             >
               Orders
             </div>
-            <div className={styles.cartcontainer } >
+            <div className={styles.cartcontainer}>
               <span
                 title={"cart"}
-                className={"material-icons " + styles.loginicon + ' ' + wobble}
+                className={"material-icons " + styles.loginicon + " " + wobble}
                 onClick={() => navigate("/cart")}
-                onAnimationEnd={() => setWobble('')}
+                onAnimationEnd={() => setWobble("")}
               >
                 shopping_cart
-              </span >
-              <div className={styles.cartcounter }
-              
-              >{cart.length}</div>
+              </span>
+              <div className={styles.cartcounter}>{cart.length}</div>
             </div>
           </div>
           <div className={styles.logincontainer}>
             <span
               title={"login-pc"}
               className={"material-icons " + styles.loginicon}
-              onClick={() => navigate("/login")}
+              onClick={() =>
+                setLoginPage(<LoginPage {...loginPageProps}></LoginPage>)
+              }
             >
               account_circle
             </span>
-            {/*<div className={styles.username}>{userName}</div>*/}
+            <div className={styles.username}>{userName}</div>
           </div>
         </div>
       </div>
@@ -138,23 +165,22 @@ function TopMenu(): JSX.Element {
             menu
           </span>
           <img src={logo} className={styles.logo} alt="logo" />
-          <div className={styles.cartcontainer }  >
+          <div className={styles.cartcontainer}>
             <span
-              className={"material-icons " + styles.loginicon + ' ' + styles.wobble}
+              className={
+                "material-icons " + styles.loginicon + " " + styles.wobble
+              }
               onClick={() => navigate("/cart")}
-              onAnimationEnd={() => setWobble('')}
+              onAnimationEnd={() => setWobble("")}
             >
               shopping_cart
             </span>
-            <div className={styles.cartcounter }
-            
-            >{cart.length}</div>
+            <div className={styles.cartcounter}>{cart.length}</div>
           </div>
-          <div className={styles.logincontainer}  >
+          <div className={styles.logincontainer}>
             <span
               title={"login-mobile"}
               className={"material-icons " + styles.loginicon}
-              onClick={() => navigate("/login")}
             >
               account_circle
             </span>

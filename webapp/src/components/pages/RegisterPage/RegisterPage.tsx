@@ -5,8 +5,11 @@ import { addUser } from "../../../api/api";
 import TopMenu from "../../menu/TopMenu";
 
 import "./RegisterPage.scss";
+type RegisterPageProps = {
+  onExit: any;
+};
 
-export function RegisterPage() {
+export function RegisterPage(props: RegisterPageProps) {
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -18,6 +21,17 @@ export function RegisterPage() {
   const navigate = useNavigate();
 
   const [error, setError] = useState("");
+
+  const onContainerClick = (event: any) => {
+    event.preventDefault();
+    if (event.target === event.currentTarget) {
+      props.onExit();
+    }
+  };
+
+  const preventDefault = (event: any) => {
+    event.preventDefault();
+  };
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, email: e.currentTarget.value });
@@ -79,11 +93,10 @@ export function RegisterPage() {
 
   return (
     <div>
-      <TopMenu></TopMenu>
-      <div className="register-page-container">
+      <div className="register-page-container" onClick={onContainerClick}>
         {error && <p>{error}</p>}
 
-        <div className="register-wrapper">
+        <div className="register-wrapper" onClick={preventDefault}>
           <form onSubmit={handleSubmit}>
             <h2>Register</h2>
             <label htmlFor="email">Email</label>

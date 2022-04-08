@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Product } from "../../api/model/product";
-import "./CardItem.scss";
+import styles from "./CardItem.module.scss";
 import { Link } from "react-router-dom";
 
 type CardItemProps = {
@@ -18,18 +18,20 @@ export const CardItem: React.FC<CardItemProps> = ({
 
   return (
     <>
-      <div className="container">
+      <div className={styles.container}>
         <Link to={"/product/" + product.id}>
-          <img className="card-product-image" src={product.img} ></img>
-        </Link>
-        <div className="description-container">
-          <div className="col1">
-            <div className="price">{product.price + " $"}</div>
-            <div className="product-name">{product.name}</div>
+          <div className={styles.imagecontainer}>
+            <img className={styles.cardproductimage} src={product.img}></img>
           </div>
-          <div className="col2">
-            <div onClick={addToCart} className="add-to-cart">
-              <span className="material-icons cart-icon">
+        </Link>
+        <div className={styles.descriptioncontainer}>
+          <div className={styles.col1}>
+            <div className={styles.price}>{product.price + " $"}</div>
+            <div className={styles.productname}>{product.name}</div>
+          </div>
+          <div className={styles.col2}>
+            <div onClick={addToCart} className={styles.addtocart}>
+              <span className={"material-icons " + styles.carticon}>
                 add_shopping_cart
               </span>
             </div>

@@ -1,19 +1,29 @@
 @import "./../../Styles.scss";
 
 .menucontainer {
-  position: sticky;
+  position: fixed;
+  width: 100%;
   top: 0px;
   height: var(--topMenuHeight);
-  background-color: var(--dark2);
+  background-color: rgba(0, 0, 0, 0);
+
   display: flex;
   flex-direction: row;
   justify-content: center;
   z-index: 100;
+  transition: 0.4s ease;
+}
+
+.colored {
+  background-color: var(--dark2);
+}
+.menucontainer > * {
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .menu {
   height: 100%;
-  box-shadow: var(--shadow2);
+  //box-shadow: var(--shadow2);
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -21,7 +31,7 @@
 
 .links {
   height: 100%;
-  width: 95%;
+  width: 80%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -50,6 +60,7 @@
   margin-left: 1rem;
   align-self: center;
   height: 3rem;
+  width: 10%;
   animation: logo-spin 25s infinite linear;
 }
 
@@ -69,7 +80,6 @@
   position: absolute;
   background-color: transparent;
 }
-
 
 a,
 a:hover,
@@ -187,7 +197,6 @@ a:active {
   margin-top: 0.25rem;
   text-align: center;
 }
-
 
 .wobble {
   animation: wobble 0.8s both;
