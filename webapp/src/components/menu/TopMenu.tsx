@@ -1,15 +1,18 @@
 import styles from "./TopMenu.module.scss";
 import logo from "./../../logo.svg";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { DedeStore } from "../../redux/store";
-import { Component, useEffect, useState } from "react";
+import { Component, Dispatch, useEffect, useState } from "react";
 import { CartItem } from "../../redux/models/CartItem";
 import { getAuth } from "firebase/auth";
 import React from "react";
 import { SubtitlesOutlined } from "@mui/icons-material";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import { RegisterPage } from "../pages/RegisterPage/RegisterPage";
+import { Utils } from "../../utils/utilts";
+import { Product } from "../../api/model/product";
+import { decrease, increase } from "../../redux/actions";
 
 type TopMenuProps = {};
 
@@ -22,6 +25,26 @@ function TopMenu(): JSX.Element {
   const [expandableRightMenuClass, setExpandableRightMenuClass] = useState(
     styles.expandablerightmenu
   );
+
+  const dispatch: Dispatch<any> = useDispatch();
+
+  const increaseProduct = React.useCallback(
+    (product: Product) => dispatch(increase(product)),
+    [dispatch]
+  );
+
+  const decreaseProduct = React.useCallback(
+    (product: Product) => dispatch(decrease(product)),
+    [dispatch]
+  );
+
+  const increaseButtonAction = (product: Product) => {
+    increaseProduct(product);
+  };
+
+  const decreaseButtonAction = (product: Product) => {
+    decreaseProduct(product);
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -49,11 +72,28 @@ function TopMenu(): JSX.Element {
   });
   const cart = useSelector((state: DedeStore) => state.cart);
 
-  let cartMenuItems = [];
+  let cartMenuItems = [<div></div>];
 
   cart.forEach((product) => {
-    const pHtml = <div></div>;
+    const pHtml = (
+      <div className={styles.cartmenuitem}>
+        <img src={product.product.img}></img>
+        <div className={styles.iteminfo}>
+          <b>{product.product.name}</b>
+          <span>
+            <b>{product.product.price}</b> € x {product.amount}
+          </span>
+          <div className={styles.buttons}>
+            <b onClick={() => decreaseButtonAction(product.product)}>-</b>
+            <b onClick={() => increaseButtonAction(product.product)}>+</b>
+          </div>
+        </div>
+      </div>
+    );
+    cartMenuItems.push(pHtml);
   });
+  cartMenuItems.push(<hr></hr>);
+
   const expandLeftMenu = () => {
     setExpandableMenuClass(
       expandableMenuClass === styles.expandablemenu
@@ -146,7 +186,7 @@ function TopMenu(): JSX.Element {
               <span
                 title={"cart"}
                 className={"material-icons " + styles.loginicon + " " + wobble}
-                onClick={() => navigate("/cart")}
+                onClick={() => expandRightMenu()}
                 onAnimationEnd={() => setWobble("")}
               >
                 shopping_cart
@@ -186,7 +226,7 @@ function TopMenu(): JSX.Element {
                 "material-icons " + styles.loginicon + " " + styles.wobble
               }
               // onClick={expandRightMenu}
-              onClick={() => navigate("/cart")}
+              onClick={() => expandRightMenu()}
               onAnimationEnd={() => setWobble("")}
             >
               shopping_cart
@@ -260,55 +300,13 @@ function TopMenu(): JSX.Element {
 
       {/* Expandable cart right menu */}
       <div className={expandableRightMenuClass}>
-        <div className={styles.links}>
-          <div
-            className={homeClass}
-            onClick={() => {
-              navigate("/home");
-              expandLeftMenu();
-            }}
-          >
-            Home
-          </div>
-          <div
-            className={styles.menuitem}
-            onClick={() => {
-              navigate("/shop");
-              expandLeftMenu();
-            }}
-          >
-            Shop
-          </div>
-          <div>
-            {/* <a href={"https://arquisoft.github.io/dede_en3a/"}> */}
-            <div
-              className={styles.menuitem}
-              onClick={() => {
-                navigate("/about");
-                expandLeftMenu();
-              }}
-            >
-              About us
-            </div>
-          </div>
-          <div
-            className={styles.menuitem}
-            onClick={() => {
-              navigate("/contact");
-              expandLeftMenu();
-            }}
-          >
-            Contact
-          </div>
-          <div
-            className={styles.menuitem}
-            onClick={() => {
-              navigate("/orders");
-              expandLeftMenu();
-            }}
-          >
-            Orders
-          </div>
+        <div className={styles.menuitemscontainer}>{cartMenuItems}</div>
+
+        <div className={styles.totalcartprice}>
+          Total: <b>{Utils.calculateTotal(cart)}</b>
+        </div>
+        <div onClick={() => navigate("/cart")} className={styles.cartproceed}>
+          Continue
         </div>
       </div>
     </>

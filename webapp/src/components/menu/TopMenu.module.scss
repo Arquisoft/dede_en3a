@@ -196,7 +196,6 @@ a:active {
 
 .expandablerightmenu {
   background-color: white;
-  z-index: 100000;
   width: 0px;
   position: fixed;
   opacity: 0;
@@ -206,16 +205,17 @@ a:active {
   height: 100vh;
   transition: 0.5s ease;
   z-index: 50;
-  .links {
-    display: none;
-    margin-top: var(--topMenuHeight);
-    padding-top: 2rem;
-    flex-direction: column;
-    justify-content: start;
+
+  hr {
+    margin: 1.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: calc(100% - 2rem);
   }
-  .links > div {
-    margin-bottom: 1rem;
-  }
+}
+
+.expandablerightmenu > * {
+  opacity: 0;
 }
 .showmenu {
   width: 60%;
@@ -225,10 +225,86 @@ a:active {
   }
 }
 
+.menuitemscontainer {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
 .showcartmenu {
-  width: 30%;
+  padding-top: var(--topMenuHeight);
+  width: 20%;
   opacity: 1;
-  .links {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+}
+
+.showcartmenu > * {
+  animation: appear 1s ease 0.1s forwards;
+}
+
+.cartmenuitem {
+  background-color: var(--dark1);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin: 1rem;
+  img {
+    border-radius: 1rem;
+
+    width: 40%;
   }
+}
+
+.totalcartprice {
+  letter-spacing: 0.04rem;
+  font-size: 1.3rem;
+  align-self: center;
+  b {
+    margin-left: 0.4rem;
+    color: var(--orange2);
+  }
+  b::after {
+    content: " €";
+  }
+}
+
+.iteminfo {
+  margin-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  span {
+    margin-top: 1rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  b {
+    user-select: none;
+    cursor: pointer;
+    font-size: 2rem;
+    color: var(--orange2);
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+.cartproceed {
+  transition: 0.3s ease;
+  user-select: none;
+  cursor: pointer;
+  margin-top: 2rem;
+  font-weight: bold;
+  align-self: center;
+  font-size: 1.5rem;
+  padding: 0.6rem;
+  background-color: var(--orange2);
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+}
+
+.cartproceed:hover {
+  filter: drop-shadow(0px 0px 5px var(--orange2));
 }

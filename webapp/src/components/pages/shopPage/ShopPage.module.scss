@@ -56,7 +56,7 @@
   width: 100%;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 .productcardcontainer > * {
   margin: 1rem;
@@ -107,6 +107,8 @@ select option {
   position: relative;
   height: 20rem;
   width: 100%;
+  border: 1rem solid rgba(255, 255, 255, 0.034);
+
   b {
     color: white;
     font-size: 4rem;
@@ -125,8 +127,10 @@ select option {
     position: absolute;
   }
   img {
-    width: 100%;
-    border: 1rem solid rgba(255, 255, 255, 0.034);
+    z-index: -100;
+    min-width: 70rem;
+    position: absolute;
+    min-height: 100%;
   }
 }
 
@@ -147,7 +151,11 @@ select option {
     padding: 0.5rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    width: 30rem;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+
+    max-width: 30rem;
 
     font-family: "Montserrat-Regular";
   }
@@ -176,5 +184,54 @@ select option {
     font-weight: bold;
     margin: 0;
     width: fit-content;
+  }
+}
+
+@media (min-width: 0px) and (max-width: $screen-sm-max) {
+  .searchbar {
+    flex-flow: column;
+    height: fit-content;
+    button {
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 1rem;
+    }
+  }
+  .searchbar > * {
+    margin-top: 2rem;
+  }
+  .productsheader {
+    border: 0;
+    img {
+      transform: translateX(-4rem);
+    }
+    b {
+      line-height: 5rem;
+    }
+    span {
+      top: 70%;
+    }
+  }
+  .filtersrow {
+    display: none;
+  }
+  .header {
+    height: 0;
+  }
+  .searchordercontainer {
+    margin-left: 0;
+  }
+  .bodycontainer {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  .productsrow {
+    margin: 0;
+  }
+  .searchbar {
+    input {
+      text-align: center;
+    }
   }
 }

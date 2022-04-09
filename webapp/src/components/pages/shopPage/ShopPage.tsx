@@ -7,7 +7,7 @@ import styles from "./ShopPage.module.scss";
 import { Dispatch } from "redux";
 import { useDispatch } from "react-redux";
 import { increase } from "../../../redux/actions";
-import headerImg from "./pexels-photo-401107.png";
+import headerImg from "./pexels-photo-401107(1).jpg";
 import { Filter } from "../../../api/model/filter";
 import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
 
@@ -71,7 +71,6 @@ function ShopPage(): JSX.Element {
 
   const handleSortingOption = (e: any) => {
     setSorting(e.currentTarget.value);
-    console.log(sorting);
   };
 
   const handleNameFilter = (event: any) => {

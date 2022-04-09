@@ -25,9 +25,15 @@ function MainPage(): JSX.Element {
   return (
     <div className={styles.container}>
       <TopMenu></TopMenu>
-      <div className={styles.background}>
-        <img src="https://images.pexels.com/photos/296323/pexels-photo-296323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"></img>
-      </div>
+      <ParallaxItem
+        item={
+          <div className={styles.background}>
+            <img src="https://images.pexels.com/photos/296323/pexels-photo-296323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"></img>
+          </div>
+        }
+        parallaxFactor={0.8}
+      ></ParallaxItem>
+
       <div className={styles.headercontainer}>
         <div className={styles.header}>
           <div className={styles.titlecontainer}>

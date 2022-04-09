@@ -8,7 +8,8 @@
 .background {
   top: 0;
   width: 100%;
-  position: fixed;
+  position: absolute;
+  overflow: hidden;
   z-index: 0;
   img {
     transform: translateX(-10rem);
@@ -286,6 +287,8 @@
     width: 100%;
   }
   .background {
-    transform: translateY(10rem) translateX(-34rem);
+    img {
+      transform: translateY(10rem) translateX(-42.5rem);
+    }
   }
 }

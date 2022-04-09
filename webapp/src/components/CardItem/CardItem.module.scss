@@ -36,10 +36,12 @@
     justify-content: center;
   }
 }
-
+.ratingnumber {
+  opacity: 0.75;
+}
 .price {
-  transition: 0.5s ease;
   margin-top: 0.5rem;
+  transition: 0.5s ease;
   color: var(--white);
   font-size: 1.5rem;
   font-family: "Montserrat-Bold";
@@ -52,8 +54,7 @@
   font-size: 1.2rem;
   color: var(--white);
   letter-spacing: var(--letterSpacing);
-  height: 3rem;
-  margin-top: 0.2rem;
+  margin-top: 1.2rem;
 }
 
 .carticon {
