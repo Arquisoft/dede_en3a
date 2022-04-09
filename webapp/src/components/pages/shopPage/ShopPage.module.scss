@@ -1,6 +1,6 @@
 @import "./../../../Styles.scss";
 
-.headercontainer {
+.container {
   width: 100%;
   background-color: var(--dark1);
   display: flex;
@@ -39,43 +39,142 @@
     forwards;
 }
 
-.productcardcontainer {
-  margin-top: 6rem;
+.bodycontainer {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+}
 
+.filtersrow {
+  width: 20%;
+}
+
+.productcardcontainer {
+  padding-top: 6rem;
+  padding: 1.5rem;
+  //background-color: rgba(255, 255, 255, 0.034);
   width: 100%;
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: space-between;
 }
 .productcardcontainer > * {
   margin: 1rem;
 }
 
-.product:nth-child(0) {
-  opacity: 0;
-  animation: appear 1s ease 1.1s forwards;
-}
-.product:nth-child(1) {
-  opacity: 0;
-
-  animation: appear 1s ease 1.3s forwards;
-}
-.product:nth-child(2) {
-  opacity: 0;
-
-  animation: appear 1s ease 1.5s forwards;
-}
-.product:nth-child(3) {
-  opacity: 0;
-
-  animation: appear 1s ease 1.7s forwards;
-}
-.product:nth-child(4) {
-  opacity: 0;
-
-  animation: appear 1s ease 1.9s forwards;
-}
-
 .product-name {
   color: var(--white1);
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  b {
+    color: var(--orange2);
+    font-size: 1.5rem;
+    margin-bottom: 0.1rem;
+  }
+  hr {
+    margin-bottom: 0.4rem;
+  }
+  select {
+    margin-top: 1rem;
+  }
+}
+select {
+  letter-spacing: 0.04rem;
+  font-size: 1.2rem;
+  width: 9rem;
+  background-color: transparent;
+  background: transparent;
+}
+select:focus {
+  outline: 0;
+  border: 0;
+}
+select option {
+  color: white;
+  background-color: var(--dark1);
+}
+.productsrow {
+  margin-left: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.productsheader {
+  overflow: hidden;
+  position: relative;
+  height: 20rem;
+  width: 100%;
+  b {
+    color: white;
+    font-size: 4rem;
+    top: 10%;
+    left: 5%;
+    position: absolute;
+  }
+  span {
+    color: var(--orange2);
+    strong {
+      color: rgb(236, 31, 31);
+    }
+    font-size: 2.6rem;
+    top: 40%;
+    left: 10%;
+    position: absolute;
+  }
+  img {
+    width: 100%;
+    border: 1rem solid rgba(255, 255, 255, 0.034);
+  }
+}
+
+.searchbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 5rem;
+  input {
+    border-radius: 2rem;
+    box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0.1);
+    border: 0;
+    outline: 0;
+    background-color: rgba(255, 255, 255, 0.0425);
+    letter-spacing: 0.05rem;
+    padding: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    width: 30rem;
+
+    font-family: "Montserrat-Regular";
+  }
+  button {
+    justify-self: flex-end;
+    font-size: larger;
+    margin-right: 1rem;
+    padding: 0.7rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: var(--orange2);
+  }
+}
+
+.searchordercontainer {
+  margin: 0;
+  margin-left: 5rem;
+  b {
+    color: var(--orange2);
+    font-size: 1.2rem;
+    margin-right: 0.2rem;
+  }
+  select {
+    cursor: pointer;
+    color: var(--orange2);
+    font-weight: bold;
+    margin: 0;
+    width: fit-content;
+  }
 }

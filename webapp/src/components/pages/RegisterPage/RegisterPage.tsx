@@ -100,21 +100,11 @@ export function RegisterPage(props: RegisterPageProps) {
           <form onSubmit={handleSubmit}>
             <h2>Register</h2>
             <label htmlFor="email">Email</label>
-            <input
-              type={"email"}
-              name="email"
-              placeholder={"youremail@goes.here"}
-              onChange={handleChangeEmail}
-            />
+            <input type={"email"} name="email" onChange={handleChangeEmail} />
             <br />
 
             <label htmlFor="name">Name & Surname</label>
-            <input
-              type={"text"}
-              name="name"
-              placeholder={"your name and surname"}
-              onChange={handleChangeName}
-            />
+            <input type={"text"} name="name" onChange={handleChangeName} />
             <br />
             <label htmlFor={"password"}>Password</label>
             <input
@@ -122,7 +112,6 @@ export function RegisterPage(props: RegisterPageProps) {
               name="password"
               id={"password"}
               onChange={handleChangePassword}
-              placeholder={"******"}
             />
             <br />
 
@@ -132,7 +121,6 @@ export function RegisterPage(props: RegisterPageProps) {
               name="confirmPasswd"
               id={"confirmPasswd"}
               onChange={handleChangeConfirmPasswd}
-              placeholder={"******"}
             />
             <br />
 

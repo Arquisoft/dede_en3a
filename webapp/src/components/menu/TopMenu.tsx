@@ -19,6 +19,9 @@ function TopMenu(): JSX.Element {
   const [firstRender, setfirstRender] = useState(true);
   const [loginPage, setLoginPage] = useState(<div></div>);
   const [registerPage, setRegisterPage] = useState(<div></div>);
+  const [expandableRightMenuClass, setExpandableRightMenuClass] = useState(
+    styles.expandablerightmenu
+  );
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -45,12 +48,25 @@ function TopMenu(): JSX.Element {
     setUserName(changedAuth?.email);
   });
   const cart = useSelector((state: DedeStore) => state.cart);
-  const expandMenu = () => {
-    console.log(expandableMenuClass);
+
+  let cartMenuItems = [];
+
+  cart.forEach((product) => {
+    const pHtml = <div></div>;
+  });
+  const expandLeftMenu = () => {
     setExpandableMenuClass(
       expandableMenuClass === styles.expandablemenu
         ? styles.expandablemenu + " " + styles.showmenu
         : styles.expandablemenu
+    );
+  };
+
+  const expandRightMenu = () => {
+    setExpandableRightMenuClass(
+      expandableRightMenuClass === styles.expandablerightmenu
+        ? styles.expandablerightmenu + " " + styles.showcartmenu
+        : styles.expandablerightmenu
     );
   };
 
@@ -107,7 +123,6 @@ function TopMenu(): JSX.Element {
                 className={styles.menuitem}
                 onClick={() => {
                   navigate("/about");
-                  expandMenu();
                 }}
               >
                 About us
@@ -160,7 +175,7 @@ function TopMenu(): JSX.Element {
             className={
               "material-icons " + styles.loginicon + " " + styles.menuicon
             }
-            onClick={() => expandMenu()}
+            onClick={() => expandLeftMenu()}
           >
             menu
           </span>
@@ -170,6 +185,7 @@ function TopMenu(): JSX.Element {
               className={
                 "material-icons " + styles.loginicon + " " + styles.wobble
               }
+              // onClick={expandRightMenu}
               onClick={() => navigate("/cart")}
               onAnimationEnd={() => setWobble("")}
             >
@@ -195,7 +211,7 @@ function TopMenu(): JSX.Element {
             className={homeClass}
             onClick={() => {
               navigate("/home");
-              expandMenu();
+              expandLeftMenu();
             }}
           >
             Home
@@ -204,7 +220,7 @@ function TopMenu(): JSX.Element {
             className={styles.menuitem}
             onClick={() => {
               navigate("/shop");
-              expandMenu();
+              expandLeftMenu();
             }}
           >
             Shop
@@ -215,7 +231,7 @@ function TopMenu(): JSX.Element {
               className={styles.menuitem}
               onClick={() => {
                 navigate("/about");
-                expandMenu();
+                expandLeftMenu();
               }}
             >
               About us
@@ -225,7 +241,7 @@ function TopMenu(): JSX.Element {
             className={styles.menuitem}
             onClick={() => {
               navigate("/contact");
-              expandMenu();
+              expandLeftMenu();
             }}
           >
             Contact
@@ -234,7 +250,61 @@ function TopMenu(): JSX.Element {
             className={styles.menuitem}
             onClick={() => {
               navigate("/orders");
-              expandMenu();
+              expandLeftMenu();
+            }}
+          >
+            Orders
+          </div>
+        </div>
+      </div>
+
+      {/* Expandable cart right menu */}
+      <div className={expandableRightMenuClass}>
+        <div className={styles.links}>
+          <div
+            className={homeClass}
+            onClick={() => {
+              navigate("/home");
+              expandLeftMenu();
+            }}
+          >
+            Home
+          </div>
+          <div
+            className={styles.menuitem}
+            onClick={() => {
+              navigate("/shop");
+              expandLeftMenu();
+            }}
+          >
+            Shop
+          </div>
+          <div>
+            {/* <a href={"https://arquisoft.github.io/dede_en3a/"}> */}
+            <div
+              className={styles.menuitem}
+              onClick={() => {
+                navigate("/about");
+                expandLeftMenu();
+              }}
+            >
+              About us
+            </div>
+          </div>
+          <div
+            className={styles.menuitem}
+            onClick={() => {
+              navigate("/contact");
+              expandLeftMenu();
+            }}
+          >
+            Contact
+          </div>
+          <div
+            className={styles.menuitem}
+            onClick={() => {
+              navigate("/orders");
+              expandLeftMenu();
             }}
           >
             Orders

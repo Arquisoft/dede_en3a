@@ -167,14 +167,6 @@ a:active {
   }
 }
 
-.showmenu {
-  width: 60%;
-  opacity: 1;
-  .links {
-    display: flex;
-  }
-}
-
 .loginLogoMobile {
   margin-right: 1rem !important;
 }
@@ -200,4 +192,43 @@ a:active {
 
 .wobble {
   animation: wobble 0.8s both;
+}
+
+.expandablerightmenu {
+  background-color: white;
+  z-index: 100000;
+  width: 0px;
+  position: fixed;
+  opacity: 0;
+  top: 0px;
+  right: 0px;
+  background-color: var(--dark2);
+  height: 100vh;
+  transition: 0.5s ease;
+  z-index: 50;
+  .links {
+    display: none;
+    margin-top: var(--topMenuHeight);
+    padding-top: 2rem;
+    flex-direction: column;
+    justify-content: start;
+  }
+  .links > div {
+    margin-bottom: 1rem;
+  }
+}
+.showmenu {
+  width: 60%;
+  opacity: 1;
+  .links {
+    display: flex;
+  }
+}
+
+.showcartmenu {
+  width: 30%;
+  opacity: 1;
+  .links {
+    display: flex;
+  }
 }
