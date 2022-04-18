@@ -1,19 +1,19 @@
 import { useNavigate } from "react-router-dom";
-import TopMenu from "../../menu/TopMenu";
-import "./LoginPage.scss";
+import styles from "./LoginPage.module.scss";
 import React, { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { auth } from "./../../../utils/firebase";
 
-type LoginPage = {};
+type LoginPageProps = { onExit: any; onRegisterClick: any };
 
-function LoginPage(): JSX.Element {
+function LoginPage(props: LoginPageProps): JSX.Element {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  //const [hide, setHide] = useState("");
 
   const { login } = useAuth();
 
@@ -26,7 +26,19 @@ function LoginPage(): JSX.Element {
     setUser({ ...user, password: e.currentTarget.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onContainerClick = (event: any) => {
+    event.preventDefault();
+    if (event.target === event.currentTarget) {
+      props.onExit();
+    }
+  };
+
+  const preventDefaultClick = (event: any) => {
+    event.preventDefault();
+  };
+
+  const handleSubmit = async (e: any) => {
+    console.log("submitting");
     e.preventDefault();
     setError("");
     console.log(user);
@@ -47,10 +59,12 @@ function LoginPage(): JSX.Element {
 
   return (
     <>
-      <TopMenu></TopMenu>
-      <div className="login-page-container">
+      <div
+        className={styles.loginpagecontainer + " "}
+        onClick={onContainerClick}
+      >
         {error && <p>{error}</p>}
-        <div className="login-wrapper">
+        <div className={styles.loginwrapper} onClick={preventDefaultClick}>
           <form onSubmit={handleSubmit}>
             <h2>Login</h2>
             <h3>Email</h3>
@@ -65,23 +79,31 @@ function LoginPage(): JSX.Element {
               type="password"
               onChange={handleChangePassword}
             ></input>
-            <div className="register"></div>
-            <div className="buttons">
-              <button title={"loggin"} type={"submit"} className="login">
-                Login
-              </button>
-            </div>
+            <div className={styles.register}></div>
+            <div className={styles.bottom}>
+              <div className={styles.buttons}>
+                <button
+                  title={"loggin"}
+                  type={"submit"}
+                  className={styles.login}
+                  onClick={handleSubmit}
+                >
+                  <b>Login</b>
+                </button>
+              </div>
 
-            <div className="register-text">
-              Need an account?{" "}
-              <b title={"register"} onClick={() => navigate("/register")}>
-                Register
-              </b>{" "}
-              here
-              <br></br>
-              <b title={"logout"} onClick={() => auth.signOut()}>
-                Log out
-              </b>
+              <div className={styles.registertext}>
+                <div>Need an account?</div>
+                <div>
+                  <b title={"register"} onClick={() => props.onRegisterClick()}>
+                    Register
+                  </b>{" "}
+                  here
+                </div>
+                <b title={"logout"} onClick={() => auth.signOut()}>
+                  Log out
+                </b>
+              </div>
             </div>
           </form>
         </div>
