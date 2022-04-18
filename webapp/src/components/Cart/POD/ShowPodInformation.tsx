@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
 import {VCARD} from "@inrupt/vocab-common-rdf";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Button} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -18,6 +18,7 @@ import {getFunctions, httpsCallable} from "firebase/functions";
 
 import "./ShowPodInformation.scss"
 import {useAuth} from "../../../context/AuthContext";
+import {Address} from "../../../api/model/pod/address";
 
 
 
@@ -101,6 +102,8 @@ function cost(cost : number) {
 
 function ShowPodInformation(props: PODProps): JSX.Element {
     const cart = useSelector((state: DedeStore) => state.cart);
+
+    //MANTENEMOS ESTO, ES UTIL PARA LA HORA DE RECIBIR VARIAS ADDRESES Y SELECCIONAR UNA
     let [address, setAddress] = React.useState("");
     const [postalCode, setPostalCode]= React.useState("");
     const [city, setCity] = React.useState("");
@@ -108,11 +111,12 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     const [region, setRegion] = React.useState("");
     const [delCost, setDelCost] = React.useState(0);
 
-    const getPODAddress = async () => setAddress(await retrievePODAddress(props.webID));
-    const getPODPostalCode = async () => setPostalCode(await retrievePODPostalCode(props.webID))
-    const getPODCity = async () => setCity(await retrievePODCity(props.webID))
-    const getPODCountry = async () => setCountry(await retrievePODCountry(props.webID));
-    const getPODRegion = async () => setRegion(await retrievePODRegion(props.webID));
+    //MODIFIQUE ESTO PARA QUE SE PUEDA ELEGIR LA WEBID DINAMICAMENTE
+    const getPODAddress = async (id : string) => setAddress(await retrievePODAddress(id));
+    const getPODPostalCode = async (id : string) => setPostalCode(await retrievePODPostalCode(id))
+    const getPODCity = async (id : string) => setCity(await retrievePODCity(id))
+    const getPODCountry = async (id : string) => setCountry(await retrievePODCountry(id));
+    const getPODRegion = async (id : string) => setRegion(await retrievePODRegion(id));
 
 
     const currentUser = useAuth().getCurrentUser();
@@ -120,17 +124,34 @@ function ShowPodInformation(props: PODProps): JSX.Element {
         return currentUser !== null;
     };
 
+    const [listOfPODAddresses, setListOfPODAddresses] = useState<Address[]>([]);
+    const [listOfWebID, setListOfWebID] = useState<string[]>([]);
 
+    //DE PRUEBA HASTA Q TENGAMOS LAS WEBID DE LOS PODS
+    const idParaPrueba : string[] = [];
+    idParaPrueba.push(props.webID);
+    setListOfWebID(idParaPrueba);
 
-
-
+    //OBTENEMOS POR CADA WEB ID LA LISTA DE ADDRESSES ASOCIADOS
     useEffect(() => {
-        getPODAddress();
-        getPODPostalCode();
-        getPODCity();
-        getPODCountry();
-        getPODRegion();
-        console.log(region)
+        const adrs : Address[] = [];
+        listOfWebID.forEach((id) =>{
+            getPODAddress(id);
+            getPODPostalCode(id);
+            getPODCity(id);
+            getPODCountry(id);
+            getPODRegion(id);
+             adrs.push({
+                address : address,
+                postalcode : postalCode,
+                city : city,
+                country : country,
+                region : region
+            });
+        });
+        setListOfPODAddresses(adrs);
+        console.log("LISTA DE PODS PROCESADOS")
+        console.log(listOfPODAddresses);
     })
     const navigate = useNavigate();
 
@@ -248,13 +269,19 @@ function ShowPodInformation(props: PODProps): JSX.Element {
         <Grid container>
             <Grid>
                 <div className={"info-container"}>
+                    <select className={"combobox-container"} id="cars">
+
+                        <option value="volvo">Volvoassdadsadadasd</option>
+                        <option value="saab">Saab</option>
+                        <option value="opel">Opel</option>
+                        <option value="audi">Audi</option>
+                    </select>
+
                     <Box component="h3" id={"addressComponent"}>Address: {address}</Box>
                     <Box component="h3" id={"postalcodeComponent"}>Postal Code: {postalCode}</Box>
                     <Box component="h3" id={"cityComponent"}>Locality: {city}</Box>
                     <Box component="h3" id={"countryComponent"}>Country: {country}</Box>
                     <Box component="h3" id={"regionComponent"}>Region: {region}</Box>
-
-                    <Box component={"h3"}> </Box>
                 </div>
                 <div className="buttonsPOD-internal">
                     <button  onClick={calcShipping}> Calculate shipping </button>
