@@ -1,9 +1,5 @@
 import {
-  getSolidDataset,
-  getStringNoLocale,
-  getThing,
-  Thing,
-  getUrl,
+    getSolidDataset, getStringNoLocale, getThing, Thing, getUrl
 } from "@inrupt/solid-client";
 
 import Grid from "@mui/material/Grid";
@@ -25,14 +21,10 @@ import {useAuth} from "../../../context/AuthContext";
 import {Address} from "../../../api/model/pod/address";
 import {AddressCalculator} from "./AddressCalculator";
 
-import { getFunctions, httpsCallable } from "firebase/functions";
 
-import "./ShowPodInformation.scss";
-import { useAuth } from "../../../context/AuthContext";
-import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
 
 type PODProps = {
-  webID: string;
+    webID: string;
 };
 
 /**
@@ -43,7 +35,6 @@ type PODProps = {
  * @param webID
  */
 
-
 function cost(cost : number) {
     if(cost != 0){
         return (
@@ -53,6 +44,9 @@ function cost(cost : number) {
         );
     }
 }
+
+
+
 
 function ShowPodInformation(props: PODProps): JSX.Element {
     const cart = useSelector((state: DedeStore) => state.cart);
@@ -96,43 +90,37 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
 
 
-            const calculateDeliveryOnCall = httpsCallable(getFunctions(), 'calculateDeliveryOnCall');
+        const calculateDeliveryOnCall = httpsCallable(getFunctions(), 'calculateDeliveryOnCall');
 
-            calculateDeliveryOnCall({
-                address: address,
-                postalcode: postalcode,
-                city : city,
-                country: country,
-                region: region
-            }).then((response  )=>{
+        calculateDeliveryOnCall({
+            address: address,
+            postalcode: postalcode,
+            city : city,
+            country: country,
+            region: region
+        }).then((response  )=>{
 
-                console.log(response)
-                let result  = response.data;
-                console.log(result);
-                // @ts-ignore
-                //alert("Your shipping will cost: " + result.cost + "$");
-                // @ts-ignore
-                setDelCost(result.cost);
-                console.log(delCost)
-               // @ts-ignore
-                return  {message: result.message , cost : result.cost};
-            }).catch((error:Error)=>{
-                alert("Something went wrong while calculating your shipping cost");
-            });
+            console.log(response)
+            let result  = response.data;
+            console.log(result);
+            // @ts-ignore
+            //alert("Your shipping will cost: " + result.cost + "$");
+            // @ts-ignore
+            setDelCost(result.cost);
+            console.log(delCost)
+            // @ts-ignore
+            return  {message: result.message , cost : result.cost};
+        }).catch((error:Error)=>{
+            alert("Something went wrong while calculating your shipping cost");
+        });
+
+
+
+
     }
 
-    let response = await calcWithFirebaseFunction(
-      address,
-      postalCode,
-      city,
-      country,
-      region
-    );
-  }
 
-  const add = async () => {
-    setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
-    
+
     async function calcShipping() {
 
 
@@ -183,7 +171,20 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
 
             });
+
     }
+    const buy = () => {
+        if (userRegistered()) {
+
+            add().then(()=>{
+
+
+
+            }).catch((error : Error)=>{
+
+                alert("OHOH, SOMETHING WENT WRONG: " + error.message);
+
+            });
 
         } else {
             navigate("/login");
@@ -201,7 +202,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
             <Grid>
                 <div className={"info-container"}>
                     <form>
-                        <select className={"combobox-container"} id="cars" onChange={setterOfAddress} >
+                        <select className={"combobox-container"} id="addreses" onChange={setterOfAddress}>
                             {addresses}
                         </select>
                     </form>
