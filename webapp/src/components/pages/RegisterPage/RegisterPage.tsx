@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { addUser } from "../../../api/api";
 import TopMenu from "../../menu/TopMenu";
 
-import "./RegisterPage.scss";
+import styles from "./RegisterPage.module.scss";
 type RegisterPageProps = {
   onExit: any;
 };
@@ -93,10 +93,10 @@ export function RegisterPage(props: RegisterPageProps) {
 
   return (
     <div>
-      <div className="register-page-container" onClick={onContainerClick}>
+      <div className={styles.registerpagecontainer} onClick={onContainerClick}>
         {error && <p>{error}</p>}
 
-        <div className="register-wrapper" onClick={preventDefault}>
+        <div className={styles.registerwrapper} onClick={preventDefault}>
           <form onSubmit={handleSubmit}>
             <h2>Register</h2>
             <label htmlFor="email">Email</label>
@@ -124,7 +124,7 @@ export function RegisterPage(props: RegisterPageProps) {
             />
             <br />
 
-            <div className="buttons">
+            <div className={styles.buttons}>
               <button type={"submit"}>Register</button>
             </div>
           </form>

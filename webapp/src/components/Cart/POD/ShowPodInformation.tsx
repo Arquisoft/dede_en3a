@@ -11,18 +11,19 @@ import Box from "@mui/material/Box";
 
 import { VCARD } from "@inrupt/vocab-common-rdf";
 import React, { useEffect } from "react";
-import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { DedeStore } from "../../../redux/store";
 import { calculateDeliveryOnCall } from "../../../../functions/src";
 
 import { getFunctions, httpsCallable } from "firebase/functions";
 
-import "./ShowPodInformation.scss";
+import "./ShowPodInformation.module.scss";
 import { useAuth } from "../../../context/AuthContext";
 import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
+import { Dispatch } from "redux";
+import { setShippingCosts } from "../../../redux/actions";
 
 type PODProps = {
   webID: string;
@@ -115,6 +116,13 @@ function cost(cost: number) {
 }
 
 function ShowPodInformation(props: PODProps): JSX.Element {
+  const dispatch: Dispatch<any> = useDispatch();
+
+  const setShippingCost = React.useCallback(
+    (shippingCosts: number) => dispatch(setShippingCosts(shippingCosts)),
+    [dispatch]
+  );
+
   const cart = useSelector((state: DedeStore) => state.cart);
   let [address, setAddress] = React.useState("");
   const [postalCode, setPostalCode] = React.useState("");
@@ -146,7 +154,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     getPODCountry();
     getPODRegion();
     console.log(region);
-  });
+  }, []);
   const navigate = useNavigate();
 
   async function calcWithFirebaseFunction(
@@ -171,14 +179,11 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       .then((response) => {
         setLoadingOverlay(<div></div>);
         console.log(response);
-        let result = response.data;
+        let result = response.data as any;
         console.log(result);
-        // @ts-ignore
-        //alert("Your shipping will cost: " + result.cost + "$");
-        // @ts-ignore
         setDelCost(result.cost);
+        setShippingCost(result.cost);
         console.log(delCost);
-        // @ts-ignore
         return { message: result.message, cost: result.cost };
       })
       .catch((error: Error) => {

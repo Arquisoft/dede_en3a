@@ -10,6 +10,7 @@ import { increase } from "../../../redux/actions";
 import headerImg from "./pexels-photo-401107(1).jpg";
 import { Filter } from "../../../api/model/filter";
 import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
+import HeaderBackground from "../../HeaderBackground/HeaderBackground";
 
 function ShopPage(): JSX.Element {
   const [products, setProducts] = useState<Product[]>([]);
@@ -88,6 +89,7 @@ function ShopPage(): JSX.Element {
   return (
     <>
       <TopMenu></TopMenu>
+      <HeaderBackground></HeaderBackground>
       {loading}
       <div className={styles.container}>
         <div className={styles.header}>

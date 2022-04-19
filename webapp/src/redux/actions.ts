@@ -38,3 +38,10 @@ export function getTotals(item: Product) {
     props: item,
   };
 }
+
+export function setShippingCosts(shippingCost: number) {
+  return {
+    type: actionTypes.SET_SHIPPING_COST,
+    props: shippingCost,
+  };
+}

@@ -12,15 +12,16 @@ type ParallaxItemProps = {
 function ParallaxItem(props: ParallaxItemProps): JSX.Element {
   const [offSet, setOffset] = useState("");
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("scroll", handleScroll);
   }, []); //Will only be called once upon initialization
   const handleScroll = (e: any) => {
-    console.log("window top", window.scrollY);
-    console.log("window bottom", window.innerHeight);
     setOffset("translateY(" + window.scrollY * props.parallaxFactor + "px)");
   };
   return (
-    <div className={styles.container} style={{ transform: offSet }}>
+    <div
+      className={styles.container}
+      style={{ transform: offSet, WebkitTransform: offSet }}
+    >
       {props.item}
     </div>
   );

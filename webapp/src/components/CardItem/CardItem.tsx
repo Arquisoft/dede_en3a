@@ -3,6 +3,7 @@ import { Product } from "../../api/model/product";
 import styles from "./CardItem.module.scss";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
+import { Utils } from "../../utils/utilts";
 
 type CardItemProps = {
   product: Product;
@@ -19,9 +20,7 @@ export const CardItem: React.FC<CardItemProps> = ({
   const [rating, setRating] = useState(5);
 
   useEffect(() => {
-    const ratings = product?.comments?.map((p) => p.rating);
-    const sum = ratings?.reduce((a, b) => a + b, 0);
-    setRating(sum! / ratings!.length || 0);
+    setRating(Utils.getProductAverageRating(product));
   }, []);
 
   return (
@@ -44,7 +43,7 @@ export const CardItem: React.FC<CardItemProps> = ({
                 readOnly
                 size={"small"}
               />
-              <div className={styles.ratingnumber}>({rating})</div>
+              <div className={styles.ratingnumber}>({rating.toFixed(1)})</div>
             </div>
           </div>
 
