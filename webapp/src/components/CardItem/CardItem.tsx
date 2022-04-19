@@ -21,7 +21,7 @@ export const CardItem: React.FC<CardItemProps> = ({
   useEffect(() => {
     const ratings = product?.comments?.map((p) => p.rating);
     const sum = ratings?.reduce((a, b) => a + b, 0);
-    setRating(sum! / ratings!.length || 0);
+    setRating(ratings! === undefined ? 0 : sum! / ratings!.length || 0);
   }, []);
 
   return (
@@ -32,11 +32,11 @@ export const CardItem: React.FC<CardItemProps> = ({
             <img className={styles.cardproductimage} src={product.img}></img>
           </div>
         </Link>
-        <div className={styles.descriptioncontainer}>
+        <div title={"cardItemDescription"} className={styles.descriptioncontainer}>
           <div className={styles.col1}>
-            <div className={styles.productname}>{product.name}</div>
-            <div className={styles.price}>{product.price + " $"}</div>
-            <div style={{ display: "flex", marginTop: "0.5rem" }}>
+            <div title={"cardItemName"} className={styles.productname}>{product.name}</div>
+            <div title={"cardItemPrice"} className={styles.price}>{product.price + " $"}</div>
+            <div title={"cardItemRating"} style={{ display: "flex", marginTop: "0.5rem" }}>
               <Rating
                 name="read-only"
                 value={rating}
@@ -49,7 +49,7 @@ export const CardItem: React.FC<CardItemProps> = ({
           </div>
 
           <div className={styles.col2}>
-            <div onClick={addToCart} className={styles.addtocart}>
+            <div title={"cardItemAddButton"} onClick={addToCart} className={styles.addtocart}>
               <span className={"material-icons " + styles.carticon}>
                 add_shopping_cart
               </span>
