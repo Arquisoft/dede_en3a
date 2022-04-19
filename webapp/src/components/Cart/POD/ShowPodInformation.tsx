@@ -19,6 +19,7 @@ import {getFunctions, httpsCallable} from "firebase/functions";
 import "./ShowPodInformation.scss"
 import {useAuth} from "../../../context/AuthContext";
 import {Address} from "../../../api/model/pod/address";
+import {AddressCalculator} from "./AddressCalculator";
 
 
 
@@ -33,59 +34,6 @@ type PODProps = {
  * returns an string of your address.
  * @param webID
  */
-
-
-
-async function retrievePODAddress(webID: string): Promise<string> {
-    let profileDocumentURI = webID.split("#")[0]
-    let myDataSet = await getSolidDataset(profileDocumentURI)
-    let profile = getThing(myDataSet, webID)
-    let urlAddress = getUrl(profile as Thing, VCARD.hasAddress) as string
-    let addressProfile = await getThing(myDataSet, urlAddress)
-    let address = getStringNoLocale(addressProfile as Thing, VCARD.street_address) as string
-    return address
-}
-
-async function retrievePODPostalCode(webID: string): Promise<string> {
-    let _profileDocumentURI = webID.split("#")[0]
-    let _myDataSet = await getSolidDataset(_profileDocumentURI)
-    let _profile = getThing(_myDataSet, webID)
-    let _urlAddress = getUrl(_profile as Thing, VCARD.hasAddress) as string
-    let _addressProfile = await getThing(_myDataSet, _urlAddress)
-    let postalCode = getStringNoLocale(_addressProfile as Thing, VCARD.postal_code) as string
-    return postalCode
-}
-
-async function retrievePODCity(webID: string): Promise<string> {
-    let __profileDocumentURI = webID.split("#")[0]
-    let __myDataSet = await getSolidDataset(__profileDocumentURI)
-    let __profile = getThing(__myDataSet, webID)
-    let __urlAddress = getUrl(__profile as Thing, VCARD.hasAddress) as string
-    let __addressProfile = await getThing(__myDataSet, __urlAddress)
-    let city = getStringNoLocale(__addressProfile as Thing, VCARD.locality) as string
-    return city
-}
-
-async function retrievePODCountry(webID: string): Promise<string> {
-    let __profileDocumentURI = webID.split("#")[0]
-    let __myDataSet = await getSolidDataset(__profileDocumentURI)
-    let __profile = getThing(__myDataSet, webID)
-    let __urlAddress = getUrl(__profile as Thing, VCARD.hasAddress) as string
-    let __addressProfile = await getThing(__myDataSet, __urlAddress)
-    let country = getStringNoLocale(__addressProfile as Thing, VCARD.country_name) as string
-    return country
-}
-
-async function retrievePODRegion(webID: string): Promise<string> {
-    let __profileDocumentURI = webID.split("#")[0]
-    let __myDataSet = await getSolidDataset(__profileDocumentURI)
-    let __profile = getThing(__myDataSet, webID)
-    let __urlAddress = getUrl(__profile as Thing, VCARD.hasAddress) as string
-    let __addressProfile = await getThing(__myDataSet, __urlAddress)
-    let region = getStringNoLocale(__addressProfile as Thing, VCARD.region) as string
-    console.log("LA REGION ES "+ region)
-    return region
-}
 
 function cost(cost : number) {
     if(cost != 0){
@@ -103,56 +51,35 @@ function cost(cost : number) {
 function ShowPodInformation(props: PODProps): JSX.Element {
     const cart = useSelector((state: DedeStore) => state.cart);
 
-    //MANTENEMOS ESTO, ES UTIL PARA LA HORA DE RECIBIR VARIAS ADDRESES Y SELECCIONAR UNA
-    let [address, setAddress] = React.useState("");
-    const [postalCode, setPostalCode]= React.useState("");
-    const [city, setCity] = React.useState("");
-    const [country, setCountry] = React.useState("");
-    const [region, setRegion] = React.useState("");
+    const [address, setAddress] = React.useState<Address>();
     const [delCost, setDelCost] = React.useState(0);
 
-    //MODIFIQUE ESTO PARA QUE SE PUEDA ELEGIR LA WEBID DINAMICAMENTE
-    const getPODAddress = async (id : string) => setAddress(await retrievePODAddress(id));
-    const getPODPostalCode = async (id : string) => setPostalCode(await retrievePODPostalCode(id))
-    const getPODCity = async (id : string) => setCity(await retrievePODCity(id))
-    const getPODCountry = async (id : string) => setCountry(await retrievePODCountry(id));
-    const getPODRegion = async (id : string) => setRegion(await retrievePODRegion(id));
-
+    const [addresses, setAddresses] = React.useState([]);
+    const [listOfAddress, setListOfAddress] = React.useState<Address[]>([]);
 
     const currentUser = useAuth().getCurrentUser();
     const userRegistered = () => {
         return currentUser !== null;
     };
 
-    const [listOfPODAddresses, setListOfPODAddresses] = useState<Address[]>([]);
-    const [listOfWebID, setListOfWebID] = useState<string[]>([]);
-
-    //DE PRUEBA HASTA Q TENGAMOS LAS WEBID DE LOS PODS
-    const idParaPrueba : string[] = [];
-    idParaPrueba.push(props.webID);
-    setListOfWebID(idParaPrueba);
-
     //OBTENEMOS POR CADA WEB ID LA LISTA DE ADDRESSES ASOCIADOS
     useEffect(() => {
-        const adrs : Address[] = [];
-        listOfWebID.forEach((id) =>{
-            getPODAddress(id);
-            getPODPostalCode(id);
-            getPODCity(id);
-            getPODCountry(id);
-            getPODRegion(id);
-             adrs.push({
-                address : address,
-                postalcode : postalCode,
-                city : city,
-                country : country,
-                region : region
-            });
-        });
-        setListOfPODAddresses(adrs);
-        console.log("LISTA DE PODS PROCESADOS")
-        console.log(listOfPODAddresses);
-    })
+        const fullAddresses = AddressCalculator(props.webID);
+        const addressesHtml : any = [];
+
+        fullAddresses.then((full: Address[]) =>{
+            console.log(full)
+            full.forEach((ind) =>{
+                const htmlOption = <option value={ind.address}> {ind.address} </option>;
+                addressesHtml.push(htmlOption);
+            })
+            console.log("2"+ addressesHtml)
+            setAddresses(addressesHtml);
+            setAddress(full[0]);
+            setListOfAddress(full);
+        })
+
+    },[])
     const navigate = useNavigate();
 
 
@@ -199,17 +126,17 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
 
         if(address == null || typeof (address) == undefined
-            || postalCode == null || typeof (postalCode) == undefined
-            || city == null || typeof (city) == undefined
-            || country == null || typeof (country) == undefined
-            || region == null || typeof (region) == undefined){
+            || address.postalcode == null || typeof (address.postalcode) == undefined
+            || address.city == null || typeof (address.city) == undefined
+            || address.country == null || typeof (address.country) == undefined
+            || address.region == null || typeof (address.region) == undefined){
 
             alert("PLEASE, ENTER A POD WITH address, postal code, city, country and region");
             return;
         }
 
 
-        let response = await calcWithFirebaseFunction(address,postalCode,city,country,region);
+        let response = await calcWithFirebaseFunction(address.address,address.postalcode,address.city,address.country,address.region);
 
     };
 
@@ -228,11 +155,11 @@ function ShowPodInformation(props: PODProps): JSX.Element {
             items:cart,
             user:currentUser?.email,
             addressData:{
-                address: address,
-                postalcode: postalCode,
-                city : city,
-                country: country,
-                region: region
+                address: address?.address,
+                postalcode: address?.postalcode,
+                city : address?.city,
+                country: address?.country,
+                region: address?.region
             }
         })
             .then(( ) => {
@@ -265,23 +192,26 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     };
 
 
+    function setterOfAddress(value : any) {
+        const finalVal = listOfAddress.filter((addr) => addr.address === value.target.value)[0]
+        setAddress(finalVal);
+    }
+
     return (
         <Grid container>
             <Grid>
                 <div className={"info-container"}>
-                    <select className={"combobox-container"} id="cars">
+                    <form>
+                        <select className={"combobox-container"} id="cars" onChange={setterOfAddress} >
+                            {addresses}
+                        </select>
+                    </form>
 
-                        <option value="volvo">Volvoassdadsadadasd</option>
-                        <option value="saab">Saab</option>
-                        <option value="opel">Opel</option>
-                        <option value="audi">Audi</option>
-                    </select>
-
-                    <Box component="h3" id={"addressComponent"}>Address: {address}</Box>
-                    <Box component="h3" id={"postalcodeComponent"}>Postal Code: {postalCode}</Box>
-                    <Box component="h3" id={"cityComponent"}>Locality: {city}</Box>
-                    <Box component="h3" id={"countryComponent"}>Country: {country}</Box>
-                    <Box component="h3" id={"regionComponent"}>Region: {region}</Box>
+                    <Box component="h3" id={"addressComponent"}>Address: {address?.address}</Box>
+                    <Box component="h3" id={"postalcodeComponent"}>Postal Code: {address?.postalcode}</Box>
+                    <Box component="h3" id={"cityComponent"}>Locality: {address?.city}</Box>
+                    <Box component="h3" id={"countryComponent"}>Country: {address?.country}</Box>
+                    <Box component="h3" id={"regionComponent"}>Region: {address?.region}</Box>
                 </div>
                 <div className="buttonsPOD-internal">
                     <button  onClick={calcShipping}> Calculate shipping </button>
