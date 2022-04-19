@@ -9,19 +9,14 @@ import { useNavigate } from "react-router-dom";
 import productCartItem from "./ProductCartItem/ProductCartItem";
 import { useAuth } from "../../context/AuthContext";
 import POD from "./POD/POD";
+import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
+import { Utils } from "../../utils/utilts";
 type CartProps = {};
 
 function Cart(props: CartProps): JSX.Element {
   const navigate = useNavigate();
 
-  const calculateTotal = (items: CartItem[]) => {
-    console.log("recalculate");
-    return items.reduce(
-      (ack: number, item) => ack + item.product.price! * item.amount,
-      0
-    ); //+ item.price
-  };
-
+  const calculateTotal = (items: CartItem[]) => Utils.calculateTotal(items);
   let itemList: JSX.Element[] = [];
 
   const products: CartItem[] = useSelector((state: DedeStore) => state.cart);
@@ -35,11 +30,12 @@ function Cart(props: CartProps): JSX.Element {
   return (
     <>
       <TopMenu></TopMenu>
-
       <div className={styles.cartcontainer}>
         <div className={styles.headercontainer}>
           <div className={styles.header}>
-            <div title={"shoppingCartTitle"}  className={styles.title}>Shopping Cart</div>
+            <div title={"shoppingCartTitle"} className={styles.title}>
+              Shopping Cart
+            </div>
             <div title={"total"} className={styles.subtitle}></div>
             Total: ${calculateTotal(products).toFixed(2)}
           </div>

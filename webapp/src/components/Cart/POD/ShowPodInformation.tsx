@@ -1,5 +1,9 @@
 import {
-    getSolidDataset, getStringNoLocale, getThing, Thing, getUrl
+  getSolidDataset,
+  getStringNoLocale,
+  getThing,
+  Thing,
+  getUrl,
 } from "@inrupt/solid-client";
 
 import Grid from "@mui/material/Grid";
@@ -21,10 +25,14 @@ import {useAuth} from "../../../context/AuthContext";
 import {Address} from "../../../api/model/pod/address";
 import {AddressCalculator} from "./AddressCalculator";
 
+import { getFunctions, httpsCallable } from "firebase/functions";
 
+import "./ShowPodInformation.scss";
+import { useAuth } from "../../../context/AuthContext";
+import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
 
 type PODProps = {
-    webID: string;
+  webID: string;
 };
 
 /**
@@ -35,6 +43,7 @@ type PODProps = {
  * @param webID
  */
 
+
 function cost(cost : number) {
     if(cost != 0){
         return (
@@ -44,9 +53,6 @@ function cost(cost : number) {
         );
     }
 }
-
-
-
 
 function ShowPodInformation(props: PODProps): JSX.Element {
     const cart = useSelector((state: DedeStore) => state.cart);
@@ -113,14 +119,20 @@ function ShowPodInformation(props: PODProps): JSX.Element {
             }).catch((error:Error)=>{
                 alert("Something went wrong while calculating your shipping cost");
             });
-
-
-
-
     }
 
+    let response = await calcWithFirebaseFunction(
+      address,
+      postalCode,
+      city,
+      country,
+      region
+    );
+  }
 
-
+  const add = async () => {
+    setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
+    
     async function calcShipping() {
 
 
@@ -171,20 +183,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
 
             });
-
     }
-    const buy = () => {
-        if (userRegistered()) {
-
-            add().then(()=>{
-
-
-
-            }).catch((error : Error)=>{
-
-                alert("OHOH, SOMETHING WENT WRONG: " + error.message);
-
-            });
 
         } else {
             navigate("/login");
