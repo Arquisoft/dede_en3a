@@ -3,6 +3,7 @@ import { Product } from "../../api/model/product";
 import styles from "./CardItem.module.scss";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
+import { Utils } from "../../utils/utilts";
 
 type CardItemProps = {
   product: Product;
@@ -19,9 +20,7 @@ export const CardItem: React.FC<CardItemProps> = ({
   const [rating, setRating] = useState(5);
 
   useEffect(() => {
-    const ratings = product?.comments?.map((p) => p.rating);
-    const sum = ratings?.reduce((a, b) => a + b, 0);
-    setRating(ratings! === undefined ? 0 : sum! / ratings!.length || 0);
+    setRating(Utils.getProductAverageRating(product));
   }, []);
 
   return (
@@ -32,11 +31,11 @@ export const CardItem: React.FC<CardItemProps> = ({
             <img className={styles.cardproductimage} src={product.img}></img>
           </div>
         </Link>
-        <div title={"cardItemDescription"} className={styles.descriptioncontainer}>
+        <div className={styles.descriptioncontainer}>
           <div className={styles.col1}>
-            <div title={"cardItemName"} className={styles.productname}>{product.name}</div>
-            <div title={"cardItemPrice"} className={styles.price}>{product.price + " $"}</div>
-            <div title={"cardItemRating"} style={{ display: "flex", marginTop: "0.5rem" }}>
+            <div className={styles.productname}>{product.name}</div>
+            <div className={styles.price}>{product.price + " $"}</div>
+            <div style={{ display: "flex", marginTop: "0.5rem" }}>
               <Rating
                 name="read-only"
                 value={rating}
@@ -44,12 +43,12 @@ export const CardItem: React.FC<CardItemProps> = ({
                 readOnly
                 size={"small"}
               />
-              <div className={styles.ratingnumber}>({rating})</div>
+              <div className={styles.ratingnumber}>({rating.toFixed(1)})</div>
             </div>
           </div>
 
           <div className={styles.col2}>
-            <div title={"cardItemAddButton"} onClick={addToCart} className={styles.addtocart}>
+            <div onClick={addToCart} className={styles.addtocart}>
               <span className={"material-icons " + styles.carticon}>
                 add_shopping_cart
               </span>
