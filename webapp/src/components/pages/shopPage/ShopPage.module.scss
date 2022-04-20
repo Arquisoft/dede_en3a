@@ -40,6 +40,7 @@
 }
 
 .bodycontainer {
+  z-index: 10;
   width: 80%;
   display: flex;
   flex-direction: row;
@@ -100,6 +101,7 @@ select option {
   margin-left: 3rem;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .productsheader {

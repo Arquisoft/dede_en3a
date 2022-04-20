@@ -1,11 +1,11 @@
-@import "./../../Styles.scss";
+@import "./../../../Styles.scss";
 
-.menucontainer {
+.container{
   position: fixed;
   width: 100%;
   top: 0px;
   height: var(--topMenuHeight);
-  background-color: rgba(0, 0, 0, 0);
+  background-color: var(--dark2);
 
   display: flex;
   flex-direction: row;
@@ -16,9 +16,6 @@
 
 .colored {
   background-color: var(--dark2);
-}
-.menucontainer > * {
-  background-color: rgba(0, 0, 0, 0);
 }
 
 .menu {
@@ -179,10 +176,6 @@ a:active {
   align-items: center;
   justify-content: center;
 }
-.logincontainer:hover {
-  filter: drop-shadow(var(--dropShadowOrange));
-  color: var(--orange2);
-}
 
 .username {
   user-select: none;
@@ -232,7 +225,7 @@ a:active {
 
 .showcartmenu {
   padding-top: var(--topMenuHeight);
-  width: 20rem;
+  width: 20%;
   opacity: 1;
   display: flex;
   flex-direction: column;

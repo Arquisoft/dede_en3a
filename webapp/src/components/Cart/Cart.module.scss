@@ -10,6 +10,23 @@
   margin-bottom: 5rem;
 }
 
+.bodycontainer {
+  margin-top: 10rem;
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  align-self: center;
+}
+
+.cartitemtitle {
+  font-size: 1.5rem;
+  margin-bottom: 0.63rem;
+
+  b {
+    color: var(--orange2);
+  }
+}
+
 .headercontainer {
   width: 100%;
   background-color: var(--dark1);
@@ -49,7 +66,6 @@
 }
 
 .carditemcardcontainer {
-  margin-top: 5.5rem;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -80,53 +96,55 @@
   }
 }
 
+.totalPrice {
+  background-color: rgba(66, 66, 66, 0.514);
+  padding: 1rem;
+  padding-right: 3rem;
+  padding-left: auto;
+  font-size: 2rem;
+  color: var(--orange2);
+  display: flex;
+  border: 1px solid rgba(255, 255, 255, 0.089);
+
+  b {
+    margin-left: auto;
+  }
+}
+
 .podcontainer {
+  margin-left: 3rem;
   margin-right: 2rem;
   top: 4.5rem;
   right: 4.5rem;
-  margin-left: auto;
-  position: sticky;
+  width: 30%;
 }
 
 .cartcontent {
-  //Un poco trampa pero funciona
-  transform: translateY(-27rem);
+  width: 70%;
+  display: flex;
+  flex-direction: column;
   align-self: flex-start;
-  margin-left: 15%;
 }
 
 @media (min-width: $screen-sm-min) and (max-width: $screen-md-max) {
-  .cartcontent {
-    align-self: center;
-    transform: translateY(0);
-  }
-
-  .podcontainer {
-    right: 0;
-    position: relative;
-    margin-right: auto;
-    margin-left: auto;
-  }
 }
 
-@media (min-width: 0px) and (max-width: $screen-xs-max) {
-  .title {
-    font-size: 4.5rem;
+@media (min-width: 0px) and (max-width: $screen-sm-max) {
+  .bodycontainer {
+    margin-top: 2rem;
+    width: 100%;
   }
   .cartcontent {
     align-self: center;
-    transform: translateY(0);
-    margin-left: 5%;
-    margin-left: 5%;
-  }
-
-  .podcontainer {
-    margin-left: 5%;
-    margin-right: 5%;
     width: 90%;
-    right: 0;
-    position: relative;
-    margin-right: auto;
-    margin-left: auto;
+  }
+  .bodycontainer {
+    flex-direction: column-reverse;
+  }
+  .podcontainer {
+    margin: 0;
+    align-self: center;
+    width: 90%;
+    margin-bottom: 3rem;
   }
 }

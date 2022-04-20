@@ -6,22 +6,26 @@ import styles from "./ParallaxItem.module.scss";
 
 type ParallaxItemProps = {
   item: JSX.Element;
-  parallaxFactor: number;
+  perspective: number;
+  distance: number;
 };
 
 function ParallaxItem(props: ParallaxItemProps): JSX.Element {
-  const [offSet, setOffset] = useState("");
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-  }, []); //Will only be called once upon initialization
-  const handleScroll = (e: any) => {
-    console.log("window top", window.scrollY);
-    console.log("window bottom", window.innerHeight);
-    setOffset("translateY(" + window.scrollY * props.parallaxFactor + "px)");
-  };
+  const scale = (props.perspective - props.distance) / props.perspective;
   return (
-    <div className={styles.container} style={{ transform: offSet }}>
-      {props.item}
+    <div
+      className={styles.container}
+      style={{ perspective: props.perspective + "px" }}
+    >
+      <div
+        className={styles.parallaxChild}
+        style={{
+          transform:
+            "translateZ(" + props.distance + "px) scale(" + scale + ")",
+        }}
+      >
+        {props.item}
+      </div>
     </div>
   );
 }

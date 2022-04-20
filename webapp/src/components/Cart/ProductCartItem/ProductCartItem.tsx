@@ -4,6 +4,7 @@ import { Dispatch } from "redux";
 import { Product } from "../../../api/model/product";
 import { decrease, increase } from "../../../redux/actions";
 import { CartItem } from "../../../redux/models/CartItem";
+import { Utils } from "../../../utils/utilts";
 import styles from "./ProductCartItem.module.scss";
 
 type ProductCartItemProps = {
@@ -48,10 +49,8 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
           src={product.product.img}
         ></img>
         <div className={styles.productcartdescriptioncontainer}>
-          <div className={styles.row1}>
-            <div className={styles.price}>{product.product.price + " $"}</div>
-            <div className={styles.productname}>{product.product.name}</div>
-          </div>
+          <div className={styles.productname}>{product.product.name}</div>
+          <div className={styles.price}>{product.product.price + " €"}</div>
           <div className={styles.row2}>
             <span className={"material-icons"} onClick={decreaseButtonAction}>
               remove
@@ -60,6 +59,9 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
             <span className={"material-icons"} onClick={increaseButtonAction}>
               add
             </span>
+          </div>
+          <div className={styles.totalprice}>
+            {(product.amount * product.product.price).toFixed(2)} €
           </div>
         </div>
       </div>

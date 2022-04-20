@@ -90,6 +90,19 @@ export async function addOrder(order: Order): Promise<any> {
   });
 }
 
+export async function getOrders(filters?: Filter[]): Promise<any> {
+  if (filters) {
+    const query = applyFilters(orderCollection, filters);
+    return getDocs(query).then((docs) =>
+        docs.docs.map((doc) => doc.data() as Order)
+    );
+  }
+
+  return getDocs(orderCollection).then((docs) =>
+      docs.docs.map((doc) => doc.data() as Order)
+  );
+}
+
 export async function getOrder(email: string | null | undefined): Promise<any> {
   if (email != null && email != undefined) {
     const q = query(orderCollection, where("userEmail", "==", email));

@@ -1,0 +1,27 @@
+.container {
+  top: 0;
+  z-index: -10;
+  width: 100%;
+  position: absolute;
+  img {
+    transform: scale(0.3) rotateZ(15deg);
+  }
+}
+
+.fade {
+  height: 15rem;
+  width: 100%;
+  // background: linear-gradient(
+  //   180deg,
+  //   rgba(0, 0, 0, 1) 0%,
+  //   rgba(255, 184, 0, 0) 100%
+  // );
+}
+
+.leftimgcontainer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -55%;
+  left: -20%;
+}
