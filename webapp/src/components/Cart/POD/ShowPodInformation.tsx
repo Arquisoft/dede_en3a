@@ -160,11 +160,11 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       items: cart,
       user: currentUser?.email,
       addressData: {
-        address: address,
-        postalcode: postalCode,
-        city: city,
-        country: country,
-        region: region,
+        address: address?.address,
+        postalcode: address?.postalcode,
+        city: address?.city,
+        country: address?.country,
+        region: address?.region,
       },
     })
       .then(() => {
@@ -211,7 +211,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
                     <Box component="h3" id={"regionComponent"}>Region: {address?.region}</Box>
                 </div>
                 <div className="buttonsPOD-internal">
-                    <button  onClick={calcShipping}> Calculate shipping </button>
+                    <button  onClick={calcShipping} > Calculate shipping </button>
                 </div>
                 {
                     cost(delCost)
