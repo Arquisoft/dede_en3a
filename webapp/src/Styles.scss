@@ -251,3 +251,8 @@ body {
     transform: translateX(-6px) rotate(-1.2deg);
   }
 }
+
+@function getParallaxScale($perspective, $distance) {
+  $result: ($perspective - $distance) / $perspective;
+  @return $result;
+}

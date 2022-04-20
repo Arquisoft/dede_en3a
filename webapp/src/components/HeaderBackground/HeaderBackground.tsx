@@ -7,7 +7,8 @@ function HeaderBackground(): JSX.Element {
       <div className={styles.container}>
         <ParallaxItem
           item={<div className={styles.fade}></div>}
-          parallaxFactor={0.8}
+          perspective={10}
+          distance={5}
         ></ParallaxItem>
         {/* <div className={styles.leftimgcontainer}>
           <ParallaxItem

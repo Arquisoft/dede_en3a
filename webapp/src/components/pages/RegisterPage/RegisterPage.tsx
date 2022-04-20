@@ -35,27 +35,56 @@ export function RegisterPage(props: RegisterPageProps) {
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, email: e.currentTarget.value });
-    console.log(e.currentTarget.name, e.currentTarget.value);
   };
 
   const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, password: e.currentTarget.value });
-    console.log(e.currentTarget.name, e.currentTarget.value);
   };
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, name: e.currentTarget.value });
-    console.log(e.currentTarget.name, e.currentTarget.value);
   };
 
   const handleChangeConfirmPasswd = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setUser({ ...user, confirmPssw: e.currentTarget.value });
-    console.log(e.currentTarget.name, e.currentTarget.value);
+  };
+
+  const register = async () => {
+    try {
+      if (user.password != user.confirmPssw) {
+        throw new Error("Passwords have to be equal");
+      }
+
+      await signup(user.email, user.password).then((userCredential) => {
+        console.log(
+          "User: " + userCredential.user,
+          "ProviderId: " + userCredential.providerId
+        );
+      });
+
+      await addUser({
+        name: user.name,
+        email: user.email,
+      });
+
+      navigate("/dashboard");
+    } catch (error: any) {
+      if (error.code === "auth/internal-error") {
+        setError("Invalid email");
+      } else if (error.code === "auth/email-already-in-use") {
+        setError("Email already registered");
+      } else if (error.code === "auth/weak-password") {
+        setError("Password should be at least 6 characters");
+      } else {
+        setError(error.message);
+      }
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    console.log("handling submit");
     e.preventDefault();
 
     setError("");
@@ -125,7 +154,9 @@ export function RegisterPage(props: RegisterPageProps) {
             <br />
 
             <div className={styles.buttons}>
-              <button type={"submit"}>Register</button>
+              <button type="submit" onClick={register}>
+                Register
+              </button>
             </div>
           </form>
         </div>
