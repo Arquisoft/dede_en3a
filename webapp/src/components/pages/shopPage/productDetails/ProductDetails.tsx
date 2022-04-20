@@ -104,8 +104,8 @@ function ProductDetails(): JSX.Element {
       productList.push(
         <div className={styles.headerContainer}>
           <div className={styles.wrapperLeft}>
-            <div className={styles.productName}>{product.name}</div>
-            <img className={styles.productImage} src={product.img}></img>
+            <div title={"reviewTitle"} className={styles.productName}>{product.name}</div>
+            <img title={"reviewImage"} className={styles.productImage} src={product.img}></img>
           </div>
           <div className={styles.wrapperRight}>
             <div className={styles.subtitle}>
@@ -159,6 +159,7 @@ function ProductDetails(): JSX.Element {
                     ).value,
                     valueGet
                   )
+
                 }
               >
                 Send
