@@ -5,8 +5,6 @@ import {CallableContext} from "firebase-functions/lib/common/providers/https";
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
-
-
 admin.initializeApp();
 
 
@@ -19,6 +17,22 @@ const geocoder = new Nominatim()
 // // https://firebase.google.com/docs/functions/typescript
 //
 
+function sendEmail(email : String){
+
+    admin
+        .firestore()
+        .collection("mail")
+        .add({
+            to: ""+email,
+            message: {
+                subject: "Hello from Firebase!",
+                text: "This is the plaintext section of the email body.",
+                html: "This is the <code>HTML</code> section of the email body.",
+            },
+        })
+        .then(() => functions.logger.info("Email delivered correctly"));
+
+}
 
 
 function degreesToRadians(degrees:number) {
@@ -64,6 +78,7 @@ export const calculateDeliveryOnCall = functions
             region: string
         },
         context:CallableContext) => {
+
 
             functions.logger.info("PRE CALC");
 
@@ -194,6 +209,7 @@ export const sendOrder = functions
         })
             .then(()=>{
                 functions.logger.info("Doc saved ");
+                sendEmail(data.user);
                 return {
                     message: "Congrats, your order has been saved...",
                     status:200

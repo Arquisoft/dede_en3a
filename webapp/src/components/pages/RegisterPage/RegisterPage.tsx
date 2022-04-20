@@ -125,7 +125,7 @@ export function RegisterPage(props: RegisterPageProps) {
             <br />
 
             <div className="buttons">
-              <button type={"submit"}>Register</button>
+              <button type={"submit"} >Register</button>
             </div>
           </form>
         </div>

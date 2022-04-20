@@ -16,7 +16,7 @@ import { decrease, increase } from "../../redux/actions";
 
 type TopMenuProps = {};
 
-function TopMenu(): JSX.Element {
+export default function TopMenu(): JSX.Element {
   const [wobble, setWobble] = useState("");
   const [transparent, setTransparent] = useState("");
   const [firstRender, setfirstRender] = useState(true);
@@ -312,5 +312,3 @@ function TopMenu(): JSX.Element {
     </>
   );
 }
-
-export default TopMenu;
