@@ -97,8 +97,10 @@ function MainPage(): JSX.Element {
               </div>
               <div className={styles.steptext}>
                 In order to proceed with the checkout, you will have to
-                introduce your solid POD WebId. If you dont have one you can
-                create one here?. We support solid community pods???
+                introduce your solid POD WebId.
+              </div>
+              <div className={styles.steptext}>
+                We support four solid pod providers. Solid Community, Solid Web, Inrupt.net and pod.Inrupt.com.
               </div>
               <span className="material-icons">face</span>
             </div>
@@ -107,8 +109,8 @@ function MainPage(): JSX.Element {
                 <b>Lastly,</b> select your delivery adress.
               </div>
               <div className={styles.steptext}>
-                All of your personal data will be contained inside your pod(?).
-                You can choose your adress and proceed with the
+                All of your personal data will be contained inside your pod.
+                You can choose your address, you may have more than one and then proceed with the payment.
               </div>
               <span className="material-icons">home</span>
             </div>
