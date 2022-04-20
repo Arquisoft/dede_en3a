@@ -98,8 +98,8 @@ function ProductDetails(): JSX.Element {
             productList.push(
                 <div className={styles.headerContainer}>
                     <div className={styles.wrapperLeft}>
-                        <div className={styles.productName}>{product.name}</div>
-                        <img className={styles.productImage} src={product.img} ></img>
+                        <div title={"reviewTitle"} className={styles.productName}>{product.name}</div>
+                        <img title={"reviewImage"} className={styles.productImage} src={product.img} ></img>
                     </div>
                     <div className={styles.wrapperRight}>
                         <div className={styles.subtitle}>{"Price: " + product.price + " $"}</div>
@@ -120,7 +120,7 @@ function ProductDetails(): JSX.Element {
             <TopMenu></TopMenu>
             <>{productList}</>
             <div className={styles.subheader}>
-                <div className={styles.subsubtitle}>Add a Review:</div>
+                <div title={"addAReview"} className={styles.subsubtitle}>Add a Review:</div>
                 <div className={styles.commentWrapper}>
                     <input className={styles.inputComment} id= "input-comment-form" type={"text"}></input>
                     <div className={styles.buttonsComments}>

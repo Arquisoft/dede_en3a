@@ -98,16 +98,17 @@ export function RegisterPage(props: RegisterPageProps) {
 
         <div className="register-wrapper" onClick={preventDefault}>
           <form onSubmit={handleSubmit}>
-            <h2>Register</h2>
-            <label htmlFor="email">Email</label>
-            <input type={"email"} name="email" onChange={handleChangeEmail} />
+            <h2 title={"registerTitle"} >Register</h2>
+            <label title={"emailLabel"} htmlFor="email">Email</label>
+            <input title={"emailInput"} type={"email"} name="email" onChange={handleChangeEmail} />
             <br />
 
-            <label htmlFor="name">Name & Surname</label>
-            <input type={"text"} name="name" onChange={handleChangeName} />
+            <label title={"nameLabel"} htmlFor="name">Name & Surname</label>
+            <input title={"nameInput"} type={"text"} name="name" onChange={handleChangeName} />
             <br />
-            <label htmlFor={"password"}>Password</label>
+            <label title={"passwordLabel"} htmlFor={"password"}>Password</label>
             <input
+                title={"passwordInput"}
               type={"password"}
               name="password"
               id={"password"}
@@ -115,8 +116,9 @@ export function RegisterPage(props: RegisterPageProps) {
             />
             <br />
 
-            <label htmlFor={"confirmPasswd"}>Confirm Password</label>
+            <label title={"confirmLabel"} htmlFor={"confirmPasswd"}>Confirm Password</label>
             <input
+                title={"confirmInput"}
               type={"password"}
               name="confirmPasswd"
               id={"confirmPasswd"}
