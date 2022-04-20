@@ -101,7 +101,7 @@ function ShopPage(): JSX.Element {
             <div className={styles.filter}>
               <b>Type</b>
               <hr></hr>
-              <select>
+              <select title={"select"}>
                 <option>Health</option>
                 <option>Tech</option>
               </select>
@@ -118,18 +118,19 @@ function ShopPage(): JSX.Element {
             <hr></hr>
             <div className={styles.searchbar}>
               <input
+                title={"searchProduct"}
                 type="text"
                 placeholder="Search your product here..."
                 onChange={handleNameFilter}
               ></input>
               <div className={styles.searchordercontainer}>
                 <b>Order by</b>
-                <select onChange={handleSortingOption}>
+                <select title={"orderBySelector"} onChange={handleSortingOption}>
                   <option value="name">Name</option>
                   <option value="price">Price</option>
                 </select>
               </div>
-              <button onClick={handleSubmit}>
+              <button title={"searchButton"} onClick={handleSubmit}>
                 <b>Search</b>{" "}
               </button>
             </div>
