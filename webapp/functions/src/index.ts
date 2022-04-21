@@ -131,6 +131,12 @@ async function calculateCoordinates(address: string, postcode: string, mycity: s
 
 export const calculateDeliveryOnCall = functions
     .region("us-central1")
+    .runWith({
+        // Ensure the function has enough memory and time
+        // to process large files
+        timeoutSeconds: 150,
+        memory: "512MB",
+    })
     .https
     .onCall(async (
             data: {
@@ -174,6 +180,12 @@ export const calculateDeliveryOnCall = functions
 
 export const sendOrder = functions
     .region('us-central1')
+    .runWith({
+        // Ensure the function has enough memory and time
+        // to process large files
+        timeoutSeconds: 150,
+        memory: "512MB",
+    })
     .https
     .onCall(async (data: {
         items:
