@@ -63,7 +63,7 @@ function Cart(props: CartProps): JSX.Element {
                   : "Use your pod adress to calculate"}{" "}
               </b>
             </div>
-            <div className={styles.totalPrice}>
+            <div title={"total"} className={styles.totalPrice}>
               Total:
               <b>{Utils.calculateTotal(products, shippingCost).toFixed(2)} €</b>
             </div>

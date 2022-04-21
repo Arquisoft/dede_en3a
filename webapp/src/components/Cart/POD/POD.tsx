@@ -17,7 +17,7 @@ function POD(): JSX.Element {
   return (
     <div className={styles.podwrapper}>
       <form name={"pod-form"}>
-        <h2 className={styles.podheader}>
+        <h2 title={"podHeader"} className={styles.podheader}>
           Introduce your webID in order to get your POD information
         </h2>
         <input
