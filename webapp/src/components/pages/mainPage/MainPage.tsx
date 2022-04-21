@@ -23,55 +23,30 @@ function MainPage(): JSX.Element {
   }
 
   return (
-    <div className={styles.container}>
-      <TopMenu></TopMenu>
-      <ParallaxItem
-        item={
-          <div className={styles.background}>
-            <img src="https://images.pexels.com/photos/296323/pexels-photo-296323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"></img>
-          </div>
-        }
-        parallaxFactor={0.8}
-      ></ParallaxItem>
+    <>
+      <div className={styles.container}>
+        <TopMenu></TopMenu>
 
-      <div className={styles.headercontainer}>
-        <div className={styles.header}>
-          <div className={styles.titlecontainer}>
-            <ParallaxItem
-              item={
-                <div className={styles.title}>
-                  <b>Dede</b>, a decentralized ecommerce website
-                </div>
-              }
-              parallaxFactor={0.5}
-            ></ParallaxItem>
-            <ParallaxItem
-              item={
-                <div className={styles.subtitle}>
-                  Innovational use of Solid Pods in order to make our deliveries
-                  more private.
-                </div>
-              }
-              parallaxFactor={0.6}
-            ></ParallaxItem>
-
-            <div className={styles.showmore + " " + transparent}>
-              <b>See more</b>
-              <span className="material-icons">expand_more</span>
-            </div>
-          </div>
+        <div className={styles.background}>
+          <img src="https://images.pexels.com/photos/296323/pexels-photo-296323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"></img>
         </div>
-        <ParallaxItem
-          item={
-            <div
-              className={styles.ourproducts}
-              onClick={() => navigate("/shop")}
-            >
-              <b>Start shopping</b>
-            </div>
-          }
-          parallaxFactor={0.7}
-        ></ParallaxItem>
+
+        <div className={styles.title}>
+          <b>Dede</b>, a decentralized ecommerce website
+        </div>
+
+        <div className={styles.subtitle}>
+          Innovational use of Solid Pods in order to make our deliveries more
+          private.
+        </div>
+
+        {/* <div className={styles.showmore + " " + transparent}>
+          <b>See more</b>
+          <span className="material-icons">expand_more</span>
+        </div> */}
+        <div className={styles.ourproducts} onClick={() => navigate("/shop")}>
+          <b>Start shopping</b>
+        </div>
 
         <div className={styles.topfade}></div>
         <div className={styles.how}>
@@ -97,8 +72,10 @@ function MainPage(): JSX.Element {
               </div>
               <div className={styles.steptext}>
                 In order to proceed with the checkout, you will have to
-                introduce your solid POD WebId. If you dont have one you can
-                create one here?. We support solid community pods???
+                introduce your solid POD WebId.
+              </div>
+              <div className={styles.steptext}>
+                We support four solid pod providers. Solid Community, Solid Web, Inrupt.net and pod.Inrupt.com.
               </div>
               <span className="material-icons">face</span>
             </div>
@@ -107,8 +84,8 @@ function MainPage(): JSX.Element {
                 <b>Lastly,</b> select your delivery adress.
               </div>
               <div className={styles.steptext}>
-                All of your personal data will be contained inside your pod(?).
-                You can choose your adress and proceed with the
+                All of your personal data will be contained inside your pod.
+                You can choose your address, you may have more than one and then proceed with the payment.
               </div>
               <span className="material-icons">home</span>
             </div>
@@ -125,7 +102,7 @@ function MainPage(): JSX.Element {
           </div>
         </div> */}
       </div>
-    </div>
+    </>
   );
 }
 

@@ -93,20 +93,3 @@ test ( 'the cardItem addButton is rendered', async () => {
     expect(button).toBeInTheDocument();
 
 } );
-/*
-test ( 'the review page is rendered', async () => {
-
-    let product:Product = {
-        id : "8ZIZkdsnZYUnf5PfOKCF",
-        img: "https://www.sideraworks.com/wp-content/uploads/2020/09/gel-hidroalcoholico-deliplus.jpg",
-        price: 1.5,
-        title: "Gel hand sanitizer"};
-
-    const {getByTitle} = render( <BrowserRouter>
-        <Provider store={store}>
-            <CardItem product={product} saveProductToCart={ () => null }></CardItem>
-        </Provider>
-    </BrowserRouter>);
-    expect(getByTitle("products")).toBeInTheDocument();
-
-} );*/

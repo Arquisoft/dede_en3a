@@ -72,11 +72,12 @@ export default function TopMenu(): JSX.Element {
   });
   const cart = useSelector((state: DedeStore) => state.cart);
 
-  let cartMenuItems = [<div></div>];
+  let cartMenuItems = [<></>];
 
+  let index = 0;
   cart.forEach((product) => {
     const pHtml = (
-      <div className={styles.cartmenuitem}>
+      <div key={index} className={styles.cartmenuitem}>
         <img src={product.product.img}></img>
         <div className={styles.iteminfo}>
           <b>{product.product.name}</b>
@@ -90,6 +91,7 @@ export default function TopMenu(): JSX.Element {
         </div>
       </div>
     );
+    index++;
     cartMenuItems.push(pHtml);
   });
   cartMenuItems.push(<hr></hr>);
@@ -157,7 +159,6 @@ export default function TopMenu(): JSX.Element {
               Shop
             </div>
             <div>
-              {/* <a href={"https://arquisoft.github.io/dede_en3a/"}> */}
               <div
                 title={"about"}
                 className={styles.menuitem}
@@ -222,10 +223,7 @@ export default function TopMenu(): JSX.Element {
           <img src={logo} className={styles.logo} alt="logo" />
           <div className={styles.cartcontainer}>
             <span
-              className={
-                "material-icons " + styles.loginicon + " " + styles.wobble
-              }
-              // onClick={expandRightMenu}
+              className={"material-icons " + styles.loginicon + " " + wobble}
               onClick={() => expandRightMenu()}
               onAnimationEnd={() => setWobble("")}
             >
@@ -237,6 +235,9 @@ export default function TopMenu(): JSX.Element {
             <span
               title={"login-mobile"}
               className={"material-icons " + styles.loginicon}
+              onClick={() =>
+                setLoginPage(<LoginPage {...loginPageProps}></LoginPage>)
+              }
             >
               account_circle
             </span>
@@ -303,7 +304,7 @@ export default function TopMenu(): JSX.Element {
         <div className={styles.menuitemscontainer}>{cartMenuItems}</div>
 
         <div className={styles.totalcartprice}>
-          Total: <b>{Utils.calculateTotal(cart)}</b>
+          Total: <b>{Utils.calculateTotal(cart).toFixed(2)}</b>
         </div>
         <div onClick={() => navigate("/cart")} className={styles.cartproceed}>
           Continue

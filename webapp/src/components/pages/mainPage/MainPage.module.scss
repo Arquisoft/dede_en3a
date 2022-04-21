@@ -4,6 +4,15 @@
 .container {
   background-color: black;
   z-index: -20;
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: 1px;
+  perspective-origin: 0 0;
+  display: flex;
+  flex-direction: column;
 }
 .background {
   top: 0;
@@ -11,47 +20,24 @@
   position: absolute;
   overflow: hidden;
   z-index: 0;
+  transform: translateZ(-7px) scale(getParallaxScale(1px, -7px));
+  transform-origin: 0 0;
   img {
     transform: translateX(-10rem);
     max-width: 130rem;
   }
 }
 
-.headercontainer {
-  z-index: 10;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 50rem;
-}
-
-.header {
-  width: 50%;
-
-  margin-left: 30%;
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-}
-
-.titlecontainer {
-  padding: 3.5rem;
-  padding-bottom: 6rem;
-  margin-top: 7rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  border-radius: 5%;
-}
-
 .title {
+  margin-top: 25rem;
+  position: absolute;
   font-size: 2.5rem;
   font-family: "Montserrat-Light";
-  opacity: 0;
   filter: drop-shadow(0px 0px 5rem var(--white));
-  animation: appear 1.35s cubic-bezier(0.33, 1, 0.68, 1) 0s forwards;
+  // animation: appear 1.35s cubic-bezier(0.33, 1, 0.68, 1) 0s;
+  transform: translateZ(-1px) scale(getParallaxScale(1px, -1px))
+    translateX(40vw);
+  transform-origin: 0 0;
   b {
     filter: drop-shadow(0px 0px 5px var(--orange2));
     color: var(--orange2);
@@ -60,13 +46,15 @@
 }
 
 .subtitle {
-  margin-top: 1rem;
-  opacity: 0;
+  position: absolute;
+  margin-top: 50rem;
   color: rgba(255, 255, 255, 0.74);
-
   font-size: 1.35rem;
   letter-spacing: 0.05rem;
-  animation: appear 1.35s cubic-bezier(0.33, 1, 0.68, 1) 0.7s forwards;
+  //animation: appear 1.35s cubic-bezier(0.33, 1, 0.68, 1) 0.7s forwards;
+  transform: translateZ(-1.5px) scale(getParallaxScale(1px, -1.5px))
+    translateX(40vw);
+  transform-origin: 0 0;
 }
 
 @media (min-width: 0px) and (max-width: $screen-md-max) {
@@ -132,15 +120,17 @@
 }
 
 .ourproducts {
-  opacity: 0;
-  animation: appear 1.35s cubic-bezier(0.33, 1, 0.68, 1) 1.3s forwards;
+  position: absolute;
+  //animation: appear 1.35s cubic-bezier(0.33, 1, 0.68, 1) 1.3s forwards;
   width: fit-content;
-  margin-top: 6rem;
-  z-index: 10;
+  margin-top: calc(35rem * getParallaxScale(1px, -2px));
+  z-index: 3;
   margin-left: 60%;
   transition: 0.95s ease;
   background-color: black;
-  overflow: hidden;
+  transform: translateZ(-2px) scale(getParallaxScale(1px, -2px))
+    translateX(40vw);
+  transform-origin: 0 0;
   b {
     filter: drop-shadow(0px 0px 3px var(--orange2));
     color: var(--orange2);
@@ -160,7 +150,7 @@
 
 .ourproducts:hover {
   margin-left: calc(60% - 2rem);
-  margin-top: 5rem;
+  margin-top: calc(34rem * getParallaxScale(1px, -2px));
 
   background-color: var(--orange2);
   padding-top: 1rem;
@@ -178,10 +168,9 @@
 }
 
 .topfade {
-  z-index: 10;
-
-  margin-top: 20rem;
-  height: 20rem;
+  z-index: 5;
+  margin-top: 95vh;
+  min-height: 20rem;
   width: 100%;
   background: rgb(0, 0, 0);
   background: linear-gradient(
@@ -220,9 +209,8 @@
   color: var(--orange2);
 }
 .bottomfade {
-  z-index: 10;
-
-  height: 20rem;
+  z-index: 1;
+  min-height: 20rem;
   width: 100%;
   background: rgb(0, 0, 0);
   background: linear-gradient(
@@ -268,23 +256,20 @@
 }
 
 @media (min-width: 0px) and (max-width: $screen-sm-max) {
-  .ourproducts {
-    margin-top: 4rem;
-  }
-  .header {
-    margin: 0;
-  }
-  .showmore {
-    right: 15%;
-  }
-  .titlecontainer {
-    margin-top: 0;
-    padding: 5%;
+  .title {
+    transform: translateZ(-1px) scale(getParallaxScale(1px, -1px)) translateX(0);
+    margin: 1rem;
+    margin-top: 10rem;
+    text-align: center;
   }
   .subtitle {
-    margin: 0;
-    padding: 5%;
-    width: 100%;
+    transform: translateZ(-1.5px) scale(getParallaxScale(1px, -1.5px))
+      translateX(0);
+    margin-top: 47rem;
+    margin-left: calc(20% * getParallaxScale(1px, -1.5px));
+  }
+
+  .ourproducts {
   }
   .background {
     img {

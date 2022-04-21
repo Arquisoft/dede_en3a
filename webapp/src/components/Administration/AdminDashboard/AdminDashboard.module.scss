@@ -1,0 +1,37 @@
+@import "./../../../variables.scss";
+@import "./../../../Styles.scss";
+
+.header {
+  margin-left: 1.5rem;
+  margin-top: var(--topMenuHeight);
+  width: 100%;
+  max-width: 70rem;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+}
+
+.bigText{
+  margin-top: 1rem;
+  width: 100%;
+  background-color: var(--dark1);
+  display: flex;
+  font-size: 2.5rem;
+  flex-direction: column;
+  color: var(--orange2);
+  justify-content: center;
+}
+
+.leftPanel{
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.options{
+  color: var(--orange3);
+  font-size: 1.25rem;
+  font-weight: bold;
+}
