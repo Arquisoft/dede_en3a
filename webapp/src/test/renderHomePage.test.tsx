@@ -30,14 +30,6 @@ test("the main text of the page is rendered", async () => {
 
 });
 
-test("See more information", async () => {
-
-    const {getByText} = render( <BrowserRouter><Provider store={store}> <MainPage></MainPage></Provider></BrowserRouter> );
-    const text = getByText("See more");
-    expect(text).toBeInTheDocument();
-
-});
-
 test("Information block title is rendered", async () => {
 
     const {getByText} = render( <BrowserRouter><Provider store={store}> <MainPage></MainPage></Provider></BrowserRouter> );
@@ -77,8 +69,7 @@ test("Use your POD - body", async () => {
 
     const {getByText} = render( <BrowserRouter><Provider store={store}> <MainPage></MainPage></Provider></BrowserRouter> );
     const text = getByText("In order to proceed with the checkout, you will have to" +
-        " introduce your solid POD WebId. If you dont have one you can" +
-        " create one here?. We support solid community pods???");
+        " introduce your solid POD WebId.");
     expect(text).toBeInTheDocument();
 
 });
@@ -94,8 +85,8 @@ test("Select address - title", async () => {
 test("Select address - body", async () => {
 
     const {getByText} = render( <BrowserRouter><Provider store={store}> <MainPage></MainPage></Provider></BrowserRouter> );
-    const text = getByText("All of your personal data will be contained inside your pod(?)." +
-        " You can choose your adress and proceed with the");
+    const text = getByText("All of your personal data will be contained inside your pod." +
+        " You can choose your address, you may have more than one and then proceed with the payment.");
     expect(text).toBeInTheDocument();
 
 });
