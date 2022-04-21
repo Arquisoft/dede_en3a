@@ -242,7 +242,7 @@ export default function TopMenu(): JSX.Element {
             >
               shopping_cart
             </span>
-            <div className={styles.cartcounter}>{cart.length}</div>
+            <div className={styles.cartcounter}>{totalNumProd()}</div>
           </div>
           <div className={styles.logincontainer}>
             <span

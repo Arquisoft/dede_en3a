@@ -14,6 +14,9 @@ import { useAuth } from "../../../../context/AuthContext";
 import { User } from "../../../../api/model/user";
 import HeaderBackground from "../../../HeaderBackground/HeaderBackground";
 import { Utils } from "../../../../utils/utilts";
+import {increase} from "../../../../redux/actions";
+import {Dispatch} from "redux";
+import {useDispatch} from "react-redux";
 
 function ProductDetails(): JSX.Element {
   const { id } = useParams();
@@ -38,6 +41,11 @@ function ProductDetails(): JSX.Element {
       valueGet = valueSet;
     }
   }
+  const dispatch: Dispatch<any> = useDispatch();
+  const saveProduct = React.useCallback(
+      (product: Product) => dispatch(increase(product)),
+      [dispatch]
+  );
 
   useEffect(() => {
     refreshUserList();
@@ -113,16 +121,25 @@ function ProductDetails(): JSX.Element {
             </div>
             <div className={styles.subtitle}>Description: </div>
             <div className={styles.text}>{product.description}</div>
-            <div className={styles.subtitle}>Rating:</div>
-            <Rating
-              name="half-rating"
-              defaultValue={2.5}
-              precision={0.5}
-              size="large"
-              onChange={(event, newValue) => {
-                setValue(newValue);
-              }}
-            />
+            <div className={styles.subtitle}>Rating:
+              <div>
+                <Rating
+                  name="half-rating"
+                  defaultValue={2.5}
+                  precision={0.5}
+                  size="large"
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                />
+              </div>
+              <div className={styles.buttonsComments}>
+                <button type="button" onClick={()=>{saveProduct(products[0])}}>Add to cart</button>
+              </div>
+            </div>
+
+
+
           </div>
         </div>
       );
