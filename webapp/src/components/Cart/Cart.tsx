@@ -43,7 +43,7 @@ function Cart(props: CartProps): JSX.Element {
         <div className={styles.bodycontainer}>
           <div className={styles.cartcontent}>
             <div className={styles.cartitemtitle}>
-              <b>({products.length})</b> Items in your cart
+              <b title={"itemsInYourCart"} >({products.length})</b> Items in your cart
             </div>
             <hr></hr>
 
@@ -55,7 +55,7 @@ function Cart(props: CartProps): JSX.Element {
             )} */}
               {itemList}
             </div>
-            <div className={styles.totalPrice}>
+            <div title={"shippingCosts"} className={styles.totalPrice}>
               Shipping costs:
               <b>
                 {shippingCost
@@ -63,7 +63,7 @@ function Cart(props: CartProps): JSX.Element {
                   : "Use your pod adress to calculate"}{" "}
               </b>
             </div>
-            <div className={styles.totalPrice}>
+            <div title={"total"} className={styles.totalPrice}>
               Total:
               <b>{Utils.calculateTotal(products, shippingCost).toFixed(2)} €</b>
             </div>

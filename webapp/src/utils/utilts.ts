@@ -20,6 +20,6 @@ export class Utils {
   static getProductAverageRating = (product: Product) => {
     const ratings = product?.comments?.map((p) => p.rating);
     const sum = ratings?.reduce((a, b) => a + b, 0);
-    return sum! / ratings!.length || 0;
+    return ratings === undefined ? 0 : sum! / ratings!.length || 0;
   };
 }

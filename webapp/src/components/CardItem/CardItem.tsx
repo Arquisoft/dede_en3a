@@ -33,10 +33,11 @@ export const CardItem: React.FC<CardItemProps> = ({
         </Link>
         <div className={styles.descriptioncontainer}>
           <div className={styles.col1}>
-            <div className={styles.productname}>{product.name}</div>
-            <div className={styles.price}>{product.price + " $"}</div>
+            <div title={"cardItemName"} className={styles.productname}>{product.name}</div>
+            <div title={"cardItemPrice"} className={styles.price}>{product.price + " $"}</div>
             <div style={{ display: "flex", marginTop: "0.5rem" }}>
               <Rating
+                  title={"cardItemRating"}
                 name="read-only"
                 value={rating}
                 precision={0.5}
@@ -48,7 +49,7 @@ export const CardItem: React.FC<CardItemProps> = ({
           </div>
 
           <div className={styles.col2}>
-            <div onClick={addToCart} className={styles.addtocart}>
+            <div title={"cardItemAddButton"} onClick={addToCart} className={styles.addtocart}>
               <span className={"material-icons " + styles.carticon}>
                 add_shopping_cart
               </span>
