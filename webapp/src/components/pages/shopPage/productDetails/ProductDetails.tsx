@@ -83,7 +83,9 @@ function ProductDetails(): JSX.Element {
 
   function loadComments() {
     products.forEach((product) => {
-      product.comments?.forEach((comment) => {
+
+
+      product.comments?.slice().reverse().forEach((comment) => {
         commentList.push(
           <div className={styles.wrapperWholeComment}>
             <div className={styles.commentWrapper}>
@@ -101,6 +103,9 @@ function ProductDetails(): JSX.Element {
           </div>
         );
       });
+
+
+
     });
   }
 
