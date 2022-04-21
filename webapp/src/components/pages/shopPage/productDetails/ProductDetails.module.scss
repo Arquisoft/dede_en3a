@@ -83,6 +83,7 @@
   b {
     color: var(--orange2);
   }
+  display: flex;
 }
 
 .subsubtitle {
@@ -115,7 +116,7 @@
   align-items: center;
   justify-content: left;
   margin-bottom: 1rem;
-
+  margin-left: 1rem;
   button {
     cursor: pointer;
     font-family: "Montserrat-Bold";
