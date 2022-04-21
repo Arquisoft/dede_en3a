@@ -5,10 +5,19 @@ import {store} from "../redux/store";
 import * as React from "react";
 import Cart from "../components/Cart/Cart";
 import {db} from "../utils/firebase"
-test("the cart title is rendered", async () => {
+
+test("the label with the number of items is rendered", async () => {
 
     const {getByTitle} = render( <BrowserRouter><Provider store={store}> <Cart></Cart> </Provider></BrowserRouter> );
-    const shoppingCartTitle = getByTitle("shoppingCartTitle");
+    const shoppingCartTitle = getByTitle("itemsInYourCart");
+    expect( shoppingCartTitle ).toBeInTheDocument();
+
+});
+
+test("the label with the shipping costs is rendered", async () => {
+
+    const {getByTitle} = render( <BrowserRouter><Provider store={store}> <Cart></Cart> </Provider></BrowserRouter> );
+    const shoppingCartTitle = getByTitle("shippingCosts");
     expect( shoppingCartTitle ).toBeInTheDocument();
 
 });
