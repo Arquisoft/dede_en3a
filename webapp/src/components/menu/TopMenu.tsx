@@ -26,6 +26,8 @@ export default function TopMenu(): JSX.Element {
     styles.expandablerightmenu
   );
 
+  let totalProducts : number = 0;
+
   const dispatch: Dispatch<any> = useDispatch();
 
   const increaseProduct = React.useCallback(
@@ -45,6 +47,17 @@ export default function TopMenu(): JSX.Element {
   const decreaseButtonAction = (product: Product) => {
     decreaseProduct(product);
   };
+
+  function totalNumProd():number{
+    let num = 0;
+    let total = 0;
+    while(num < cart.length){
+      total += cart[num].amount;
+      num++;
+    }
+    totalProducts = total;
+    return total;
+  }
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -192,7 +205,7 @@ export default function TopMenu(): JSX.Element {
               >
                 shopping_cart
               </span>
-              <div className={styles.cartcounter}>{cart.length}</div>
+              <div className={styles.cartcounter}>{totalNumProd()}</div>
             </div>
           </div>
           <div className={styles.logincontainer}>
