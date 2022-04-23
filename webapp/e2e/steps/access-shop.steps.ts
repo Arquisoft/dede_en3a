@@ -15,7 +15,7 @@ defineFeature(feature, test => {
     page = await browser.newPage();
 
     await page
-      .goto("https://dede-en3a.web.app/home", {
+      .goto("http://localhost:3000", {
         waitUntil: "networkidle0",
       })
       .catch(() => {});

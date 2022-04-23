@@ -2,7 +2,7 @@ export default {
     transform: {
         "^.+\\.tsx?$": "ts-jest"
     },
-    testMatch: ["**/steps/*.ts"],
+    testMatch: ["<rootDir>/e2e/steps/*.ts"],
     moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
-    preset: "jest-puppeteer",
+    preset: "jest-puppeteer"
 }
