@@ -93,6 +93,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       setLoadingOverlay(<></>);
     });
   }, []);
+
   const navigate = useNavigate();
 
   async function calcWithFirebaseFunction(
@@ -129,22 +130,23 @@ function ShowPodInformation(props: PODProps): JSX.Element {
   }
 
   async function calcShipping() {
-    if (
-      address == null ||
-      typeof address == undefined ||
-      address.postalcode == null ||
-      typeof address.postalcode == undefined ||
-      address.city == null ||
-      typeof address.city == undefined ||
-      address.country == null ||
-      typeof address.country == undefined ||
-      address.region == null ||
-      typeof address.region == undefined
-    ) {
-      alert(
-        "PLEASE, ENTER A POD WITH address, postal code, city, country and region"
-      );
+    if (address == null || typeof address == undefined) {
+      alert("Your POD has not any address associated with it. We cannot calculate your shipping cost")
       return;
+    } else {
+      if(address.postalcode == null ||
+          typeof address.postalcode == undefined ||
+          address.city == null ||
+          typeof address.city == undefined ||
+          address.country == null ||
+          typeof address.country == undefined ||
+          address.region == null ||
+          typeof address.region == undefined) {
+        alert(
+            "PLEASE, ENTER A POD WITH address, postal code, city, country and region"
+        );
+        return;
+      }
     }
 
     let response = await calcWithFirebaseFunction(
