@@ -126,7 +126,7 @@ export function RegisterPage(props: RegisterPageProps) {
         {error && <p>{error}</p>}
 
         <div className={styles.registerwrapper} onClick={preventDefault}>
-          <form onSubmit={handleSubmit}>
+          <form name={"registerForm"} onSubmit={handleSubmit}>
             <h2 title={"registerTitle"} >Register</h2>
             <label title={"emailLabel"} htmlFor="email">Email</label>
             <input title={"emailInput"} type={"email"} name="email" onChange={handleChangeEmail} />

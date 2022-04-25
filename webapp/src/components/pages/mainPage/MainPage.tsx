@@ -44,7 +44,7 @@ function MainPage(): JSX.Element {
           <b>See more</b>
           <span className="material-icons">expand_more</span>
         </div> */}
-        <div className={styles.ourproducts} onClick={() => navigate("/shop")}>
+        <div title={"startShopping"} className={styles.ourproducts} onClick={() => navigate("/shop")}>
           <b>Start shopping</b>
         </div>
 

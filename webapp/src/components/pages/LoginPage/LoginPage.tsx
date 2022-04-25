@@ -65,7 +65,7 @@ function LoginPage(props: LoginPageProps): JSX.Element {
       >
         {error && <p>{error}</p>}
         <div className={styles.loginwrapper} onClick={preventDefaultClick}>
-          <form onSubmit={handleSubmit}>
+          <form name={"loginForm"} onSubmit={handleSubmit}>
             <h2>Login</h2>
             <h3>Email</h3>
             <input
