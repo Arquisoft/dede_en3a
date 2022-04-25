@@ -7,5 +7,5 @@ Scenario: The user access the shop through the navbar
 
 Scenario: The user access the shop through the Start Shopping button of Home page
   Given A user on the home page
-  When I pres the Start Shopping button
+  When I press the Start Shopping button
   Then I am in the Shop page
