@@ -218,7 +218,7 @@ export default function TopMenu(): JSX.Element {
             >
               account_circle
             </span>
-            <div className={styles.username}>{userName}</div>
+            <div title={"loginUsername"} className={styles.username}>{userName}</div>
           </div>
         </div>
       </div>
