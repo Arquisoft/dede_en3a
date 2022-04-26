@@ -19,6 +19,8 @@ import AboutPage from "./components/pages/AboutPage/AboutPage";
 import AdminDashboard from "./components/Administration/AdminDashboard/AdminDashboard";
 import AdminFirebase from "./components/Administration/AdminFirebase/AdminFirebase";
 
+
+
 function App(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
 
@@ -32,6 +34,7 @@ function App(): JSX.Element {
 
   return (
     <>
+
       <BrowserRouter>
         <Routes>
           <Route path="/home" element={<MainPage />} />

@@ -27,6 +27,7 @@ import { Dispatch } from "redux";
 import { setShippingCosts } from "../../../redux/actions";
 import { Address } from "../../../api/model/pod/address";
 import { AddressCalculator } from "./AddressCalculator";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
 type PODProps = {
   webID: string;
@@ -124,6 +125,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
         return { message: result.message, cost: result.cost };
       })
       .catch((error: Error) => {
+        setLoadingOverlay(<div></div>);
         alert("Something went wrong while calculating your shipping cost");
       });
   }
@@ -156,6 +158,18 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     );
   }
 
+
+
+
+  function setterOfAddress(value: any) {
+    const finalVal = listOfAddress.filter(
+      (addr) => addr.address === value.target.value
+    )[0];
+    setAddress(finalVal);
+  }
+
+
+
   const add = async () => {
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
 
@@ -166,43 +180,111 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
     const sendOrder = httpsCallable(functions, "sendOrder");
 
+
+    if (
+        address == null ||
+        typeof address == undefined ||
+        address.postalcode == null ||
+        typeof address.postalcode == undefined ||
+        address.city == null ||
+        typeof address.city == undefined ||
+        address.country == null ||
+        typeof address.country == undefined ||
+        address.region == null ||
+        typeof address.region == undefined
+    ){
+      alert("aaaaaaaaaaaaaaaaaa")
+      setLoadingOverlay(<div></div>);
+      return ;
+    }
+
+
     return await sendOrder({
       items: cart,
       user: currentUser?.email,
       addressData: {
-        address: address?.address,
-        postalcode: address?.postalcode,
-        city: address?.city,
-        country: address?.country,
-        region: address?.region,
+        address: address.address,
+        postalcode: address.postalcode,
+        city: address.city,
+        country: address.country,
+        region: address.region,
       },
     })
-      .then(() => {
-        setLoadingOverlay(<div></div>);
+        .then(() => {
+          setLoadingOverlay(<div></div>);
 
-        alert("Your order has been processed.");
-      })
-      .catch(() => {
-        alert("Sorry, we are suffering technical problems, try again...");
-      });
+          alert("Your order has been processed.");
+        })
+        .catch(() => {
+          setLoadingOverlay(<div></div>);
+          alert("Sorry, we are suffering technical problems, try again...");
+        });
   };
+
+
+
   const buy = () => {
     if (userRegistered()) {
       add()
-        .then(() => {})
-        .catch((error: Error) => {
-          alert("OHOH, SOMETHING WENT WRONG: " + error.message);
-        });
+          .then(() => {})
+          .catch((error: Error) => {
+            alert("OHOH, SOMETHING WENT WRONG: " + error.message);
+          });
     } else {
       navigate("/login");
     }
   };
 
-  function setterOfAddress(value: any) {
-    const finalVal = listOfAddress.filter(
-      (addr) => addr.address === value.target.value
-    )[0];
-    setAddress(finalVal);
+
+  function renderPaypalButtons(){
+
+
+
+    if (cart.length == 0) {
+
+      return (<div> EMPTY CART == NO RENDER BUTTONS</div>);
+    } else {
+
+      let totalToPay:number = 0;
+
+
+      return (
+          <PayPalButtons
+              createOrder={(data, actions) => {
+                return actions.order
+                    .create({
+                      purchase_units: [
+                        {
+                          amount: {
+                            currency_code: "USD",
+                            value:,
+                          },
+                        },
+                      ],
+                    })
+                    .then((orderId) => {
+                      // Your code here after create the order
+                      return orderId;
+                    });
+              }}
+              onApprove={async (data, actions: any) => {
+
+                return actions.order.capture().then(function () {
+                  // Your code here after capture the order
+                  buy();
+                });
+
+
+              }}
+
+          />
+
+      );
+
+    }
+
+
+
   }
 
   return (
@@ -244,6 +326,8 @@ function ShowPodInformation(props: PODProps): JSX.Element {
           <button type={"submit"} className="buy" onClick={buy}>
             Checkout
           </button>
+          {renderPaypalButtons()}
+
         </div>
       </Grid>
     </Grid>

@@ -9,6 +9,8 @@
     "@inrupt/vocab-common-rdf": "^1.0.3",
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.5",
+    "@paypal/paypal-js": "^5.0.5",
+    "@paypal/react-paypal-js": "^7.6.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
