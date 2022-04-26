@@ -130,7 +130,7 @@ async function calculateCoordinates(address: string, postcode: string, mycity: s
 
 
 export const calculateDeliveryOnCall = functions
-    .region("us-central1")
+    .region("europe-west1")
     .runWith({
         // Ensure the function has enough memory and time
         // to process large files
@@ -179,7 +179,7 @@ export const calculateDeliveryOnCall = functions
 
 
 export const sendOrder = functions
-    .region('us-central1')
+    .region('europe-west1')
     .runWith({
         // Ensure the function has enough memory and time
         // to process large files

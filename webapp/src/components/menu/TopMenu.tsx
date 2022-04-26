@@ -208,7 +208,7 @@ export default function TopMenu(): JSX.Element {
               <div className={styles.cartcounter}>{totalNumProd()}</div>
             </div>
           </div>
-          <div className={styles.logincontainer}>
+          <div title={"loginTopMenu"} className={styles.logincontainer}>
             <span
               title={"login-pc"}
               className={"material-icons " + styles.loginicon}
@@ -218,7 +218,7 @@ export default function TopMenu(): JSX.Element {
             >
               account_circle
             </span>
-            <div className={styles.username}>{userName}</div>
+            <div title={"loginUsername"} className={styles.username}>{userName}</div>
           </div>
         </div>
       </div>
