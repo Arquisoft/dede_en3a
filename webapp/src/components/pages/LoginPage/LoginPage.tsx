@@ -44,7 +44,7 @@ function LoginPage(props: LoginPageProps): JSX.Element {
     console.log(user);
     try {
       await login(user.email, user.password).then((userCredential) => {
-        navigate("/dashboard");
+        navigate("/shop");
       });
     } catch (error: any) {
       if (error.code === "auth/user-not-found") {

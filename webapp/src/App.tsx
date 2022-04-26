@@ -19,6 +19,8 @@ import AboutPage from "./components/pages/AboutPage/AboutPage";
 import AdminDashboard from "./components/Administration/AdminDashboard/AdminDashboard";
 import AdminFirebase from "./components/Administration/AdminFirebase/AdminFirebase";
 
+
+
 function App(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
 
@@ -30,8 +32,11 @@ function App(): JSX.Element {
     refreshUserList();
   }, []);
 
+
+
   return (
     <>
+
       <BrowserRouter>
         <Routes>
           <Route path="/home" element={<MainPage />} />
@@ -44,7 +49,7 @@ function App(): JSX.Element {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="*" element={<Navigate to="/home" />} />
-          <Route path={"/dashboard"} element={<Dashboard />} />;
+          {/*} <Route path={"/dashboard"} element={<Dashboard />} />*/};
           <Route path="*" element={<Navigate to="/home" />} />
           <Route path={"/pod"} element={<POD />} />
 
