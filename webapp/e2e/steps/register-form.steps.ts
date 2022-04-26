@@ -14,7 +14,7 @@ defineFeature(feature, test => {
 
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: false, slowMo:50}); //false to run tests locally
+      : await puppeteer.launch({ headless: false, slowMo:100}); //false to run tests locally
     page = await browser.newPage();
 
     await page
@@ -38,16 +38,17 @@ defineFeature(feature, test => {
       await page.setViewport({ width: 1400, height: 900 });
       await expect(page).toMatch("Dede, a decentralized ecommerce website");
       await expect(page).toClick('div[title="loginTopMenu"]')
-      await expect(page).toFillForm('form[name="loginForm"]',{
-        email:email,
-        password:password
-      })
+
+      await expect(page).toFill("input[title='email']", email);
+      await expect(page).toFill("input[title='password']", password);
+
       await expect(page).toClick('button', {text:'Login'})
 
     });
 
-    then('A confirmation message should be shown in the screen', async () => {
-      await expect(page).toMatch('You are logged as:')
+    then('The orders of this client are available', async () => {
+      await expect(page).toClick('div[title="orders"]')
+      await expect(page).toMatch("Date:")
     });
   })
 
@@ -66,21 +67,22 @@ defineFeature(feature, test => {
 
         when('I access the register form, fill the data in it and press submit', async () => {
           await page.setViewport({ width: 1400, height: 900 });
-          await expect(page).toMatch("Dede, a decentralized ecommerce website");
-          await expect(page).toClick('div[title="loginDiv"]')
-          await expect(page).toClick('b', {text:'Register'})
-          await expect(page).toFillForm('form[name="registerForm"]',{
-            email:email,
-            name:name,
-            password:password,
-            confirmPasswd:password
-          })
+          await expect(page).toClick('div[title="home"]')
+          await expect(page).toClick('div[title="loginTopMenu"]')
+          await expect(page).toClick('b[title="register"]')
+
+          await expect(page).toFill("input[title='emailInput']", email);
+          await expect(page).toFill("input[title='nameInput']", name);
+          await expect(page).toFill("input[title='passwordInput']", password);
+          await expect(page).toFill("input[title='confirmInput']", password);
+
           await expect(page).toClick('button', {text:'Register'})
 
         });
 
         then('A confirmation message should be shown in the screen', async () => {
-          await expect(page).toMatch('You are logged as:')
+          await expect(page).toClick('div[title="orders"]')
+          await expect(page).not.toMatch("Date:")
         });
   })
 
