@@ -28,6 +28,10 @@ import { setShippingCosts } from "../../../redux/actions";
 import { Address } from "../../../api/model/pod/address";
 import { AddressCalculator } from "./AddressCalculator";
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import {setCookie} from "../../../context/Cookies";
+import {getCookie} from "../../../context/Cookies";
+import {RegisterPage} from "../../pages/RegisterPage/RegisterPage";
+import LoginPage from "../../pages/LoginPage/LoginPage";
 
 type PODProps = {
   webID: string;
@@ -63,6 +67,10 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   const cart = useSelector((state: DedeStore) => state.cart);
 
+
+  const [loginPage, setLoginPage] = useState(<div></div>);
+  const [registerPage, setRegisterPage] = useState(<div></div>);
+
   const [address, setAddress] = React.useState<Address>();
   const [delCost, setDelCost] = React.useState(0);
 
@@ -78,6 +86,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   //OBTENEMOS POR CADA WEB ID LA LISTA DE ADDRESSES ASOCIADOS
   useEffect(() => {
+
     const fullAddresses = AddressCalculator(props.webID);
     const addressesHtml: any = [];
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
@@ -92,7 +101,16 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       setAddress(full[0]);
       setListOfAddress(full);
       setLoadingOverlay(<></>);
-    });
+
+      setCookie("address", full[0].address,1);
+      setCookie("city", full[0].city,1);
+      setCookie("country", full[0].country,1);
+      setCookie("region", full[0].region,1);
+      setCookie("postalcode", full[0].postalcode,1);
+
+
+    }
+    );
   }, []);
   const navigate = useNavigate();
 
@@ -130,6 +148,8 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       });
   }
 
+
+
   async function calcShipping() {
     if (
       address == null ||
@@ -156,6 +176,8 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       address.country,
       address.region
     );
+
+    return response;
   }
 
 
@@ -166,6 +188,13 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       (addr) => addr.address === value.target.value
     )[0];
     setAddress(finalVal);
+
+    setCookie("address", finalVal.address,1);
+    setCookie("city", finalVal.city,1);
+    setCookie("country", finalVal.country,1);
+    setCookie("region", finalVal.region,1);
+    setCookie("postalcode", finalVal.postalcode,1);
+
   }
 
 
@@ -181,33 +210,17 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     const sendOrder = httpsCallable(functions, "sendOrder");
 
 
-    if (
-        address == null ||
-        typeof address == undefined ||
-        address.postalcode == null ||
-        typeof address.postalcode == undefined ||
-        address.city == null ||
-        typeof address.city == undefined ||
-        address.country == null ||
-        typeof address.country == undefined ||
-        address.region == null ||
-        typeof address.region == undefined
-    ){
-      alert("aaaaaaaaaaaaaaaaaa")
-      setLoadingOverlay(<div></div>);
-      return ;
-    }
 
 
     return await sendOrder({
       items: cart,
       user: currentUser?.email,
       addressData: {
-        address: address.address,
-        postalcode: address.postalcode,
-        city: address.city,
-        country: address.country,
-        region: address.region,
+        address: getCookie("address"),
+        postalcode: getCookie("postalcode"),
+        city: getCookie("city"),
+        country: getCookie("country"),
+        region: getCookie("region"),
       },
     })
         .then(() => {
@@ -221,23 +234,35 @@ function ShowPodInformation(props: PODProps): JSX.Element {
         });
   };
 
+  const loginPageProps = {
+    onExit: () => setLoginPage(<div></div>),
+    onRegisterClick: () => {
+      setLoginPage(<div></div>);
+      setRegisterPage(
+          <RegisterPage
+              onExit={() => setRegisterPage(<div></div>)}
+          ></RegisterPage>
+      );
+    },
+  };
 
 
   const buy = () => {
     if (userRegistered()) {
+
       add()
           .then(() => {})
           .catch((error: Error) => {
+            setLoadingOverlay(<div></div>);
             alert("OHOH, SOMETHING WENT WRONG: " + error.message);
           });
     } else {
-      navigate("/login");
+      setLoginPage(<LoginPage {...loginPageProps}></LoginPage>)
+
     }
   };
 
-
   function renderPaypalButtons(){
-
 
 
     if (cart.length == 0) {
@@ -245,19 +270,20 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       return (<div> EMPTY CART == NO RENDER BUTTONS</div>);
     } else {
 
-      let totalToPay:number = 0;
-
 
       return (
           <PayPalButtons
+
               createOrder={(data, actions) => {
+
+
                 return actions.order
                     .create({
                       purchase_units: [
                         {
                           amount: {
                             currency_code: "USD",
-                            value:,
+                            value:"1",
                           },
                         },
                       ],
@@ -273,8 +299,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
                   // Your code here after capture the order
                   buy();
                 });
-
-
               }}
 
           />
@@ -288,7 +312,10 @@ function ShowPodInformation(props: PODProps): JSX.Element {
   }
 
   return (
+      <>
+        {loginPage}
     <Grid container>
+
       {loadingOverlay}
       <Grid>
         <div className={"info-container"}>
@@ -319,7 +346,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
           </Box>
         </div>
         <div className="buttonsPOD-internal">
-          <button onClick={calcShipping}> Calculate shipping </button>
+          <button onClick={calcShipping}> Calculate shipping  </button>
         </div>
         {cost(delCost)}
         <div className="buttonsPOD-internal">
@@ -330,7 +357,9 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
         </div>
       </Grid>
+
     </Grid>
+      </>
   );
 }
 

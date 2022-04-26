@@ -32,6 +32,8 @@ function App(): JSX.Element {
     refreshUserList();
   }, []);
 
+
+
   return (
     <>
 
@@ -47,7 +49,7 @@ function App(): JSX.Element {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="*" element={<Navigate to="/home" />} />
-          <Route path={"/dashboard"} element={<Dashboard />} />;
+          {/*} <Route path={"/dashboard"} element={<Dashboard />} />*/};
           <Route path="*" element={<Navigate to="/home" />} />
           <Route path={"/pod"} element={<POD />} />
 
