@@ -29,6 +29,6 @@ console.log(firebaseConfig);
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
-export const functions = getFunctions(app,"europe-west1");
+export const functions = getFunctions(app, "europe-west1");
 
 export const db = getFirestore(app);
