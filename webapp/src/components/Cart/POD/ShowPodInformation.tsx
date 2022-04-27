@@ -19,18 +19,19 @@ import { DedeStore } from "../../../redux/store";
 import { calculateDeliveryOnCall } from "../../../../functions/src";
 
 import { getFunctions, httpsCallable } from "firebase/functions";
-import {functions} from "../../../utils/firebase"
-import "./ShowPodInformation.module.scss";
+import { functions } from "../../../utils/firebase";
+import styles from "./ShowPodInformation.module.scss";
 import { useAuth } from "../../../context/AuthContext";
 import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
 import { Dispatch } from "redux";
-import { setShippingCosts } from "../../../redux/actions";
+import { setEstimatedDelivery, setShippingCosts } from "../../../redux/actions";
 import { Address } from "../../../api/model/pod/address";
 import { AddressCalculator } from "./AddressCalculator";
+import Modal from "../../Modal/Modal";
 import { PayPalButtons } from "@paypal/react-paypal-js";
-import {setCookie} from "../../../context/Cookies";
-import {getCookie} from "../../../context/Cookies";
-import {RegisterPage} from "../../pages/RegisterPage/RegisterPage";
+import { setCookie } from "../../../context/Cookies";
+import { getCookie } from "../../../context/Cookies";
+import { RegisterPage } from "../../pages/RegisterPage/RegisterPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 
 type PODProps = {
@@ -48,7 +49,7 @@ type PODProps = {
 function cost(cost: number) {
   if (cost != 0) {
     return (
-      <div className={"info-container"}>
+      <div className={styles.infocontainer}>
         <Box component="h3" id={"deliveryComponent"}>
           Delivery cost: {cost} $
         </Box>
@@ -64,9 +65,13 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     (shippingCosts: number) => dispatch(setShippingCosts(shippingCosts)),
     [dispatch]
   );
+  const setEstimatedDeliveryDate = React.useCallback(
+    (estimatedDelivery: number) =>
+      dispatch(setEstimatedDelivery(estimatedDelivery)),
+    [dispatch]
+  );
 
   const cart = useSelector((state: DedeStore) => state.cart);
-
 
   const [loginPage, setLoginPage] = useState(<div></div>);
   const [registerPage, setRegisterPage] = useState(<div></div>);
@@ -79,6 +84,20 @@ function ShowPodInformation(props: PODProps): JSX.Element {
   const [addresses, setAddresses] = React.useState([]);
   const [listOfAddress, setListOfAddress] = React.useState<Address[]>([]);
 
+  const [orderModal, setOrderModal] = React.useState(<></>);
+
+  const orderModalHtml = (
+    <div className={styles.sucessfulorder}>
+      <div className={styles.title}>Your order was sucessful!</div>
+      <div className={styles.subtitle}>
+        You can see the state of your orders in your account{" "}
+      </div>
+      <div className={styles.accept} onClick={() => setOrderModal(<></>)}>
+        Accept
+      </div>
+    </div>
+  );
+
   const currentUser = useAuth().getCurrentUser();
   const userRegistered = () => {
     return currentUser !== null;
@@ -86,7 +105,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   //OBTENEMOS POR CADA WEB ID LA LISTA DE ADDRESSES ASOCIADOS
   useEffect(() => {
-
     const fullAddresses = AddressCalculator(props.webID);
     const addressesHtml: any = [];
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
@@ -102,15 +120,12 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       setListOfAddress(full);
       setLoadingOverlay(<></>);
 
-      setCookie("address", full[0].address,1);
-      setCookie("city", full[0].city,1);
-      setCookie("country", full[0].country,1);
-      setCookie("region", full[0].region,1);
-      setCookie("postalcode", full[0].postalcode,1);
-
-
-    }
-    );
+      setCookie("address", full[0].address, 1);
+      setCookie("city", full[0].city, 1);
+      setCookie("country", full[0].country, 1);
+      setCookie("region", full[0].region, 1);
+      setCookie("postalcode", full[0].postalcode, 1);
+    });
   }, []);
   const navigate = useNavigate();
 
@@ -122,7 +137,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     region: string
   ): Promise<{ message: string; cost: number } | void> {
     const calculateDeliveryOnCall = httpsCallable(
-        functions,
+      functions,
       "calculateDeliveryOnCall"
     );
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
@@ -139,6 +154,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
         let result = response.data as any;
         console.log(result);
         setShippingCost(result.cost);
+        setEstimatedDeliveryDate(result.estimatedDelivery);
         setDelCost(result.cost);
         return { message: result.message, cost: result.cost };
       })
@@ -147,8 +163,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
         alert("Something went wrong while calculating your shipping cost");
       });
   }
-
-
 
   async function calcShipping() {
     if (
@@ -180,24 +194,18 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     return response;
   }
 
-
-
-
   function setterOfAddress(value: any) {
     const finalVal = listOfAddress.filter(
       (addr) => addr.address === value.target.value
     )[0];
     setAddress(finalVal);
 
-    setCookie("address", finalVal.address,1);
-    setCookie("city", finalVal.city,1);
-    setCookie("country", finalVal.country,1);
-    setCookie("region", finalVal.region,1);
-    setCookie("postalcode", finalVal.postalcode,1);
-
+    setCookie("address", finalVal.address, 1);
+    setCookie("city", finalVal.city, 1);
+    setCookie("country", finalVal.country, 1);
+    setCookie("region", finalVal.region, 1);
+    setCookie("postalcode", finalVal.postalcode, 1);
   }
-
-
 
   const add = async () => {
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
@@ -207,10 +215,8 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       return;
     }
 
+    console.log("ITEMS BEING SENT TO SENDORDER FUNCTIONS", cart);
     const sendOrder = httpsCallable(functions, "sendOrder");
-
-
-
 
     return await sendOrder({
       items: cart,
@@ -223,15 +229,16 @@ function ShowPodInformation(props: PODProps): JSX.Element {
         region: getCookie("region"),
       },
     })
-        .then(() => {
-          setLoadingOverlay(<div></div>);
+      .then(() => {
+        setLoadingOverlay(<></>);
 
-          alert("Your order has been processed.");
-        })
-        .catch(() => {
-          setLoadingOverlay(<div></div>);
-          alert("Sorry, we are suffering technical problems, try again...");
-        });
+        setOrderModal(<Modal element={orderModalHtml}></Modal>);
+      })
+      .catch((error: any) => {
+        setLoadingOverlay(<></>);
+        console.log("catch error", error.message);
+        alert(error);
+      });
   };
 
   const loginPageProps = {
@@ -239,127 +246,107 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     onRegisterClick: () => {
       setLoginPage(<div></div>);
       setRegisterPage(
-          <RegisterPage
-              onExit={() => setRegisterPage(<div></div>)}
-          ></RegisterPage>
+        <RegisterPage
+          onExit={() => setRegisterPage(<div></div>)}
+        ></RegisterPage>
       );
     },
   };
 
-
   const buy = () => {
     if (userRegistered()) {
-
       add()
-          .then(() => {})
-          .catch((error: Error) => {
-            setLoadingOverlay(<div></div>);
-            alert("OHOH, SOMETHING WENT WRONG: " + error.message);
-          });
+        .then(() => {})
+        .catch((error: Error) => {
+          setLoadingOverlay(<div></div>);
+          alert("OHOH, SOMETHING WENT WRONG: " + error.message);
+        });
     } else {
-      setLoginPage(<LoginPage {...loginPageProps}></LoginPage>)
-
+      setLoginPage(<LoginPage {...loginPageProps}></LoginPage>);
     }
   };
 
-  function renderPaypalButtons(){
-
-
+  function renderPaypalButtons() {
     if (cart.length == 0) {
-
-      return (<div> EMPTY CART == NO RENDER BUTTONS</div>);
+      return <div> EMPTY CART == NO RENDER BUTTONS</div>;
     } else {
-
-
       return (
-          <PayPalButtons
-
-              createOrder={(data, actions) => {
-
-
-                return actions.order
-                    .create({
-                      purchase_units: [
-                        {
-                          amount: {
-                            currency_code: "USD",
-                            value:"1",
-                          },
-                        },
-                      ],
-                    })
-                    .then((orderId) => {
-                      // Your code here after create the order
-                      return orderId;
-                    });
-              }}
-              onApprove={async (data, actions: any) => {
-
-                return actions.order.capture().then(function () {
-                  // Your code here after capture the order
-                  buy();
-                });
-              }}
-
-          />
-
+        <PayPalButtons
+          createOrder={(data: any, actions: any) => {
+            return actions.order
+              .create({
+                purchase_units: [
+                  {
+                    amount: {
+                      currency_code: "USD",
+                      value: "1",
+                    },
+                  },
+                ],
+              })
+              .then((orderId: any) => {
+                // Your code here after create the order
+                return orderId;
+              });
+          }}
+          onApprove={async (data: any, actions: any) => {
+            return actions.order.capture().then(function () {
+              // Your code here after capture the order
+              buy();
+            });
+          }}
+        />
       );
-
     }
-
-
-
   }
 
   return (
-      <>
-        {loginPage}
-    <Grid container>
+    <>
+      {loginPage}
+      <Grid container>
+        {loadingOverlay}
+        {orderModal}
+        <Grid>
+          <div className={styles.infocontainer}>
+            <form>
+              <select
+                className={styles.comboboxcontainer}
+                id="addreses"
+                onChange={setterOfAddress}
+              >
+                {addresses}
+              </select>
+            </form>
 
-      {loadingOverlay}
-      <Grid>
-        <div className={"info-container"}>
-          <form>
-            <select
-              className={"combobox-container"}
-              id="addreses"
-              onChange={setterOfAddress}
-            >
-              {addresses}
-            </select>
-          </form>
-
-          <Box component="h3" id={"addressComponent"}>
-            Address: {address?.address}
-          </Box>
-          <Box component="h3" id={"postalcodeComponent"}>
-            Postal Code: {address?.postalcode}
-          </Box>
-          <Box component="h3" id={"cityComponent"}>
-            Locality: {address?.city}
-          </Box>
-          <Box component="h3" id={"countryComponent"}>
-            Country: {address?.country}
-          </Box>
-          <Box component="h3" id={"regionComponent"}>
-            Region: {address?.region}
-          </Box>
-        </div>
-        <div className="buttonsPOD-internal">
-          <button onClick={calcShipping}> Calculate shipping  </button>
-        </div>
-        {cost(delCost)}
-        <div className="buttonsPOD-internal">
-          <button type={"submit"} className="buy" onClick={buy}>
-            Checkout
-          </button>
-          {renderPaypalButtons()}
-
-        </div>
+            <Box component="h3" id={"addressComponent"}>
+              Address: {address?.address}
+            </Box>
+            <Box component="h3" id={"postalcodeComponent"}>
+              Postal Code: {address?.postalcode}
+            </Box>
+            <Box component="h3" id={"cityComponent"}>
+              Locality: {address?.city}
+            </Box>
+            <Box component="h3" id={"countryComponent"}>
+              Country: {address?.country}
+            </Box>
+            <Box component="h3" id={"regionComponent"}>
+              Region: {address?.region}
+            </Box>
+          </div>
+          <div className={styles.buttonsPODinternal}>
+            <button onClick={calcShipping}> Calculate shipping </button>
+          </div>
+          {cost(delCost)}
+          <div className={styles.buttonsPODinternal}>
+            <button type={"submit"} className={styles.buy} onClick={buy}>
+              Checkout
+            </button>
+            {renderPaypalButtons()}
+          </div>
+        </Grid>
       </Grid>
-
-    </Grid>
-      </>
+    </>
   );
 }
 

@@ -1,4 +1,4 @@
-import {Comments} from "./comments";
+import { Comments } from "./comments";
 
 export interface Product {
   id: string;
@@ -9,4 +9,5 @@ export interface Product {
   title: string;
   name?: string;
   comments?: Comments[];
+  stock?: number;
 }

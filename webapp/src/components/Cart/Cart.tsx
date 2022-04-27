@@ -24,6 +24,14 @@ function Cart(props: CartProps): JSX.Element {
     (state: DedeStore) => state.shippingCost
   );
 
+  const getEstimatedDeliveryDate = () => {
+    if (estimatedDelivery) return new Date(estimatedDelivery).toDateString();
+    return "";
+  };
+
+  const estimatedDelivery: number | null = useSelector(
+    (state: DedeStore) => state.estimatedDelivery
+  );
   const products: CartItem[] = useSelector((state: DedeStore) => state.cart);
 
   products.forEach((cartItem) => {
@@ -43,7 +51,8 @@ function Cart(props: CartProps): JSX.Element {
         <div className={styles.bodycontainer}>
           <div className={styles.cartcontent}>
             <div className={styles.cartitemtitle}>
-              <b title={"itemsInYourCart"} >({products.length})</b> Items in your cart
+              <b title={"itemsInYourCart"}>({products.length})</b> Items in your
+              cart
             </div>
             <hr></hr>
 
@@ -66,6 +75,10 @@ function Cart(props: CartProps): JSX.Element {
             <div title={"total"} className={styles.totalPrice}>
               Total:
               <b>{Utils.calculateTotal(products, shippingCost).toFixed(2)} €</b>
+            </div>
+            <div title={"total"} className={styles.totalPrice}>
+              Estimated delivery date:
+              <b>{getEstimatedDeliveryDate()}</b>
             </div>
           </div>
 
