@@ -63,7 +63,7 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }} --project dede-en3a-336f8 --public webapp/build
+          args: deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }} --project dede-en3a-336f8 --public /home/runner/work/dede_en3a/dede_en3a/webapp/build
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
