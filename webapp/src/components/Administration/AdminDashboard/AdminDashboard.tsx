@@ -1,13 +1,13 @@
-import AdminTopMenu from "../AdminTopMenu/AdminTopMenu";
 import styles from "./AdminDashboard.module.scss";
-import ParallaxItem from "../../ParallaxItem/ParallaxItem";
-import {Button} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {Product} from "../../../api/model/product";
-import {getOrder, getOrders, getProducts, getUsers} from "../../../api/api";
+import {getAdmin, getOrder, getOrders, getProducts, getUsers} from "../../../api/api";
 import {Filter} from "../../../api/model/filter";
 import {User} from "../../../api/model/user";
 import {Order} from "../../../api/model/orders/order";
+import TopMenu from "../../menu/TopMenu";
+import {useAuth} from "../../../context/AuthContext";
+import {getAuth} from "firebase/auth";
 
 
 function AdminDashboard(): JSX.Element {
@@ -27,6 +27,29 @@ function AdminDashboard(): JSX.Element {
     const refreshOrderList = async () => {
         setOrders(await getOrders());
     };
+
+    const [auth, setAuth] = useState<boolean>(false);
+    const { getCurrentUser } = useAuth();
+
+    const refreshAdminList = async () => {
+        getAdmin(getCurrentUser()?.email).then((user) => {
+            AdminAuth(user);
+        });
+    };
+
+    getAuth().onAuthStateChanged((user) => {
+        refreshAdminList();
+    })
+
+    function AdminAuth(user : User){
+        if(user){
+            setAuth(true);
+        }
+        else{
+            setAuth(false);
+        }
+        console.log(auth)
+    }
 
     useEffect(() => {
         refreshUserList();
@@ -92,19 +115,27 @@ function AdminDashboard(): JSX.Element {
     }
 
     return (
-
         <>
-            <AdminTopMenu></AdminTopMenu>
-            <div className={styles.header}>
-                <div className={styles.bigText}> Administration Panel </div>
-                <div className={styles.leftPanel}>
-                    <button value={"users"} className={styles.options} onClick={setterOfOption}> Users </button>
-                    <button value={"products"} className={styles.options} onClick={setterOfOption}> Products </button>
-                    <button value={"orders"} className={styles.options} onClick={setterOfOption}> Orders </button>
-                    <button value={"statistics"} className={styles.options} onClick={setterOfOption}> Statistics </button>
-                </div>
-                {option}
-            </div>
+            {auth ? (
+                <>
+                    <TopMenu></TopMenu>
+                    <div className={styles.header}>
+                        <div className={styles.bigText}> Administration Panel </div>
+                        <div className={styles.leftPanel}>
+                            <button value={"users"} className={styles.options} onClick={setterOfOption}> Users </button>
+                            <button value={"products"} className={styles.options} onClick={setterOfOption}> Products </button>
+                            <button value={"orders"} className={styles.options} onClick={setterOfOption}> Orders </button>
+                            <button value={"statistics"} className={styles.options} onClick={setterOfOption}> Statistics </button>
+                        </div>
+                        {option}
+                    </div>
+                </>)
+                :
+                <>
+                    <TopMenu></TopMenu>
+                    <h1>YOU DO NOT HAVE PERMISSIONS TO ACCESS HERE</h1>
+                </>
+            }
         </>
     );
 }

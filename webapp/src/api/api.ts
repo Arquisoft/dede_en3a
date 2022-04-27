@@ -28,6 +28,7 @@ import { Filter } from "./model/filter";
 const userCollection = collection(db, "user");
 const productCollection = collection(db, "products");
 const orderCollection = collection(db, "orders");
+const adminCollection = collection(db, "admin");
 
 export async function signUpUser(
   auth: Auth,
@@ -108,6 +109,16 @@ export async function getOrder(email: string | null | undefined): Promise<any> {
     const q = query(orderCollection, where("userEmail", "==", email));
     return getDocs(q).then((docs) =>
       docs.docs.map((doc) => doc.data() as Order)
+    );
+  }
+  return null;
+}
+
+export async function getAdmin(email: string | null | undefined): Promise<any> {
+  if (email != null && email != undefined) {
+    const q = query(adminCollection, where("email", "==", email));
+    return getDocs(q).then((docs) =>
+        docs.docs.map((doc) => doc.data() as User)[0]
     );
   }
   return null;

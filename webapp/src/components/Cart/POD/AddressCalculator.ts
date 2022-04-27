@@ -1,11 +1,13 @@
 import {Address} from "../../../api/model/pod/address";
-import {getSolidDataset, getStringNoLocale, getThing, getUrl, getUrlAll, Thing} from "@inrupt/solid-client";
+import {getSolidDataset, getStringNoLocale, getThing, getUrl, getUrlAll, setThing, Thing} from "@inrupt/solid-client";
 import {VCARD} from "@inrupt/vocab-common-rdf";
 
 export async function AddressCalculator(webID : string): Promise<Address[]>{
     let profileDocumentURI = webID.split("#")[0]
     let myDataSet = await getSolidDataset(profileDocumentURI)
     let profile = getThing(myDataSet, webID)
+    console.log("thing")
+    console.log(profile)
     let urlAddress = getUrlAll(profile as Thing, VCARD.hasAddress)
     console.log(urlAddress)
 
@@ -29,4 +31,10 @@ async function calculator(address: string, myDataSet : any) : Promise<Address>{
         region: getStringNoLocale(addressProfile as Thing, VCARD.region) as string
     }
     return add;
+}
+
+export async function AddAddressToPublicPod(webID : string){
+    let profileDocumentURI = webID.split("#")[0]
+    let myDataSet = await getSolidDataset(profileDocumentURI)
+    let profile = getThing(myDataSet, webID)
 }
