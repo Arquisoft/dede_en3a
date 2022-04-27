@@ -21,7 +21,7 @@ import { calculateDeliveryOnCall } from "../../../../functions/src";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { functions } from "../../../utils/firebase";
 import styles from "./ShowPodInformation.module.scss";
-import { useAuth } from "../../../context/AuthContext";
+import {getCurrentUser, useAuth} from "../../../context/AuthContext";
 import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
 import { Dispatch } from "redux";
 import { setEstimatedDelivery, setShippingCosts } from "../../../redux/actions";
@@ -97,6 +97,82 @@ function ShowPodInformation(props: PODProps): JSX.Element {
         Accept
       </div>
     </div>
+  );
+
+
+  const loginPageProps = {
+    onExit: () => setLoginPage(<div></div>),
+    onRegisterClick: () => {
+      setLoginPage(<div></div>);
+      setRegisterPage(
+          <RegisterPage
+              onExit={() => setRegisterPage(<div></div>)}
+          ></RegisterPage>
+      );
+    },
+    onLoginSuccess: () => {setLoginPage(<div></div>); setRegisterPage(<div></div>); setOrderModal(<></>)},
+  };
+
+
+  const loginModal = (<LoginPage {...loginPageProps}></LoginPage>);
+
+
+
+
+  const emptyCartErrorModal = (
+
+      <div className={styles.modalerror}>
+        <div className={styles.title}>Sorry, cannot proceed with an empty cart...</div>
+        <div className={styles.title}>
+          Add some products to your cart.
+        </div>
+        <div className={styles.accept} onClick={() => setOrderModal(<></>)}>
+          Accept
+        </div>
+      </div>
+
+
+  );
+
+
+  const paypalModalMenu = (
+
+      <>
+
+      <PayPalButtons
+          createOrder={(data: any, actions: any) => {
+            return actions.order
+                .create({
+                  purchase_units: [
+                    {
+                      amount: {
+                        currency_code: "EUR",
+                        value: getCookie("totalCartAndShipping"),
+                      },
+                    },
+                  ],
+                })
+                .then((orderId: any) => {
+
+                  // Your code here after create the order
+                  return orderId;
+                });
+          }}
+          onApprove={async (data: any, actions: any) => {
+            return actions.order.capture().then(function () {
+              setOrderModal(<></>)
+              // Your code here after capture the order
+              buy();
+            });
+          }}
+      />
+
+        <div className={styles.cancel} onClick={() => setOrderModal(<></>)}>
+          Cancel
+        </div>
+      </>
+
+
   );
 
   const currentUser = useAuth().getCurrentUser();
@@ -177,13 +253,21 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
     console.log("CALCULANDO")
 
-    let response = await calcWithFirebaseFunction(
+    let response : void | {message: string, cost: number} = await calcWithFirebaseFunction(
       getCookie("address"),
         getCookie("postalcode"),
         getCookie("city"),
         getCookie("country"),
         getCookie("region")
     );
+
+    let shipCost = "";
+    //to check response is not void
+    if(response instanceof  Object){
+      shipCost = response.cost.toString();
+    }
+
+    setCookie("shippingCost",shipCost,1)
 
     return response;
   }
@@ -217,7 +301,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       return;
     }
 
-    console.log("ITEMS BEING SENT TO SENDORDER FUNCTIONS", cart);
+    console.log("ITEMS BEING SENT TO SEND ORDER FUNCTIONS", cart);
     const sendOrder = httpsCallable(functions, "sendOrder");
 
 
@@ -246,18 +330,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       });
   };
 
-  const loginPageProps = {
-    onExit: () => setLoginPage(<div></div>),
-    onRegisterClick: () => {
-      setLoginPage(<div></div>);
-      setRegisterPage(
-        <RegisterPage
-          onExit={() => setRegisterPage(<div></div>)}
-        ></RegisterPage>
-      );
-    },
-  };
-
 
   const buy = () => {
     if (userRegistered()) {
@@ -273,48 +345,41 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     }
   };
 
-  function renderPaypalButtons(){
 
 
-    if (cart.length == 0) {
-
-      return (<div> EMPTY CART == NO RENDER BUTTONS</div>);
-    } else {
 
 
-      return (
-        <PayPalButtons
-          createOrder={(data: any, actions: any) => {
-            return actions.order
-              .create({
-                purchase_units: [
-                  {
-                    amount: {
-                      currency_code: "USD",
-                      value: "1",
-                    },
-                  },
-                ],
-              })
-              .then((orderId: any) => {
-                // Your code here after create the order
-                return orderId;
-              });
-          }}
-          onApprove={async (data: any, actions: any) => {
-            return actions.order.capture().then(function () {
-              // Your code here after capture the order
-              buy();
-            });
-          }}
-        />
-      );
+  function canCheckout(){
+
+    if(cart.length == 0){
+
+
+      setOrderModal(<Modal element={emptyCartErrorModal}></Modal>)
+
+    }
+    else if(!userRegistered()){
+
+      setOrderModal(<Modal element={loginModal}></Modal>)
+
+
+  //IF USER IS LOGED IN AND NON-EMPTY CART --> RENDER PAYPAL BUTTONS
+    }else{
+
+
+      let shipCost  = Number(getCookie("shippingCost"))
+      let cartCost = 0;
+      for(let i = 0; i< cart.length; i++){
+        cartCost += cart[i].amount + cart[i].product.price;
+      }
+      setCookie("totalCartAndShipping",(shipCost+cartCost)+"",1)
+      setOrderModal(<Modal element={paypalModalMenu}></Modal>);
 
     }
 
-
-
   }
+
+
+
 
   return (
     <>
@@ -350,15 +415,12 @@ function ShowPodInformation(props: PODProps): JSX.Element {
               Region: {getCookie("region")}
             </Box>
           </div>
+
           <div className={styles.buttonsPODinternal}>
-            <button onClick={calcShipping}> Calculate shipping </button>
-          </div>
-          {cost(delCost)}
-          <div className={styles.buttonsPODinternal}>
-            <button type={"submit"} className={styles.buy} onClick={buy}>
+            <button type={"submit"} className={styles.buy} onClick={canCheckout}>
               Checkout
             </button>
-            {renderPaypalButtons()}
+
           </div>
         </Grid>
       </Grid>
