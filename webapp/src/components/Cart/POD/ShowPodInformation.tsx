@@ -129,18 +129,20 @@ function ShowPodInformation(props: PODProps): JSX.Element {
   }
 
   async function calcShipping() {
-    if (
-      address == null ||
-      typeof address == undefined ||
-      address.postalcode == null ||
-      typeof address.postalcode == undefined ||
-      address.city == null ||
-      typeof address.city == undefined ||
-      address.country == null ||
-      typeof address.country == undefined ||
-      address.region == null ||
-      typeof address.region == undefined
-    ) {
+    if (address == null || typeof address == undefined) {
+      alert("Your POD has not an address associated with it");
+      return;
+    }
+
+    if(address.postalcode == null ||
+        typeof address.postalcode == undefined ||
+        address.city == null ||
+        typeof address.city == undefined ||
+        address.country == null ||
+        typeof address.country == undefined ||
+        address.region == null ||
+        typeof address.region == undefined)
+     {
       alert(
         "PLEASE, ENTER A POD WITH address, postal code, city, country and region"
       );
