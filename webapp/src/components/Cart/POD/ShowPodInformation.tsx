@@ -28,6 +28,11 @@ import { setEstimatedDelivery, setShippingCosts } from "../../../redux/actions";
 import { Address } from "../../../api/model/pod/address";
 import { AddressCalculator } from "./AddressCalculator";
 import Modal from "../../Modal/Modal";
+import { PayPalButtons } from "@paypal/react-paypal-js";
+import { setCookie } from "../../../context/Cookies";
+import { getCookie } from "../../../context/Cookies";
+import { RegisterPage } from "../../pages/RegisterPage/RegisterPage";
+import LoginPage from "../../pages/LoginPage/LoginPage";
 
 type PODProps = {
   webID: string;
@@ -67,6 +72,9 @@ function ShowPodInformation(props: PODProps): JSX.Element {
   );
 
   const cart = useSelector((state: DedeStore) => state.cart);
+
+  const [loginPage, setLoginPage] = useState(<div></div>);
+  const [registerPage, setRegisterPage] = useState(<div></div>);
 
   const [address, setAddress] = React.useState<Address>();
   const [delCost, setDelCost] = React.useState(0);
@@ -111,6 +119,12 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       setAddress(full[0]);
       setListOfAddress(full);
       setLoadingOverlay(<></>);
+
+      setCookie("address", full[0].address, 1);
+      setCookie("city", full[0].city, 1);
+      setCookie("country", full[0].country, 1);
+      setCookie("region", full[0].region, 1);
+      setCookie("postalcode", full[0].postalcode, 1);
     });
   }, []);
   const navigate = useNavigate();
@@ -145,6 +159,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
         return { message: result.message, cost: result.cost };
       })
       .catch((error: Error) => {
+        setLoadingOverlay(<div></div>);
         alert("Something went wrong while calculating your shipping cost");
       });
   }
@@ -175,6 +190,21 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       address.country,
       address.region
     );
+
+    return response;
+  }
+
+  function setterOfAddress(value: any) {
+    const finalVal = listOfAddress.filter(
+      (addr) => addr.address === value.target.value
+    )[0];
+    setAddress(finalVal);
+
+    setCookie("address", finalVal.address, 1);
+    setCookie("city", finalVal.city, 1);
+    setCookie("country", finalVal.country, 1);
+    setCookie("region", finalVal.region, 1);
+    setCookie("postalcode", finalVal.postalcode, 1);
   }
 
   const add = async () => {
@@ -192,11 +222,11 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       items: cart,
       user: currentUser?.email,
       addressData: {
-        address: address?.address,
-        postalcode: address?.postalcode,
-        city: address?.city,
-        country: address?.country,
-        region: address?.region,
+        address: getCookie("address"),
+        postalcode: getCookie("postalcode"),
+        city: getCookie("city"),
+        country: getCookie("country"),
+        region: getCookie("region"),
       },
     })
       .then(() => {
@@ -205,72 +235,118 @@ function ShowPodInformation(props: PODProps): JSX.Element {
         setOrderModal(<Modal element={orderModalHtml}></Modal>);
       })
       .catch((error: any) => {
+        setLoadingOverlay(<></>);
         console.log("catch error", error.message);
         alert(error);
       });
   };
+
+  const loginPageProps = {
+    onExit: () => setLoginPage(<div></div>),
+    onRegisterClick: () => {
+      setLoginPage(<div></div>);
+      setRegisterPage(
+        <RegisterPage
+          onExit={() => setRegisterPage(<div></div>)}
+        ></RegisterPage>
+      );
+    },
+  };
+
   const buy = () => {
     if (userRegistered()) {
       add()
         .then(() => {})
         .catch((error: Error) => {
+          setLoadingOverlay(<div></div>);
           alert("OHOH, SOMETHING WENT WRONG: " + error.message);
         });
     } else {
-      navigate("/login");
+      setLoginPage(<LoginPage {...loginPageProps}></LoginPage>);
     }
   };
 
-  function setterOfAddress(value: any) {
-    const finalVal = listOfAddress.filter(
-      (addr) => addr.address === value.target.value
-    )[0];
-    setAddress(finalVal);
+  function renderPaypalButtons() {
+    if (cart.length == 0) {
+      return <div> EMPTY CART == NO RENDER BUTTONS</div>;
+    } else {
+      return (
+        <PayPalButtons
+          createOrder={(data: any, actions: any) => {
+            return actions.order
+              .create({
+                purchase_units: [
+                  {
+                    amount: {
+                      currency_code: "USD",
+                      value: "1",
+                    },
+                  },
+                ],
+              })
+              .then((orderId: any) => {
+                // Your code here after create the order
+                return orderId;
+              });
+          }}
+          onApprove={async (data: any, actions: any) => {
+            return actions.order.capture().then(function () {
+              // Your code here after capture the order
+              buy();
+            });
+          }}
+        />
+      );
+    }
   }
 
   return (
-    <Grid container>
-      {loadingOverlay}
-      {orderModal}
-      <Grid>
-        <div className={styles.infocontainer}>
-          <form>
-            <select
-              className={styles.comboboxcontainer}
-              id="addreses"
-              onChange={setterOfAddress}
-            >
-              {addresses}
-            </select>
-          </form>
+    <>
+      {loginPage}
+      <Grid container>
+        {loadingOverlay}
+        {orderModal}
+        <Grid>
+          <div className={styles.infocontainer}>
+            <form>
+              <select
+                className={styles.comboboxcontainer}
+                id="addreses"
+                onChange={setterOfAddress}
+              >
+                {addresses}
+              </select>
+            </form>
 
-          <Box component="h3" id={"addressComponent"}>
-            Address: {address?.address}
-          </Box>
-          <Box component="h3" id={"postalcodeComponent"}>
-            Postal Code: {address?.postalcode}
-          </Box>
-          <Box component="h3" id={"cityComponent"}>
-            Locality: {address?.city}
-          </Box>
-          <Box component="h3" id={"countryComponent"}>
-            Country: {address?.country}
-          </Box>
-          <Box component="h3" id={"regionComponent"}>
-            Region: {address?.region}
-          </Box>
-        </div>
-        <div className={styles.buttonsPODinternal}>
-          <button onClick={calcShipping}> Calculate shipping </button>
-        </div>
-        {cost(delCost)}
-        <div className={styles.buttonsPODinternal}>
-          <button type={"submit"} className={styles.buy} onClick={buy}>
-            Checkout
-          </button>
-        </div>
+            <Box component="h3" id={"addressComponent"}>
+              Address: {address?.address}
+            </Box>
+            <Box component="h3" id={"postalcodeComponent"}>
+              Postal Code: {address?.postalcode}
+            </Box>
+            <Box component="h3" id={"cityComponent"}>
+              Locality: {address?.city}
+            </Box>
+            <Box component="h3" id={"countryComponent"}>
+              Country: {address?.country}
+            </Box>
+            <Box component="h3" id={"regionComponent"}>
+              Region: {address?.region}
+            </Box>
+          </div>
+          <div className={styles.buttonsPODinternal}>
+            <button onClick={calcShipping}> Calculate shipping </button>
+          </div>
+          {cost(delCost)}
+          <div className={styles.buttonsPODinternal}>
+            <button type={"submit"} className={styles.buy} onClick={buy}>
+              Checkout
+            </button>
+            {renderPaypalButtons()}
+          </div>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 }
 
