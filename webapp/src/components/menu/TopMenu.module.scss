@@ -1,19 +1,29 @@
 @import "./../../Styles.scss";
 
 .menucontainer {
-  position: sticky;
+  position: fixed;
+  width: 100%;
   top: 0px;
   height: var(--topMenuHeight);
-  background-color: var(--dark2);
+  background-color: rgba(0, 0, 0, 0);
+
   display: flex;
   flex-direction: row;
   justify-content: center;
   z-index: 100;
+  transition: 0.4s ease;
+}
+
+.colored {
+  background-color: var(--dark2);
+}
+.menucontainer > * {
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .menu {
   height: 100%;
-  box-shadow: var(--shadow2);
+  //box-shadow: var(--shadow2);
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -21,7 +31,7 @@
 
 .links {
   height: 100%;
-  width: 95%;
+  width: 80%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -50,6 +60,7 @@
   margin-left: 1rem;
   align-self: center;
   height: 3rem;
+  width: 10%;
   animation: logo-spin 25s infinite linear;
 }
 
@@ -57,16 +68,6 @@
   cursor: pointer;
   font-size: 2rem;
   align-self: center;
-  margin-right: 3.5rem;
-  transition: 0.35s ease;
-}
-
-.loginicon:hover {
-  filter: drop-shadow(var(--dropShadowOrange));
-  font-size: 2rem;
-  align-self: center;
-  margin-right: 3.5rem;
-  color: var(--orange2);
 }
 
 .cartcounter {
@@ -78,10 +79,6 @@
   top: -0rem;
   position: absolute;
   background-color: transparent;
-}
-
-.wobble {
-  animation: wobble 0.8s both;
 }
 
 a,
@@ -157,7 +154,7 @@ a:active {
   background-color: var(--dark2);
   height: 100vh;
   transition: 0.5s ease;
-  z-index: 1;
+  z-index: 50;
   .links {
     display: none;
     margin-top: var(--topMenuHeight);
@@ -170,10 +167,144 @@ a:active {
   }
 }
 
+.loginLogoMobile {
+  margin-right: 1rem !important;
+}
+
+.logincontainer {
+  transition: 0.35s ease;
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.logincontainer:hover {
+  filter: drop-shadow(var(--dropShadowOrange));
+  color: var(--orange2);
+}
+
+.username {
+  user-select: none;
+  margin-top: 0.25rem;
+  text-align: center;
+}
+
+.wobble {
+  animation: wobble 0.8s both;
+}
+
+.expandablerightmenu {
+  background-color: white;
+  width: 0px;
+  position: fixed;
+  opacity: 0;
+  top: 0px;
+  right: 0px;
+  background-color: var(--dark2);
+  height: 100vh;
+  transition: 0.5s ease;
+  z-index: 50;
+
+  hr {
+    margin: 1.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: calc(100% - 2rem);
+  }
+}
+
+.expandablerightmenu > * {
+  opacity: 0;
+}
 .showmenu {
   width: 60%;
   opacity: 1;
   .links {
     display: flex;
   }
+}
+
+.menuitemscontainer {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.showcartmenu {
+  padding-top: var(--topMenuHeight);
+  width: 20rem;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.showcartmenu > * {
+  animation: appear 1s ease 0.1s forwards;
+}
+
+.cartmenuitem {
+  background-color: var(--dark1);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin: 1rem;
+  img {
+    border-radius: 1rem;
+
+    width: 40%;
+  }
+}
+
+.totalcartprice {
+  letter-spacing: 0.04rem;
+  font-size: 1.3rem;
+  align-self: center;
+  b {
+    margin-left: 0.4rem;
+    color: var(--orange2);
+  }
+  b::after {
+    content: " €";
+  }
+}
+
+.iteminfo {
+  margin-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  span {
+    margin-top: 1rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  b {
+    user-select: none;
+    cursor: pointer;
+    font-size: 2rem;
+    color: var(--orange2);
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+.cartproceed {
+  transition: 0.3s ease;
+  user-select: none;
+  cursor: pointer;
+  margin-top: 2rem;
+  font-weight: bold;
+  align-self: center;
+  font-size: 1.5rem;
+  padding: 0.6rem;
+  background-color: var(--orange2);
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+}
+
+.cartproceed:hover {
+  filter: drop-shadow(0px 0px 5px var(--orange2));
 }

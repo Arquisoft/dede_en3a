@@ -60,8 +60,8 @@ This diagram shows how the app components and their respective hardware devices 
 
 Quality and/or Performance Features::
 
-Perfomance is mainly based on the user's available resources (connection speed, device hardware, etc) and the resources of the hosting server device (which depends on the price plan). We cannot control those things.
-To a lesser extent, the perfomance of the application will also depend on the
+Performance is mainly based on the user's available resources(connection speed, device hardware, etc.) and the resources of the hosting server device (which depends on the price plan). We cannot control those things.
+To a lesser extent, the performance of the application will also depend on the
 node.js and react apps. We will make the required optimizations in order to maximize the performance and quality.
 
 
@@ -70,7 +70,8 @@ Mapping of Building Blocks to Infrastructure::
 |===
 | Client Device         | Device of the user (desktop, mobile). Must have internet connection
 | DB     | Firebase provides a database linked to the app.
+|DB Api | Corresponding api to perform queries to Firebase Database
 | Web Server     | Firebase in which our app will be running.
-
+|Geocoder | Api to calculate coordinates and distances given a street, city, region...
 | POD Provider      | The pod provider we will be using. In our case, Solid Community. Will be in charge of providing the pods for the app users.
 |===

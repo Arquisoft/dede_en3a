@@ -1,9 +1,18 @@
-import { INCREASE, DECREASE, REMOVE, CLEAR_CART } from "./actionTypes";
+import {
+  INCREASE,
+  DECREASE,
+  REMOVE,
+  CLEAR_CART,
+  SET_SHIPPING_COST,
+  SET_ESTIMATED_DELIVERY,
+} from "./actionTypes";
 
 import { DedeAction, DedeStore } from "./store";
 
 const initialStore = {
   cart: [],
+  shippingCost: null,
+  estimatedDelivery: null,
 };
 
 const reducer = (
@@ -27,7 +36,27 @@ const reducer = (
         .filter((item) => item.amount !== 0),
     };
   }
-  if (action.type === INCREASE) {
+
+  //SET SHIPPING COSTS
+  else if (action.type === SET_SHIPPING_COST) {
+    console.log("SETTING SHIP COSTS", action.props);
+    return {
+      ...state,
+      shippingCost: action.props,
+    };
+  }
+
+  //SET ESTIMATED DELIVERY
+  else if (action.type === SET_ESTIMATED_DELIVERY) {
+    console.log("SETTING ESTIMATED DELIVERY", action.props);
+    return {
+      ...state,
+      estimatedDelivery: action.props,
+    };
+  }
+
+  //INCREASE CART
+  else if (action.type === INCREASE) {
     const newCartItems = state.cart;
 
     let exists = false;
@@ -53,7 +82,8 @@ const reducer = (
     };
   }
 
-  if (action.type === CLEAR_CART) {
+  // CLEAR CART
+  else if (action.type === CLEAR_CART) {
     return { ...state, cart: [] };
   }
   if (action.type === REMOVE) {

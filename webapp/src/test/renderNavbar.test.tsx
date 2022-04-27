@@ -4,7 +4,7 @@ import TopMenu from "../components/menu/TopMenu";
 import {Provider} from "react-redux";
 import {store} from "../redux/store";
 import {BrowserRouter} from "react-router-dom";
-
+import {db} from "../utils/firebase"
 test ( 'Navbar home test', async () => {
 
     const {getByTitle} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
@@ -57,7 +57,7 @@ test ( 'Navbar Cart test', async () => {
 test ( 'Navbar Login test', async () => {
 
     const {getByTitle} = render( <BrowserRouter><Provider store={store}> <TopMenu></TopMenu></Provider></BrowserRouter> );
-    const loginButton = getByTitle("login");
+    const loginButton = getByTitle("login-pc");
     expect(loginButton).toBeInTheDocument();
 
 } );

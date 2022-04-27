@@ -2,7 +2,6 @@
   background-color: var(--dark2);
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: var(--shadow2);
 
   margin-top: 2rem;
   margin-bottom: 2rem;
@@ -16,9 +15,10 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  z-index: 10;
 }
 
-.pod-input-field {
+.podinputfield {
   font-size: 2rem;
   width: 90%;
   padding: 0.3rem;
@@ -30,17 +30,16 @@ form {
   margin-top: 0.5rem;
 }
 
-.pod-header {
-  font-family: "Montserrat-Bold";
+.podheader {
+  font-family: "Montserrat-Light";
   color: var(--orange1);
+  font-size: 1.6rem;
   margin-left: 1rem;
   padding: 5%;
   margin-top: 1rem;
 }
 
-.pod-wrapper {
-  box-shadow: 0px 0px 3rem rgba(255, 255, 255, 0.192);
-  border-radius: 1rem;
+.podwrapper {
   display: flex;
   flex-direction: column;
   background-color: var(--dark3);

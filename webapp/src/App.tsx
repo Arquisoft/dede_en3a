@@ -16,6 +16,10 @@ import { Dashboard } from "./components/pages/DashboardPage/dashboard";
 import { RegisterPage } from "./components/pages/RegisterPage/RegisterPage";
 import POD from "./components/Cart/POD/POD";
 import AboutPage from "./components/pages/AboutPage/AboutPage";
+import AdminDashboard from "./components/Administration/AdminDashboard/AdminDashboard";
+import AdminFirebase from "./components/Administration/AdminFirebase/AdminFirebase";
+
+
 
 function App(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
@@ -28,23 +32,30 @@ function App(): JSX.Element {
     refreshUserList();
   }, []);
 
+
+
   return (
     <>
+
       <BrowserRouter>
         <Routes>
           <Route path="/home" element={<MainPage />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/login" element={<LoginPage />} />
+          {/* <Route path="/login" element={<LoginPage />} /> */}
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          {/* <Route path="/register" element={<RegisterPage />} /> */}
           <Route path="/shop" element={<ShopPage />} />
-          <Route path={"/product/:id"} element={<ProductDetails/>}></Route>
+          <Route path={"/product/:id"} element={<ProductDetails />}></Route>
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="*" element={<Navigate to="/home" />} />
-          <Route path={"/dashboard"} element={<Dashboard />} />;
+          {/*} <Route path={"/dashboard"} element={<Dashboard />} />*/};
           <Route path="*" element={<Navigate to="/home" />} />
           <Route path={"/pod"} element={<POD />} />
+
+          {/* Need to auth or something xD */}
+          <Route path={"/admin"} element={<AdminDashboard/>} />
+          <Route path={"/firebase"} element={<AdminFirebase/>} />
         </Routes>
       </BrowserRouter>
 

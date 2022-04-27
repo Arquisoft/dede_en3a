@@ -46,13 +46,14 @@ Contained Building Blocks::
 | User         | A client using our application.
 | Dede     | The application itself. 
 | Pod     | The user's pod. It is external to our application. It is used by the application in order to preserve the privacy of our users. Will be provided by an external POD Provider.
+|Geocoder | Api to calculate coordinates and distances given the address from the pod.
 |===
 
 *Level 1:*
 
 |===
 | Frontend         | React application. Will contain the user interface as well as any client-side function the application may need. 
-| Backend     | The backend functionality will be provided by the firebase functions.
+| Backend     | The backend functionality will be provided by the firebase functions and Firebase DB Api.
 |===
 *Level 2:*
 
@@ -60,6 +61,7 @@ __These components are highly subject to change, given the early stage of the ap
 
 |===
 | GUI     | The interface system the user will interact with.
+|DB Api | Built-in api already provided by firebase to access the database.
 | Functions     | Provided by firebase. Serverless backend code that works via http requests.
 They allow JavaScript, TypeScript, Python and Go. They provide automatic vertical and horizontal escalation
 depending on the number of requests, ensuring availability and efficiency.

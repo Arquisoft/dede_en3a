@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "../../api/model/product";
-import "./CardItem.scss";
+import styles from "./CardItem.module.scss";
 import { Link } from "react-router-dom";
+import { Rating } from "@mui/material";
+import { Utils } from "../../utils/utilts";
 
 type CardItemProps = {
   product: Product;
@@ -13,23 +15,74 @@ export const CardItem: React.FC<CardItemProps> = ({
   product,
 }) => {
   const addToCart = () => {
-    saveProductToCart(product);
+    if (product.stock !== 0) saveProductToCart(product);
   };
+  const [rating, setRating] = useState(5);
+
+  let stockMessage: JSX.Element = <></>;
+  let outOfStockImageStyle;
+  let cartOutOfStockStyle;
+
+  if (product.stock! < 50) {
+    stockMessage = <div className={styles.lowstock}>Low stock</div>;
+    if (product.stock === 0) {
+      outOfStockImageStyle = styles.outofstockimage;
+      stockMessage = <div className={styles.lowstock}>Out of stock</div>;
+      cartOutOfStockStyle = styles.cartoutofstock;
+    }
+  }
+
+  useEffect(() => {
+    setRating(Utils.getProductAverageRating(product));
+  }, []);
 
   return (
     <>
-      <div className="container">
+      <div className={styles.container}>
         <Link to={"/product/" + product.id}>
-          <img className="card-product-image" src={product.img} ></img>
-        </Link>
-        <div className="description-container">
-          <div className="col1">
-            <div className="price">{product.price + " $"}</div>
-            <div className="product-name">{product.name}</div>
+          <div className={styles.imagecontainer}>
+            <img
+              className={styles.cardproductimage + " " + outOfStockImageStyle}
+              src={product.img}
+            ></img>
+            {stockMessage}
           </div>
-          <div className="col2">
-            <div onClick={addToCart} className="add-to-cart">
-              <span className="material-icons cart-icon">
+        </Link>
+        <div className={styles.descriptioncontainer}>
+          <div className={styles.col1}>
+            <div title={"cardItemName"} className={styles.productname}>
+              {product.name}
+            </div>
+            <div title={"cardItemPrice"} className={styles.price}>
+              {product.price + " $"}
+            </div>
+            <div style={{ display: "flex", marginTop: "0.5rem" }}>
+              <Rating
+                title={"cardItemRating"}
+                name="read-only"
+                value={rating}
+                precision={0.5}
+                readOnly
+                size={"small"}
+              />
+              <div className={styles.ratingnumber}>({rating.toFixed(1)})</div>
+            </div>
+          </div>
+
+          <div className={styles.col2}>
+            <div
+              title={"cardItemAddButton"}
+              onClick={addToCart}
+              className={styles.addtocart}
+            >
+              <span
+                className={
+                  "material-icons " +
+                  styles.carticon +
+                  " " +
+                  cartOutOfStockStyle
+                }
+              >
                 add_shopping_cart
               </span>
             </div>

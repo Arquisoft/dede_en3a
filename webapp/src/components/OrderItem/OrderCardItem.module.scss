@@ -1,31 +1,30 @@
-.product-cart-container {
+@import "../../variables.scss";
+
+.productcartcontainer {
   margin-top: 3rem;
-  height: 15rem;
-  width: 45rem;
+  width: 100%;
   color: var(--white);
   display: flex;
-  flex-direction: row;
+  flex-flow: row;
 }
 
-.product-image:hover {
+.productimage:hover {
   transform: scale(1.05);
   .price {
     margin-top: 1rem;
   }
 }
 
-.product-image {
+.productimage {
   cursor: pointer;
   transition: 0.5s ease;
   border-radius: 0.5rem;
-  width: 15rem;
-  height: 100%;
+  width: 14rem;
+  height: 15rem;
 }
 
-.product-cart-description-container {
-  margin-left: 3rem;
-  flex-direction: row;
-  width: 25rem;
+.productcartdescriptioncontainer {
+  margin-left: 1rem;
 }
 .price {
   transition: 0.5s ease;
@@ -34,16 +33,28 @@
   font-size: 1.8rem;
   font-family: "Montserrat-Bold";
 }
-.product-name {
+.productname {
   font-size: 1.4rem;
   color: var(--white);
   letter-spacing: var(--letterSpacing);
   margin-top: 0.2rem;
   font-family: "Montserrat-Bold";
 }
-.product-ammount {
+.productammount {
   font-size: 1.4rem;
   color: var(--white);
   letter-spacing: var(--letterSpacing);
   margin-top: 0.2rem;
+}
+
+@media (min-width: 0px) and (max-width: $screen-xs-max) {
+  .productimage {
+    width: 75%;
+    margin-left: 7.5%;
+    height: auto;
+  }
+
+  .productcartcontainer {
+    flex-direction: column;
+  }
 }

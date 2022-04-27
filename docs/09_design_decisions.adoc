@@ -6,7 +6,7 @@
 ****
 .Contents
 Important, expensive, large scale or risky architecture decisions including rationals.
-With "decisions" we mean selecting one alternative based on given criteria.
+With "decisions", we mean selecting one alternative based on given criteria.
 
 Please use your judgement to decide whether an architectural decision should be documented
 here in this central section or whether you better document it locally
@@ -29,9 +29,12 @@ Various options:
 |===
 | Decision         | Pros    | Cons
 | QA-1 Webstorm      | Easy IDE to use very similar to IntellIJ |
-| QA-2 Node.js   | Uses Javascript, you can stream big files.      | Do not provide scalability.
-| QA-3 Webapp   | Better user experience, flexible access, easy setup.      | Reduced speed, Internet reliance.
-| QA-4 Pod. Solid Community   | Data security, all data in one place.      | As the data is decentralized you need to rely on
+| QA-2 Webapp   | Better user experience, flexible access, easy setup.      | Reduced speed, Internet reliance.
+| QA-3 Pod. Solid Community   | Data security, all data in one place.      | As the data is decentralized you need to rely on
 a different product and poor documentation.
-| QA-5 Firebase | It supports the development and the deployment for the app. Also some backend    | Not very familiarized
+| QA-4 Firebase Hosting| It supports the deployment for the app. High availability.  | Not very familiarized.
+| QA-5 Firebase Database| It stores the document-based database. High availability. Provides a clear web interface to administrate it. A protected and secure backend for accessing the storage is already provided. | Not very familiarized with document-based database.
+| QA-6 Firebase Functions| Serverless approach to provide the backend of our app. Has its own stored logs. High availability.  | Very difficult to debug.
+| QA-7 Redux      | Easy way of keeping the state of the application and using information of different pages | Hard configuration and none of us had any idea of how to use it before.
+| QA-8 Geocoder API | Fast coordinates resolution for addresses. | Very poor documentation for using it in TypeScript.
 |===

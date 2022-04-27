@@ -36,5 +36,5 @@ Potentially more columns in case you need translations.
                 
 | Node.js       | Node.js is a platform built on JavaScript runtime for easily building
                     fast and scalable network applications.
-| Firebase      | Platform to develop web applications and also to deploy them. Backend can be done inside.
+| Firebase      | Platform to develop web applications and also to deploy them. Backend functions can be served from firebase.
 |===

@@ -13,6 +13,8 @@ export type DedeAction = {
 
 export type DedeStore = {
   cart: CartItem[];
+  shippingCost: number | null;
+  estimatedDelivery: number | null;
 };
 
 type DispatchType = (args: DedeAction) => DedeAction;
