@@ -127,6 +127,22 @@ async function calculateCoordinates(
   return geocoder.search({ q: query });
 }
 
+/**
+ *
+ * @param distance Distance in km from the storage point to delivery adress
+ * @returns The estimated delivery date in milliseconds
+ */
+function calculateEstimatedDelivery(distance: number) {
+  const TIME_FOR_100KM = 3600000; //1hr for 1km
+
+  const currentDateMillis = new Date().getTime();
+
+  const deliveryTimeMillis = distance * TIME_FOR_100KM;
+
+  const sum = currentDateMillis + deliveryTimeMillis;
+  return sum;
+}
+
 export const calculateDeliveryOnCall = functions
   .region("europe-west1")
   .runWith({
@@ -174,10 +190,14 @@ export const calculateDeliveryOnCall = functions
 
       //1$ each 100km
       let costShi = distance / 100;
+
+      const estimatedDelivery = calculateEstimatedDelivery(distance);
+
       costShi = parseFloat(costShi.toFixed(2));
       return {
         message: "Congrats, your shipping has been calculated...",
         cost: costShi,
+        estimatedDelivery: estimatedDelivery,
       };
     }
   );
@@ -233,6 +253,8 @@ export const sendOrder = functions
         result[0].lon
       );
       //1$ for 100km
+
+      const estimatedDelivery = calculateEstimatedDelivery(distance);
       let costShi = distance / 100;
       costShi = parseFloat(costShi.toFixed(2));
 
@@ -291,6 +313,7 @@ export const sendOrder = functions
           address: addressAsString,
           shippingCost: costShi,
           totalAmount: total + costShi,
+          estimatedDelivery: estimatedDelivery,
         })
         .then(async () => {
           functions.logger.info("Doc saved ");

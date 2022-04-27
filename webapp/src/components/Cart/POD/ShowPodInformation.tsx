@@ -24,7 +24,7 @@ import styles from "./ShowPodInformation.module.scss";
 import { useAuth } from "../../../context/AuthContext";
 import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
 import { Dispatch } from "redux";
-import { setShippingCosts } from "../../../redux/actions";
+import { setEstimatedDelivery, setShippingCosts } from "../../../redux/actions";
 import { Address } from "../../../api/model/pod/address";
 import { AddressCalculator } from "./AddressCalculator";
 import Modal from "../../Modal/Modal";
@@ -58,6 +58,11 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   const setShippingCost = React.useCallback(
     (shippingCosts: number) => dispatch(setShippingCosts(shippingCosts)),
+    [dispatch]
+  );
+  const setEstimatedDeliveryDate = React.useCallback(
+    (estimatedDelivery: number) =>
+      dispatch(setEstimatedDelivery(estimatedDelivery)),
     [dispatch]
   );
 
@@ -135,6 +140,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
         let result = response.data as any;
         console.log(result);
         setShippingCost(result.cost);
+        setEstimatedDeliveryDate(result.estimatedDelivery);
         setDelCost(result.cost);
         return { message: result.message, cost: result.cost };
       })
