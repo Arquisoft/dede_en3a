@@ -68,7 +68,6 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
   tests:
-
     runs-on: ubuntu-latest
     env:
       REACT_APP_apiKey: ${{ secrets.REACT_APP_APIKEY }}
