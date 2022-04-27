@@ -19,14 +19,15 @@ import { DedeStore } from "../../../redux/store";
 import { calculateDeliveryOnCall } from "../../../../functions/src";
 
 import { getFunctions, httpsCallable } from "firebase/functions";
-import {functions} from "../../../utils/firebase"
-import "./ShowPodInformation.module.scss";
+import { functions } from "../../../utils/firebase";
+import styles from "./ShowPodInformation.module.scss";
 import { useAuth } from "../../../context/AuthContext";
 import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
 import { Dispatch } from "redux";
 import { setShippingCosts } from "../../../redux/actions";
 import { Address } from "../../../api/model/pod/address";
 import { AddressCalculator } from "./AddressCalculator";
+import Modal from "../../Modal/Modal";
 
 type PODProps = {
   webID: string;
@@ -43,7 +44,7 @@ type PODProps = {
 function cost(cost: number) {
   if (cost != 0) {
     return (
-      <div className={"info-container"}>
+      <div className={styles.infocontainer}>
         <Box component="h3" id={"deliveryComponent"}>
           Delivery cost: {cost} $
         </Box>
@@ -69,6 +70,20 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   const [addresses, setAddresses] = React.useState([]);
   const [listOfAddress, setListOfAddress] = React.useState<Address[]>([]);
+
+  const [orderModal, setOrderModal] = React.useState(<></>);
+
+  const orderModalHtml = (
+    <div className={styles.sucessfulorder}>
+      <div className={styles.title}>Your order was sucessful!</div>
+      <div className={styles.subtitle}>
+        You can see the state of your orders in your account{" "}
+      </div>
+      <div className={styles.accept} onClick={() => setOrderModal(<></>)}>
+        Accept
+      </div>
+    </div>
+  );
 
   const currentUser = useAuth().getCurrentUser();
   const userRegistered = () => {
@@ -103,7 +118,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     region: string
   ): Promise<{ message: string; cost: number } | void> {
     const calculateDeliveryOnCall = httpsCallable(
-        functions,
+      functions,
       "calculateDeliveryOnCall"
     );
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
@@ -164,6 +179,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       return;
     }
 
+    console.log("ITEMS BEING SENT TO SENDORDER FUNCTIONS", cart);
     const sendOrder = httpsCallable(functions, "sendOrder");
 
     return await sendOrder({
@@ -178,12 +194,13 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       },
     })
       .then(() => {
-        setLoadingOverlay(<div></div>);
+        setLoadingOverlay(<></>);
 
-        alert("Your order has been processed.");
+        setOrderModal(<Modal element={orderModalHtml}></Modal>);
       })
-      .catch(() => {
-        alert("Sorry, we are suffering technical problems, try again...");
+      .catch((error: any) => {
+        console.log("catch error", error.message);
+        alert(error);
       });
   };
   const buy = () => {
@@ -208,11 +225,12 @@ function ShowPodInformation(props: PODProps): JSX.Element {
   return (
     <Grid container>
       {loadingOverlay}
+      {orderModal}
       <Grid>
-        <div className={"info-container"}>
+        <div className={styles.infocontainer}>
           <form>
             <select
-              className={"combobox-container"}
+              className={styles.comboboxcontainer}
               id="addreses"
               onChange={setterOfAddress}
             >
@@ -236,12 +254,12 @@ function ShowPodInformation(props: PODProps): JSX.Element {
             Region: {address?.region}
           </Box>
         </div>
-        <div className="buttonsPOD-internal">
+        <div className={styles.buttonsPODinternal}>
           <button onClick={calcShipping}> Calculate shipping </button>
         </div>
         {cost(delCost)}
-        <div className="buttonsPOD-internal">
-          <button type={"submit"} className="buy" onClick={buy}>
+        <div className={styles.buttonsPODinternal}>
+          <button type={"submit"} className={styles.buy} onClick={buy}>
             Checkout
           </button>
         </div>

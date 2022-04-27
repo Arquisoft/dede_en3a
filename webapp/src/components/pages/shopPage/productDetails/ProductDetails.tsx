@@ -14,14 +14,16 @@ import { useAuth } from "../../../../context/AuthContext";
 import { User } from "../../../../api/model/user";
 import HeaderBackground from "../../../HeaderBackground/HeaderBackground";
 import { Utils } from "../../../../utils/utilts";
-import {increase} from "../../../../redux/actions";
-import {Dispatch} from "redux";
-import {useDispatch} from "react-redux";
+import { increase } from "../../../../redux/actions";
+import { Dispatch } from "redux";
+import { useDispatch } from "react-redux";
+import { display } from "@mui/system";
 
 function ProductDetails(): JSX.Element {
   const { id } = useParams();
 
   const [products, setProducts] = useState<Product[]>([]);
+  const [product, setProduct] = useState<Product>();
 
   const refreshProductList = async () => {
     setProducts(await getProductById(id));
@@ -34,6 +36,10 @@ function ProductDetails(): JSX.Element {
     setUsers(await getUsersByEmail(getCurrentUser()?.email));
   };
 
+  useEffect(() => {
+    setProduct(products.filter((p) => p.id === id)[0]);
+  }, [products]);
+
   let valueGet = 2.5;
 
   function setValue(valueSet: number | null) {
@@ -42,10 +48,13 @@ function ProductDetails(): JSX.Element {
     }
   }
   const dispatch: Dispatch<any> = useDispatch();
-  const saveProduct = React.useCallback(
-      (product: Product) => dispatch(increase(product)),
-      [dispatch]
-  );
+  const saveProduct = (p: Product) => {
+    if (product?.stock !== 0) dispatch(increase(p));
+  };
+  let outOfStock = "";
+  if (product?.stock === 0) {
+    outOfStock = styles.outofstock;
+  }
 
   useEffect(() => {
     refreshUserList();
@@ -83,29 +92,27 @@ function ProductDetails(): JSX.Element {
 
   function loadComments() {
     products.forEach((product) => {
-
-
-      product.comments?.slice().reverse().forEach((comment) => {
-        commentList.push(
-          <div className={styles.wrapperWholeComment}>
-            <div className={styles.commentWrapper}>
-              <img className={styles.userImage} src={comment.userImage}></img>
-              <div className={styles.username}>{comment.author}</div>
+      product.comments
+        ?.slice()
+        .reverse()
+        .forEach((comment) => {
+          commentList.push(
+            <div className={styles.wrapperWholeComment}>
+              <div className={styles.commentWrapper}>
+                <img className={styles.userImage} src={comment.userImage}></img>
+                <div className={styles.username}>{comment.author}</div>
+              </div>
+              <Rating
+                name="read-only"
+                value={comment.rating}
+                precision={0.5}
+                readOnly
+                size={"small"}
+              />
+              <div className={styles.text}>{comment.message}</div>
             </div>
-            <Rating
-              name="read-only"
-              value={comment.rating}
-              precision={0.5}
-              readOnly
-              size={"small"}
-            />
-            <div className={styles.text}>{comment.message}</div>
-          </div>
-        );
-      });
-
-
-
+          );
+        });
     });
   }
 
@@ -117,16 +124,35 @@ function ProductDetails(): JSX.Element {
       productList.push(
         <div className={styles.headerContainer}>
           <div className={styles.wrapperLeft}>
-            <div title={"reviewTitle"} className={styles.productName}>{product.name}</div>
-            <img title={"reviewImage"} className={styles.productImage} src={product.img}></img>
+            <div title={"reviewTitle"} className={styles.productName}>
+              {product.name}
+            </div>
+            <img
+              title={"reviewImage"}
+              className={styles.productImage}
+              src={product.img}
+            ></img>
           </div>
           <div className={styles.wrapperRight}>
-            <div className={styles.subtitle}>
-              Price <b>{product.price} €</b>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <div className={styles.subtitle}>
+                Price <b> {product.price} €</b>
+              </div>
+              <div className={styles.subtitle}>
+                Stock <b> {product.stock} </b>
+              </div>
             </div>
+
             <div className={styles.subtitle}>Description: </div>
             <div className={styles.text}>{product.description}</div>
-            <div className={styles.subtitle}>Rating:
+            <div className={styles.subtitle}>
+              Rating:
               <div>
                 <Rating
                   name="half-rating"
@@ -139,12 +165,16 @@ function ProductDetails(): JSX.Element {
                 />
               </div>
               <div className={styles.buttonsComments}>
-                <button type="button" onClick={()=>{saveProduct(products[0])}}>Add to cart</button>
+                <div
+                  onClick={() => {
+                    saveProduct(products[0]);
+                  }}
+                  className={styles.addtocart + " " + outOfStock}
+                >
+                  Add to cart
+                </div>
               </div>
             </div>
-
-
-
           </div>
         </div>
       );
@@ -181,7 +211,6 @@ function ProductDetails(): JSX.Element {
                     ).value,
                     valueGet
                   )
-
                 }
               >
                 Send
