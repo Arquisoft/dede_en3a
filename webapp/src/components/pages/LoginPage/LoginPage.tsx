@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { auth } from "./../../../utils/firebase";
 
-type LoginPageProps = { onExit: any; onRegisterClick: any };
+type LoginPageProps = { onExit: any; onRegisterClick: any; onLoginSuccess?: any };
 
 function LoginPage(props: LoginPageProps): JSX.Element {
   const navigate = useNavigate();
@@ -44,7 +44,12 @@ function LoginPage(props: LoginPageProps): JSX.Element {
     console.log(user);
     try {
       await login(user.email, user.password).then((userCredential) => {
-        navigate("/shop");
+        if(props.onLoginSuccess){
+          props.onLoginSuccess();
+        }else{
+          navigate("/shop")
+        }
+
       });
     } catch (error: any) {
       if (error.code === "auth/user-not-found") {
