@@ -73,6 +73,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   const cart = useSelector((state: DedeStore) => state.cart);
 
+
   const [loginPage, setLoginPage] = useState(<div></div>);
   const [registerPage, setRegisterPage] = useState(<div></div>);
 
@@ -105,6 +106,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   //OBTENEMOS POR CADA WEB ID LA LISTA DE ADDRESSES ASOCIADOS
   useEffect(() => {
+
     const fullAddresses = AddressCalculator(props.webID);
     const addressesHtml: any = [];
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
@@ -120,12 +122,17 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       setListOfAddress(full);
       setLoadingOverlay(<></>);
 
-      setCookie("address", full[0].address, 1);
-      setCookie("city", full[0].city, 1);
-      setCookie("country", full[0].country, 1);
-      setCookie("region", full[0].region, 1);
-      setCookie("postalcode", full[0].postalcode, 1);
-    });
+      setCookie("address", full[0].address,1);
+      setCookie("city", full[0].city,1);
+      setCookie("country", full[0].country,1);
+      setCookie("region", full[0].region,1);
+      setCookie("postalcode", full[0].postalcode,1);
+
+
+      calcShipping()
+
+    }
+    );
   }, []);
   const navigate = useNavigate();
 
@@ -164,35 +171,25 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       });
   }
 
+
+
   async function calcShipping() {
-    if (
-      address == null ||
-      typeof address == undefined ||
-      address.postalcode == null ||
-      typeof address.postalcode == undefined ||
-      address.city == null ||
-      typeof address.city == undefined ||
-      address.country == null ||
-      typeof address.country == undefined ||
-      address.region == null ||
-      typeof address.region == undefined
-    ) {
-      alert(
-        "PLEASE, ENTER A POD WITH address, postal code, city, country and region"
-      );
-      return;
-    }
+
+    console.log("CALCULANDO")
 
     let response = await calcWithFirebaseFunction(
-      address.address,
-      address.postalcode,
-      address.city,
-      address.country,
-      address.region
+      getCookie("address"),
+        getCookie("postalcode"),
+        getCookie("city"),
+        getCookie("country"),
+        getCookie("region")
     );
 
     return response;
   }
+
+
+
 
   function setterOfAddress(value: any) {
     const finalVal = listOfAddress.filter(
@@ -200,12 +197,17 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     )[0];
     setAddress(finalVal);
 
-    setCookie("address", finalVal.address, 1);
-    setCookie("city", finalVal.city, 1);
-    setCookie("country", finalVal.country, 1);
-    setCookie("region", finalVal.region, 1);
-    setCookie("postalcode", finalVal.postalcode, 1);
+    setCookie("address", finalVal.address,1);
+    setCookie("city", finalVal.city,1);
+    setCookie("country", finalVal.country,1);
+    setCookie("region", finalVal.region,1);
+    setCookie("postalcode", finalVal.postalcode,1);
+
+    calcShipping()
+
   }
+
+
 
   const add = async () => {
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
@@ -217,6 +219,9 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
     console.log("ITEMS BEING SENT TO SENDORDER FUNCTIONS", cart);
     const sendOrder = httpsCallable(functions, "sendOrder");
+
+
+
 
     return await sendOrder({
       items: cart,
@@ -253,8 +258,10 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     },
   };
 
+
   const buy = () => {
     if (userRegistered()) {
+
       add()
         .then(() => {})
         .catch((error: Error) => {
@@ -266,10 +273,15 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     }
   };
 
-  function renderPaypalButtons() {
+  function renderPaypalButtons(){
+
+
     if (cart.length == 0) {
-      return <div> EMPTY CART == NO RENDER BUTTONS</div>;
+
+      return (<div> EMPTY CART == NO RENDER BUTTONS</div>);
     } else {
+
+
       return (
         <PayPalButtons
           createOrder={(data: any, actions: any) => {
@@ -297,7 +309,11 @@ function ShowPodInformation(props: PODProps): JSX.Element {
           }}
         />
       );
+
     }
+
+
+
   }
 
   return (
@@ -319,19 +335,19 @@ function ShowPodInformation(props: PODProps): JSX.Element {
             </form>
 
             <Box component="h3" id={"addressComponent"}>
-              Address: {address?.address}
+              Address: {getCookie("address")}
             </Box>
             <Box component="h3" id={"postalcodeComponent"}>
-              Postal Code: {address?.postalcode}
+              Postal Code: {getCookie("postalcode")}
             </Box>
             <Box component="h3" id={"cityComponent"}>
-              Locality: {address?.city}
+              Locality: {getCookie("city")}
             </Box>
             <Box component="h3" id={"countryComponent"}>
-              Country: {address?.country}
+              Country: {getCookie("country")}
             </Box>
             <Box component="h3" id={"regionComponent"}>
-              Region: {address?.region}
+              Region: {getCookie("region")}
             </Box>
           </div>
           <div className={styles.buttonsPODinternal}>
