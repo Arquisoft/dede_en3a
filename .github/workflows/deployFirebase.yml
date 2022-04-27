@@ -1,6 +1,6 @@
 name: CI for ASW2122
 on:
-  push:
+  pull_request:
     branches: [continuous_integration]
     types: [closed]
 
@@ -66,5 +66,4 @@ jobs:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-
 
