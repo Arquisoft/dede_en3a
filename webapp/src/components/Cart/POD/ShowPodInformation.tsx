@@ -216,6 +216,52 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       alert("Oh, you are doing an empty order, that is not allowed :(");
       return;
     }
+    console.log("Address: " + getCookie("address"))
+    if(
+        getCookie("address") ||
+        typeof getCookie("address") == undefined
+    ) {
+      throw new Error("Your address has not an street address associated." +
+          " Operation cancelled");
+      return;
+    }
+    console.log("Postal Code: " + getCookie("postalcode"))
+    if(
+        getCookie("postalcode") == "" ||
+        typeof getCookie("postalcode") == undefined
+    ) {
+      console.log("haz algo")
+      alert("Your address has not a postal code associated." +
+          " Operation cancelled");
+      return;
+    }
+    console.log("City: " + getCookie("city"))
+    if(
+        getCookie("city") == null ||
+        typeof getCookie("city") == undefined
+    ) {
+      alert("Your address has not a city associated." +
+          " Operation cancelled");
+      return;
+    }
+    console.log("Country: " + getCookie("country"))
+    if(
+        getCookie("country") == null ||
+        typeof getCookie("country") == undefined
+    ) {
+      alert("Your address has not a country associated." +
+          " Operation cancelled");
+      return;
+    }
+    console.log("Region: " + getCookie("region"))
+    if(
+        getCookie("region") == null ||
+        typeof getCookie("region") == undefined
+    ) {
+      alert("Your address has not a region associated." +
+          " Operation cancelled");
+      return;
+    }
 
     console.log("ITEMS BEING SENT TO SENDORDER FUNCTIONS", cart);
     const sendOrder = httpsCallable(functions, "sendOrder");
