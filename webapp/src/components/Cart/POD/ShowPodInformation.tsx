@@ -21,7 +21,7 @@ import { calculateDeliveryOnCall } from "../../../../functions/src";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { functions } from "../../../utils/firebase";
 import styles from "./ShowPodInformation.module.scss";
-import { useAuth } from "../../../context/AuthContext";
+import {getCurrentUser, useAuth} from "../../../context/AuthContext";
 import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
 import { Dispatch } from "redux";
 import { setEstimatedDelivery, setShippingCosts } from "../../../redux/actions";
@@ -73,6 +73,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   const cart = useSelector((state: DedeStore) => state.cart);
 
+
   const [loginPage, setLoginPage] = useState(<div></div>);
   const [registerPage, setRegisterPage] = useState(<div></div>);
 
@@ -98,6 +99,82 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     </div>
   );
 
+
+  const loginPageProps = {
+    onExit: () => setLoginPage(<div></div>),
+    onRegisterClick: () => {
+      setLoginPage(<div></div>);
+      setRegisterPage(
+          <RegisterPage
+              onExit={() => setRegisterPage(<div></div>)}
+          ></RegisterPage>
+      );
+    },
+    onLoginSuccess: () => {setLoginPage(<div></div>); setRegisterPage(<div></div>); setOrderModal(<></>)},
+  };
+
+
+  const loginModal = (<LoginPage {...loginPageProps}></LoginPage>);
+
+
+
+
+  const emptyCartErrorModal = (
+
+      <div className={styles.modalerror}>
+        <div className={styles.title}>Sorry, cannot proceed with an empty cart...</div>
+        <div className={styles.title}>
+          Add some products to your cart.
+        </div>
+        <div className={styles.accept} onClick={() => setOrderModal(<></>)}>
+          Accept
+        </div>
+      </div>
+
+
+  );
+
+
+  const paypalModalMenu = (
+
+      <>
+
+      <PayPalButtons
+          createOrder={(data: any, actions: any) => {
+            return actions.order
+                .create({
+                  purchase_units: [
+                    {
+                      amount: {
+                        currency_code: "EUR",
+                        value: getCookie("totalCartAndShipping"),
+                      },
+                    },
+                  ],
+                })
+                .then((orderId: any) => {
+
+                  // Your code here after create the order
+                  return orderId;
+                });
+          }}
+          onApprove={async (data: any, actions: any) => {
+            return actions.order.capture().then(function () {
+              setOrderModal(<></>)
+              // Your code here after capture the order
+              buy();
+            });
+          }}
+      />
+
+        <div className={styles.cancel} onClick={() => setOrderModal(<></>)}>
+          Cancel
+        </div>
+      </>
+
+
+  );
+
   const currentUser = useAuth().getCurrentUser();
   const userRegistered = () => {
     return currentUser !== null;
@@ -105,6 +182,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   //OBTENEMOS POR CADA WEB ID LA LISTA DE ADDRESSES ASOCIADOS
   useEffect(() => {
+
     const fullAddresses = AddressCalculator(props.webID);
     const addressesHtml: any = [];
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
@@ -120,12 +198,17 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       setListOfAddress(full);
       setLoadingOverlay(<></>);
 
-      setCookie("address", full[0].address, 1);
-      setCookie("city", full[0].city, 1);
-      setCookie("country", full[0].country, 1);
-      setCookie("region", full[0].region, 1);
-      setCookie("postalcode", full[0].postalcode, 1);
-    });
+      setCookie("address", full[0].address,1);
+      setCookie("city", full[0].city,1);
+      setCookie("country", full[0].country,1);
+      setCookie("region", full[0].region,1);
+      setCookie("postalcode", full[0].postalcode,1);
+
+
+      calcShipping()
+
+    }
+    );
   }, []);
   const navigate = useNavigate();
 
@@ -164,37 +247,33 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       });
   }
 
+
+
   async function calcShipping() {
-    if (address == null || typeof address == undefined) {
-      alert("Your POD has not an address associated with it");
-      return;
-    }
 
-    if(address.postalcode == null ||
-        typeof address.postalcode == undefined ||
-        address.city == null ||
-        typeof address.city == undefined ||
-        address.country == null ||
-        typeof address.country == undefined ||
-        address.region == null ||
-        typeof address.region == undefined)
-     {
-      alert(
-        "PLEASE, ENTER A POD WITH address, postal code, city, country and region"
-      );
-      return;
-    }
+    console.log("CALCULANDO")
 
-    let response = await calcWithFirebaseFunction(
-      address.address,
-      address.postalcode,
-      address.city,
-      address.country,
-      address.region
+    let response : void | {message: string, cost: number} = await calcWithFirebaseFunction(
+      getCookie("address"),
+        getCookie("postalcode"),
+        getCookie("city"),
+        getCookie("country"),
+        getCookie("region")
     );
+
+    let shipCost = "";
+    //to check response is not void
+    if(response instanceof  Object){
+      shipCost = response.cost.toString();
+    }
+
+    setCookie("shippingCost",shipCost,1)
 
     return response;
   }
+
+
+
 
   function setterOfAddress(value: any) {
     const finalVal = listOfAddress.filter(
@@ -202,12 +281,17 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     )[0];
     setAddress(finalVal);
 
-    setCookie("address", finalVal.address, 1);
-    setCookie("city", finalVal.city, 1);
-    setCookie("country", finalVal.country, 1);
-    setCookie("region", finalVal.region, 1);
-    setCookie("postalcode", finalVal.postalcode, 1);
+    setCookie("address", finalVal.address,1);
+    setCookie("city", finalVal.city,1);
+    setCookie("country", finalVal.country,1);
+    setCookie("region", finalVal.region,1);
+    setCookie("postalcode", finalVal.postalcode,1);
+
+    calcShipping()
+
   }
+
+
 
   const add = async () => {
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
@@ -216,55 +300,12 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       alert("Oh, you are doing an empty order, that is not allowed :(");
       return;
     }
-    console.log("Address: " + getCookie("address"))
-    if(
-        getCookie("address") ||
-        typeof getCookie("address") == undefined
-    ) {
-      throw new Error("Your address has not an street address associated." +
-          " Operation cancelled");
-      return;
-    }
-    console.log("Postal Code: " + getCookie("postalcode"))
-    if(
-        getCookie("postalcode") == "" ||
-        typeof getCookie("postalcode") == undefined
-    ) {
-      console.log("haz algo")
-      alert("Your address has not a postal code associated." +
-          " Operation cancelled");
-      return;
-    }
-    console.log("City: " + getCookie("city"))
-    if(
-        getCookie("city") == null ||
-        typeof getCookie("city") == undefined
-    ) {
-      alert("Your address has not a city associated." +
-          " Operation cancelled");
-      return;
-    }
-    console.log("Country: " + getCookie("country"))
-    if(
-        getCookie("country") == null ||
-        typeof getCookie("country") == undefined
-    ) {
-      alert("Your address has not a country associated." +
-          " Operation cancelled");
-      return;
-    }
-    console.log("Region: " + getCookie("region"))
-    if(
-        getCookie("region") == null ||
-        typeof getCookie("region") == undefined
-    ) {
-      alert("Your address has not a region associated." +
-          " Operation cancelled");
-      return;
-    }
 
-    console.log("ITEMS BEING SENT TO SENDORDER FUNCTIONS", cart);
+    console.log("ITEMS BEING SENT TO SEND ORDER FUNCTIONS", cart);
     const sendOrder = httpsCallable(functions, "sendOrder");
+
+
+
 
     return await sendOrder({
       items: cart,
@@ -289,20 +330,10 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       });
   };
 
-  const loginPageProps = {
-    onExit: () => setLoginPage(<div></div>),
-    onRegisterClick: () => {
-      setLoginPage(<div></div>);
-      setRegisterPage(
-        <RegisterPage
-          onExit={() => setRegisterPage(<div></div>)}
-        ></RegisterPage>
-      );
-    },
-  };
 
   const buy = () => {
     if (userRegistered()) {
+
       add()
         .then(() => {})
         .catch((error: Error) => {
@@ -314,39 +345,41 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     }
   };
 
-  function renderPaypalButtons() {
-    if (cart.length == 0) {
-      return <div> EMPTY CART == NO RENDER BUTTONS</div>;
-    } else {
-      return (
-        <PayPalButtons
-          createOrder={(data: any, actions: any) => {
-            return actions.order
-              .create({
-                purchase_units: [
-                  {
-                    amount: {
-                      currency_code: "USD",
-                      value: "1",
-                    },
-                  },
-                ],
-              })
-              .then((orderId: any) => {
-                // Your code here after create the order
-                return orderId;
-              });
-          }}
-          onApprove={async (data: any, actions: any) => {
-            return actions.order.capture().then(function () {
-              // Your code here after capture the order
-              buy();
-            });
-          }}
-        />
-      );
+
+
+
+
+  function canCheckout(){
+
+    if(cart.length == 0){
+
+
+      setOrderModal(<Modal element={emptyCartErrorModal}></Modal>)
+
     }
+    else if(!userRegistered()){
+
+      setOrderModal(<Modal element={loginModal}></Modal>)
+
+
+  //IF USER IS LOGED IN AND NON-EMPTY CART --> RENDER PAYPAL BUTTONS
+    }else{
+
+
+      let shipCost  = Number(getCookie("shippingCost"))
+      let cartCost = 0;
+      for(let i = 0; i< cart.length; i++){
+        cartCost += cart[i].amount + cart[i].product.price;
+      }
+      setCookie("totalCartAndShipping",(shipCost+cartCost)+"",1)
+      setOrderModal(<Modal element={paypalModalMenu}></Modal>);
+
+    }
+
   }
+
+
+
 
   return (
     <>
@@ -367,30 +400,27 @@ function ShowPodInformation(props: PODProps): JSX.Element {
             </form>
 
             <Box component="h3" id={"addressComponent"}>
-              Address: {address?.address}
+              Address: {getCookie("address")}
             </Box>
             <Box component="h3" id={"postalcodeComponent"}>
-              Postal Code: {address?.postalcode}
+              Postal Code: {getCookie("postalcode")}
             </Box>
             <Box component="h3" id={"cityComponent"}>
-              Locality: {address?.city}
+              Locality: {getCookie("city")}
             </Box>
             <Box component="h3" id={"countryComponent"}>
-              Country: {address?.country}
+              Country: {getCookie("country")}
             </Box>
             <Box component="h3" id={"regionComponent"}>
-              Region: {address?.region}
+              Region: {getCookie("region")}
             </Box>
           </div>
+
           <div className={styles.buttonsPODinternal}>
-            <button onClick={calcShipping}> Calculate shipping </button>
-          </div>
-          {cost(delCost)}
-          <div className={styles.buttonsPODinternal}>
-            <button type={"submit"} className={styles.buy} onClick={buy}>
+            <button type={"submit"} className={styles.buy} onClick={canCheckout}>
               Checkout
             </button>
-            {renderPaypalButtons()}
+
           </div>
         </Grid>
       </Grid>
