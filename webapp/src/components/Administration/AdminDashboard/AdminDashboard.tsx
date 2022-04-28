@@ -115,7 +115,6 @@ function AdminDashboard(): JSX.Element {
             stock: parseFloat(stock)
         };
         updateProduct(product);
-        window.location.reload();
         setModal(<></>);
     }
 
@@ -150,6 +149,7 @@ function AdminDashboard(): JSX.Element {
                 </div>
                 <div className={styles.mood}>
                     <div className={styles.accept} onClick={() => EditProduct(product.id,
+                        product.comments!,
                         (document.getElementById("input-name-form") as HTMLInputElement).value,
                         (document.getElementById("input-description-form") as HTMLInputElement).value,
                         (document.getElementById("input-price-form") as HTMLInputElement).value,
@@ -166,7 +166,7 @@ function AdminDashboard(): JSX.Element {
             </div>
     );
 
-    function EditProduct(id: string, name : string, desc : string, price : string, img : string, stock : string, cat : string){
+    function EditProduct(id: string, comments : Comments[], name : string, desc : string, price : string, img : string, stock : string, cat : string){
         var product: Product = {
             id: id,
             category: cat,
@@ -175,10 +175,10 @@ function AdminDashboard(): JSX.Element {
             price: parseFloat(price),
             title: name,
             name: name,
+            comments: comments,
             stock: parseFloat(stock)
         };
         updateProduct(product);
-        window.location.reload();
         setModal(<></>);
     }
 
@@ -207,7 +207,6 @@ function AdminDashboard(): JSX.Element {
     function DeleteProduct(id: string, name : string){
         if(name === "DELETE"){
             removeProduct(id);
-            window.location.reload();
         }
         setModal(<></>);
     }
