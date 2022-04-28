@@ -8,6 +8,9 @@ import {Order} from "../../../api/model/orders/order";
 import TopMenu from "../../menu/TopMenu";
 import {useAuth} from "../../../context/AuthContext";
 import {getAuth} from "firebase/auth";
+import OrdersPage from "../../pages/OrdersPage/OrdersPage";
+import MainPage from "../../pages/mainPage/MainPage";
+import moment from "moment";
 
 
 function AdminDashboard(): JSX.Element {
@@ -15,6 +18,7 @@ function AdminDashboard(): JSX.Element {
     const [users, setUsers] = useState<User[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
     const [orders, setOrders] = useState<Order[]>([]);
+    const [modal, setModal] = useState(<div></div>);
 
     const refreshUserList = async () => {
         setUsers(await getUsers());
@@ -48,7 +52,6 @@ function AdminDashboard(): JSX.Element {
         else{
             setAuth(false);
         }
-        console.log(auth)
     }
 
     useEffect(() => {
@@ -59,10 +62,11 @@ function AdminDashboard(): JSX.Element {
 
     function usersDisplay(){
         const res : any = [];
-        res.push(<div> USUARIOS </div>)
+        res.push(<div className={styles.displayTitle}> USERS </div>)
         users.forEach((user) => {
+            let dateUser = new Date(user.created!);
             res.push(
-                <div> Email: {user.email} Name: {user.name} Creation Date: {user.created}</div>
+                <div className={styles.displayOptions}> · Email: {user.email} // Name: {user.name} // Creation Date: {moment(dateUser).format("YYYY-MM-DD HH:MM:SS")}</div>
             );
         });
         setOptions(res)
@@ -70,10 +74,17 @@ function AdminDashboard(): JSX.Element {
 
     function productsDisplay(){
         const res : any = [];
-        res.push(<div> PRODUCTS </div>)
+        res.push(<div className={styles.mood}>
+            <div className={styles.displayTitle}> PRODUCTS </div>
+            <button className={styles.indAdd} onClick={() => setModal(<>ADDING</>)}>+</button>
+        </div>)
         products.forEach((product) => {
             res.push(
-                <div> Title: {product.title} ID: {product.id} Price: {product.price} Category: {product.category}</div>
+                <div className={styles.wrapperOptions}>
+                    <div className={styles.displayOptions}>· Name: {product.title} // Stock: {product.stock} // Price: {product.price}$ // Category: {product.category}</div>
+                    <button className={styles.indEdit} onClick={() => setModal(<>EDIT</>)}>o</button>
+                    <button className={styles.indDelete} onClick={() => setModal(<>DELETE</>)}>-</button>
+                </div>
             );
         });
         setOptions(res)
@@ -81,10 +92,11 @@ function AdminDashboard(): JSX.Element {
 
     function ordersDisplay(){
         const res : any = [];
-        res.push(<div> ORDERS </div>)
+        res.push(<div className={styles.displayTitle}> ORDERS </div>)
         orders.forEach((order) => {
+            let dateOrder = new Date(order.created);
             res.push(
-                <div>Email: {order.userEmail} Address: {order.address} Cost: {order.totalAmount} Items: {order.items.length} Date: {order.created}</div>
+                <div className={styles.displayOptions}>· Email: {order.userEmail} // Address: {order.address} // Cost: {order.totalAmount}$ // Items: {order.items.length} // Date: {moment(dateOrder).format("YYYY-MM-DD HH:MM:SS")}</div>
             );
         });
         setOptions(res)
@@ -121,13 +133,15 @@ function AdminDashboard(): JSX.Element {
                     <TopMenu></TopMenu>
                     <div className={styles.header}>
                         <div className={styles.bigText}> Administration Panel </div>
-                        <div className={styles.leftPanel}>
-                            <button value={"users"} className={styles.options} onClick={setterOfOption}> Users </button>
-                            <button value={"products"} className={styles.options} onClick={setterOfOption}> Products </button>
-                            <button value={"orders"} className={styles.options} onClick={setterOfOption}> Orders </button>
-                            <button value={"statistics"} className={styles.options} onClick={setterOfOption}> Statistics </button>
+                        <div className={styles.optionleft}>
+                            <div className={styles.leftPanel}>
+                                <button value={"users"} className={styles.options} onClick={setterOfOption}> Users </button>
+                                <button value={"products"} className={styles.options} onClick={setterOfOption}> Products </button>
+                                <button value={"orders"} className={styles.options} onClick={setterOfOption}> Orders </button>
+                                <button value={"statistics"} className={styles.options} onClick={setterOfOption}> Statistics </button>
+                            </div>
+                            <div className={styles.optionvertical}>{option}</div>
                         </div>
-                        {option}
                     </div>
                 </>)
                 :

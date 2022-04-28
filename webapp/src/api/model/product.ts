@@ -9,4 +9,5 @@ export interface Product {
   title: string;
   name?: string;
   comments?: Comments[];
+  stock?: number;
 }

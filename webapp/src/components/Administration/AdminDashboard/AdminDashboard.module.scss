@@ -19,6 +19,7 @@
   display: flex;
   font-size: 2.5rem;
   flex-direction: column;
+  font-weight: bold;
   color: var(--orange2);
   justify-content: center;
 }
@@ -34,4 +35,60 @@
   color: var(--orange3);
   font-size: 1.25rem;
   font-weight: bold;
+}
+
+.displayOptions{
+  color: cyan;
+  display: flex;
+  flex-direction: row;
+}
+
+.displayTitle{
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: var(--orange2);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.wrapperOptions{
+  display: flex;
+  flex-direction: row;
+}
+
+.indAdd{
+  margin-left: 1rem;
+  font-weight: bold;
+  font-size: 2rem;
+  color: #00bf00;
+}
+
+.indEdit{
+  margin-left: 1rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #bfbf00;
+}
+
+.indDelete{
+  margin-left: 1rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #bf0000;
+}
+
+.optionleft{
+  display: flex;
+  flex-direction: row;
+}
+
+.optionvertical{
+  margin-left: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mood{
+  display: flex;
+  flex-direction: row;
 }
