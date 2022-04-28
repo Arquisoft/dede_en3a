@@ -34,12 +34,13 @@
     "redux-thunk": "^2.4.1",
     "sass": "^1.49.9",
     "typescript": "^4.5.4",
+    "uuidv4": "^6.2.13",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage",
+    "test": "react-scripts test -- --coverage --watchAll=false",
     "test:e2e": "start-server-and-test prod 3000 'jest --rootDir=e2e --config=./e2e/jest.config.ts'",
     "eject": "react-scripts eject",
     "prod": "ts-node-dev ./server.ts"
