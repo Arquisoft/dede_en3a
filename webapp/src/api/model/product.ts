@@ -1,4 +1,4 @@
-import {Comments} from "./comments";
+import { Comments } from "./comments";
 
 export interface Product {
   id: string;

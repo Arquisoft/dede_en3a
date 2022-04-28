@@ -4,6 +4,7 @@ import {
   REMOVE,
   CLEAR_CART,
   SET_SHIPPING_COST,
+  SET_ESTIMATED_DELIVERY,
 } from "./actionTypes";
 
 import { DedeAction, DedeStore } from "./store";
@@ -11,6 +12,7 @@ import { DedeAction, DedeStore } from "./store";
 const initialStore = {
   cart: [],
   shippingCost: null,
+  estimatedDelivery: null,
 };
 
 const reducer = (
@@ -41,6 +43,15 @@ const reducer = (
     return {
       ...state,
       shippingCost: action.props,
+    };
+  }
+
+  //SET ESTIMATED DELIVERY
+  else if (action.type === SET_ESTIMATED_DELIVERY) {
+    console.log("SETTING ESTIMATED DELIVERY", action.props);
+    return {
+      ...state,
+      estimatedDelivery: action.props,
     };
   }
 

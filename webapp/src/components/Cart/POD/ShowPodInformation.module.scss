@@ -1,7 +1,7 @@
-.info-button {
+.infobutton {
   font-size: 2rem;
   color: #7d0000;
-  background-color:black;
+  background-color: black;
 }
 
 .buttons {
@@ -28,18 +28,18 @@
   }
 }
 
-.combobox-container{
+.comboboxcontainer {
   color: var(--orange2);
   margin-bottom: 1rem;
   width: 20rem;
 }
 
-.info-container {
+.infocontainer {
   margin-left: 1rem;
   margin-bottom: 1rem;
 }
 
-.buttonsPOD-internal {
+.buttonsPODinternal {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -62,4 +62,90 @@
   button:hover {
     filter: drop-shadow(0px 0px 7px var(--orange2));
   }
+}
+
+.sucessfulorder {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 2rem;
+  box-shadow: var(--shadow2);
+  position: relative;
+  width: 40vw;
+  background-color: white;
+  height: 13rem;
+  .title {
+    text-align: center;
+
+    font-weight: bold;
+    color: var(--orange2);
+    font-size: 1.8rem;
+  }
+  .subtitle {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.3rem;
+    color: black;
+    opacity: 0.8;
+  }
+  .accept {
+    margin-top: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    cursor: pointer;
+    padding: 0.5rem;
+    padding-inline: 1.2rem;
+    border-radius: 0.3rem;
+    background-color: var(--orange2);
+    width: fit-content;
+    font-size: 1.3rem;
+  }
+}
+
+.modalerror {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 2rem;
+  box-shadow: var(--shadow2);
+  position: relative;
+  width: 40vw;
+  background-color: red;
+  height: 13rem;
+  .title {
+    text-align: center;
+
+    font-weight: bold;
+    color: var(--dark1);
+    font-size: 1.8rem;
+  }
+
+  .accept {
+    margin-top: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    cursor: pointer;
+    padding: 0.5rem;
+    padding-inline: 1.2rem;
+    border-radius: 0.3rem;
+    background-color: var(--orange2);
+    width: fit-content;
+    font-size: 1.3rem;
+  }
+}
+
+.cancel {
+  margin-top: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  cursor: pointer;
+  padding: 0.5rem;
+  padding-inline: 1.2rem;
+  border-radius: 0.3rem;
+  background-color: var(red);
+  width: fit-content;
+  font-size: 1.3rem;
 }

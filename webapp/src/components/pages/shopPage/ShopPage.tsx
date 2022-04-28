@@ -125,7 +125,10 @@ function ShopPage(): JSX.Element {
               ></input>
               <div className={styles.searchordercontainer}>
                 <b>Order by</b>
-                <select title={"orderBySelector"} onChange={handleSortingOption}>
+                <select
+                  title={"orderBySelector"}
+                  onChange={handleSortingOption}
+                >
                   <option value="name">Name</option>
                   <option value="price">Price</option>
                 </select>

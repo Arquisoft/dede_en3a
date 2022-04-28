@@ -17,7 +17,7 @@ ReactDOM.render(
         <PayPalScriptProvider
             options={{
                 "client-id": "AasWxFdPNztdDfhqG6ksUNov6Ijfrnj6BX76NJ0RQhEVZiR9f2pgvBLiL3h56BUE3Ti75EWNInW07thm",
-                currency: "USD",
+                currency: "EUR",
             }}
         >
                 <App />
