@@ -135,6 +135,22 @@ function ShowPodInformation(props: PODProps): JSX.Element {
   );
 
 
+  const notEnoughDataPodErrorModal = (
+
+      <div className={styles.modalerror}>
+        <div className={styles.title}>Sorry, cannot proceed...</div>
+        <div className={styles.title}>
+          There is not enough information in the pod for calculate shipping.
+        </div>
+        <div className={styles.accept} onClick={() => setOrderModal(<></>)}>
+          Accept
+        </div>
+      </div>
+
+
+  );
+
+
   const paypalModalMenu = (
 
       <>
@@ -192,6 +208,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
         const htmlOption = <option value={ind.address}> {ind.address} </option>;
         addressesHtml.push(htmlOption);
       });
+
       console.log("2" + addressesHtml);
       setAddresses(addressesHtml);
       setAddress(full[0]);
@@ -203,7 +220,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       setCookie("country", full[0].country,1);
       setCookie("region", full[0].region,1);
       setCookie("postalcode", full[0].postalcode,1);
-
 
       calcShipping()
 
@@ -247,11 +263,39 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       });
   }
 
-
-
   async function calcShipping() {
 
     console.log("CALCULANDO")
+
+    if(getCookie("address") == "") {
+      alert("Sorry but your address has not an street address associated with it." +
+          " Revise your pod data");
+      return;
+    }
+
+    if(getCookie("postalcode") == "") {
+      alert("Sorry but your address has not a postal code associated with it. " +
+          "Revise your pod data");
+      return;
+    }
+
+    if(getCookie("city") == "") {
+      alert("Sorry but your address has not a city associated with it. " +
+          "Revise your pod data");
+      return;
+    }
+
+    if(getCookie("country") == "") {
+      alert("Sorry but your address has not a country associated with it. " +
+          "Revise your pod data");
+      return;
+    }
+
+    if(getCookie("region") == "") {
+      alert("Sorry but your address has not a region associated with it. " +
+          "Revise your pod data");
+      return;
+    }
 
     let response : void | {message: string, cost: number} = await calcWithFirebaseFunction(
       getCookie("address"),
@@ -271,8 +315,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
     return response;
   }
-
-
 
 
   function setterOfAddress(value: any) {
@@ -304,9 +346,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     console.log("ITEMS BEING SENT TO SEND ORDER FUNCTIONS", cart);
     const sendOrder = httpsCallable(functions, "sendOrder");
 
-
-
-
     return await sendOrder({
       items: cart,
       user: currentUser?.email,
@@ -330,7 +369,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       });
   };
 
-
   const buy = () => {
     if (userRegistered()) {
 
@@ -346,30 +384,30 @@ function ShowPodInformation(props: PODProps): JSX.Element {
   };
 
 
-
-
-
   function canCheckout(){
 
     if(cart.length == 0){
-
-
       setOrderModal(<Modal element={emptyCartErrorModal}></Modal>)
 
     }
     else if(!userRegistered()){
-
       setOrderModal(<Modal element={loginModal}></Modal>)
 
-
   //IF USER IS LOGED IN AND NON-EMPTY CART --> RENDER PAYPAL BUTTONS
-    }else{
+    }else if (getCookie("address") == "" ||
+              getCookie("postalcode") == "" ||
+              getCookie("city") == "" ||
+              getCookie("country") == "" ||
+              getCookie("region") == ""){
+      setOrderModal(<Modal element={notEnoughDataPodErrorModal}></Modal>)
+    }
+    else{
 
 
-      let shipCost  = Number(getCookie("shippingCost"))
-      let cartCost = 0;
-      for(let i = 0; i< cart.length; i++){
-        cartCost += cart[i].amount + cart[i].product.price;
+        let shipCost  = Number(getCookie("shippingCost"))
+        let cartCost = 0;
+        for(let i = 0; i< cart.length; i++){
+          cartCost += cart[i].amount + cart[i].product.price;
       }
       setCookie("totalCartAndShipping",(shipCost+cartCost)+"",1)
       setOrderModal(<Modal element={paypalModalMenu}></Modal>);
@@ -400,19 +438,19 @@ function ShowPodInformation(props: PODProps): JSX.Element {
             </form>
 
             <Box component="h3" id={"addressComponent"}>
-              Address: {getCookie("address")}
+              Address: {getCookie("address") != ""? getCookie("address"):"none"}
             </Box>
             <Box component="h3" id={"postalcodeComponent"}>
-              Postal Code: {getCookie("postalcode")}
+              Postal Code: {getCookie("postalcode") != ""? getCookie("postalcode"):"none"}
             </Box>
             <Box component="h3" id={"cityComponent"}>
-              Locality: {getCookie("city")}
+              Locality: {getCookie("city") != ""? getCookie("city"):"none"}
             </Box>
             <Box component="h3" id={"countryComponent"}>
-              Country: {getCookie("country")}
+              Country: {getCookie("country") != ""? getCookie("country"):"none"}
             </Box>
             <Box component="h3" id={"regionComponent"}>
-              Region: {getCookie("region")}
+              Region: {getCookie("region") != ""? getCookie("region"):"none"}
             </Box>
           </div>
 

@@ -3,6 +3,7 @@ import {
   collection,
   getDocs,
   setDoc,
+    deleteDoc,
   doc,
   CollectionReference,
   Query,
@@ -28,6 +29,7 @@ import { Filter } from "./model/filter";
 const userCollection = collection(db, "user");
 const productCollection = collection(db, "products");
 const orderCollection = collection(db, "orders");
+const adminCollection = collection(db, "admin");
 
 export async function signUpUser(
   auth: Auth,
@@ -71,6 +73,10 @@ export async function addProduct(product: Product): Promise<any> {
   });
 }
 
+export async function removeProduct(id : string){
+  await deleteDoc(doc(db,"products", id));
+}
+
 export async function getProducts(filters?: Filter[]): Promise<any> {
   if (filters) {
     const query = applyFilters(productCollection, filters);
@@ -82,6 +88,17 @@ export async function getProducts(filters?: Filter[]): Promise<any> {
   return getDocs(productCollection).then((docs) =>
     docs.docs.map((doc) => doc.data() as Product)
   );
+}
+
+export async function addAdmin(email: string, name : string): Promise<any> {
+  return setDoc(doc(db, "admin", email), {
+    email,
+    name
+  });
+}
+
+export async function removeAdmin(email : string){
+  await deleteDoc(doc(db,"admin", email));
 }
 
 export async function addOrder(order: Order): Promise<any> {
@@ -108,6 +125,16 @@ export async function getOrder(email: string | null | undefined): Promise<any> {
     const q = query(orderCollection, where("userEmail", "==", email));
     return getDocs(q).then((docs) =>
       docs.docs.map((doc) => doc.data() as Order)
+    );
+  }
+  return null;
+}
+
+export async function getAdmin(email: string | null | undefined): Promise<any> {
+  if (email != null && email != undefined) {
+    const q = query(adminCollection, where("email", "==", email));
+    return getDocs(q).then((docs) =>
+        docs.docs.map((doc) => doc.data() as User)[0]
     );
   }
   return null;

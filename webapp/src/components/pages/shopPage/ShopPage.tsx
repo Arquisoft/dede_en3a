@@ -44,13 +44,30 @@ function ShopPage(): JSX.Element {
     setLoading(<LoadingOverlay></LoadingOverlay>);
     event.preventDefault();
     console.log("name filter on search", nameFilter);
-    getProducts([nameFilter]).then((products) => {
-      setLoading(<></>);
+    getProducts().then((products) => {
+      setLoading(<div></div>);
+
+      //^.*DEF.*$ --> checkea contiene substring DEF
+
+      var productsMatching: Product[] = [];
       const unorderedProducts = products as Product[];
 
-      let orderedProducts = unorderedProducts.sort((a, b) => sortByName(a, b));
+      unorderedProducts.forEach((product) => {
+        if (
+          (product.name as string)
+            .toLocaleLowerCase()
+            .includes(nameFilter.value) ||
+          (product.title as string)
+            .toLocaleLowerCase()
+            .includes(nameFilter.value)
+        ) {
+          productsMatching.push(product);
+        }
+      });
+
+      let orderedProducts = productsMatching.sort((a, b) => sortByName(a, b));
       if (sorting === "price")
-        orderedProducts = unorderedProducts.sort((a, b) => sortByPrice(a, b));
+        orderedProducts = productsMatching.sort((a, b) => sortByPrice(a, b));
 
       setProducts(orderedProducts);
     });

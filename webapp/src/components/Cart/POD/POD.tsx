@@ -5,7 +5,7 @@ import styles from "./POD.module.scss";
 function pod(webID: string) {
   //Puse 43 porque no puede haber un pod link menor que https://.solidcommunity.net/profile/card#me
   if (webID.length > 0 && webID.length < 43) {
-    return <h3>Please enter a valid SOLIDCommunity POD</h3>;
+    return <h3>Please enter a valid POD</h3>;
   } else if (webID.length != 0) {
     return <ShowPodInformation webID={webID} />;
   }
