@@ -1,5 +1,7 @@
 import { defineFeature, loadFeature } from 'jest-cucumber';
 import puppeteer from "puppeteer";
+import {apps} from "firebase-functions/lib/apps";
+import delay = apps.delay;
 
 const feature = loadFeature('./e2e/features/register-form.feature');
 
@@ -43,12 +45,15 @@ defineFeature(feature, test => {
       await expect(page).toFill("input[title='password']", password);
 
       await expect(page).toClick('button', {text:'Login'})
+      await expect(page).toClick('div[title="orders"]')
 
     });
 
     then('The orders of this client are available', async () => {
+
+      await delay(3000);
       await expect(page).toClick('div[title="orders"]')
-      await expect(page).toMatch("Date:")
+      await expect(page).toMatch("Orders")//There is an order in the account of this user
     });
   })
 
@@ -60,7 +65,7 @@ defineFeature(feature, test => {
     let name:string
 
         given('An unregistered user', () => {
-          email = "notregistered@123.com"
+          email = (Math.random() + 1).toString(36) + "@123.com"
           password = "123123"
           name = "notregistered"
         });
