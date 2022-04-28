@@ -19,7 +19,7 @@ import { DedeStore } from "../../../redux/store";
 import { calculateDeliveryOnCall } from "../../../../functions/src";
 
 import { getFunctions, httpsCallable } from "firebase/functions";
-
+import {functions} from "../../../utils/firebase"
 import "./ShowPodInformation.module.scss";
 import { useAuth } from "../../../context/AuthContext";
 import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
@@ -103,7 +103,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     region: string
   ): Promise<{ message: string; cost: number } | void> {
     const calculateDeliveryOnCall = httpsCallable(
-      getFunctions(),
+        functions,
       "calculateDeliveryOnCall"
     );
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
@@ -164,7 +164,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       return;
     }
 
-    const sendOrder = httpsCallable(getFunctions(), "sendOrder");
+    const sendOrder = httpsCallable(functions, "sendOrder");
 
     return await sendOrder({
       items: cart,
