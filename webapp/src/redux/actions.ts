@@ -45,3 +45,10 @@ export function setShippingCosts(shippingCost: number) {
     props: shippingCost,
   };
 }
+
+export function setEstimatedDelivery(estimatedDelivery: number) {
+  return {
+    type: actionTypes.SET_ESTIMATED_DELIVERY,
+    props: estimatedDelivery,
+  };
+}

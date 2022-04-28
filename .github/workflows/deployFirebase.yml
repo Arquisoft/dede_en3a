@@ -5,12 +5,22 @@ on:
     types: [closed]
 
 jobs:
+
   build:
     defaults:
       run:
         working-directory: webapp
     name: Build
     runs-on: ubuntu-latest
+    env:
+      REACT_APP_apiKey: ${{ secrets.REACT_APP_APIKEY }}
+      REACT_APP_authDomain: ${{ secrets.REACT_APP_AUTHDOMAIN }}
+      REACT_APP_databaseURL: ${{ secrets.REACT_APP_DATABASEURL }}
+      REACT_APP_projectId: ${{ secrets.REACT_APP_PROJECTID }}
+      REACT_APP_storageBucket: ${{ secrets.REACT_APP_STORAGEBUCKET }}
+      REACT_APP_messagingSenderId: ${{ secrets.REACT_APP_MESSAGINGSENDERID }}
+      REACT_APP_appId: ${{ secrets.REACT_APP_APPID }}
+      REACT_APP_paypalapi: ${{ secrets.REACT_APP_PAYPALAPI }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -25,6 +35,36 @@ jobs:
         with:
           name: take-build-file
           path: ./webapp/build
+
+  tests:
+    runs-on: ubuntu-latest
+    env:
+      REACT_APP_apiKey: ${{ secrets.REACT_APP_APIKEY }}
+      REACT_APP_authDomain: ${{ secrets.REACT_APP_AUTHDOMAIN }}
+      REACT_APP_databaseURL: ${{ secrets.REACT_APP_DATABASEURL }}
+      REACT_APP_projectId: ${{ secrets.REACT_APP_PROJECTID }}
+      REACT_APP_storageBucket: ${{ secrets.REACT_APP_STORAGEBUCKET }}
+      REACT_APP_messagingSenderId: ${{ secrets.REACT_APP_MESSAGINGSENDERID }}
+      REACT_APP_appId: ${{ secrets.REACT_APP_APPID }}
+      REACT_APP_paypalapi: ${{ secrets.REACT_APP_PAYPALAPI }}
+    defaults:
+      run:
+        working-directory: webapp
+    strategy:
+      matrix:
+        node-version: [ 12.x, 14.x, 16.x ]
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      run: npm run test:e2e
+      run: npm run build --if-present
+      run: npm test
+
   deploy:
     defaults:
       run:
@@ -32,6 +72,15 @@ jobs:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
+    env:
+      REACT_APP_apiKey: ${{ secrets.REACT_APP_APIKEY }}
+      REACT_APP_authDomain: ${{ secrets.REACT_APP_AUTHDOMAIN }}
+      REACT_APP_databaseURL: ${{ secrets.REACT_APP_DATABASEURL }}
+      REACT_APP_projectId: ${{ secrets.REACT_APP_PROJECTID }}
+      REACT_APP_storageBucket: ${{ secrets.REACT_APP_STORAGEBUCKET }}
+      REACT_APP_messagingSenderId: ${{ secrets.REACT_APP_MESSAGINGSENDERID }}
+      REACT_APP_appId: ${{ secrets.REACT_APP_APPID }}
+      REACT_APP_paypalapi: ${{ secrets.REACT_APP_PAYPALAPI }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -43,6 +92,8 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting
+          args: deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }} --project dede-en3a-336f8
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+

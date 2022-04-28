@@ -15,9 +15,22 @@ export const CardItem: React.FC<CardItemProps> = ({
   product,
 }) => {
   const addToCart = () => {
-    saveProductToCart(product);
+    if (product.stock !== 0) saveProductToCart(product);
   };
   const [rating, setRating] = useState(5);
+
+  let stockMessage: JSX.Element = <></>;
+  let outOfStockImageStyle;
+  let cartOutOfStockStyle;
+
+  if (product.stock! < 50) {
+    stockMessage = <div className={styles.lowstock}>Low stock</div>;
+    if (product.stock === 0) {
+      outOfStockImageStyle = styles.outofstockimage;
+      stockMessage = <div className={styles.lowstock}>Out of stock</div>;
+      cartOutOfStockStyle = styles.cartoutofstock;
+    }
+  }
 
   useEffect(() => {
     setRating(Utils.getProductAverageRating(product));
@@ -28,16 +41,24 @@ export const CardItem: React.FC<CardItemProps> = ({
       <div className={styles.container}>
         <Link to={"/product/" + product.id}>
           <div className={styles.imagecontainer}>
-            <img className={styles.cardproductimage} src={product.img}></img>
+            <img
+              className={styles.cardproductimage + " " + outOfStockImageStyle}
+              src={product.img}
+            ></img>
+            {stockMessage}
           </div>
         </Link>
         <div className={styles.descriptioncontainer}>
           <div className={styles.col1}>
-            <div title={"cardItemName"} className={styles.productname}>{product.name}</div>
-            <div title={"cardItemPrice"} className={styles.price}>{product.price + " $"}</div>
+            <div title={"cardItemName"} className={styles.productname}>
+              {product.name}
+            </div>
+            <div title={"cardItemPrice"} className={styles.price}>
+              {product.price + " $"}
+            </div>
             <div style={{ display: "flex", marginTop: "0.5rem" }}>
               <Rating
-                  title={"cardItemRating"}
+                title={"cardItemRating"}
                 name="read-only"
                 value={rating}
                 precision={0.5}
@@ -49,8 +70,19 @@ export const CardItem: React.FC<CardItemProps> = ({
           </div>
 
           <div className={styles.col2}>
-            <div title={"cardItemAddButton"} onClick={addToCart} className={styles.addtocart}>
-              <span className={"material-icons " + styles.carticon}>
+            <div
+              title={"cardItemAddButton"}
+              onClick={addToCart}
+              className={styles.addtocart}
+            >
+              <span
+                className={
+                  "material-icons " +
+                  styles.carticon +
+                  " " +
+                  cartOutOfStockStyle
+                }
+              >
                 add_shopping_cart
               </span>
             </div>
