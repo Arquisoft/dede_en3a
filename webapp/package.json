@@ -34,6 +34,7 @@
     "redux-thunk": "^2.4.1",
     "sass": "^1.49.9",
     "typescript": "^4.5.4",
+    "uuidv4": "^6.2.13",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
