@@ -3,6 +3,8 @@ on:
   pull_request:
     branches: [develop]
     types: [closed]
+  push:
+    branches: [ master, develop ]
 
 jobs:
 
@@ -61,9 +63,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      run: npm run test:e2e
-      run: npm run build --if-present
-      run: npm test
+      - name: Run commands for tests
+        run:
+          npm run test:e2e
+          npm run build --if-present
+          npm test
 
   deploy:
     defaults:
