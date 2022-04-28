@@ -14,7 +14,7 @@ import HeaderBackground from "../../HeaderBackground/HeaderBackground";
 
 function ShopPage(): JSX.Element {
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(<div></div>);
+  const [loading, setLoading] = useState(<></>);
   const [sorting, setSorting] = useState("Name");
 
   const refreshProductList = async () => {
@@ -45,7 +45,7 @@ function ShopPage(): JSX.Element {
     event.preventDefault();
     console.log("name filter on search", nameFilter);
     getProducts([nameFilter]).then((products) => {
-      setLoading(<div></div>);
+      setLoading(<></>);
       const unorderedProducts = products as Product[];
 
       let orderedProducts = unorderedProducts.sort((a, b) => sortByName(a, b));
