@@ -63,11 +63,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: run tests e2e
-        run:
+      - run:
           npm run test:e2e
-      - name: run normal tests
-        run:
+      - run:
           npm test
 
   deploy:
