@@ -55,8 +55,8 @@ function ShopPage(): JSX.Element {
 
       unorderedProducts.forEach(product => {
 
-        if( (product.name as string).toLocaleLowerCase().includes(nameFilter.value) ||
-            (product.title as string).toLocaleLowerCase().includes(nameFilter.value)){
+        if( (product.name as string).toLocaleLowerCase().includes(nameFilter.value.toLocaleLowerCase()) ||
+            (product.title as string).toLocaleLowerCase().includes(nameFilter.value.toLocaleLowerCase())){
           productsMatching.push(product)
         }
 
