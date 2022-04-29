@@ -14,7 +14,7 @@ defineFeature(feature, test => {
 
         browser = process.env.GITHUB_ACTIONS
             ? await puppeteer.launch()
-            : await puppeteer.launch({ headless: false, slowMo:100}); //false to run tests locally
+            : await puppeteer.launch({ headless: false, slowMo:0}); //false to run tests locally
         page = await browser.newPage();
 
         await page

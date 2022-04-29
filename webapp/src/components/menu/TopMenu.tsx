@@ -196,7 +196,7 @@ export default function TopMenu(): JSX.Element {
             >
               Orders
             </div>
-            <div className={styles.cartcontainer}>
+            <div id={"cartTopMenu"} className={styles.cartcontainer}>
               <span
                 title={"cart"}
                 className={"material-icons " + styles.loginicon + " " + wobble}
@@ -319,9 +319,9 @@ export default function TopMenu(): JSX.Element {
         <div className={styles.totalcartprice}>
           Total: <b>{Utils.calculateTotal(cart).toFixed(2)}</b>
         </div>
-        <div onClick={() => navigate("/cart")} className={styles.cartproceed}>
+        <button id={"continueCart"} onClick={() => navigate("/cart")} className={styles.cartproceed}>
           Continue
-        </div>
+        </button>
       </div>
     </>
   );
