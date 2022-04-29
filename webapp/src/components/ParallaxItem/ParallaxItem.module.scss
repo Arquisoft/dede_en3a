@@ -1,0 +1,11 @@
+.container {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  perspective-origin: 0 0;
+}
+
+.parallaxChild {
+  transform-origin: 0 0;
+}

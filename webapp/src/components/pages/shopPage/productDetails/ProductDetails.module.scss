@@ -1,23 +1,31 @@
 @import "./../../../../Styles.scss";
 
-.wrapperLeft{
+.container {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapperLeft {
   margin-top: 3rem;
   margin-left: 3rem;
 }
 
-.wrapperWholeComment{
+.wrapperWholeComment {
   margin-top: 0.75rem;
   margin-left: 4rem;
   margin-bottom: 0.75rem;
 }
 
-.username{
+.username {
   font-family: "Montserrat-Bold";
   font-size: 1rem;
   margin-left: 0.5rem;
 }
 
-.commentWrapper{
+.commentWrapper {
   text-align: center;
   margin-top: 1rem;
   display: flex;
@@ -28,12 +36,13 @@
   color: var(--white1);
 }
 
-.headerContainer{
+.headerContainer {
+  margin-top: 4rem;
   display: flex;
   flex-flow: row wrap;
 }
 
-.wrapperRight{
+.wrapperRight {
   margin-top: 6rem;
   margin-left: 2rem;
   display: flex;
@@ -49,10 +58,9 @@
   transition: 0.5s ease;
   border-radius: 0.5rem;
   width: 20rem;
-  height: 100%;
 }
 
-.userImage{
+.userImage {
   cursor: pointer;
   transition: 0.5s ease;
   border-radius: 0.5rem;
@@ -60,30 +68,37 @@
   height: 3%;
 }
 
-.productName{
-  font-family: "Montserrat-Bold";
+.productName {
+  font-family: "Montserrat-Light";
+  font-weight: bold;
   font-size: 2rem;
   color: var(--orange1);
   margin-bottom: 1rem;
 }
 
-.subtitle{
+.subtitle {
   margin-top: 1rem;
-  font-family: "Montserrat-Bold";
+  font-family: "Montserrat-Regular";
   font-size: 1.5rem;
+  b {
+    margin-left: 0.5rem;
+    color: var(--orange2);
+  }
+  display: flex;
 }
 
-.subsubtitle{
+.subsubtitle {
   font-family: "Montserrat-Bold";
   font-size: 1.5rem;
   margin-left: 3rem;
 }
 
-.text{
+.text {
   font-size: 1rem;
+  opacity: 0.9;
 }
 
-.inputComment{
+.inputComment {
   font-size: 1rem;
   width: 70%;
   padding: 0.3rem;
@@ -102,24 +117,44 @@
   align-items: center;
   justify-content: left;
   margin-bottom: 1rem;
+  margin-left: 1rem;
+}
 
-  button {
-    cursor: pointer;
-    font-family: "Montserrat-Bold";
-    background-color: var(--orange2);
-    font-size: 1.3rem;
-    padding: 1rem;
-    padding-left: 1.7rem;
-    padding-right: 1.7rem;
+.subheader {
+  margin-top: 1rem;
+}
 
-    border-radius: 0.5rem;
-    transition: 0.35s;
-  }
-  button:hover {
-    filter: drop-shadow(0px 0px 7px var(--orange2));
+@media (min-width: 0px) and (max-width: $screen-sm-max) {
+  .headerContainer {
+    margin-top: 0;
   }
 }
 
-.subheader{
-  margin-top: 5rem;
+.addtocart {
+  cursor: pointer;
+  font-family: "Montserrat-Bold";
+  background-color: var(--orange2);
+  font-size: 1.3rem;
+  padding: 1rem;
+  padding-left: 1.7rem;
+  padding-right: 1.7rem;
+
+  border-radius: 0.5rem;
+  transition: 0.35s;
+}
+
+.addtocart:hover {
+  filter: drop-shadow(0px 0px 7px var(--orange2));
+}
+
+.outofstock {
+  filter: opacity(0.5);
+  background-color: gray;
+  cursor: default;
+}
+
+.outofstock:hover {
+  filter: opacity(0.5);
+
+  cursor: not-allowed;
 }

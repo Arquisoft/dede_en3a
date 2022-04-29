@@ -9,21 +9,29 @@ import { useNavigate } from "react-router-dom";
 import productCartItem from "./ProductCartItem/ProductCartItem";
 import { useAuth } from "../../context/AuthContext";
 import POD from "./POD/POD";
+import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
+import { Utils } from "../../utils/utilts";
+import HeaderBackground from "../HeaderBackground/HeaderBackground";
 type CartProps = {};
 
 function Cart(props: CartProps): JSX.Element {
   const navigate = useNavigate();
 
-  const calculateTotal = (items: CartItem[]) => {
-    console.log("recalculate");
-    return items.reduce(
-      (ack: number, item) => ack + item.product.price! * item.amount,
-      0
-    ); //+ item.price
-  };
-
+  const calculateTotal = (items: CartItem[]) => Utils.calculateTotal(items);
   let itemList: JSX.Element[] = [];
 
+  const shippingCost: number | null = useSelector(
+    (state: DedeStore) => state.shippingCost
+  );
+
+  const getEstimatedDeliveryDate = () => {
+    if (estimatedDelivery) return new Date(estimatedDelivery).toDateString();
+    return "";
+  };
+
+  const estimatedDelivery: number | null = useSelector(
+    (state: DedeStore) => state.estimatedDelivery
+  );
   const products: CartItem[] = useSelector((state: DedeStore) => state.cart);
 
   products.forEach((cartItem) => {
@@ -35,26 +43,47 @@ function Cart(props: CartProps): JSX.Element {
   return (
     <>
       <TopMenu></TopMenu>
-
+      <HeaderBackground></HeaderBackground>
       <div className={styles.cartcontainer}>
         <div className={styles.headercontainer}>
-          <div className={styles.header}>
-            <div title={"shoppingCartTitle"}  className={styles.title}>Shopping Cart</div>
-            <div title={"total"} className={styles.subtitle}></div>
-            Total: ${calculateTotal(products).toFixed(2)}
-          </div>
+          <div className={styles.header}></div>
         </div>
-        <div className={styles.podcontainer}>
-          <POD />
-        </div>
-        <div className={styles.cartcontent}>
-          <div className={styles.carditemcardcontainer}>
-            {/* {props.products.length === 0 ? (
+        <div className={styles.bodycontainer}>
+          <div className={styles.cartcontent}>
+            <div className={styles.cartitemtitle}>
+              <b title={"itemsInYourCart"}>({products.length})</b> Items in your
+              cart
+            </div>
+            <hr></hr>
+
+            <div className={styles.carditemcardcontainer}>
+              {/* {props.products.length === 0 ? (
               <p>Your cart is empty.</p>
             ) : (
               { itemList }
             )} */}
-            {itemList}
+              {itemList}
+            </div>
+            <div title={"shippingCosts"} className={styles.totalPrice}>
+              Shipping costs:
+              <b>
+                {shippingCost
+                  ? shippingCost + " €"
+                  : "Use your pod adress to calculate"}{" "}
+              </b>
+            </div>
+            <div title={"total"} className={styles.totalPrice}>
+              Total:
+              <b>{Utils.calculateTotal(products, shippingCost).toFixed(2)} €</b>
+            </div>
+            <div title={"estimDeliverDate"} className={styles.totalPrice}>
+              Estimated delivery date:
+              <b>{getEstimatedDeliveryDate()}</b>
+            </div>
+          </div>
+
+          <div className={styles.podcontainer}>
+            <POD />
           </div>
         </div>
       </div>

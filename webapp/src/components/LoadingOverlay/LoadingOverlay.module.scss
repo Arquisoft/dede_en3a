@@ -1,0 +1,40 @@
+
+@keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.397);
+}
+
+
+
+.loadingSpinner {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+
+    z-index: 1001;
+    border-radius: 50%;
+    border: 1rem solid rgba(255, 255, 255, 0.247);
+    border-left-color: var(--orange2);
+    width: 10rem;
+    height: 10rem;
+    
+    animation: spin 1s ease infinite;
+  }
+
+

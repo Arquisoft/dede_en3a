@@ -1,0 +1,235 @@
+@import "./../../../variables.scss";
+@import "./../../../Styles.scss";
+
+.header {
+  margin-left: 1.5rem;
+  margin-top: var(--topMenuHeight);
+  width: 100%;
+  max-width: 70rem;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+}
+
+.bigText{
+  margin-top: 1rem;
+  width: 100%;
+  background-color: var(--dark1);
+  display: flex;
+  font-size: 2.5rem;
+  flex-direction: column;
+  font-weight: bold;
+  color: var(--orange2);
+  justify-content: center;
+}
+
+.leftPanel{
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.options{
+  color: var(--orange3);
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.displayOptions{
+  color: cyan;
+  display: flex;
+  flex-direction: row;
+}
+
+.displayTitle{
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: var(--orange2);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.wrapperOptions{
+  display: flex;
+  flex-direction: row;
+}
+
+.indAdd{
+  margin-left: 1rem;
+  font-weight: bold;
+  font-size: 2rem;
+  color: #00bf00;
+  align-items: center;
+}
+
+.indEdit{
+  margin-left: 1rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #bfbf00;
+  align-items: center;
+}
+
+.indDelete{
+  margin-left: 1rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #bf0000;
+  align-items: center;
+}
+
+.optionleft{
+  display: flex;
+  flex-direction: row;
+}
+
+.optionvertical{
+  margin-left: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mood{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.modalAdmin {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 2rem;
+  box-shadow: var(--shadow2);
+  position: relative;
+  width: 40vw;
+  background-color: white;
+  height: 26.5rem;
+  .title {
+    text-align: center;
+
+    font-weight: bold;
+    color: var(--orange2);
+    font-size: 1.8rem;
+  }
+  .subtitle {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.3rem;
+    color: black;
+    opacity: 0.8;
+  }
+  .accept {
+    margin-top: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    cursor: pointer;
+    padding: 0.5rem;
+    padding-inline: 1.2rem;
+    border-radius: 0.3rem;
+    background-color: var(--orange2);
+    width: fit-content;
+    font-size: 1.3rem;
+  }
+}
+
+.modalAdmin2 {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 2rem;
+  box-shadow: var(--shadow2);
+  position: relative;
+  width: 40vw;
+  background-color: white;
+  height: 15.5rem;
+  .title {
+    text-align: center;
+
+    font-weight: bold;
+    color: var(--orange2);
+    font-size: 1.8rem;
+  }
+  .subtitle {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.3rem;
+    color: black;
+    opacity: 0.8;
+  }
+  .accept {
+    margin-top: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    cursor: pointer;
+    padding: 0.5rem;
+    padding-inline: 1.2rem;
+    border-radius: 0.3rem;
+    background-color: var(--orange2);
+    width: fit-content;
+    font-size: 1.3rem;
+  }
+}
+
+.modalerror {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 2rem;
+  box-shadow: var(--shadow2);
+  position: relative;
+  width: 40vw;
+  background-color: red;
+  height: 13rem;
+  .title {
+    text-align: center;
+
+    font-weight: bold;
+    color: var(--dark1);
+    font-size: 1.8rem;
+  }
+
+  .accept {
+    margin-top: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    cursor: pointer;
+    padding: 0.5rem;
+    padding-inline: 1.2rem;
+    border-radius: 0.3rem;
+    background-color: var(--orange2);
+    width: fit-content;
+    font-size: 1.3rem;
+  }
+}
+
+.cancel {
+  margin-top: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  cursor: pointer;
+  padding: 0.5rem;
+  padding-inline: 1.2rem;
+  border-radius: 0.3rem;
+  background-color: var(red);
+  width: fit-content;
+  font-size: 1.3rem;
+}
+
+.inputfield {
+  font-size: 1rem;
+  width: 90%;
+  padding: 0.3rem;
+  background-color: gray;
+  color: var(--dark2);
+  border-radius: 0.5rem;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 0.5rem;
+}
