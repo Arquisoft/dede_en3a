@@ -14,7 +14,7 @@ import HeaderBackground from "../../HeaderBackground/HeaderBackground";
 
 function ShopPage(): JSX.Element {
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(<div></div>);
+  const [loading, setLoading] = useState(<></>);
   const [sorting, setSorting] = useState("Name");
 
   const refreshProductList = async () => {
@@ -36,8 +36,8 @@ function ShopPage(): JSX.Element {
   const dispatch: Dispatch<any> = useDispatch();
 
   const saveProduct = React.useCallback(
-      (product: Product) => dispatch(increase(product)),
-      [dispatch]
+    (product: Product) => dispatch(increase(product)),
+    [dispatch]
   );
 
   const handleSubmit = (event: any) => {
@@ -49,15 +49,19 @@ function ShopPage(): JSX.Element {
 
       //^.*DEF.*$ --> checkea contiene substring DEF
 
-
-      var productsMatching : Product[] = [];
+      var productsMatching: Product[] = [];
       const unorderedProducts = products as Product[];
 
-      unorderedProducts.forEach(product => {
-
-        if( (product.name as string).toLocaleLowerCase().includes(nameFilter.value.toLocaleLowerCase()) ||
-            (product.title as string).toLocaleLowerCase().includes(nameFilter.value.toLocaleLowerCase())){
-          productsMatching.push(product)
+      unorderedProducts.forEach((product) => {
+        if (
+          (product.name as string)
+            .toLocaleLowerCase()
+            .includes(nameFilter.value.toLocaleLowerCase()) ||
+          (product.title as string)
+            .toLocaleLowerCase()
+            .includes(nameFilter.value.toLocaleLowerCase())
+        ) {
+          productsMatching.push(product);
         }
 
       })
@@ -98,73 +102,73 @@ function ShopPage(): JSX.Element {
 
   products.forEach((product) => {
     productList.push(
-        <div className={styles.product}>
-          <CardItem product={product} saveProductToCart={saveProduct}></CardItem>
-        </div>
+      <div className={styles.product}>
+        <CardItem product={product} saveProductToCart={saveProduct}></CardItem>
+      </div>
     );
   });
 
   return (
-      <>
-        <TopMenu></TopMenu>
-        <HeaderBackground></HeaderBackground>
-        {loading}
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <div title={"ShopTitle"} className={styles.title}></div>
-            <div className={styles.subtitle}></div>
-          </div>
-          <form className={styles.bodycontainer} onSubmit={handleSubmit}>
-            <div className={styles.filtersrow}>
-              <div className={styles.filter}>
-                <b>Type</b>
-                <hr></hr>
-                <select title={"select"}>
-                  <option>Health</option>
-                  <option>Tech</option>
-                </select>
-              </div>
+    <>
+      <TopMenu></TopMenu>
+      <HeaderBackground></HeaderBackground>
+      {loading}
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <div title={"ShopTitle"} className={styles.title}></div>
+          <div className={styles.subtitle}></div>
+        </div>
+        <form className={styles.bodycontainer} onSubmit={handleSubmit}>
+          <div className={styles.filtersrow}>
+            <div className={styles.filter}>
+              <b>Type</b>
+              <hr></hr>
+              <select title={"select"}>
+                <option>Health</option>
+                <option>Tech</option>
+              </select>
             </div>
-            <div className={styles.productsrow}>
-              <div className={styles.productsheader}>
-                <b>Openning offer</b>
-                <span>
+          </div>
+          <div className={styles.productsrow}>
+            <div className={styles.productsheader}>
+              <b>Openning offer</b>
+              <span>
                 First order <strong>20% off</strong>
               </span>
-                <img src={headerImg}></img>
-              </div>
-              <hr></hr>
-              <div className={styles.searchbar}>
-                <input
-                    title={"searchProduct"}
-                    type="text"
-                    placeholder="Search your product here..."
-                    onChange={handleNameFilter}
-                ></input>
-                <div className={styles.searchordercontainer}>
-                  <b>Order by</b>
-                  <select
-                      title={"orderBySelector"}
-                      onChange={handleSortingOption}
-                  >
-                    <option value="name">Name</option>
-                    <option value="price">Price</option>
-                  </select>
-                </div>
-                <button title={"searchButton"} onClick={handleSubmit}>
-                  <b>Search</b>{" "}
-                </button>
-              </div>
-
-              <hr style={{ marginTop: "0.4rem" }}></hr>
-              <div title={"products"} className={styles.productcardcontainer}>
-                {" "}
-                {productList}
-              </div>
+              <img src={headerImg}></img>
             </div>
-          </form>
-        </div>
-      </>
+            <hr></hr>
+            <div className={styles.searchbar}>
+              <input
+                title={"searchProduct"}
+                type="text"
+                placeholder="Search your product here..."
+                onChange={handleNameFilter}
+              ></input>
+              <div className={styles.searchordercontainer}>
+                <b>Order by</b>
+                <select
+                  title={"orderBySelector"}
+                  onChange={handleSortingOption}
+                >
+                  <option value="name">Name</option>
+                  <option value="price">Price</option>
+                </select>
+              </div>
+              <button title={"searchButton"} onClick={handleSubmit}>
+                <b>Search</b>{" "}
+              </button>
+            </div>
+
+            <hr style={{ marginTop: "0.4rem" }}></hr>
+            <div title={"products"} className={styles.productcardcontainer}>
+              {" "}
+              {productList}
+            </div>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 
