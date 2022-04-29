@@ -56,18 +56,23 @@ function ShopPage(): JSX.Element {
         if (
           (product.name as string)
             .toLocaleLowerCase()
-            .includes(nameFilter.value) ||
+            .includes(nameFilter.value.toLocaleLowerCase()) ||
           (product.title as string)
             .toLocaleLowerCase()
-            .includes(nameFilter.value)
+            .includes(nameFilter.value.toLocaleLowerCase())
         ) {
           productsMatching.push(product);
         }
-      });
+
+      })
+
+
 
       let orderedProducts = productsMatching.sort((a, b) => sortByName(a, b));
       if (sorting === "price")
         orderedProducts = productsMatching.sort((a, b) => sortByPrice(a, b));
+
+
 
       setProducts(orderedProducts);
     });
