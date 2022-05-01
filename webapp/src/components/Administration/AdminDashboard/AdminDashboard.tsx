@@ -24,7 +24,7 @@ import moment from "moment";
 import Modal from "../../Modal/Modal";
 import {Comments} from "../../../api/model/comments";
 import { v4 as uuid } from 'uuid';
-import {randomUUID} from "crypto";
+import {VictoryPie, VictoryChart, VictoryBar, VictoryArea, VictoryLabel} from "victory"
 
 
 function AdminDashboard(): JSX.Element {
@@ -33,6 +33,7 @@ function AdminDashboard(): JSX.Element {
     const [products, setProducts] = useState<Product[]>([]);
     const [orders, setOrders] = useState<Order[]>([]);
     const [modal, setModal] = React.useState(<></>);
+    const [stat, setStat] = React.useState([]);
 
     const refreshUserList = async () => {
         setUsers(await getUsers());
@@ -115,6 +116,7 @@ function AdminDashboard(): JSX.Element {
             stock: parseFloat(stock)
         };
         updateProduct(product);
+        refreshProductList().then(() => productsDisplay());
         setModal(<></>);
     }
 
@@ -179,6 +181,7 @@ function AdminDashboard(): JSX.Element {
             stock: parseFloat(stock)
         };
         updateProduct(product);
+        refreshProductList().then(() => productsDisplay());
         setModal(<></>);
     }
 
@@ -278,9 +281,71 @@ function AdminDashboard(): JSX.Element {
 
     function statisticsDisplay(){
         const res : any = [];
-        res.push(<div className={styles.displayTitle}> STATISTICS </div>)
 
-        setOptions(res)
+        const var1 : any[] = [];
+        let var2 : number = 0;
+        let var3: any[] = [];
+
+        products.forEach((prod) => {
+            var1.push({x: prod.name, y :prod.stock});
+            let count = 0;
+            let num = 0;
+            prod.comments?.forEach((com) =>{
+                count += com.rating
+                num++;
+            })
+            if(count != 0){
+                count = count / num;
+            }
+            var3.push({x : prod.name, y : count})
+        });
+
+        orders.forEach((ord) => {
+            var2 += ord.totalAmount;
+        });
+
+        const opt1 : any = []
+        const opt2 : any = []
+        const opt3 : any = []
+
+        opt1.push(<div className={styles.backgroundStats}>
+            <VictoryChart height={400} width={1400}
+                          domainPadding={{ x: 100, y: [0, 10] }}>
+                <VictoryBar
+                    style={{data: { fill: 'tomato'}}}
+                    data={var1}
+                />
+            </VictoryChart>
+        </div>)
+
+        opt2.push(<svg viewBox="0 0 800 800">
+            <VictoryPie
+                standalone={false}
+                width={800} height={800}
+                data={var3}
+                innerRadius={100} labelRadius={200}
+                style={{ labels: { fontSize: 20, fill: "tomato" } }}
+            />
+            <VictoryLabel
+                textAnchor="middle"
+                style={{ fontSize: 20 , fill: "white"}}
+                x={400} y={400}
+                text="RATINGS"
+            />
+        </svg>)
+
+        opt3.push(<div className={styles.manin}>Total revenue: {var2.toFixed(2)}$</div>)
+
+        res.push(<div>
+            <div className={styles.displayTitle}> STATISTICS </div>
+            <div className={styles.optionsA}>
+                <button onClick={() => {setStat(opt1)}}>Product Stock</button>
+                <button onClick={() => setStat(opt2)}>Rating Chart</button>
+                <button onClick={() => setStat(opt3)}>Revenue</button>
+            </div>
+            <div>{stat}</div>
+        </div>)
+        setOptions(res);
     }
 
     function setterOfOption(opt : any) {

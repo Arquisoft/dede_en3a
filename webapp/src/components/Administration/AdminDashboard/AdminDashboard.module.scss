@@ -36,6 +36,12 @@
   font-size: 1.25rem;
   font-weight: bold;
 }
+.optionsA{
+  color: var(--orange3);
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-right: 1.5rem;
+}
 
 .displayOptions{
   color: cyan;
@@ -232,4 +238,17 @@
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 0.5rem;
+}
+
+.backgroundStats{
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.manin{
+  color: darkorange;
+  font-weight: bold;
+  font-size: 3.5rem;
+  margin-left: 1.5rem;
 }
