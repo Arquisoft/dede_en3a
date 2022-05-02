@@ -30,19 +30,19 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-          #- name: Download Artifact
-          #uses: actions/download-artifact@v3
-          #with:
-          #name: take-build-file
-        #path: /home/runner/work/dede_en3a/dede_en3a/webapp
+      - run: npm install
+      - run: CI=false npm run build
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: take-build-file
+          path: /home/runner/work/dede_en3a/dede_en3a/webapp
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           #node-version: ${{ matrix.node-version }}
           node-version: 16
           #cache: 'npm'
-      - run: npm install
-      - run: CI=false npm run build
       #- run: npm ci
       - run: npm run test:e2e
       - run: npm test -- --watchAll=false --detectOpenHandles --forceExit
