@@ -25,6 +25,7 @@ import Modal from "../../Modal/Modal";
 import {Comments} from "../../../api/model/comments";
 import { v4 as uuid } from 'uuid';
 import {VictoryPie, VictoryChart, VictoryBar, VictoryArea, VictoryLabel} from "victory"
+import {useNavigate} from "react-router-dom";
 
 
 function AdminDashboard(): JSX.Element {
@@ -34,6 +35,9 @@ function AdminDashboard(): JSX.Element {
     const [orders, setOrders] = useState<Order[]>([]);
     const [modal, setModal] = React.useState(<></>);
     const [stat, setStat] = React.useState([]);
+    const [modalErr, setModalErr] = React.useState(<></>);
+
+    const navigate = useNavigate();
 
     const refreshUserList = async () => {
         setUsers(await getUsers());
@@ -229,11 +233,31 @@ function AdminDashboard(): JSX.Element {
         refreshUserList();
         refreshProductList();
         refreshOrderList();
+        ModalErr();
     }, []);
 
-    useEffect(() => {
-        console.log(products)
-    });
+    function ModalErr(){
+        let a : any = [];
+        a.push();
+        setModalErr(<Modal element={ErrHtml}></Modal>)
+    }
+
+    const ErrHtml = (
+            <div className={styles.modalAdmin2}>
+                <div className={styles.title}>Err 403</div>
+                <div className={styles.subtitle}>
+                    <div>
+                        YOU DO NOT HAVE THE PERMISSIONS TO ACCESS HERE
+                    </div>
+                </div>
+                <div className={styles.mood}>
+                    <div className={styles.accept} onClick={() => {setModal(<></>); navigate("/home");}}>
+                        Okay
+                    </div>
+                </div>
+            </div>
+    );
+
 
     function usersDisplay(){
         const res : any = [];
@@ -397,7 +421,7 @@ function AdminDashboard(): JSX.Element {
                 :
                 <>
                     <TopMenu></TopMenu>
-                    <h1>YOU DO NOT HAVE PERMISSIONS TO ACCESS HERE</h1>
+                    {modalErr}
                 </>
             }
         </>
