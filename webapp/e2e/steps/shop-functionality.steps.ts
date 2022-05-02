@@ -1,5 +1,7 @@
 import {defineFeature, loadFeature} from "jest-cucumber";
 import puppeteer from "puppeteer";
+import {apps} from "firebase-functions/lib/apps";
+import delay = apps.delay;
 
 const feature = loadFeature('./e2e/features/shop-functionality.feature');
 
@@ -14,7 +16,7 @@ defineFeature(feature, test => {
 
         browser = process.env.GITHUB_ACTIONS
             ? await puppeteer.launch()
-            : await puppeteer.launch({ headless: false, slowMo:100}); //false to run tests locally
+            : await puppeteer.launch({ headless: false, slowMo:0}); //false to run tests locally
         page = await browser.newPage();
 
         await page
@@ -41,6 +43,7 @@ defineFeature(feature, test => {
             await expect(page).toFill("input[title='searchProduct']", "Hand");
 
             await expect(page).toClick('button', {text:'Search'})
+            await delay(3000);
 
         });
 

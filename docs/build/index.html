@@ -908,7 +908,7 @@ conventions (e.g. programming or versioning guidelines, documentation or naming 
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Database</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The POD will have most of the information so we will not store it but we will store other stuff like the products to buy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The POD will have most of the information so we will not store it, but we will store other stuff like the products to buy</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Obviously the database will be linked to the web</p></td>
 </tr>
 </tbody>
@@ -1011,10 +1011,7 @@ Refer to details in the following sections.</p>
 <p>The technologies we have decided to use for the development of the app are:</p>
 </div>
 <div class="paragraph">
-<p>Bootstrap → In order to avoid as much as possible the development of CSS we chose to use Bootstrap.</p>
-</div>
-<div class="paragraph">
-<p>Solid Community → Main POD server provider. Widely used.</p>
+<p>Solid Community, Inrupt and SolidWeb  → Main POD server providers. Widely used. The app works with all the PODs that follows the same standard as them.</p>
 </div>
 <div class="paragraph">
 <p>Firebase → Serverless service for the deployment and development of the application, providing the web and DB hosting,
@@ -1136,6 +1133,10 @@ Thus it contains the white box description of selected building blocks of level 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Geocoder</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Api to calculate coordinates and distances given the address from the pod.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PayPal API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PayPal provides developers with a powerfull api to process payments with PayPal, Credit cards and Sofort.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1301,7 +1302,7 @@ You will mainly capture scenarios in your documentation to communicate your arch
 <div class="sect2">
 <h3 id="_purchasing_scenario">6.2. Purchasing scenario</h3>
 <div class="paragraph">
-<p>Once the user has logged in he/she can purchase products, add them to the order and pay.</p>
+<p>Once the user has logged in he/she can purchase products, add them to the order and pay. This diagram represents a successful purchase.</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="./images/Purchasing_scenario.png" alt="Purchasing scenario"></span></p>
@@ -1644,6 +1645,16 @@ a different product and poor documentation.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Serverless approach to provide the backend of our app. Has its own stored logs. High availability.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Very difficult to debug.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QA-7 Redux</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Easy way of keeping the state of the application and using information of different pages</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hard configuration and none of us had any idea of how to use it before.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QA-8 Geocoder API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fast coordinates resolution for addresses.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Very poor documentation for using it in TypeScript.</p></td>
+</tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
@@ -1954,7 +1965,7 @@ Created by Dr. Peter Hruschka &amp; Dr. Gernot Starke.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-02-12 11:30:04 +0100
+Last updated 2022-04-23 17:32:52 +0200
 </div>
 </div>
 </body>

@@ -47,6 +47,7 @@ Contained Building Blocks::
 | Dede     | The application itself. 
 | Pod     | The user's pod. It is external to our application. It is used by the application in order to preserve the privacy of our users. Will be provided by an external POD Provider.
 |Geocoder | Api to calculate coordinates and distances given the address from the pod.
+|PayPal API | PayPal provides developers with a powerfull api to process payments with PayPal, Credit cards and Sofort.
 |===
 
 *Level 1:*
