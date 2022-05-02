@@ -8,40 +8,10 @@ on:
 
 jobs:
 
-  build:
-    defaults:
-      run:
-        working-directory: webapp
-    name: Build
-    runs-on: ubuntu-latest
-    env:
-      REACT_APP_apiKey: ${{ secrets.REACT_APP_APIKEY }}
-      REACT_APP_authDomain: ${{ secrets.REACT_APP_AUTHDOMAIN }}
-      REACT_APP_databaseURL: ${{ secrets.REACT_APP_DATABASEURL }}
-      REACT_APP_projectId: ${{ secrets.REACT_APP_PROJECTID }}
-      REACT_APP_storageBucket: ${{ secrets.REACT_APP_STORAGEBUCKET }}
-      REACT_APP_messagingSenderId: ${{ secrets.REACT_APP_MESSAGINGSENDERID }}
-      REACT_APP_appId: ${{ secrets.REACT_APP_APPID }}
-      REACT_APP_paypalapi: ${{ secrets.REACT_APP_PAYPALAPI }}
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-      - name: Install Dependencies
-        run:
-          npm install
-      - name: Build
-        run:
-          CI=false npm run build
-      - name: Archive Production Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: take-build-file
-          path: ./webapp/build
-
   tests:
     name: Tests
     runs-on: ubuntu-latest
-    needs: [build]
+    #needs: [build]
     defaults:
       run:
         working-directory: webapp
@@ -75,6 +45,7 @@ jobs:
       - run: CI=false npm run build
       - run: npm ci
       - run: npm test
+        timeout-minutes: 30
       - run: npm run test:e2e
 
   deploy:
