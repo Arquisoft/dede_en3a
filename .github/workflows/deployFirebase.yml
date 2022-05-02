@@ -39,6 +39,10 @@ jobs:
           path: ./webapp/build
 
   tests:
+    defaults:
+      run:
+        working-directory: webapp
+    name: Tests
     runs-on: ubuntu-latest
     env:
       REACT_APP_apiKey: ${{ secrets.REACT_APP_APIKEY }}
@@ -49,9 +53,6 @@ jobs:
       REACT_APP_messagingSenderId: ${{ secrets.REACT_APP_MESSAGINGSENDERID }}
       REACT_APP_appId: ${{ secrets.REACT_APP_APPID }}
       REACT_APP_paypalapi: ${{ secrets.REACT_APP_PAYPALAPI }}
-    defaults:
-      run:
-        working-directory: webapp
     strategy:
       matrix:
         node-version: [ 12.x, 14.x, 16.x ]
@@ -63,10 +64,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run:
-          npm run test:e2e
-      - run:
-          npm test
+      #- run: npm ci
+      - run: npm test
+      - run: npm run test:e2e
 
   deploy:
     defaults:
