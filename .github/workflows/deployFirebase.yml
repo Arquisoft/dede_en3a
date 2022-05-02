@@ -68,6 +68,7 @@ jobs:
       #- run: npm ci
       - run: npm test
       - run: npm run test:e2e
+      - uses: codecov/codecov-action@v2
 
   deploy:
     defaults:
