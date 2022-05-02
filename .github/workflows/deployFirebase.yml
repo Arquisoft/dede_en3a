@@ -54,28 +54,29 @@ jobs:
       REACT_APP_messagingSenderId: ${{ secrets.REACT_APP_MESSAGINGSENDERID }}
       REACT_APP_appId: ${{ secrets.REACT_APP_APPID }}
       REACT_APP_paypalapi: ${{ secrets.REACT_APP_PAYPALAPI }}
-    strategy:
-      matrix:
-        node-version: [ 12.x, 14.x, 16.x ]
+    #strategy:
+    #  matrix:
+    #    node-version: [ 12.x, 14.x, 16.x ]
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          #node-version: ${{ matrix.node-version }}
+          node-version: 16
           cache: 'npm'
       #- run: npm ci
       - run: npm test
       - run: npm run test:e2e
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v3
 
   deploy:
     defaults:
       run:
         working-directory: webapp
     name: Deploy
-    needs: build
+    needs: [build, tests]
     runs-on: ubuntu-latest
     env:
       REACT_APP_apiKey: ${{ secrets.REACT_APP_APIKEY }}
