@@ -1,5 +1,5 @@
 # dede_en3A
-## https://dede-en3a.web.app/home
+## https://dedeen3a.web.app/home
 
 [![Actions Status](https://github.com/arquisoft/dede_en3a/workflows/CI%20for%20ASW2122/badge.svg)](https://github.com/arquisoft/dede_en3a/actions)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_dede_en3a&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_dede_en3a)
@@ -48,5 +48,5 @@ You should be able to access the application in [http://localhost:3000](http://l
 ## More information
 You can get more information about the respository in the other README files:
 - Documentation: https://arquisoft.github.io/dede_en3a/
-- Webapp: https://dede-en3a.web.app/home
+- Webapp: https://dedeen3a.web.app/cart
 - Restapi: NO RESTAPI

@@ -5,6 +5,7 @@ import { addUser } from "../../../api/api";
 import TopMenu from "../../menu/TopMenu";
 
 import styles from "./RegisterPage.module.scss";
+import Modal from "../../Modal/Modal";
 type RegisterPageProps = {
   onExit: any;
 };
@@ -21,6 +22,23 @@ export function RegisterPage(props: RegisterPageProps) {
   const navigate = useNavigate();
 
   const [error, setError] = useState("");
+
+  const [errorModal, setErrorModal] = React.useState(<></>);
+
+
+  const errorModalHtml = (
+      <div className={styles.modalerror}>
+        <div className={styles.titleError}> {error} </div>
+
+        <div className={styles.accept} onClick={() => setErrorModal(<></>)}>
+          Accept
+        </div>
+      </div>
+  );
+
+
+
+
 
   const onContainerClick = (event: any) => {
     event.preventDefault();
@@ -72,14 +90,17 @@ export function RegisterPage(props: RegisterPageProps) {
       navigate("/dashboard");
     } catch (error: any) {
       if (error.code === "auth/internal-error") {
-        setError("Invalid email");
+        setError("Invalid email format.");
+
       } else if (error.code === "auth/email-already-in-use") {
         setError("Email already registered");
+
       } else if (error.code === "auth/weak-password") {
         setError("Password should be at least 6 characters");
       } else {
-        setError(error.message);
+        setError("Unknown error :( Please try again...");
       }
+      setErrorModal(<Modal element={errorModalHtml}></Modal>)
     }
   };
 
@@ -109,21 +130,24 @@ export function RegisterPage(props: RegisterPageProps) {
       navigate("/dashboard");
     } catch (error: any) {
       if (error.code === "auth/internal-error") {
-        setError("Invalid email");
+        setError("Invalid email format.");
+
       } else if (error.code === "auth/email-already-in-use") {
         setError("Email already registered");
+
       } else if (error.code === "auth/weak-password") {
         setError("Password should be at least 6 characters");
       } else {
-        setError(error.message);
+        setError("Unknown error :( Please try again...");
       }
+      setErrorModal(<Modal element={errorModalHtml}></Modal>)
     }
   };
 
   return (
     <div>
       <div className={styles.registerpagecontainer} onClick={onContainerClick}>
-        {error && <p>{error}</p>}
+
 
         <div className={styles.registerwrapper} onClick={preventDefault}>
           <form name={"registerForm"} onSubmit={handleSubmit}>
@@ -163,6 +187,7 @@ export function RegisterPage(props: RegisterPageProps) {
           </form>
         </div>
       </div>
+      {errorModal}
     </div>
   );
 }

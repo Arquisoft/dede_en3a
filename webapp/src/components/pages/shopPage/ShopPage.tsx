@@ -14,7 +14,7 @@ import HeaderBackground from "../../HeaderBackground/HeaderBackground";
 
 function ShopPage(): JSX.Element {
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(<div></div>);
+  const [loading, setLoading] = useState(<></>);
   const [sorting, setSorting] = useState("Name");
 
   const refreshProductList = async () => {
@@ -44,13 +44,35 @@ function ShopPage(): JSX.Element {
     setLoading(<LoadingOverlay></LoadingOverlay>);
     event.preventDefault();
     console.log("name filter on search", nameFilter);
-    getProducts([nameFilter]).then((products) => {
+    getProducts().then((products) => {
       setLoading(<div></div>);
+
+      //^.*DEF.*$ --> checkea contiene substring DEF
+
+      var productsMatching: Product[] = [];
       const unorderedProducts = products as Product[];
 
-      let orderedProducts = unorderedProducts.sort((a, b) => sortByName(a, b));
+      unorderedProducts.forEach((product) => {
+        if (
+          (product.name as string)
+            .toLocaleLowerCase()
+            .includes(nameFilter.value.toLocaleLowerCase()) ||
+          (product.title as string)
+            .toLocaleLowerCase()
+            .includes(nameFilter.value.toLocaleLowerCase())
+        ) {
+          productsMatching.push(product);
+        }
+
+      })
+
+
+
+      let orderedProducts = productsMatching.sort((a, b) => sortByName(a, b));
       if (sorting === "price")
-        orderedProducts = unorderedProducts.sort((a, b) => sortByPrice(a, b));
+        orderedProducts = productsMatching.sort((a, b) => sortByPrice(a, b));
+
+
 
       setProducts(orderedProducts);
     });
