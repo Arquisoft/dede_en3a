@@ -53,7 +53,7 @@ jobs:
       run:
         working-directory: webapp
     name: Deploy
-    needs: [build, tests]
+    needs: [tests]
     runs-on: ubuntu-latest
     env:
       REACT_APP_apiKey: ${{ secrets.REACT_APP_APIKEY }}
