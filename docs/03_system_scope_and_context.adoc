@@ -22,7 +22,7 @@
 |The information that provides to the user logged
 
 |Database
-|The POD will have most of the information so we will not store it but we will store other stuff like the products to buy
+|The POD will have most of the information so we will not store it, but we will store other stuff like the products to buy
 |Obviously the database will be linked to the web
 
 |===

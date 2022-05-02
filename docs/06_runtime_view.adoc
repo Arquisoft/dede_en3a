@@ -39,6 +39,6 @@ image:Login_scenario.png["Login scenario"]
 
 === Purchasing scenario
 
-Once the user has logged in he/she can purchase products, add them to the order and pay.
+Once the user has logged in he/she can purchase products, add them to the order and pay. This diagram represents a successful purchase.
 
 image:Purchasing_scenario.png["Purchasing scenario"]

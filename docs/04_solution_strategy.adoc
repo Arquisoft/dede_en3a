@@ -27,9 +27,8 @@ Refer to details in the following sections.
 
 The technologies we have decided to use for the development of the app are:
 
-Bootstrap → In order to avoid as much as possible the development of CSS we chose to use Bootstrap.
 
-Solid Community → Main POD server provider. Widely used.
+Solid Community, Inrupt and SolidWeb  → Main POD server providers. Widely used. The app works with all the PODs that follows the same standard as them.
 
 Firebase → Serverless service for the deployment and development of the application, providing the web and DB hosting,
 a prepared backend for the DB and a way of deploying isolated custom functions. It also provides authentication storage,
