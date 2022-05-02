@@ -18,14 +18,14 @@ function LoginPage(props: LoginPageProps): JSX.Element {
   const { login } = useAuth();
 
   const [error, setError] = useState("");
-  const [errorModal, setErrorModal] = React.useState(<></>);
+  const [resultModal, setResultModal] = React.useState(<></>);
 
 
   const errorModalWrongEmailOrPassword = (
       <div className={styles.modalerror}>
         <div className={styles.titleError}>Provided email not found or wrong password, try again...</div>
 
-        <div className={styles.accept} onClick={() => setErrorModal(<></>)}>
+        <div className={styles.accept} onClick={() => setResultModal(<></>)}>
           Accept
         </div>
       </div>
@@ -35,14 +35,11 @@ function LoginPage(props: LoginPageProps): JSX.Element {
       <div className={styles.modalerror}>
         <div className={styles.titleError}>An unexpected error happened, please retry.</div>
 
-        <div className={styles.accept} onClick={() => setErrorModal(<></>)}>
+        <div className={styles.accept} onClick={() => setResultModal(<></>)}>
           Accept
         </div>
       </div>
   );
-
-
-
 
 
 
@@ -73,6 +70,7 @@ function LoginPage(props: LoginPageProps): JSX.Element {
     try {
       await login(user.email, user.password).then((userCredential) => {
         if(props.onLoginSuccess){
+
           props.onLoginSuccess();
         }else{
           navigate("/shop")
@@ -81,19 +79,19 @@ function LoginPage(props: LoginPageProps): JSX.Element {
       }).catch((error) =>{
         if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
 
-          setErrorModal(<Modal element={errorModalWrongEmailOrPassword}></Modal>)
+          setResultModal(<Modal element={errorModalWrongEmailOrPassword}></Modal>)
         } else {
 
-          setErrorModal(<Modal element={genericError}></Modal>)
+          setResultModal(<Modal element={genericError}></Modal>)
         }
       });
     } catch (error: any) {
       if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
 
-        setErrorModal(<Modal element={errorModalWrongEmailOrPassword}></Modal>)
+        setResultModal(<Modal element={errorModalWrongEmailOrPassword}></Modal>)
       } else {
 
-        setErrorModal(<Modal element={genericError}></Modal>)
+        setResultModal(<Modal element={genericError}></Modal>)
       }
     }
   };
@@ -151,7 +149,7 @@ function LoginPage(props: LoginPageProps): JSX.Element {
         </div>
       </div>
 
-      {errorModal}
+      {resultModal}
     </>
   );
 }
