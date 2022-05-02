@@ -72,11 +72,9 @@ jobs:
           node-version: 16
           #cache: 'npm'
       - name: Install Dependencies
-        run:
-          npm install
+        run: npm install
       - name: Build
-        run:
-          CI=false npm run build
+        run: CI=false npm run build
       - run: npm ci
       - run: npm test
       - run: npm run test:e2e
