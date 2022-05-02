@@ -45,7 +45,7 @@ jobs:
       - run: CI=false npm run build
       #- run: npm ci
       - run: npm run test:e2e
-      - run: CI=false npm test -- --watchAll=false
+      - run: npm test -- --watchAll=false --detectOpenHandles
 
   deploy:
     defaults:
