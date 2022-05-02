@@ -41,11 +41,12 @@ jobs:
           #node-version: ${{ matrix.node-version }}
           node-version: 16
           #cache: 'npm'
-      - run: npm install
+
       - run: CI=false npm run build
+      - run: npm install
       - run: npm ci
-      - run: npm test
       - run: npm run test:e2e
+      - run: npm test
 
   deploy:
     defaults:
