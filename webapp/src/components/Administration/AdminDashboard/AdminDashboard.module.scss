@@ -37,10 +37,12 @@
   font-weight: bold;
 }
 .optionsA{
-  color: var(--orange3);
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-right: 1.5rem;
+  button{
+    color: var(--orange3);
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-right: 1.5rem;
+  }
 }
 
 .displayOptions{

@@ -207,7 +207,7 @@ function AdminDashboard(): JSX.Element {
 
     function DeleteProduct(id: string, name : string){
         if(name === "DELETE"){
-            removeProduct(id);
+            removeProduct(id).then(() => refreshProductList().then(() => productsDisplay()));
         }
         setModal(<></>);
     }
