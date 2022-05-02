@@ -115,8 +115,7 @@ function AdminDashboard(): JSX.Element {
             comments: [],
             stock: parseFloat(stock)
         };
-        updateProduct(product);
-        refreshProductList().then(() => productsDisplay());
+        updateProduct(product).then(() => refreshProductList().then(() => productsDisplay()));
         setModal(<></>);
     }
 
@@ -180,8 +179,7 @@ function AdminDashboard(): JSX.Element {
             comments: comments,
             stock: parseFloat(stock)
         };
-        updateProduct(product);
-        refreshProductList().then(() => productsDisplay());
+        updateProduct(product).then(() => refreshProductList().then(() => productsDisplay()));
         setModal(<></>);
     }
 
@@ -232,6 +230,10 @@ function AdminDashboard(): JSX.Element {
         refreshProductList();
         refreshOrderList();
     }, []);
+
+    useEffect(() => {
+        console.log(products)
+    });
 
     function usersDisplay(){
         const res : any = [];
