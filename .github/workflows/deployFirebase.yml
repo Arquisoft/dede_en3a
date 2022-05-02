@@ -45,8 +45,7 @@ jobs:
       - run: CI=false npm run build
       #- run: npm ci
       - run: npm run test:e2e
-      - run: npm test
-      - run: q
+      - run: CI=true npm test
 
   deploy:
     defaults:
