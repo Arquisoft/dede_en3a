@@ -60,6 +60,11 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: take-build-file
+          path: /home/runner/work/dede_en3a/dede_en3a/webapp
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -69,7 +74,6 @@ jobs:
       #- run: npm ci
       - run: npm test
       - run: npm run test:e2e
-      - uses: codecov/codecov-action@v3
 
   deploy:
     defaults:
