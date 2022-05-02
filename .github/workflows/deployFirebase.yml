@@ -57,9 +57,9 @@ jobs:
       REACT_APP_messagingSenderId: ${{ secrets.REACT_APP_MESSAGINGSENDERID }}
       REACT_APP_appId: ${{ secrets.REACT_APP_APPID }}
       REACT_APP_paypalapi: ${{ secrets.REACT_APP_PAYPALAPI }}
-    strategy:
-      matrix:
-        node-version: [ 12.x, 14.x, 16.x ]
+    #strategy:
+    #  matrix:
+    #    node-version: [ 12.x, 14.x, 16.x ]
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
