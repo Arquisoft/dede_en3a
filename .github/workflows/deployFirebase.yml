@@ -39,6 +39,7 @@ jobs:
           path: ./webapp/build
 
   tests:
+    needs: [built]
     defaults:
       run:
         working-directory: webapp
