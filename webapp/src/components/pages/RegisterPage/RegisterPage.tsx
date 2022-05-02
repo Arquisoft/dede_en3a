@@ -23,17 +23,31 @@ export function RegisterPage(props: RegisterPageProps) {
 
   const [error, setError] = useState("");
 
-  const [errorModal, setErrorModal] = React.useState(<></>);
+  const [resultModal, setResultModal] = React.useState(<></>);
 
 
   const errorModalHtml = (
       <div className={styles.modalerror}>
         <div className={styles.titleError}> {error} </div>
 
-        <div className={styles.accept} onClick={() => setErrorModal(<></>)}>
+        <div className={styles.accept} onClick={() => setResultModal(<></>)}>
           Accept
         </div>
       </div>
+  );
+
+  const successModalHtml = (
+
+      <div className={styles.sucessfulorder}>
+        <div className={styles.title}>Congratulations, you have created a DEDE Account!</div>
+        <div className={styles.subtitle}>
+          Start shopping whenever you want...
+        </div>
+        <div className={styles.accept} onClick={() => {setResultModal(<></>); navigate("/shop");}}>
+          Start Shopping
+        </div>
+      </div>
+
   );
 
 
@@ -75,11 +89,15 @@ export function RegisterPage(props: RegisterPageProps) {
         throw new Error("Passwords have to be equal");
       }
 
-      await signup(user.email, user.password).then((userCredential) => {
+      await signup(user.email, user.password).then( (userCredential) => {
         console.log(
           "User: " + userCredential.user,
           "ProviderId: " + userCredential.providerId
         );
+
+
+
+        setResultModal(<Modal element={successModalHtml}></Modal>)
       });
 
       await addUser({
@@ -87,7 +105,7 @@ export function RegisterPage(props: RegisterPageProps) {
         email: user.email,
       });
 
-      navigate("/dashboard");
+
     } catch (error: any) {
       if (error.code === "auth/internal-error") {
         setError("Invalid email format.");
@@ -100,7 +118,7 @@ export function RegisterPage(props: RegisterPageProps) {
       } else {
         setError("Unknown error :( Please try again...");
       }
-      setErrorModal(<Modal element={errorModalHtml}></Modal>)
+      setResultModal(<Modal element={errorModalHtml}></Modal>)
     }
   };
 
@@ -120,6 +138,7 @@ export function RegisterPage(props: RegisterPageProps) {
           "User: " + userCredential.user,
           "ProviderId: " + userCredential.providerId
         );
+        setResultModal(<Modal element={successModalHtml}></Modal>)
       });
 
       await addUser({
@@ -140,7 +159,7 @@ export function RegisterPage(props: RegisterPageProps) {
       } else {
         setError("Unknown error :( Please try again...");
       }
-      setErrorModal(<Modal element={errorModalHtml}></Modal>)
+      setResultModal(<Modal element={errorModalHtml}></Modal>)
     }
   };
 
@@ -187,7 +206,7 @@ export function RegisterPage(props: RegisterPageProps) {
           </form>
         </div>
       </div>
-      {errorModal}
+      {resultModal}
     </div>
   );
 }
