@@ -91,6 +91,32 @@ defineFeature(feature, test => {
         });
   })
 
+  test('The user does an incorrect login', ({given,when,then}) => {
+
+    let email:string
+    let password:string
+
+    given('A registered user', () => {
+      email = "123@123.com"
+      password = "dasfasdfasd"
+    });
+
+    when('I login with a wrong account', async () => {
+      await page.setViewport({ width: 1400, height: 900 });
+      await expect(page).toClick('div[title="home"]')
+      await expect(page).toClick('div[title="loginTopMenu"]')
+
+      await expect(page).toFill("input[title='email']", email);
+      await expect(page).toFill("input[title='password']", password);
+
+      await expect(page).toClick('button', {text:'Login'})
+    });
+
+    then('An error message appears', async () => {
+      await expect(page).toMatch("Provided email not found or wrong password, try again...")
+    });
+  })
+
   afterAll(async ()=>{
     await browser.close()
   })
