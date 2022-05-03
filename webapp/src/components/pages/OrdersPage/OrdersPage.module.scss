@@ -59,7 +59,21 @@
   background-color: var(--dark3);
 }
 
+.ordercontainer {
+  margin: 1rem;
+}
+
 .order {
   margin-left: 2rem;
   margin-bottom: 1rem;
+}
+
+.orderrow {
+  display: flex;
+  background-color: rgba(255, 139, 51, 0.144);
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.089);
+  b {
+    margin-left: auto;
+  }
 }
