@@ -13,11 +13,9 @@ import { Comments } from "../../../../api/model/comments";
 import { useAuth } from "../../../../context/AuthContext";
 import { User } from "../../../../api/model/user";
 import HeaderBackground from "../../../HeaderBackground/HeaderBackground";
-import { Utils } from "../../../../utils/utilts";
 import { increase } from "../../../../redux/actions";
 import { Dispatch } from "redux";
 import { useDispatch } from "react-redux";
-import { display } from "@mui/system";
 
 function ProductDetails(): JSX.Element {
   const { id } = useParams();
