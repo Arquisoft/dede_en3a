@@ -1,3 +1,4 @@
+import { Order } from "../api/model/orders/order";
 import { CollectionReference, Query } from "firebase/firestore";
 import { Filter } from "../api/model/filter";
 import { Product } from "../api/model/product";

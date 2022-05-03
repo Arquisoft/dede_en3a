@@ -103,37 +103,16 @@
   }
 }
 
-.modalerror {
-  display: flex;
-  flex-direction: column;
+.paypalcontainer {
+  background-color: whitesmoke;
   padding: 1rem;
-  border-radius: 2rem;
-  box-shadow: var(--shadow2);
-  position: relative;
-  width: 40vw;
-  background-color: red;
-  height: 13rem;
-  .title {
-    text-align: center;
-
-    font-weight: bold;
-    color: var(--dark1);
-    font-size: 1.8rem;
-  }
-
-  .accept {
-    margin-top: 1.5rem;
-    margin-left: auto;
-    margin-right: auto;
-
-    cursor: pointer;
-    padding: 0.5rem;
-    padding-inline: 1.2rem;
-    border-radius: 0.3rem;
-    background-color: var(--orange2);
-    width: fit-content;
-    font-size: 1.3rem;
-  }
+  border-radius: 1rem;
+  max-width: 40rem;
+  width: calc(100vw - 2rem);
+  color: black;
+  font-weight: bold;
+  overflow-y: scroll;
+  max-height: 80vh;
 }
 
 .cancel {

@@ -7,4 +7,6 @@ export interface Order {
   totalAmount: number;
   userEmail: string;
   estimatedDelivery: number;
+  shippingCost?: number;
+  state?: string;
 }
