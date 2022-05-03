@@ -4,6 +4,7 @@
 [![Actions Status](https://github.com/arquisoft/dede_en3a/workflows/CI%20for%20ASW2122/badge.svg)](https://github.com/arquisoft/dede_en3a/actions)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_dede_en3a&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_dede_en3a)
 [![codecov](https://codecov.io/gh/arquisoft/dede_en3a/branch/master/graph/badge.svg?token=VN4XG9NTRO)](https://codecov.io/gh/arquisoft/dede_en3a)
+[![pages-build-deployment](https://github.com/Arquisoft/dede_en3a/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Arquisoft/dede_en3a/actions/workflows/pages/pages-build-deployment)
 
 <p float="left">
 <img src="https://blog.wildix.com/wp-content/uploads/2020/06/react-logo.jpg" height="100">
