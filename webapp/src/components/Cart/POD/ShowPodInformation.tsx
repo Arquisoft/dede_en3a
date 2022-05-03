@@ -118,24 +118,24 @@ function ShowPodInformation(props: PODProps): JSX.Element {
   const loginModal = <LoginPage {...loginPageProps}></LoginPage>;
 
   const emptyCartErrorModal = (
-    <div className={styles.modalerror}>
-      <div className={styles.title}>
+    <div className="modalerror">
+      <div className="titleError">
         Sorry, cannot proceed with an empty cart...
       </div>
-      <div className={styles.title}>Add some products to your cart.</div>
-      <div className={styles.accept} onClick={() => setOrderModal(<></>)}>
+      <div className="titleError">Add some products to your cart.</div>
+      <div className="accept" onClick={() => setOrderModal(<></>)}>
         Accept
       </div>
     </div>
   );
 
   const notEnoughDataPodErrorModal = (
-    <div className={styles.modalerror}>
-      <div className={styles.title}>Sorry, cannot proceed...</div>
-      <div className={styles.title}>
+    <div className="modalerror">
+      <div className="title">Sorry, cannot proceed...</div>
+      <div className="title">
         There is not enough information in the pod for calculate shipping.
       </div>
-      <div className={styles.accept} onClick={() => setOrderModal(<></>)}>
+      <div className="accept" onClick={() => setOrderModal(<></>)}>
         Accept
       </div>
     </div>
@@ -207,7 +207,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
       calcShipping();
     });
-  }, []);
+  }, [props.webID]);
   const navigate = useNavigate();
 
   async function calcWithFirebaseFunction(
@@ -399,6 +399,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
   return (
     <>
       {loginPage}
+      {console.log(getCookie("city"))}
       <Grid container>
         {loadingOverlay}
         {orderModal}

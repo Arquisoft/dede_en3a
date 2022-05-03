@@ -102,6 +102,39 @@ input:hover {
   outline: 0;
   -webkit-appearance: none;
 }
+.modalerror {
+  max-width: 40rem;
+  width: calc(100vw - 2rem);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  box-shadow: var(--shadow2);
+  position: relative;
+  background-color: whitesmoke;
+  .titleError {
+    text-align: center;
+
+    font-weight: bold;
+    color: rgba(255, 0, 0, 0.685);
+
+    font-size: 1.3rem;
+  }
+
+  .accept {
+    margin-top: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    cursor: pointer;
+    padding: 0.5rem;
+    padding-inline: 1.2rem;
+    border-radius: 0.3rem;
+    background-color: var(--orange2);
+    width: fit-content;
+    font-size: 1.3rem;
+  }
+}
 
 button,
 button:hover,

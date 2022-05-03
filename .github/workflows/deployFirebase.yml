@@ -3,15 +3,18 @@ on:
   pull_request:
     branches: [develop]
     types: [closed]
+  push:
+    branches: [ master, develop ]
 
 jobs:
 
-  build:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    #needs: [build]
     defaults:
       run:
         working-directory: webapp
-    name: Build
-    runs-on: ubuntu-latest
     env:
       REACT_APP_apiKey: ${{ secrets.REACT_APP_APIKEY }}
       REACT_APP_authDomain: ${{ secrets.REACT_APP_AUTHDOMAIN }}
@@ -21,58 +24,35 @@ jobs:
       REACT_APP_messagingSenderId: ${{ secrets.REACT_APP_MESSAGINGSENDERID }}
       REACT_APP_appId: ${{ secrets.REACT_APP_APPID }}
       REACT_APP_paypalapi: ${{ secrets.REACT_APP_PAYPALAPI }}
+    #strategy:
+    #  matrix:
+    #    node-version: [ 12.x, 14.x, 16.x ]
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-      - name: Install Dependencies
-        run:
-          npm install
-      - name: Build
-        run:
-          CI=false npm run build
+      - run: npm install
+      - run: CI=false npm run build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v3
         with:
           name: take-build-file
           path: ./webapp/build
-
-  tests:
-    runs-on: ubuntu-latest
-    env:
-      REACT_APP_apiKey: ${{ secrets.REACT_APP_APIKEY }}
-      REACT_APP_authDomain: ${{ secrets.REACT_APP_AUTHDOMAIN }}
-      REACT_APP_databaseURL: ${{ secrets.REACT_APP_DATABASEURL }}
-      REACT_APP_projectId: ${{ secrets.REACT_APP_PROJECTID }}
-      REACT_APP_storageBucket: ${{ secrets.REACT_APP_STORAGEBUCKET }}
-      REACT_APP_messagingSenderId: ${{ secrets.REACT_APP_MESSAGINGSENDERID }}
-      REACT_APP_appId: ${{ secrets.REACT_APP_APPID }}
-      REACT_APP_paypalapi: ${{ secrets.REACT_APP_PAYPALAPI }}
-    defaults:
-      run:
-        working-directory: webapp
-    strategy:
-      matrix:
-        node-version: [ 12.x, 14.x, 16.x ]
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - name: Run commands for tests
-        run:
-          npm run test:e2e
-          npm run build --if-present
-          npm test
+          #node-version: ${{ matrix.node-version }}
+          node-version: 16
+          #cache: 'npm'
+      #- run: npm ci
+      - run: npm run test:e2e
+      - run: npm test -- --watchAll=false --detectOpenHandles --forceExit
 
   deploy:
     defaults:
       run:
         working-directory: webapp
     name: Deploy
-    needs: build
+    needs: [tests]
     runs-on: ubuntu-latest
     env:
       REACT_APP_apiKey: ${{ secrets.REACT_APP_APIKEY }}
@@ -97,5 +77,3 @@ jobs:
           args: deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }} --project dede-en3a-336f8
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-
-

@@ -24,9 +24,9 @@ function MainPage(): JSX.Element {
 
   return (
     <>
-      <div className={styles.container}>
-        <TopMenu></TopMenu>
+      <TopMenu alwaysOpaque={true}></TopMenu>
 
+      <div className={styles.container}>
         <div className={styles.background}>
           <img src="https://images.pexels.com/photos/296323/pexels-photo-296323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"></img>
         </div>
@@ -44,7 +44,11 @@ function MainPage(): JSX.Element {
           <b>See more</b>
           <span className="material-icons">expand_more</span>
         </div> */}
-        <div title={"startShopping"} className={styles.ourproducts} onClick={() => navigate("/shop")}>
+        <div
+          title={"startShopping"}
+          className={styles.ourproducts}
+          onClick={() => navigate("/shop")}
+        >
           <b>Start shopping</b>
         </div>
 
@@ -75,7 +79,8 @@ function MainPage(): JSX.Element {
                 introduce your solid POD WebId.
               </div>
               <div className={styles.steptext}>
-                We support four solid pod providers. Solid Community, Solid Web, Inrupt.net and pod.Inrupt.com.
+                We support four solid pod providers. Solid Community, Solid Web,
+                Inrupt.net and pod.Inrupt.com.
               </div>
               <span className="material-icons">face</span>
             </div>
@@ -84,8 +89,9 @@ function MainPage(): JSX.Element {
                 <b>Lastly,</b> select your delivery adress.
               </div>
               <div className={styles.steptext}>
-                All of your personal data will be contained inside your pod.
-                You can choose your address, you may have more than one and then proceed with the payment.
+                All of your personal data will be contained inside your pod. You
+                can choose your address, you may have more than one and then
+                proceed with the payment.
               </div>
               <span className="material-icons">home</span>
             </div>

@@ -1,5 +1,8 @@
 import { defineFeature, loadFeature } from 'jest-cucumber';
 import puppeteer from "puppeteer";
+import {apps} from "firebase-functions/lib/apps";
+import delay = apps.delay;
+import uuid = require("uuid")
 
 const feature = loadFeature('./e2e/features/register-form.feature');
 
@@ -14,7 +17,7 @@ defineFeature(feature, test => {
 
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: false, slowMo:100}); //false to run tests locally
+      : await puppeteer.launch({ headless: false, slowMo:0}); //false to run tests locally
     page = await browser.newPage();
 
     await page
@@ -31,7 +34,6 @@ defineFeature(feature, test => {
 
     given('A registered user', () => {
       email = "123@123.com"
-      password = "123123"
     });
 
     when('I fill the data in the form and press login', async () => {
@@ -40,15 +42,18 @@ defineFeature(feature, test => {
       await expect(page).toClick('div[title="loginTopMenu"]')
 
       await expect(page).toFill("input[title='email']", email);
-      await expect(page).toFill("input[title='password']", password);
+      await expect(page).toFill("input[title='password']", "123123");
 
       await expect(page).toClick('button', {text:'Login'})
+      await expect(page).toClick('div[title="orders"]')
 
     });
 
     then('The orders of this client are available', async () => {
+
+      await delay(3000);
       await expect(page).toClick('div[title="orders"]')
-      await expect(page).toMatch("Date:")
+      await expect(page).toMatch("Orders")//There is an order in the account of this user
     });
   })
 
@@ -56,12 +61,12 @@ defineFeature(feature, test => {
       ({given,when,then}) => {
 
     let email:string;
-    let password:string;
     let name:string
+    let randValue = uuid.v4()
 
         given('An unregistered user', () => {
-          email = "notregistered@123.com"
-          password = "123123"
+
+          email = randValue + "@123.com"
           name = "notregistered"
         });
 
@@ -73,8 +78,8 @@ defineFeature(feature, test => {
 
           await expect(page).toFill("input[title='emailInput']", email);
           await expect(page).toFill("input[title='nameInput']", name);
-          await expect(page).toFill("input[title='passwordInput']", password);
-          await expect(page).toFill("input[title='confirmInput']", password);
+          await expect(page).toFill("input[title='passwordInput']", "123123");
+          await expect(page).toFill("input[title='confirmInput']", "123123");
 
           await expect(page).toClick('button', {text:'Register'})
 
@@ -84,6 +89,30 @@ defineFeature(feature, test => {
           await expect(page).toClick('div[title="orders"]')
           await expect(page).not.toMatch("Date:")
         });
+  })
+
+  test('The user does an incorrect login', ({given,when,then}) => {
+
+    let email:string
+
+    given('A registered user', () => {
+      email = "123@123.com"
+    });
+
+    when('I login with a wrong account', async () => {
+      await page.setViewport({ width: 1400, height: 900 });
+      await expect(page).toClick('div[title="home"]')
+      await expect(page).toClick('div[title="loginTopMenu"]')
+
+      await expect(page).toFill("input[title='email']", email);
+      await expect(page).toFill("input[title='password']", "dasfasdfasd");
+
+      await expect(page).toClick('button', {text:'Login'})
+    });
+
+    then('An error message appears', async () => {
+      await expect(page).toMatch("Provided email not found or wrong password, try again...")
+    });
   })
 
   afterAll(async ()=>{

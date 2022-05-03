@@ -14,9 +14,9 @@ import { Utils } from "../../utils/utilts";
 import { Product } from "../../api/model/product";
 import { decrease, increase } from "../../redux/actions";
 
-type TopMenuProps = {};
+type TopMenuProps = { alwaysOpaque?: boolean };
 
-export default function TopMenu(): JSX.Element {
+export default function TopMenu(props: TopMenuProps): JSX.Element {
   const [wobble, setWobble] = useState("");
   const [transparent, setTransparent] = useState("");
   const [firstRender, setfirstRender] = useState(true);
@@ -26,7 +26,7 @@ export default function TopMenu(): JSX.Element {
     styles.expandablerightmenu
   );
 
-  let totalProducts : number = 0;
+  let totalProducts: number = 0;
 
   const dispatch: Dispatch<any> = useDispatch();
 
@@ -48,10 +48,10 @@ export default function TopMenu(): JSX.Element {
     decreaseProduct(product);
   };
 
-  function totalNumProd():number{
+  function totalNumProd(): number {
     let num = 0;
     let total = 0;
-    while(num < cart.length){
+    while (num < cart.length) {
       total += cart[num].amount;
       num++;
     }
@@ -60,11 +60,13 @@ export default function TopMenu(): JSX.Element {
   }
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    //if (props.alwaysOpaque)
+    setTransparent(styles.colored);
+    // window.addEventListener("scroll", handleScroll);
   }, []); //Will only be called once upon initialization
 
   function handleScroll(event: any) {
-    if (window.scrollY !== 0) {
+    if (window.scrollY !== 0 || props.alwaysOpaque) {
       setTransparent(styles.colored);
     } else {
       setTransparent("");
@@ -196,7 +198,7 @@ export default function TopMenu(): JSX.Element {
             >
               Orders
             </div>
-            <div className={styles.cartcontainer}>
+            <div id={"cartTopMenu"} className={styles.cartcontainer}>
               <span
                 title={"cart"}
                 className={"material-icons " + styles.loginicon + " " + wobble}
@@ -218,7 +220,9 @@ export default function TopMenu(): JSX.Element {
             >
               account_circle
             </span>
-            <div title={"loginUsername"} className={styles.username}>{userName}</div>
+            <div title={"loginUsername"} className={styles.username}>
+              {userName}
+            </div>
           </div>
         </div>
       </div>
@@ -319,9 +323,9 @@ export default function TopMenu(): JSX.Element {
         <div className={styles.totalcartprice}>
           Total: <b>{Utils.calculateTotal(cart).toFixed(2)}</b>
         </div>
-        <div onClick={() => navigate("/cart")} className={styles.cartproceed}>
+        <button id={"continueCart"} onClick={() => navigate("/cart")} className={styles.cartproceed}>
           Continue
-        </div>
+        </button>
       </div>
     </>
   );

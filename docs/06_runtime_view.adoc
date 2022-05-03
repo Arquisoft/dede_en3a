@@ -34,11 +34,11 @@ There are many notations for describing scenarios, e.g.
 
 This is the process where the user logs in into the application and the system verifies it.
 
-image:Login_scenario.png["Login scenario"]
+image:Purchasing_scenario.png["Login scenario"]
 
 
 === Purchasing scenario
 
-Once the user has logged in he/she can purchase products, add them to the order and pay.
+Once the user has logged in he/she can purchase products, add them to the order and pay. This diagram represents a successful purchase.
 
 image:Purchasing_scenario.png["Purchasing scenario"]

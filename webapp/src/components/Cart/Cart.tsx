@@ -78,7 +78,7 @@ function Cart(props: CartProps): JSX.Element {
               Total:
               <b>{Utils.calculateTotal(products, shippingCost).toFixed(2)} €</b>
             </div>
-            <div title={"total"} className={styles.totalPrice}>
+            <div title={"estimDeliverDate"} className={styles.totalPrice}>
               Estimated delivery date:
               <b>{getEstimatedDeliveryDate()}</b>
             </div>

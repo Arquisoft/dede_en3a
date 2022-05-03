@@ -69,9 +69,8 @@ export const CardItem: React.FC<CardItemProps> = ({
             </div>
           </div>
 
-          <div className={styles.col2}>
+          <div title={"cardItemAddButton"} className={styles.col2}>
             <div
-              title={"cardItemAddButton"}
               onClick={addToCart}
               className={styles.addtocart}
             >
