@@ -163,7 +163,7 @@ function calculateEstimatedDelivery(distance: number) {
 
 export const checkOrdersState = functions
   .region("europe-west1")
-  .pubsub.schedule("every 1 minutes")
+  .pubsub.schedule("every 60 minutes")
   .onRun(async (context: any) => {
     await admin
       .firestore()
