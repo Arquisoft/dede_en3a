@@ -2,6 +2,7 @@ import { defineFeature, loadFeature } from 'jest-cucumber';
 import puppeteer from "puppeteer";
 import {apps} from "firebase-functions/lib/apps";
 import delay = apps.delay;
+import uuid = require("uuid")
 
 const feature = loadFeature('./e2e/features/register-form.feature');
 
@@ -61,11 +62,11 @@ defineFeature(feature, test => {
 
     let email:string;
     let name:string
-    const randValue = Math.random()
+    let randValue = uuid.v4()
 
         given('An unregistered user', () => {
 
-          email = randValue.toString(36) + "@123.com"
+          email = randValue + "@123.com"
           name = "notregistered"
         });
 
