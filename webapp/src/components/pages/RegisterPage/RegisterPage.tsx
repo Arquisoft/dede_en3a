@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { addUser } from "../../../api/api";
@@ -26,6 +26,9 @@ export function RegisterPage(props: RegisterPageProps) {
   const [resultModal, setResultModal] = React.useState(<></>);
 
 
+
+
+
   const errorModalHtml = (
       <div className={styles.modalerror}>
         <div className={styles.titleError}> {error} </div>
@@ -35,6 +38,14 @@ export function RegisterPage(props: RegisterPageProps) {
         </div>
       </div>
   );
+
+  useEffect(() => {
+
+        if(error){
+          setResultModal(<Modal element={errorModalHtml}></Modal>)
+        }
+      }
+      , [error]);
 
   const successModalHtml = (
 
@@ -86,7 +97,8 @@ export function RegisterPage(props: RegisterPageProps) {
   const register = async () => {
     try {
       if (user.password != user.confirmPssw) {
-        throw new Error("Passwords have to be equal");
+        setError("Passwords are different.");
+        return
       }
 
       await signup(user.email, user.password).then( (userCredential) => {
@@ -118,50 +130,10 @@ export function RegisterPage(props: RegisterPageProps) {
       } else {
         setError("Unknown error :( Please try again...");
       }
-      setResultModal(<Modal element={errorModalHtml}></Modal>)
+
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    console.log("handling submit");
-    e.preventDefault();
-
-    setError("");
-    console.log(user);
-    try {
-      if (user.password != user.confirmPssw) {
-        throw new Error("Passwords have to be equal");
-      }
-
-      await signup(user.email, user.password).then((userCredential) => {
-        console.log(
-          "User: " + userCredential.user,
-          "ProviderId: " + userCredential.providerId
-        );
-        setResultModal(<Modal element={successModalHtml}></Modal>)
-      });
-
-      await addUser({
-        name: user.name,
-        email: user.email,
-      });
-
-      navigate("/dashboard");
-    } catch (error: any) {
-      if (error.code === "auth/internal-error") {
-        setError("Invalid email format.");
-
-      } else if (error.code === "auth/email-already-in-use") {
-        setError("Email already registered");
-
-      } else if (error.code === "auth/weak-password") {
-        setError("Password should be at least 6 characters");
-      } else {
-        setError("Unknown error :( Please try again...");
-      }
-      setResultModal(<Modal element={errorModalHtml}></Modal>)
-    }
-  };
 
   return (
     <div>
@@ -169,7 +141,7 @@ export function RegisterPage(props: RegisterPageProps) {
 
 
         <div className={styles.registerwrapper} onClick={preventDefault}>
-          <form name={"registerForm"} onSubmit={handleSubmit}>
+          <form name={"registerForm"} onSubmit={register}>
             <h2 title={"registerTitle"} >Register</h2>
             <label title={"emailLabel"} htmlFor="email">Email</label>
             <input title={"emailInput"} type={"email"} name="email" onChange={handleChangeEmail} />
