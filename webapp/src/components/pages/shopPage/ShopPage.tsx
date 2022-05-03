@@ -16,6 +16,7 @@ function ShopPage(): JSX.Element {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(<div></div>);
   const [sorting, setSorting] = useState("Name");
+  const [typeFilter, setTypeFilter] = useState<Filter | null>();
 
   const refreshProductList = async () => {
     setProducts(await getProducts());
@@ -43,8 +44,9 @@ function ShopPage(): JSX.Element {
   const handleSubmit = (event: any) => {
     setLoading(<LoadingOverlay></LoadingOverlay>);
     event.preventDefault();
-    console.log("name filter on search", nameFilter);
-    getProducts([nameFilter]).then((products) => {
+    const filters = typeFilter ? [nameFilter, typeFilter] : [nameFilter];
+    console.log(filters);
+    getProducts(filters).then((products) => {
       setLoading(<div></div>);
       const unorderedProducts = products as Product[];
 
@@ -72,6 +74,17 @@ function ShopPage(): JSX.Element {
 
   const handleSortingOption = (e: any) => {
     setSorting(e.currentTarget.value);
+  };
+  const handleTypeFilter = (e: any) => {
+    if (e.currentTarget.value === "any") {
+      setTypeFilter(null);
+    } else {
+      setTypeFilter({
+        property: "category",
+        comparison: "==",
+        value: e.currentTarget.value,
+      } as Filter);
+    }
   };
 
   const handleNameFilter = (event: any) => {
@@ -101,9 +114,10 @@ function ShopPage(): JSX.Element {
             <div className={styles.filter}>
               <b>Type</b>
               <hr></hr>
-              <select title={"select"}>
-                <option>Health</option>
-                <option>Tech</option>
+              <select title={"select"} onChange={handleTypeFilter}>
+                <option value="any">Any</option>
+                <option value="health">Health</option>
+                <option value="tech">Tech</option>
               </select>
             </div>
           </div>

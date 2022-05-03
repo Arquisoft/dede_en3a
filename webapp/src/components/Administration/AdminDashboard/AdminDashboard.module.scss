@@ -12,7 +12,7 @@
   justify-content: center;
 }
 
-.bigText{
+.bigText {
   margin-top: 1rem;
   width: 100%;
   background-color: var(--dark1);
@@ -24,20 +24,20 @@
   justify-content: center;
 }
 
-.leftPanel{
+.leftPanel {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.options{
+.options {
   color: var(--orange3);
   font-size: 1.25rem;
   font-weight: bold;
 }
-.optionsA{
-  button{
+.optionsA {
+  button {
     color: var(--orange3);
     font-size: 1.25rem;
     font-weight: bold;
@@ -45,13 +45,13 @@
   }
 }
 
-.displayOptions{
+.displayOptions {
   color: cyan;
   display: flex;
   flex-direction: row;
 }
 
-.displayTitle{
+.displayTitle {
   margin-top: 1rem;
   font-size: 1.5rem;
   color: var(--orange2);
@@ -59,12 +59,12 @@
   margin-bottom: 0.5rem;
 }
 
-.wrapperOptions{
+.wrapperOptions {
   display: flex;
   flex-direction: row;
 }
 
-.indAdd{
+.indAdd {
   margin-left: 1rem;
   font-weight: bold;
   font-size: 2rem;
@@ -72,7 +72,7 @@
   align-items: center;
 }
 
-.indEdit{
+.indEdit {
   margin-left: 1rem;
   font-weight: bold;
   font-size: 1.25rem;
@@ -80,7 +80,7 @@
   align-items: center;
 }
 
-.indDelete{
+.indDelete {
   margin-left: 1rem;
   font-weight: bold;
   font-size: 1.25rem;
@@ -88,18 +88,18 @@
   align-items: center;
 }
 
-.optionleft{
+.optionleft {
   display: flex;
   flex-direction: row;
 }
 
-.optionvertical{
+.optionvertical {
   margin-left: 4rem;
   display: flex;
   flex-direction: column;
 }
 
-.mood{
+.mood {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -242,13 +242,13 @@
   margin-top: 0.5rem;
 }
 
-.backgroundStats{
+.backgroundStats {
   background: white;
   display: flex;
   flex-direction: column;
 }
 
-.manin{
+.manin {
   color: darkorange;
   font-weight: bold;
   font-size: 3.5rem;

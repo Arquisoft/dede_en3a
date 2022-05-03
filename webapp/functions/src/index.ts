@@ -14,73 +14,91 @@ const geocoder = new Nominatim();
 // // https://firebase.google.com/docs/functions/typescript
 //
 
-function sendEmail(
-  email: String,
-  data: {
-    items: CartItem[];
-    user: String;
-    addressData: {
-      address: string;
-      postalcode: string;
-      city: string;
-      country: string;
-      region: string;
-    };
-  },
+async function sendEmail(
+  title: string,
+  email: string,
+  items: any,
+  address: string,
   shippingCost: number,
-  productsCost: number
+  productsCost: number,
+  created: number,
+  estimatedDelivery: number,
+  orderState: string,
+  info: string
 ) {
+  const formatedCreationDate = new Date(created).toLocaleString().split(",")[0];
+  const formatedEstimatedDelivery = new Date(estimatedDelivery)
+    .toLocaleString()
+    .split(",")[0];
+
+  let orderItemRows = "";
+
+  items.forEach((item: any) => {
+    orderItemRows +=
+      "<tr><td style='padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>" +
+      item.title +
+      "</td><td style='padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>" +
+      item.price.toFixed(2) +
+      "€ </td><td style='padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>" +
+      item.amount +
+      "</td><td style='padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>" +
+      (item.amount * item.price).toFixed(2) +
+      "€ </td></tr style='padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>";
+  });
+
   let message: String =
-    "<table >\n" +
-    "<tr >\n" +
-    "<th>PRODUCT</th>\n" +
-    "<th >PRICE</th>\n" +
-    "<th >UNITS</th>\n" +
-    "</tr>\n";
-
-  let totalProd: number = 0;
-
-  let allItems = data.items;
-  while (totalProd < allItems.length) {
-    message +=
-      "<tr>\n" +
-      "<td >" +
-      allItems[totalProd].product.title +
-      "</td>\n" +
-      "<td >" +
-      allItems[totalProd].product.price +
-      "</td>\n" +
-      "<td >" +
-      allItems[totalProd].amount +
-      "</td>\n" +
-      "</tr>\n";
-    totalProd++;
-  }
-
-  message += "</table><br>";
-  message += "<p>Total cost of products: " + productsCost + "€</p><br>";
-  message +=
-    "<p>Shiping to: " +
-    data.addressData.address +
-    " , " +
-    data.addressData.city +
-    " , " +
-    data.addressData.postalcode +
-    " , " +
-    data.addressData.region +
-    " , " +
-    data.addressData.country;
-  message += "<p>Total cost of shiping: " + shippingCost + "€</p>";
-  message +=
-    "<p>Total cost of order: " + (productsCost + shippingCost) + "€</p>";
-
-  admin
+    "<div style='color: white; padding: 1rem; background-color: #171717'>" +
+    "<span>" +
+    info +
+    "</span>" +
+    "<table style='border-spacing: 0px; width: 100%; background-color: rgba(255, 255, 255, 0.027);border: 1px solid rgba(255, 255, 255, 0.089); '>" +
+    "  <th style='background-color: rgba(66, 66, 66, 0.514); padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>Item</th>" +
+    "  <th style='background-color: rgba(66, 66, 66, 0.514); padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>Price</th>" +
+    "  <th style='background-color: rgba(66, 66, 66, 0.514); padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>Quantity</th>" +
+    "  <th style='background-color: rgba(66, 66, 66, 0.514); padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>Total</th>" +
+    orderItemRows +
+    "</table>" +
+    "<div style='display:flex; background-color: rgba(255, 139, 51, 0.144);  padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>" +
+    "  Shipping costs: <b style='margin-left: auto;'> " +
+    shippingCost +
+    " €</b>" +
+    "</div>" +
+    "<div style='display:flex; background-color: rgba(255, 139, 51, 0.144);  padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>" +
+    "  Total: <b style='margin-left: auto;'> " +
+    productsCost +
+    shippingCost +
+    " €</b>" +
+    "</div>" +
+    "<div style='display:flex; background-color: rgba(255, 139, 51, 0.144);  padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>" +
+    "  Creation date:" +
+    "  <b style='margin-left: auto;'>" +
+    formatedCreationDate +
+    "</b>" +
+    "</div>" +
+    "<div style='display:flex; background-color: rgba(255, 139, 51, 0.144);  padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>" +
+    "  Estimated delivery:" +
+    "  <b style='margin-left: auto;'>" +
+    formatedEstimatedDelivery +
+    "  </b>" +
+    "</div>" +
+    "<div style='display:flex; background-color: rgba(255, 139, 51, 0.144);  padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>" +
+    "  State: <b style='margin-left: auto;'> " +
+    orderState +
+    "</b>" +
+    "</div>" +
+    "<div style='display:flex; background-color: rgba(255, 139, 51, 0.144);  padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>" +
+    "  Adress: <b style='margin-left: auto;'> " +
+    address +
+    "</b>" +
+    "</div>" +
+    "</div>";
+  await admin
     .firestore()
     .collection("mail")
     .add({
       to: "" + email,
       message: {
-        subject: "Your order has been processed.",
+        subject: "[Dede] " + title,
         text: "These are the details of your last order:",
         html: "" + message,
       },
@@ -142,6 +160,73 @@ function calculateEstimatedDelivery(distance: number) {
   const sum = currentDateMillis + deliveryTimeMillis;
   return sum;
 }
+
+export const checkOrdersState = functions
+  .region("europe-west1")
+  .pubsub.schedule("every 1 minutes")
+  .onRun(async (context: any) => {
+    await admin
+      .firestore()
+      .collection("orders")
+      .where("state", "!=", "Delivered")
+      .get()
+      .then((snapshot: any) => {
+        snapshot.forEach(async (doc: any) => {
+          const order = doc.data();
+          const difference = order.estimatedDelivery - order.created;
+          const stepDif = difference / 3;
+          const currentDateMillis = Date.now();
+          let newState = "Being prepared";
+          if (currentDateMillis >= order.created + stepDif) {
+            newState = "Shipped";
+          }
+          if (currentDateMillis >= order.created + stepDif * 2) {
+            newState = "Out for delivery";
+          }
+          if (currentDateMillis >= order.created + stepDif * 3) {
+            newState = "Delivered";
+          }
+          if (order.state !== newState) {
+            const updatedOrder = { ...order, state: newState };
+            const message =
+              "Your order status has changed from " +
+              order.state +
+              " to " +
+              newState;
+
+            await sendEmail(
+              "Your order status has changed",
+              order.userEmail,
+              order.items,
+              order.address,
+              order.shippingCost,
+              order.totalAmount,
+              order.created,
+              order.estimatedDelivery,
+              newState,
+              message
+            );
+            await admin
+              .firestore()
+              .collection("orders")
+              .doc(doc.id)
+              .update({ ...updatedOrder })
+              .then(() => {
+                console.log(
+                  "Update order: " +
+                    doc.id +
+                    " from state " +
+                    order.state +
+                    " to " +
+                    newState
+                );
+              });
+          }
+        });
+      });
+    console.log("This will be running each 5 minutes");
+    return null;
+  });
 
 export const calculateDeliveryOnCall = functions
   .region("europe-west1")
@@ -214,7 +299,7 @@ export const sendOrder = functions
     async (
       data: {
         items: CartItem[];
-        user: String;
+        user: string;
         addressData: {
           address: string;
           postalcode: string;
@@ -305,20 +390,33 @@ export const sendOrder = functions
 
       functions.logger.info("Tipo doc:" + orders.type);
       functions.logger.info("Antes del add");
+      const created = Date.now();
       await orders
         .add({
-          created: Date.now(),
+          created: created,
           userEmail: data.user,
           items: items,
           address: addressAsString,
           shippingCost: costShi,
           totalAmount: total + costShi,
           estimatedDelivery: estimatedDelivery,
+          state: "Being prepared",
         })
         .then(async () => {
           functions.logger.info("Doc saved ");
           await decreaseProductsStock(data.items);
-          sendEmail(data.user, data, costShi, total);
+          await sendEmail(
+            "Your order has been processed",
+            data.user,
+            items,
+            data.addressData.address,
+            costShi,
+            total,
+            created,
+            estimatedDelivery,
+            "Being prepared",
+            "Your order has been processed. You will be notified when on shipping state changes."
+          );
           return {
             message: "Congrats, your order has been saved...",
             status: 200,

@@ -18,32 +18,61 @@ function OrdersPage(): JSX.Element {
   useEffect(() => {
     refreshOrderList();
   }, []);
+  const getOrderHtml = (order: Order) => {
+    const orderItemRows: JSX.Element[] = [];
 
+    order.items.forEach((item) => {
+      orderItemRows.push(
+        <tr>
+          <td>{item.title}</td>
+          <td>{item.price.toFixed(2)} €</td>
+          <td>{item.amount}</td>
+          <td>{(item.price * item.amount).toFixed(2)} €</td>
+        </tr>
+      );
+    });
+    const html: JSX.Element = (
+      <div className={styles.ordercontainer}>
+        <table>
+          <th>Item</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          {orderItemRows}
+        </table>
+        <div className={styles.orderrow}>
+          Shipping costs: <b>{order.shippingCost} €</b>
+        </div>
+        <div className={styles.orderrow}>
+          Total: <b>{order.totalAmount} €</b>
+        </div>
+        <div className={styles.orderrow}>
+          Creation date:{" "}
+          <b>{moment(new Date(order.created)).format("YYYY-MM-DD")}</b>
+        </div>
+        <div className={styles.orderrow}>
+          Estimated delivery:{" "}
+          <b>
+            {moment(new Date(order.estimatedDelivery)).format("YYYY-MM-DD")}
+          </b>
+        </div>
+        <div className={styles.orderrow}>
+          Adress: <b>{order.address}</b>
+        </div>
+        <div className={styles.orderrow}>
+          State: <b>{order.state}</b>
+        </div>
+      </div>
+    );
+
+    return html;
+  };
   let orderList: JSX.Element[] = [];
 
   if (orders != null || orders != undefined) {
     orders.forEach((order) => {
-      let group: JSX.Element[] = [];
-      order.items.forEach((indOrd) => {
-        group.push(
-          <div className={styles.order}>
-            <OrderCardItem orderItem={indOrd}></OrderCardItem>
-          </div>
-        );
-      });
-      let dateOrder = new Date(order.created);
-      orderList.push(
-        <div className={styles.orderwrapper}>
-          <div className={styles.ordersname}>
-            Date: {moment(dateOrder).format("YYYY-MM-DD HH:MM:SS")}
-          </div>
-          <div className={styles.ordersname}>Address: {order.address}</div>
-          <div className={styles.ordersname}>
-            Total ammount: {order.totalAmount} €
-          </div>
-          <div className={styles.carditemscontainer}>{group}</div>
-        </div>
-      );
+      const orderElement = getOrderHtml(order);
+      orderList.push(orderElement);
     });
   }
 

@@ -27,6 +27,30 @@ html,
   width: 10px;
   height: 10px;
 }
+
+table {
+  background-color: rgba(255, 255, 255, 0.027);
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.089);
+  td {
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.089);
+  }
+  th {
+    min-width: 10rem;
+    background-color: rgba(66, 66, 66, 0.514);
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.089);
+  }
+}
+@media (min-width: 0px) and (max-width: $screen-md-max) {
+  table {
+    th {
+      min-width: 0px;
+    }
+  }
+}
+
 hr {
   width: 100%;
   color: rgba(255, 255, 255, 0.432);
