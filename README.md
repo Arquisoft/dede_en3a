@@ -9,7 +9,7 @@
 <p float="left">
 <img src="https://blog.wildix.com/wp-content/uploads/2020/06/react-logo.jpg" height="100">
 <img src="https://miro.medium.com/max/1200/0*RbmfNyhuBb8G3LWh.png" height="100">
-<img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Firebase_Logo.png" height="100">
+<img src="https://i0.wp.com/unaaldia.hispasec.com/wp-content/uploads/2020/05/firebase.png?fit=1200%2C600&ssl=1" height="100">
 </p>
 
 
