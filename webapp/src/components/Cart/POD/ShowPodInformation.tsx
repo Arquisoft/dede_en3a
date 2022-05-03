@@ -99,7 +99,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     </div>
   );
 
-
   const loginPageProps = {
     onExit: () => setLoginPage(<div></div>),
     onRegisterClick: () => {
@@ -116,9 +115,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   const loginModal = (<LoginPage {...loginPageProps}></LoginPage>);
 
-
-
-
   const emptyCartErrorModal = (
 
       <div className={styles.modalerror}>
@@ -130,7 +126,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
           Accept
         </div>
       </div>
-
 
   );
 
@@ -169,7 +164,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
   const paypalModalMenu = (
 
       <>
-
       <PayPalButtons
           createOrder={(data: any, actions: any) => {
             return actions.order
@@ -246,7 +240,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
     }
     );
-  }, []);
+  }, [props.webID]);
   const navigate = useNavigate();
 
   async function calcWithFirebaseFunction(
@@ -354,8 +348,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   }
 
-
-
   const add = async () => {
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
 
@@ -438,11 +430,10 @@ function ShowPodInformation(props: PODProps): JSX.Element {
   }
 
 
-
-
   return (
     <>
       {loginPage}
+      {console.log(getCookie("city"))}
       <Grid container>
         {loadingOverlay}
         {orderModal}
