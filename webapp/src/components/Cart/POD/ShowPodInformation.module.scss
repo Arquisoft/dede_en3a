@@ -103,6 +103,18 @@
   }
 }
 
+.paypalcontainer {
+  background-color: whitesmoke;
+  padding: 1rem;
+  border-radius: 1rem;
+  max-width: 40rem;
+  width: calc(100vw - 2rem);
+  color: black;
+  font-weight: bold;
+  overflow-y: scroll;
+  max-height: 80vh;
+}
+
 .modalerror {
   display: flex;
   flex-direction: column;

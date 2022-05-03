@@ -32,6 +32,7 @@ async function sendEmail(
     .split(",")[0];
 
   let orderItemRows = "";
+  const totalAmount = productsCost + shippingCost;
 
   items.forEach((item: any) => {
     orderItemRows +=
@@ -65,8 +66,7 @@ async function sendEmail(
     "</div>" +
     "<div style='display:flex; background-color: rgba(255, 139, 51, 0.144);  padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>" +
     "  Total: <b style='margin-left: auto;'> " +
-    productsCost +
-    shippingCost +
+    totalAmount +
     " €</b>" +
     "</div>" +
     "<div style='display:flex; background-color: rgba(255, 139, 51, 0.144);  padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.089);'>" +
