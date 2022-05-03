@@ -73,7 +73,7 @@ function ProductDetails(): JSX.Element {
     const comment: Comments = {
       author: name,
       message: message,
-      userImage: "http://cdn.onlinewebfonts.com/svg/img_184513.png",
+      userImage: "https://cdn.onlinewebfonts.com/svg/img_184513.png",
       rating: rating,
     };
 

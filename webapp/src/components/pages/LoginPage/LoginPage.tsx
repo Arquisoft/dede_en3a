@@ -3,7 +3,7 @@ import styles from "./LoginPage.module.scss";
 import React, { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { auth } from "./../../../utils/firebase";
-
+import Modal from "../../Modal/Modal"
 type LoginPageProps = { onExit: any; onRegisterClick: any; onLoginSuccess?: any };
 
 function LoginPage(props: LoginPageProps): JSX.Element {
@@ -18,6 +18,31 @@ function LoginPage(props: LoginPageProps): JSX.Element {
   const { login } = useAuth();
 
   const [error, setError] = useState("");
+  const [resultModal, setResultModal] = React.useState(<></>);
+
+
+  const errorModalWrongEmailOrPassword = (
+      <div className={styles.modalerror}>
+        <div className={styles.titleError}>Provided email not found or wrong password, try again...</div>
+
+        <div className={styles.accept} onClick={() => setResultModal(<></>)}>
+          Accept
+        </div>
+      </div>
+  );
+
+  const genericError = (
+      <div className={styles.modalerror}>
+        <div className={styles.titleError}>An unexpected error happened, please retry.</div>
+
+        <div className={styles.accept} onClick={() => setResultModal(<></>)}>
+          Accept
+        </div>
+      </div>
+  );
+
+
+
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, email: e.currentTarget.value });
@@ -45,30 +70,40 @@ function LoginPage(props: LoginPageProps): JSX.Element {
     try {
       await login(user.email, user.password).then((userCredential) => {
         if(props.onLoginSuccess){
+
           props.onLoginSuccess();
         }else{
           navigate("/shop")
         }
 
+      }).catch((error) =>{
+        if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
+
+          setResultModal(<Modal element={errorModalWrongEmailOrPassword}></Modal>)
+        } else {
+
+          setResultModal(<Modal element={genericError}></Modal>)
+        }
       });
     } catch (error: any) {
-      if (error.code === "auth/user-not-found") {
-        setError("User not found");
-      } else if (error.code === "auth/wrong-password") {
-        setError("Wring password for provided user");
+      if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
+
+        setResultModal(<Modal element={errorModalWrongEmailOrPassword}></Modal>)
       } else {
-        setError(error.message);
+
+        setResultModal(<Modal element={genericError}></Modal>)
       }
     }
   };
 
   return (
     <>
+
+
       <div
         className={styles.loginpagecontainer + " "}
         onClick={onContainerClick}
       >
-        {error && <p>{error}</p>}
         <div className={styles.loginwrapper} onClick={preventDefaultClick}>
           <form name={"loginForm"} onSubmit={handleSubmit}>
             <h2>Login</h2>
@@ -113,6 +148,8 @@ function LoginPage(props: LoginPageProps): JSX.Element {
           </form>
         </div>
       </div>
+
+      {resultModal}
     </>
   );
 }

@@ -5,6 +5,7 @@ import { addUser } from "../../../api/api";
 import TopMenu from "../../menu/TopMenu";
 
 import styles from "./RegisterPage.module.scss";
+import Modal from "../../Modal/Modal";
 type RegisterPageProps = {
   onExit: any;
 };
@@ -21,6 +22,37 @@ export function RegisterPage(props: RegisterPageProps) {
   const navigate = useNavigate();
 
   const [error, setError] = useState("");
+
+  const [resultModal, setResultModal] = React.useState(<></>);
+
+
+  const errorModalHtml = (
+      <div className={styles.modalerror}>
+        <div className={styles.titleError}> {error} </div>
+
+        <div className={styles.accept} onClick={() => setResultModal(<></>)}>
+          Accept
+        </div>
+      </div>
+  );
+
+  const successModalHtml = (
+
+      <div className={styles.sucessfulorder}>
+        <div className={styles.title}>Congratulations, you have created a DEDE Account!</div>
+        <div className={styles.subtitle}>
+          Start shopping whenever you want...
+        </div>
+        <div className={styles.accept} onClick={() => {setResultModal(<></>); navigate("/shop");}}>
+          Start Shopping
+        </div>
+      </div>
+
+  );
+
+
+
+
 
   const onContainerClick = (event: any) => {
     event.preventDefault();
@@ -57,11 +89,15 @@ export function RegisterPage(props: RegisterPageProps) {
         throw new Error("Passwords have to be equal");
       }
 
-      await signup(user.email, user.password).then((userCredential) => {
+      await signup(user.email, user.password).then( (userCredential) => {
         console.log(
           "User: " + userCredential.user,
           "ProviderId: " + userCredential.providerId
         );
+
+
+
+        setResultModal(<Modal element={successModalHtml}></Modal>)
       });
 
       await addUser({
@@ -69,17 +105,20 @@ export function RegisterPage(props: RegisterPageProps) {
         email: user.email,
       });
 
-      navigate("/dashboard");
+
     } catch (error: any) {
       if (error.code === "auth/internal-error") {
-        setError("Invalid email");
+        setError("Invalid email format.");
+
       } else if (error.code === "auth/email-already-in-use") {
         setError("Email already registered");
+
       } else if (error.code === "auth/weak-password") {
         setError("Password should be at least 6 characters");
       } else {
-        setError(error.message);
+        setError("Unknown error :( Please try again...");
       }
+      setResultModal(<Modal element={errorModalHtml}></Modal>)
     }
   };
 
@@ -99,6 +138,7 @@ export function RegisterPage(props: RegisterPageProps) {
           "User: " + userCredential.user,
           "ProviderId: " + userCredential.providerId
         );
+        setResultModal(<Modal element={successModalHtml}></Modal>)
       });
 
       await addUser({
@@ -109,21 +149,24 @@ export function RegisterPage(props: RegisterPageProps) {
       navigate("/dashboard");
     } catch (error: any) {
       if (error.code === "auth/internal-error") {
-        setError("Invalid email");
+        setError("Invalid email format.");
+
       } else if (error.code === "auth/email-already-in-use") {
         setError("Email already registered");
+
       } else if (error.code === "auth/weak-password") {
         setError("Password should be at least 6 characters");
       } else {
-        setError(error.message);
+        setError("Unknown error :( Please try again...");
       }
+      setResultModal(<Modal element={errorModalHtml}></Modal>)
     }
   };
 
   return (
     <div>
       <div className={styles.registerpagecontainer} onClick={onContainerClick}>
-        {error && <p>{error}</p>}
+
 
         <div className={styles.registerwrapper} onClick={preventDefault}>
           <form name={"registerForm"} onSubmit={handleSubmit}>
@@ -163,6 +206,7 @@ export function RegisterPage(props: RegisterPageProps) {
           </form>
         </div>
       </div>
+      {resultModal}
     </div>
   );
 }

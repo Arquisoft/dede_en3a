@@ -1,5 +1,7 @@
 import {defineFeature, loadFeature} from "jest-cucumber";
 import puppeteer from "puppeteer";
+import {apps} from "firebase-functions/lib/apps";
+import delay = apps.delay;
 
 const feature = loadFeature('./e2e/features/shop-functionality.feature');
 
@@ -14,7 +16,7 @@ defineFeature(feature, test => {
 
         browser = process.env.GITHUB_ACTIONS
             ? await puppeteer.launch()
-            : await puppeteer.launch({ headless: false, slowMo:100}); //false to run tests locally
+            : await puppeteer.launch({ headless: false, slowMo:0}); //false to run tests locally
         page = await browser.newPage();
 
         await page
@@ -26,12 +28,7 @@ defineFeature(feature, test => {
 
     test('The user searches Gel hand sanitizer', ({given,when,then}) => {
 
-        let email:string
-        let password:string
-
         given('A user on the shop page', () => {
-            email = "123@123.com"
-            password = "123123"
         });
 
         when('I write "Hand" on the search bar and press the Search button', async () => {
@@ -41,6 +38,7 @@ defineFeature(feature, test => {
             await expect(page).toFill("input[title='searchProduct']", "Hand");
 
             await expect(page).toClick('button', {text:'Search'})
+            await delay(3000);
 
         });
 
@@ -53,12 +51,7 @@ defineFeature(feature, test => {
 
     test('The user adds a product to the cart', ({given,when,then}) => {
 
-        let email:string
-        let password:string
-
         given('A user on the shop page', () => {
-            email = "123@123.com"
-            password = "123123"
         });
 
         when('I press the Add to Cart button', async () => {
