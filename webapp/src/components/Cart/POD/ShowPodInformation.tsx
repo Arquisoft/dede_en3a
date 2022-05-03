@@ -73,6 +73,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   const cart = useSelector((state: DedeStore) => state.cart);
 
+
   const [loginPage, setLoginPage] = useState(<div></div>);
   const [registerPage, setRegisterPage] = useState(<div></div>);
 
@@ -129,10 +130,26 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     </div>
   );
 
+
+  const paypalErrorModal = (
+
+      <div className={"modalerror"}>
+        <div className={"titleError"}>Sorry, an error with paypal happened</div>
+        <div className={"titleError"}>
+          Try later...
+        </div>
+        <div className={"accept"} onClick={() => setOrderModal(<></>)}>
+          Accept
+        </div>
+      </div>
+
+
+  );
+
   const notEnoughDataPodErrorModal = (
     <div className="modalerror">
-      <div className="title">Sorry, cannot proceed...</div>
-      <div className="title">
+      <div className="titleError">Sorry, cannot proceed...</div>
+      <div className="titleError">
         There is not enough information in the pod for calculate shipping.
       </div>
       <div className="accept" onClick={() => setOrderModal(<></>)}>
@@ -141,33 +158,41 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     </div>
   );
 
+
   const paypalModalMenu = (
     <div className={styles.paypalcontainer}>
       <PayPalButtons
-        createOrder={(data: any, actions: any) => {
-          return actions.order
-            .create({
-              purchase_units: [
-                {
-                  amount: {
-                    currency_code: "EUR",
-                    value: getCookie("totalCartAndShipping"),
-                  },
-                },
-              ],
-            })
-            .then((orderId: any) => {
-              // Your code here after create the order
-              return orderId;
+          createOrder={(data: any, actions: any) => {
+            return actions.order
+                .create({
+                  purchase_units: [
+                    {
+                      amount: {
+                        currency_code: "EUR",
+                        value: getCookie("totalCartAndShipping"),
+                      },
+                    },
+                  ],
+                })
+                .then((orderId: any) => {
+
+                  // Your code here after create the order
+                  return orderId;
+                });
+          }}
+          onApprove={async (data: any, actions: any) => {
+            return actions.order.capture().then(function () {
+              setOrderModal(<></>)
+              // Your code here after capture the order
+              buy();
             });
-        }}
-        onApprove={async (data: any, actions: any) => {
-          return actions.order.capture().then(function () {
-            setOrderModal(<></>);
-            // Your code here after capture the order
-            buy();
-          });
-        }}
+          }}
+          onError={async (err) => {
+
+              setOrderModal(<Modal element={paypalErrorModal}></Modal>)
+
+
+          }}
       />
 
       <div className={styles.cancel} onClick={() => setOrderModal(<></>)}>
@@ -183,6 +208,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   //OBTENEMOS POR CADA WEB ID LA LISTA DE ADDRESSES ASOCIADOS
   useEffect(() => {
+
     const fullAddresses = AddressCalculator(props.webID);
     const addressesHtml: any = [];
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
@@ -308,6 +334,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     return response;
   }
 
+
   function setterOfAddress(value: any) {
     const finalVal = listOfAddress.filter(
       (addr) => addr.address === value.target.value
@@ -359,6 +386,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   const buy = () => {
     if (userRegistered()) {
+
       add()
         .then(() => {})
         .catch((error: Error) => {
@@ -393,8 +421,11 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       }
       setCookie("totalCartAndShipping", shipCost + cartCost + "", 1);
       setOrderModal(<Modal element={paypalModalMenu}></Modal>);
+
     }
+
   }
+
 
   return (
     <>
@@ -443,6 +474,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
             >
               Checkout
             </button>
+
           </div>
         </Grid>
       </Grid>
