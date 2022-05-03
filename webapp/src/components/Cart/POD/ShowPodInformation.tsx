@@ -133,12 +133,12 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   const paypalErrorModal = (
 
-      <div className={styles.modalerror}>
-        <div className={styles.title}>Sorry, an error with paypal happened</div>
-        <div className={styles.title}>
+      <div className={"modalerror"}>
+        <div className={"titleError"}>Sorry, an error with paypal happened</div>
+        <div className={"titleError"}>
           Try later...
         </div>
-        <div className={styles.accept} onClick={() => setOrderModal(<></>)}>
+        <div className={"accept"} onClick={() => setOrderModal(<></>)}>
           Accept
         </div>
       </div>
@@ -148,8 +148,8 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   const notEnoughDataPodErrorModal = (
     <div className="modalerror">
-      <div className="title">Sorry, cannot proceed...</div>
-      <div className="title">
+      <div className="titleError">Sorry, cannot proceed...</div>
+      <div className="titleError">
         There is not enough information in the pod for calculate shipping.
       </div>
       <div className="accept" onClick={() => setOrderModal(<></>)}>
