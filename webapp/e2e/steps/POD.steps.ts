@@ -29,11 +29,9 @@ defineFeature(feature, test => {
   test('The user introduces their POD', ({given,when,then}) => {
     
     let email:string
-    let password:string
 
     given('A user', () => {
       email = "123@123.com"
-      password = "123123"
     });
 
     when('I go to the cart and introduce the POD', async () => {

@@ -61,7 +61,7 @@ defineFeature(feature, test => {
 
     let email:string;
     let name:string
-    const randValue = Math.random() + 1
+    const randValue = Math.random()
 
         given('An unregistered user', () => {
 
@@ -93,11 +93,9 @@ defineFeature(feature, test => {
   test('The user does an incorrect login', ({given,when,then}) => {
 
     let email:string
-    let password:string
 
     given('A registered user', () => {
       email = "123@123.com"
-      password = "dasfasdfasd"
     });
 
     when('I login with a wrong account', async () => {
@@ -106,7 +104,7 @@ defineFeature(feature, test => {
       await expect(page).toClick('div[title="loginTopMenu"]')
 
       await expect(page).toFill("input[title='email']", email);
-      await expect(page).toFill("input[title='password']", password);
+      await expect(page).toFill("input[title='password']", "dasfasdfasd");
 
       await expect(page).toClick('button', {text:'Login'})
     });
