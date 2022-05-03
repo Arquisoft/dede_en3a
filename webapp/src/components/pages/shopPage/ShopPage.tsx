@@ -45,7 +45,7 @@ function ShopPage(): JSX.Element {
   const handleSubmit = (event: any) => {
     setLoading(<LoadingOverlay></LoadingOverlay>);
     event.preventDefault();
-    const filters = typeFilter ? [nameFilter, typeFilter] : [nameFilter];
+    const filters = typeFilter ? [ typeFilter] : [];
     console.log(filters);
     getProducts(filters).then((products) => {
       setLoading(<div></div>);
