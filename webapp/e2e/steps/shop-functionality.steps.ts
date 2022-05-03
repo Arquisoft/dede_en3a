@@ -28,12 +28,7 @@ defineFeature(feature, test => {
 
     test('The user searches Gel hand sanitizer', ({given,when,then}) => {
 
-        let email:string
-        let password:string
-
         given('A user on the shop page', () => {
-            email = "123@123.com"
-            password = "123123"
         });
 
         when('I write "Hand" on the search bar and press the Search button', async () => {
@@ -56,12 +51,7 @@ defineFeature(feature, test => {
 
     test('The user adds a product to the cart', ({given,when,then}) => {
 
-        let email:string
-        let password:string
-
         given('A user on the shop page', () => {
-            email = "123@123.com"
-            password = "123123"
         });
 
         when('I press the Add to Cart button', async () => {
