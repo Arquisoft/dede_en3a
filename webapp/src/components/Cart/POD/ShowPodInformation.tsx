@@ -135,6 +135,21 @@ function ShowPodInformation(props: PODProps): JSX.Element {
   );
 
 
+  const paypalErrorModal = (
+
+      <div className={styles.modalerror}>
+        <div className={styles.title}>Sorry, an error with paypal happened</div>
+        <div className={styles.title}>
+          Try later...
+        </div>
+        <div className={styles.accept} onClick={() => setOrderModal(<></>)}>
+          Accept
+        </div>
+      </div>
+
+
+  );
+
   const notEnoughDataPodErrorModal = (
 
       <div className={styles.modalerror}>
@@ -180,6 +195,12 @@ function ShowPodInformation(props: PODProps): JSX.Element {
               // Your code here after capture the order
               buy();
             });
+          }}
+          onError={async (err) => {
+
+              setOrderModal(<Modal element={paypalErrorModal}></Modal>)
+
+
           }}
       />
 
