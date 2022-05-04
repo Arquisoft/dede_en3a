@@ -24,7 +24,11 @@ import styles from "./ShowPodInformation.module.scss";
 import { getCurrentUser, useAuth } from "../../../context/AuthContext";
 import LoadingOverlay from "../../LoadingOverlay/LoadingOverlay";
 import { Dispatch } from "redux";
-import { setEstimatedDelivery, setShippingCosts } from "../../../redux/actions";
+import {
+  clearCart,
+  setEstimatedDelivery,
+  setShippingCosts,
+} from "../../../redux/actions";
 import { Address } from "../../../api/model/pod/address";
 import { AddressCalculator } from "./AddressCalculator";
 import Modal from "../../Modal/Modal";
@@ -73,7 +77,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   const cart = useSelector((state: DedeStore) => state.cart);
 
-
   const [loginPage, setLoginPage] = useState(<div></div>);
   const [registerPage, setRegisterPage] = useState(<div></div>);
 
@@ -93,7 +96,13 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       <div className={styles.subtitle}>
         You can see the state of your orders in your account{" "}
       </div>
-      <div className={styles.accept} onClick={() => setOrderModal(<></>)}>
+      <div
+        className={styles.accept}
+        onClick={() => {
+          setOrderModal(<></>);
+          orderSucess();
+        }}
+      >
         Accept
       </div>
     </div>
@@ -116,6 +125,11 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     },
   };
 
+  const orderSucess = () => {
+    dispatch(clearCart());
+    navigate("/orders");
+  };
+
   const loginModal = <LoginPage {...loginPageProps}></LoginPage>;
 
   const emptyCartErrorModal = (
@@ -130,20 +144,14 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     </div>
   );
 
-
   const paypalErrorModal = (
-
-      <div className={"modalerror"}>
-        <div className={"titleError"}>Sorry, an error with paypal happened</div>
-        <div className={"titleError"}>
-          Try later...
-        </div>
-        <div className={"accept"} onClick={() => setOrderModal(<></>)}>
-          Accept
-        </div>
+    <div className={"modalerror"}>
+      <div className={"titleError"}>Sorry, an error with paypal happened</div>
+      <div className={"titleError"}>Try later...</div>
+      <div className={"accept"} onClick={() => setOrderModal(<></>)}>
+        Accept
       </div>
-
-
+    </div>
   );
 
   const notEnoughDataPodErrorModal = (
@@ -158,41 +166,36 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     </div>
   );
 
-
   const paypalModalMenu = (
     <div className={styles.paypalcontainer}>
       <PayPalButtons
-          createOrder={(data: any, actions: any) => {
-            return actions.order
-                .create({
-                  purchase_units: [
-                    {
-                      amount: {
-                        currency_code: "EUR",
-                        value: getCookie("totalCartAndShipping"),
-                      },
-                    },
-                  ],
-                })
-                .then((orderId: any) => {
-
-                  // Your code here after create the order
-                  return orderId;
-                });
-          }}
-          onApprove={async (data: any, actions: any) => {
-            return actions.order.capture().then(function () {
-              setOrderModal(<></>)
-              // Your code here after capture the order
-              buy();
+        createOrder={(data: any, actions: any) => {
+          return actions.order
+            .create({
+              purchase_units: [
+                {
+                  amount: {
+                    currency_code: "EUR",
+                    value: getCookie("totalCartAndShipping"),
+                  },
+                },
+              ],
+            })
+            .then((orderId: any) => {
+              // Your code here after create the order
+              return orderId;
             });
-          }}
-          onError={async (err) => {
-
-              setOrderModal(<Modal element={paypalErrorModal}></Modal>)
-
-
-          }}
+        }}
+        onApprove={async (data: any, actions: any) => {
+          return actions.order.capture().then(function () {
+            setOrderModal(<></>);
+            // Your code here after capture the order
+            buy();
+          });
+        }}
+        onError={async (err) => {
+          setOrderModal(<Modal element={paypalErrorModal}></Modal>);
+        }}
       />
 
       <div className={styles.cancel} onClick={() => setOrderModal(<></>)}>
@@ -208,7 +211,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
 
   //OBTENEMOS POR CADA WEB ID LA LISTA DE ADDRESSES ASOCIADOS
   useEffect(() => {
-
     const fullAddresses = AddressCalculator(props.webID);
     const addressesHtml: any = [];
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
@@ -334,7 +336,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     return response;
   }
 
-
   function setterOfAddress(value: any) {
     const finalVal = listOfAddress.filter(
       (addr) => addr.address === value.target.value
@@ -373,20 +374,19 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       },
     })
       .then(() => {
+        //ORDER SUCESSSS
         setLoadingOverlay(<></>);
 
         setOrderModal(<Modal element={orderModalHtml}></Modal>);
       })
       .catch((error: any) => {
         setLoadingOverlay(<></>);
-        console.log("catch error", error.message);
         alert(error);
       });
   };
 
   const buy = () => {
     if (userRegistered()) {
-
       add()
         .then(() => {})
         .catch((error: Error) => {
@@ -421,11 +421,8 @@ function ShowPodInformation(props: PODProps): JSX.Element {
       }
       setCookie("totalCartAndShipping", shipCost + cartCost + "", 1);
       setOrderModal(<Modal element={paypalModalMenu}></Modal>);
-
     }
-
   }
-
 
   return (
     <>
@@ -474,7 +471,6 @@ function ShowPodInformation(props: PODProps): JSX.Element {
             >
               Checkout
             </button>
-
           </div>
         </Grid>
       </Grid>

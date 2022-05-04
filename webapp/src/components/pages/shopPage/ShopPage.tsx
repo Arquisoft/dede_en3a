@@ -45,7 +45,7 @@ function ShopPage(): JSX.Element {
   const handleSubmit = (event: any) => {
     setLoading(<LoadingOverlay></LoadingOverlay>);
     event.preventDefault();
-    const filters = typeFilter ? [ typeFilter] : [];
+    const filters = typeFilter ? [typeFilter] : [];
     console.log(filters);
     getProducts(filters).then((products) => {
       setLoading(<div></div>);
@@ -143,7 +143,7 @@ function ShopPage(): JSX.Element {
             <div className={styles.productsheader}>
               <b>Openning offer</b>
               <span>
-                First order <strong>20% off</strong>
+                Everything <strong>20% off</strong>
               </span>
               <img src={headerImg}></img>
             </div>
