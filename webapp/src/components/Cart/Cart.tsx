@@ -30,7 +30,6 @@ function Cart(props: CartProps): JSX.Element {
       return moment(new Date(estimatedDelivery)).format("YYYY-MM-DD ");
     return "";
   };
-
   const estimatedDelivery: number | null = useSelector(
     (state: DedeStore) => state.estimatedDelivery
   );

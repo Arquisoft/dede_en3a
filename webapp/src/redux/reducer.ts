@@ -7,9 +7,9 @@ import {
   SET_ESTIMATED_DELIVERY,
 } from "./actionTypes";
 
-import { DedeAction, DedeStore } from "./store";
+import { DedeAction, DedeStore, loadState } from "./store";
 
-const initialStore = {
+export const initialStore = {
   cart: [],
   shippingCost: null,
   estimatedDelivery: null,
@@ -84,7 +84,7 @@ const reducer = (
 
   // CLEAR CART
   else if (action.type === CLEAR_CART) {
-    return { ...state, cart: [] };
+    return { ...state, cart: [], estimatedDelivery: null, shippingCost: null };
   }
   if (action.type === REMOVE) {
     return {
