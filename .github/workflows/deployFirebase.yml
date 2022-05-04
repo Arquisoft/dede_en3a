@@ -3,12 +3,10 @@ on:
   pull_request:
     branches: [develop]
     types: [closed]
-  push:
-    branches: [ master, develop ]
 
 jobs:
 
-  tests:
+  test:
     name: Tests
     runs-on: ubuntu-latest
     #needs: [build]
