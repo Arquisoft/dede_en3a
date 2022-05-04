@@ -16,6 +16,7 @@ import AboutPage from "./components/pages/AboutPage/AboutPage";
 import AdminDashboard from "./components/Administration/AdminDashboard/AdminDashboard";
 import { useAuth } from "./context/AuthContext";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Presentation from "./components/pages/PresentationPage/Presentation";
 
 function App(): JSX.Element {
   return (
@@ -37,6 +38,10 @@ function App(): JSX.Element {
           <Route path={"/pod"} element={<POD />} />
           {/* Need to auth or something xD */}
           <Route path={"/admin"} element={<AdminDashboard />} />
+          <Route
+            path={"/presentation"}
+            element={<Presentation></Presentation>}
+          ></Route>
         </Routes>
       </BrowserRouter>
 

@@ -1,0 +1,8 @@
+@import "./../../../Styles.scss";
+
+.iframecontainer {
+  background-color: var(--dark2) !important;
+  padding-top: var(--topMenuHeight);
+  height: calc(100vh);
+  width: 100%;
+}
