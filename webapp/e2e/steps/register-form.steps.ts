@@ -2,6 +2,7 @@ import { defineFeature, loadFeature } from 'jest-cucumber';
 import puppeteer from "puppeteer";
 import {apps} from "firebase-functions/lib/apps";
 import delay = apps.delay;
+import uuid = require("uuid")
 
 const feature = loadFeature('./e2e/features/register-form.feature');
 
@@ -33,7 +34,6 @@ defineFeature(feature, test => {
 
     given('A registered user', () => {
       email = "123@123.com"
-      password = "123123"
     });
 
     when('I fill the data in the form and press login', async () => {
@@ -42,7 +42,7 @@ defineFeature(feature, test => {
       await expect(page).toClick('div[title="loginTopMenu"]')
 
       await expect(page).toFill("input[title='email']", email);
-      await expect(page).toFill("input[title='password']", password);
+      await expect(page).toFill("input[title='password']", "123123");
 
       await expect(page).toClick('button', {text:'Login'})
       await expect(page).toClick('div[title="orders"]')
@@ -61,12 +61,12 @@ defineFeature(feature, test => {
       ({given,when,then}) => {
 
     let email:string;
-    let password:string;
     let name:string
+    let randValue = uuid.v4()
 
         given('An unregistered user', () => {
-          email = (Math.random() + 1).toString(36) + "@123.com"
-          password = "123123"
+
+          email = randValue + "@123.com"
           name = "notregistered"
         });
 
@@ -78,8 +78,8 @@ defineFeature(feature, test => {
 
           await expect(page).toFill("input[title='emailInput']", email);
           await expect(page).toFill("input[title='nameInput']", name);
-          await expect(page).toFill("input[title='passwordInput']", password);
-          await expect(page).toFill("input[title='confirmInput']", password);
+          await expect(page).toFill("input[title='passwordInput']", "123123");
+          await expect(page).toFill("input[title='confirmInput']", "123123");
 
           await expect(page).toClick('button', {text:'Register'})
 
@@ -94,11 +94,9 @@ defineFeature(feature, test => {
   test('The user does an incorrect login', ({given,when,then}) => {
 
     let email:string
-    let password:string
 
     given('A registered user', () => {
       email = "123@123.com"
-      password = "dasfasdfasd"
     });
 
     when('I login with a wrong account', async () => {
@@ -107,7 +105,7 @@ defineFeature(feature, test => {
       await expect(page).toClick('div[title="loginTopMenu"]')
 
       await expect(page).toFill("input[title='email']", email);
-      await expect(page).toFill("input[title='password']", password);
+      await expect(page).toFill("input[title='password']", "dasfasdfasd");
 
       await expect(page).toClick('button', {text:'Login'})
     });

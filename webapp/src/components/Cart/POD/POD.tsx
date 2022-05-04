@@ -7,6 +7,7 @@ function pod(webID: string) {
   if (webID.length > 0 && webID.length < 43) {
     return <h3>Please enter a valid POD</h3>;
   } else if (webID.length != 0) {
+    console.log(webID)
     return <ShowPodInformation webID={webID} />;
   }
 }
