@@ -27,6 +27,30 @@ html,
   width: 10px;
   height: 10px;
 }
+
+table {
+  background-color: rgba(255, 255, 255, 0.027);
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.089);
+  td {
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.089);
+  }
+  th {
+    min-width: 10rem;
+    background-color: rgba(66, 66, 66, 0.514);
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.089);
+  }
+}
+@media (min-width: 0px) and (max-width: $screen-md-max) {
+  table {
+    th {
+      min-width: 0px;
+    }
+  }
+}
+
 hr {
   width: 100%;
   color: rgba(255, 255, 255, 0.432);
@@ -77,6 +101,39 @@ input:hover {
   border: 0;
   outline: 0;
   -webkit-appearance: none;
+}
+.modalerror {
+  max-width: 40rem;
+  width: calc(100vw - 2rem);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  box-shadow: var(--shadow2);
+  position: relative;
+  background-color: whitesmoke;
+  .titleError {
+    text-align: center;
+
+    font-weight: bold;
+    color: rgba(255, 0, 0, 0.685);
+
+    font-size: 1.3rem;
+  }
+
+  .accept {
+    margin-top: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    cursor: pointer;
+    padding: 0.5rem;
+    padding-inline: 1.2rem;
+    border-radius: 0.3rem;
+    background-color: var(--orange2);
+    width: fit-content;
+    font-size: 1.3rem;
+  }
 }
 
 button,

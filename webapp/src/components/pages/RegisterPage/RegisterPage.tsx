@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { addUser } from "../../../api/api";
@@ -25,34 +25,40 @@ export function RegisterPage(props: RegisterPageProps) {
 
   const [resultModal, setResultModal] = React.useState(<></>);
 
-
   const errorModalHtml = (
-      <div className={styles.modalerror}>
-        <div className={styles.titleError}> {error} </div>
+    <div className="modalerror">
+      <div className="titleError"> {error} </div>
 
-        <div className={styles.accept} onClick={() => setResultModal(<></>)}>
-          Accept
-        </div>
+      <div className="accept" onClick={() => setResultModal(<></>)}>
+        Accept
       </div>
+    </div>
   );
+
+  useEffect(() => {
+    if (error) {
+      setResultModal(<Modal element={errorModalHtml}></Modal>);
+      setError("");
+    }
+  }, [error]);
 
   const successModalHtml = (
-
-      <div className={styles.sucessfulorder}>
-        <div className={styles.title}>Congratulations, you have created a DEDE Account!</div>
-        <div className={styles.subtitle}>
-          Start shopping whenever you want...
-        </div>
-        <div className={styles.accept} onClick={() => {setResultModal(<></>); navigate("/shop");}}>
-          Start Shopping
-        </div>
+    <div className={styles.sucessfulorder}>
+      <div className={styles.title}>
+        Congratulations, you have created a DEDE Account!
       </div>
-
+      <div className={styles.subtitle}>Start shopping whenever you want...</div>
+      <div
+        className={styles.accept}
+        onClick={() => {
+          setResultModal(<></>);
+          navigate("/shop");
+        }}
+      >
+        Start Shopping
+      </div>
+    </div>
   );
-
-
-
-
 
   const onContainerClick = (event: any) => {
     event.preventDefault();
@@ -86,51 +92,8 @@ export function RegisterPage(props: RegisterPageProps) {
   const register = async () => {
     try {
       if (user.password != user.confirmPssw) {
-        throw new Error("Passwords have to be equal");
-      }
-
-      await signup(user.email, user.password).then( (userCredential) => {
-        console.log(
-          "User: " + userCredential.user,
-          "ProviderId: " + userCredential.providerId
-        );
-
-
-
-        setResultModal(<Modal element={successModalHtml}></Modal>)
-      });
-
-      await addUser({
-        name: user.name,
-        email: user.email,
-      });
-
-
-    } catch (error: any) {
-      if (error.code === "auth/internal-error") {
-        setError("Invalid email format.");
-
-      } else if (error.code === "auth/email-already-in-use") {
-        setError("Email already registered");
-
-      } else if (error.code === "auth/weak-password") {
-        setError("Password should be at least 6 characters");
-      } else {
-        setError("Unknown error :( Please try again...");
-      }
-      setResultModal(<Modal element={errorModalHtml}></Modal>)
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    console.log("handling submit");
-    e.preventDefault();
-
-    setError("");
-    console.log(user);
-    try {
-      if (user.password != user.confirmPssw) {
-        throw new Error("Passwords have to be equal");
+        setError("Passwords are different.");
+        return;
       }
 
       await signup(user.email, user.password).then((userCredential) => {
@@ -138,49 +101,59 @@ export function RegisterPage(props: RegisterPageProps) {
           "User: " + userCredential.user,
           "ProviderId: " + userCredential.providerId
         );
-        setResultModal(<Modal element={successModalHtml}></Modal>)
+
+        setResultModal(<Modal element={successModalHtml}></Modal>);
       });
 
       await addUser({
         name: user.name,
         email: user.email,
       });
-
-      navigate("/dashboard");
     } catch (error: any) {
       if (error.code === "auth/internal-error") {
         setError("Invalid email format.");
-
       } else if (error.code === "auth/email-already-in-use") {
         setError("Email already registered");
-
       } else if (error.code === "auth/weak-password") {
         setError("Password should be at least 6 characters");
       } else {
         setError("Unknown error :( Please try again...");
       }
-      setResultModal(<Modal element={errorModalHtml}></Modal>)
     }
   };
 
   return (
     <div>
       <div className={styles.registerpagecontainer} onClick={onContainerClick}>
-
-
         <div className={styles.registerwrapper} onClick={preventDefault}>
-          <form name={"registerForm"} onSubmit={handleSubmit}>
-            <h2 title={"registerTitle"} >Register</h2>
-            <label title={"emailLabel"} htmlFor="email">Email</label>
-            <input title={"emailInput"} type={"email"} name="email" onChange={handleChangeEmail} />
+          <form name={"registerForm"} onSubmit={register}>
+            <h2 title={"registerTitle"}>Register</h2>
+            <label title={"emailLabel"} htmlFor="email">
+              Email
+            </label>
+            <input
+              title={"emailInput"}
+              type={"email"}
+              name="email"
+              onChange={handleChangeEmail}
+            />
             <br />
 
-            <label title={"nameLabel"} htmlFor="name">Name & Surname</label>
-            <input title={"nameInput"} type={"text"} name="name" onChange={handleChangeName} />
-            <br />
-            <label title={"passwordLabel"} htmlFor={"password"}>Password</label>
+            <label title={"nameLabel"} htmlFor="name">
+              Name & Surname
+            </label>
             <input
-                title={"passwordInput"}
+              title={"nameInput"}
+              type={"text"}
+              name="name"
+              onChange={handleChangeName}
+            />
+            <br />
+            <label title={"passwordLabel"} htmlFor={"password"}>
+              Password
+            </label>
+            <input
+              title={"passwordInput"}
               type={"password"}
               name="password"
               id={"password"}
@@ -188,9 +161,11 @@ export function RegisterPage(props: RegisterPageProps) {
             />
             <br />
 
-            <label title={"confirmLabel"} htmlFor={"confirmPasswd"}>Confirm Password</label>
+            <label title={"confirmLabel"} htmlFor={"confirmPasswd"}>
+              Confirm Password
+            </label>
             <input
-                title={"confirmInput"}
+              title={"confirmInput"}
               type={"password"}
               name="confirmPasswd"
               id={"confirmPasswd"}

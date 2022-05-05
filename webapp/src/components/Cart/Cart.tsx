@@ -12,6 +12,7 @@ import POD from "./POD/POD";
 import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
 import { Utils } from "../../utils/utilts";
 import HeaderBackground from "../HeaderBackground/HeaderBackground";
+import moment from "moment";
 type CartProps = {};
 
 function Cart(props: CartProps): JSX.Element {
@@ -25,10 +26,10 @@ function Cart(props: CartProps): JSX.Element {
   );
 
   const getEstimatedDeliveryDate = () => {
-    if (estimatedDelivery) return new Date(estimatedDelivery).toDateString();
+    if (estimatedDelivery)
+      return moment(new Date(estimatedDelivery)).format("YYYY-MM-DD ");
     return "";
   };
-
   const estimatedDelivery: number | null = useSelector(
     (state: DedeStore) => state.estimatedDelivery
   );

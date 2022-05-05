@@ -26,10 +26,9 @@ export function remove(item: Product) {
     },
   };
 }
-export function clearCart(item: Product) {
+export function clearCart() {
   return {
     type: actionTypes.CLEAR_CART,
-    props: item,
   };
 }
 export function getTotals(item: Product) {

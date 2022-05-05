@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {getAdmin, getUsers} from "./api/api";
+import { getAdmin, getUsers } from "./api/api";
 import { User } from "./api/model/user";
 import "./App.scss";
 import "./Styles.scss";
@@ -14,16 +14,13 @@ import OrdersPage from "./components/pages/OrdersPage/OrdersPage";
 import POD from "./components/Cart/POD/POD";
 import AboutPage from "./components/pages/AboutPage/AboutPage";
 import AdminDashboard from "./components/Administration/AdminDashboard/AdminDashboard";
-import {useAuth} from "./context/AuthContext";
+import { useAuth } from "./context/AuthContext";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
-
+import Presentation from "./components/pages/PresentationPage/Presentation";
 
 function App(): JSX.Element {
-
   return (
     <>
-
       <BrowserRouter>
         <Routes>
           <Route path="/home" element={<MainPage />} />
@@ -39,9 +36,12 @@ function App(): JSX.Element {
           {/*} <Route path={"/dashboard"} element={<Dashboard />} />*/};
           <Route path="*" element={<Navigate to="/home" />} />
           <Route path={"/pod"} element={<POD />} />
-
           {/* Need to auth or something xD */}
-          <Route path={"/admin"} element={<AdminDashboard/>} />
+          <Route path={"/admin"} element={<AdminDashboard />} />
+          <Route
+            path={"/presentation"}
+            element={<Presentation></Presentation>}
+          ></Route>
         </Routes>
       </BrowserRouter>
 

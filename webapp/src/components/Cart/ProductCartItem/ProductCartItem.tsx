@@ -49,19 +49,23 @@ export const ProductCartItem: React.FC<ProductCartItemProps> = ({
           src={product.product.img}
         ></img>
         <div className={styles.productcartdescriptioncontainer}>
-          <div className={styles.productname}>{product.product.name}</div>
-          <div className={styles.price}>{product.product.price + " €"}</div>
-          <div className={styles.row2}>
-            <span className={"material-icons"} onClick={decreaseButtonAction}>
-              remove
-            </span>
-            <div className={styles.productcartamount}>{product.amount}</div>
-            <span className={"material-icons"} onClick={increaseButtonAction}>
-              add
-            </span>
+          <div className={styles.namecontainer}>
+            <div className={styles.productname}>{product.product.name}</div>
           </div>
-          <div className={styles.totalprice}>
-            {(product.amount * product.product.price).toFixed(2)} €
+          <div className={styles.quantity}>
+            <div className={styles.price}>{product.product.price + " €"}</div>
+            <div className={styles.row2}>
+              <span className={"material-icons"} onClick={decreaseButtonAction}>
+                remove
+              </span>
+              <div className={styles.productcartamount}>{product.amount}</div>
+              <span className={"material-icons"} onClick={increaseButtonAction}>
+                add
+              </span>
+            </div>
+            <div className={styles.totalprice}>
+              {(product.amount * product.product.price).toFixed(2)} €
+            </div>
           </div>
         </div>
       </div>
