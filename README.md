@@ -51,3 +51,8 @@ You can get more information about the respository in the other README files:
 - Documentation: https://arquisoft.github.io/dede_en3a/
 - Webapp: https://dedeen3a.web.app/cart
 - Restapi: NO RESTAPI
+
+## Instructions to Buy
+Use the following credentials to buy with paypal:
+ - Username: sb-np47tu15929938@personal.example.com
+ - Password: uZA?6hP!
