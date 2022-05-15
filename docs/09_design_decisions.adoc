@@ -37,4 +37,5 @@ a different product and poor documentation.
 | QA-6 Firebase Functions| Serverless approach to provide the backend of our app. Has its own stored logs. High availability.  | Very difficult to debug.
 | QA-7 Redux      | Easy way of keeping the state of the application and using information of different pages | Hard configuration and none of us had any idea of how to use it before.
 | QA-8 Geocoder API | Fast coordinates resolution for addresses. | Very poor documentation for using it in TypeScript.
+| QA-9 PayPal API | Reliable payment gateway | A bit poor and unclear documentation
 |===

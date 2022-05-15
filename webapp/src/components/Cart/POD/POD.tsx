@@ -3,12 +3,13 @@ import ShowPodInformation from "./ShowPodInformation";
 import styles from "./POD.module.scss";
 
 function pod(webID: string) {
-  //Puse 43 porque no puede haber un pod link menor que https://.solidcommunity.net/profile/card#me
-  if (webID.length > 0 && webID.length < 43) {
-    return <h3>Please enter a valid POD</h3>;
-  } else if (webID.length != 0) {
+  if (webID.includes("solidcommunity.net/profile/card#me")
+    || webID.includes("solidweb.org/profile/card#me")
+    || webID.includes("inrupt.net/profile/card#me")) {
     console.log(webID)
     return <ShowPodInformation webID={webID} />;
+  } else if (webID.length != 0) {
+    return <h3>Please enter a valid POD</h3>;
   }
 }
 
