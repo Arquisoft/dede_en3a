@@ -214,6 +214,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     const fullAddresses = AddressCalculator(props.webID);
     const addressesHtml: any = [];
     setLoadingOverlay(<LoadingOverlay></LoadingOverlay>);
+
     fullAddresses.then((full: Address[]) => {
       console.log(full);
       full.forEach((ind) => {
@@ -394,6 +395,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
           alert("OHOH, SOMETHING WENT WRONG: " + error.message);
         });
     } else {
+
       setLoginPage(<LoginPage {...loginPageProps}></LoginPage>);
     }
   };
@@ -402,7 +404,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
     if (cart.length == 0) {
       setOrderModal(<Modal element={emptyCartErrorModal}></Modal>);
     } else if (!userRegistered()) {
-      setOrderModal(<Modal element={loginModal}></Modal>);
+      setLoginPage(loginModal);
 
       //IF USER IS LOGED IN AND NON-EMPTY CART --> RENDER PAYPAL BUTTONS
     } else if (
@@ -427,6 +429,7 @@ function ShowPodInformation(props: PODProps): JSX.Element {
   return (
     <>
       {loginPage}
+      {registerPage}
       {console.log(getCookie("city"))}
       <Grid container>
         {loadingOverlay}

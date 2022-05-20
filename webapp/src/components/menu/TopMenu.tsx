@@ -184,6 +184,17 @@ export default function TopMenu(props: TopMenuProps): JSX.Element {
                 About us
               </div>
             </div>
+            <div>
+              <div
+                  title={"aboutDede"}
+                  className={styles.menuitem}
+                  onClick={() => {
+                    navigate("/presentation");
+                  }}
+              >
+                About DeDe
+              </div>
+            </div>
             <div
               title={"contact"}
               className={styles.menuitem}
@@ -295,6 +306,17 @@ export default function TopMenu(props: TopMenuProps): JSX.Element {
               About us
             </div>
           </div>
+
+            <div
+                className={styles.menuitem}
+                onClick={() => {
+                  navigate("/presentation");
+                  expandLeftMenu();
+                }}
+            >
+              About DeDe
+            </div>
+
           <div
             className={styles.menuitem}
             onClick={() => {

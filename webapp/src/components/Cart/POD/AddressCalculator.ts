@@ -4,7 +4,9 @@ import {VCARD} from "@inrupt/vocab-common-rdf";
 
 export async function AddressCalculator(webID : string): Promise<Address[]>{
     let profileDocumentURI = webID.split("#")[0]
+
     let myDataSet = await getSolidDataset(profileDocumentURI)
+
     let profile = getThing(myDataSet, webID)
     console.log("thing")
     console.log(profile)

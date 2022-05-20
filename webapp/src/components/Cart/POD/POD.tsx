@@ -8,7 +8,7 @@ function pod(webID: string) {
     || webID.includes("inrupt.net/profile/card#me")) {
     console.log(webID)
     return <ShowPodInformation webID={webID} />;
-  } else if (webID.length != 0) {
+  } else {
     return <h3>Please enter a valid POD</h3>;
   }
 }
