@@ -1,5 +1,5 @@
-FROM node:16.13.1
-LABEL org.opencontainers.image.source https://github.com/pglez82/ASW2122_0
+FROM node:16.14.2
+
 COPY . /app
 WORKDIR /app
 #Install the dependencies
