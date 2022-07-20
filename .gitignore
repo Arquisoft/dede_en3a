@@ -29,3 +29,8 @@ yarn-error.log*
 #documentation build does not go into master
 docs/build
 
+#extra things with terraform
+*.tfstate
+*.tfstate*
+.terraform*
+
